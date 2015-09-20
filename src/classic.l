@@ -96,6 +96,7 @@ ftoi { SAVE_TOK; UPDATE_LOC; return Xplode::BisonParser::token::x_FTOI; }
 "-" { SAVE_TOK; UPDATE_LOC; return Xplode::BisonParser::token::x_MINUS; }
 "*" { SAVE_TOK; UPDATE_LOC; return Xplode::BisonParser::token::x_MULT; }
 "/" { SAVE_TOK; UPDATE_LOC; return Xplode::BisonParser::token::x_DIV; }
+"%" { SAVE_TOK; UPDATE_LOC; return Xplode::BisonParser::token::x_MOD; }
 "**" { SAVE_TOK; UPDATE_LOC; return Xplode::BisonParser::token::x_POWER; }
 
 "..." { SAVE_TOK; UPDATE_LOC; return Xplode::BisonParser::token::x_EXTEND;}

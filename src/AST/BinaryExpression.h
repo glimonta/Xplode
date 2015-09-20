@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -18,7 +18,7 @@
 class BinaryExpression : public Expression {
   public:
   std::string opname;
-  Expression *lexp, *rexp; 
+  Expression *lexp, *rexp;
   BinaryExpression(std::string op,Expression *l, Expression *r){
     opname = op;
     lexp = l;
@@ -36,7 +36,7 @@ class BinaryExpression : public Expression {
 
     lexp->firstcheck(symtb);
     rexp-> firstcheck(symtb);
-  
+
   }
 
 };

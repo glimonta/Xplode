@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -26,26 +26,26 @@
 class Program : public CompoundStatement {
 
 public:
-  NodeList *definitionList; 
+  NodeList *definitionList;
   SymTable *table;
 
-  Program(SymTable *stb, Node *b){ 
+  Program(SymTable *stb, Node *b){
 
     table= stb;
-    //this->insertPrimitives(); 
-    definitionList = 0; 
+    //this->insertPrimitives();
+    definitionList = 0;
     block = (Block *) b;
-    block->setFather(table); 
+    block->setFather(table);
 
   }
 
-  Program(SymTable *stb, NodeList *d, Node *b){ 
+  Program(SymTable *stb, NodeList *d, Node *b){
 
-    table = stb; 
-    //this->insertPrimitives(); 
-    definitionList = d; 
+    table = stb;
+    //this->insertPrimitives();
+    definitionList = d;
     //this->setFathers();
-    block = (Block *) b; 
+    block = (Block *) b;
     block->setFather(table);
 
   }
@@ -53,9 +53,9 @@ public:
   void insertPrimitives(){
 
     table->insert(INT_SYMBOL);
-    table->insert(FLOAT_SYMBOL); 
-    table->insert(CHAR_SYMBOL);   
-    table->insert(BOOL_SYMBOL);   
+    table->insert(FLOAT_SYMBOL);
+    table->insert(CHAR_SYMBOL);
+    table->insert(BOOL_SYMBOL);
     table->insert(VOID_SYMBOL);
 
   }
@@ -68,18 +68,18 @@ public:
     }
     block->print(tab+2);
   }
-  
+
   void printTable(){
 
     if(table!=NULL) table->print();
     std::list<Node *>::iterator iter;
     Statement *st;
-    if (definitionList!=NULL) 
+    if (definitionList!=NULL)
       for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
             st = (Statement *) *iter;
-            st->printTable(); 
+            st->printTable();
       }
-  
+
     if(block!=NULL) block->printTable();
 
   }
@@ -88,20 +88,20 @@ public:
 
     Statement *st;
     std::list<Node *>::iterator iter;
-    for(iter = (*definitionList).nodeList.begin(); 
+    for(iter = (*definitionList).nodeList.begin();
         iter != (*definitionList).nodeList.end(); ++iter){
-        
-        st = (Statement *) *iter;          
-        st->setFather(table); 
+
+        st = (Statement *) *iter;
+        st->setFather(table);
     }
 
 
   }
 
   void check(){
-  
+
     this->firstcheck();
-  
+
   }
 
   void firstcheck(){
@@ -109,28 +109,28 @@ public:
     //this->checktypes(table, table, NULL);
     std::list<Node *>::iterator iter;
     Statement *st;
-    if (definitionList!=NULL) 
+    if (definitionList!=NULL)
       for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
             st = (Statement *) *iter;
-            st->firstcheck(table); 
+            st->firstcheck(table);
       }
-  
-    if(block!=NULL) block->firstcheck();  
-    
-  
+
+    if(block!=NULL) block->firstcheck();
+
+
   }
 
   void checktypes(SymTable *tb, SymTable* root, Symbol *s){
-  
+
   /*  std::map<std::string, Symbol *>::iterator it;
-  
+
     for(it=tb->table->begin();it!=tb->table->end();++it){
-    
+
       if(s==it->second) error;
-      if(it->second->defined>1) 
+      if(it->second->defined>1)
         checktypes((SymTable *) it->second->pt, root,it->second);
-    
-    
+
+
     }
   */
   }

@@ -32,9 +32,10 @@ algunos extras, para acceder a otro nivel de expresividad.
 * \+ : Signo más. Suma
 * \* : Asterisco. Multiplicación.
 * \- : Signo menos. Resta. Menos unitario.
-* / : Slash. División. 
-* < : Menor que. 
-* \> : Mayor que. 
+* / : Slash. División.
+* % : Porcentaje. Módulo.
+* < : Menor que.
+* \> : Mayor que.
 
 
 ###Simbolos no unitarios
@@ -46,9 +47,9 @@ algunos extras, para acceder a otro nivel de expresividad.
 * || : Disyunción.
 * // : Comentario. Alcanze hasta el final de la línea.
 * ** : Potencia.
-* <= : Menor o igual que. 
-* \>= : Mayor o igual que. 
-* ... : Puntos suspensivos. Usado para funciones con numero variable de parametros. 
+* <= : Menor o igual que.
+* \>= : Mayor o igual que.
+* ... : Puntos suspensivos. Usado para funciones con numero variable de parametros.
 
 
 ###Palabras reservadas (Versión Clásica)
