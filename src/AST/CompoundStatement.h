@@ -21,9 +21,9 @@ public:
 
   Block *block;
 
-  CompoundStatement(){}
+  CompoundStatement() {}
 
-  void print(int tab){}
+  void print(int tab) {}
 
   virtual void printTable() {
 
@@ -31,13 +31,15 @@ public:
 
   }
 
-  virtual void setFather(SymTable *s){
+  virtual void setFather(SymTable *s) {
 
     block->setFather(s);
 
   }
 
-  virtual void firstcheck(SymTable *symtb){}
+  virtual void firstcheck(SymTable *symtb) {}
+
+  virtual std::string generateTAC(GeneratorTAC *generator) {}
 
 };
 

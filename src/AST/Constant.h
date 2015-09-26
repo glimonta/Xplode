@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -17,15 +17,23 @@
 
 class Constant : public Expression {
   public:
-  std::string value;
-  Constant(std::string v, TypeDeclaration *n){value = v; ntype = n; }
-  void print(int tab){
-   std::cout << std::string(tab, ' ') << "CONSTANT\n";
-   std::cout << std::string(tab, ' ') << "value: " << value << "\n";
-   std::cout << std::string(tab, ' ') << "type: " <<(long int ) ntype << std::endl;
-  }
+    std::string value;
+    Constant(std::string v, TypeDeclaration *n){value = v; ntype = n; }
+    void print(int tab){
+      std::cout << std::string(tab, ' ') << "CONSTANT\n";
+      std::cout << std::string(tab, ' ') << "value: " << value << "\n";
+      std::cout << std::string(tab, ' ') << "type: " <<(long int ) ntype << std::endl;
+    }
 
-  void firstcheck(SymTable *symtb){}
+    void firstcheck(SymTable *symtb){}
+
+    std::string toString() {
+      return value;
+    }
+
+    std::string generateTAC(GeneratorTAC *generator) {
+      return toString();
+    }
 
 };
 

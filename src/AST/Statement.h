@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -16,7 +16,7 @@
 class Statement: public Node {
 
   public:
-  
+
     virtual void print(int tab) {}
 
     virtual void printTable() {}
@@ -24,7 +24,9 @@ class Statement: public Node {
     virtual void setFather(SymTable *s){}
 
     virtual void firstcheck(SymTable *symtb){}
-    
+
+    virtual std::string generateTAC(GeneratorTAC *generator) {}
+
     virtual Symbol *toSymbol() {return NULL;}
 
 

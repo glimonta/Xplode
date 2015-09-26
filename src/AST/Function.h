@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -21,67 +21,70 @@
 class Function : public CompoundStatement {
   public:
 
-  TypeDeclaration *ntype;
-  SymTable* symtb;
-  std::string returnType;
-  std::string fname;
+    TypeDeclaration *ntype;
+    SymTable* symtb;
+    std::string returnType;
+    std::string fname;
 
-  Function(SymTable *s,std::string name,Node *t,Node *b) { 
+    Function(SymTable *s,std::string name,Node *t,Node *b) {
 
-    symtb = s;
-    ntype = (TypeDeclaration *) t; 
-    //TypeDeclaration *tp = (TypeDeclaration *) r; 
-    fname =name; 
-    //parameters = (TupleType *) p; 
-    block  = (Block *) b;
-    //if (parameters != 0){
-    //  block->table->add(parameters);
-    //}
-  }
+      symtb = s;
+      ntype = (TypeDeclaration *) t;
+      //TypeDeclaration *tp = (TypeDeclaration *) r;
+      fname =name;
+      //parameters = (TupleType *) p;
+      block  = (Block *) b;
+      //if (parameters != 0){
+      //  block->table->add(parameters);
+      //}
+    }
 
-  void print(int tab){
-   
-   std::cout << std::string(tab, ' ') << "FUNCTION\n";
-   std::cout << std::string(tab, ' ') << "name: " << fname << "\n";
-   ntype->print(tab);
-    block->print(tab+2);
-  }
+    void print(int tab){
 
-  void setFather(SymTable *s){
-  
-    if(block!=NULL) block->setFather(s);
-  
-  }
+      std::cout << std::string(tab, ' ') << "FUNCTION\n";
+      std::cout << std::string(tab, ' ') << "name: " << fname << "\n";
+      ntype->print(tab);
+      block->print(tab+2);
+    }
 
-  Symbol *toSymbol() {}//return new Symbol(name,NULL, line, column); }
+    void setFather(SymTable *s){
 
-  void firstcheck(SymTable *symtb){
+      if(block!=NULL) block->setFather(s);
 
-    /*SymTable *root = symtb->getRoot();
-    Declaration *decl;
-    std::list<Node *>::iterator iter;
-    
-    if(parameters != NULL)
-          for(iter = (*parameters).nodeList.begin();
-              iter != (*parameters).nodeList.end(); ++iter){
-     
-                decl = (Declaration *) *iter;          
-                decl->firstcheck(root); 
-          }
-    
-    */ //falta verificar los parametros de las funciones 
-    
-    if(block!=NULL) block->firstcheck();
-  
-  }
+    }
 
-  void printTable() {
+    Symbol *toSymbol() {}//return new Symbol(name,NULL, line, column); }
 
-     symtb->print();
-     if (block!=NULL) block->printTable();
+    void firstcheck(SymTable *symtb){
 
-  }
+      /*SymTable *root = symtb->getRoot();
+        Declaration *decl;
+        std::list<Node *>::iterator iter;
 
+        if(parameters != NULL)
+        for(iter = (*parameters).nodeList.begin();
+        iter != (*parameters).nodeList.end(); ++iter){
+
+        decl = (Declaration *) *iter;
+        decl->firstcheck(root);
+        }
+
+       */ //falta verificar los parametros de las funciones
+
+      if(block!=NULL) block->firstcheck();
+
+    }
+
+    void printTable() {
+
+      symtb->print();
+      if (block!=NULL) block->printTable();
+
+    }
+
+    std::string generateTAC(GeneratorTAC *generator) {
+      //TODO
+    }
 
 };
 

@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -15,26 +15,30 @@
 
 class WhileStatement : public CompoundStatement {
   public:
-  
-  Expression *condition; 
-  WhileStatement(Expression *c, Node *b){ 
-    condition = c; 
-    block = (Block *) b;
-  }
-  
-  void print(int tab){
-   std::cout << std::string(tab, ' ') << "WHILE STATEMENT \n";
-   std::cout << std::string(tab, ' ') << "condition: \n";
-   condition->print(tab+2);
-   block->print(tab+2);
-  }
 
-  void firstcheck(SymTable *symtb){
-  
-    condition->firstcheck(symtb);
-    if(block!=NULL) block->firstcheck();
-  
-  }
+    Expression *condition;
+    WhileStatement(Expression *c, Node *b){
+      condition = c;
+      block = (Block *) b;
+    }
+
+    void print(int tab){
+      std::cout << std::string(tab, ' ') << "WHILE STATEMENT \n";
+      std::cout << std::string(tab, ' ') << "condition: \n";
+      condition->print(tab+2);
+      block->print(tab+2);
+    }
+
+    void firstcheck(SymTable *symtb){
+
+      condition->firstcheck(symtb);
+      if(block!=NULL) block->firstcheck();
+
+    }
+
+    std::string generateTAC(GeneratorTAC *generator) {
+      //TODO
+    }
 
 };
 

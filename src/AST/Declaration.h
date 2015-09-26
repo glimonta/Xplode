@@ -61,6 +61,11 @@ class Declaration : public Statement {
   */
   }  
 
+  std::string generateTAC(GeneratorTAC *generator) {
+    //TODO
+      printf("Estoy en el genTAC para las declaraciones\n");
+  }
+
 };
 
 

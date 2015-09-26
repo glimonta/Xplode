@@ -15,125 +15,144 @@
 #ifndef X_MAINPROGRAM
 #define X_MAINPROGRAM
 
-#define INT_SYMBOL new Symbol(true,"_int",new TypeDeclaration(TYPE_INT,SIZE_INT),0,0,true)
-#define FLOAT_SYMBOL new Symbol(true, "_float",new TypeDeclaration(TYPE_FLOAT,SIZE_FLOAT),0,0,true)
-#define CHAR_SYMBOL new Symbol(true,"_char",new TypeDeclaration(TYPE_CHAR,SIZE_CHAR),0,0,true)
-#define BOOL_SYMBOL new Symbol(true,"_bool",new TypeDeclaration(TYPE_BOOL,SIZE_BOOL),0,0,true)
-#define VOID_SYMBOL new Symbol(true,"_void",new TypeDeclaration(TYPE_VOID),0,0,true)
-#define STRING_SYMBOL new Symbol(true,"_string",new TypeDeclaration(TYPE_STRING),0,0,true)
-#define ERROR_SYMBOL new Symbol(true,"_error",new TypeDeclaration(TYPE_ERROR),0,0,true)
+#define INT_SYMBOL    new Symbol(true,"_int",    new TypeDeclaration(TYPE_INT,SIZE_INT),     0,0,true)
+#define FLOAT_SYMBOL  new Symbol(true, "_float", new TypeDeclaration(TYPE_FLOAT,SIZE_FLOAT), 0,0,true)
+#define CHAR_SYMBOL   new Symbol(true,"_char",   new TypeDeclaration(TYPE_CHAR,SIZE_CHAR),   0,0,true)
+#define BOOL_SYMBOL   new Symbol(true,"_bool",   new TypeDeclaration(TYPE_BOOL,SIZE_BOOL),   0,0,true)
+#define VOID_SYMBOL   new Symbol(true,"_void",   new TypeDeclaration(TYPE_VOID),             0,0,true)
+#define STRING_SYMBOL new Symbol(true,"_string", new TypeDeclaration(TYPE_STRING),           0,0,true)
+#define ERROR_SYMBOL  new Symbol(true,"_error",  new TypeDeclaration(TYPE_ERROR),            0,0,true)
 
 class Program : public CompoundStatement {
 
-public:
-  NodeList *definitionList;
-  SymTable *table;
+  public:
+    NodeList *definitionList;
+    SymTable *table;
 
-  Program(SymTable *stb, Node *b){
+    Program(SymTable *stb, Node *b){
 
-    table= stb;
-    //this->insertPrimitives();
-    definitionList = 0;
-    block = (Block *) b;
-    block->setFather(table);
+      table= stb;
+      //this->insertPrimitives();
+      definitionList = 0;
+      block = (Block *) b;
+      block->setFather(table);
 
-  }
-
-  Program(SymTable *stb, NodeList *d, Node *b){
-
-    table = stb;
-    //this->insertPrimitives();
-    definitionList = d;
-    //this->setFathers();
-    block = (Block *) b;
-    block->setFather(table);
-
-  }
-
-  void insertPrimitives(){
-
-    table->insert(INT_SYMBOL);
-    table->insert(FLOAT_SYMBOL);
-    table->insert(CHAR_SYMBOL);
-    table->insert(BOOL_SYMBOL);
-    table->insert(VOID_SYMBOL);
-
-  }
-
-  void print(int tab = 0){
-    std::cout << std::string(tab, ' ') << "PROGRAM \n";
-    if (definitionList != 0 ){
-     std::cout << std::string(tab, ' ') << "DEFINITIONS \n";
-     definitionList->print(tab+2);
     }
-    block->print(tab+2);
-  }
 
-  void printTable(){
+    Program(SymTable *stb, NodeList *d, Node *b){
 
-    if(table!=NULL) table->print();
-    std::list<Node *>::iterator iter;
-    Statement *st;
-    if (definitionList!=NULL)
-      for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
-            st = (Statement *) *iter;
-            st->printTable();
+      table = stb;
+      //this->insertPrimitives();
+      definitionList = d;
+      //this->setFathers();
+      block = (Block *) b;
+      block->setFather(table);
+
+    }
+
+    void insertPrimitives(){
+
+      table->insert(INT_SYMBOL);
+      table->insert(FLOAT_SYMBOL);
+      table->insert(CHAR_SYMBOL);
+      table->insert(BOOL_SYMBOL);
+      table->insert(VOID_SYMBOL);
+
+    }
+
+    void print(int tab = 0){
+      std::cout << std::string(tab, ' ') << "PROGRAM \n";
+      if (definitionList != 0 ){
+        std::cout << std::string(tab, ' ') << "DEFINITIONS \n";
+        definitionList->print(tab+2);
       }
+      block->print(tab+2);
+    }
 
-    if(block!=NULL) block->printTable();
+    void printTable(){
 
-  }
+      if(table!=NULL) table->print();
+      std::list<Node *>::iterator iter;
+      Statement *st;
+      if (definitionList!=NULL)
+        for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
+          st = (Statement *) *iter;
+          st->printTable();
+        }
 
-  void setFathers() {
+      if(block!=NULL) block->printTable();
 
-    Statement *st;
-    std::list<Node *>::iterator iter;
-    for(iter = (*definitionList).nodeList.begin();
-        iter != (*definitionList).nodeList.end(); ++iter){
+    }
+
+    void setFathers() {
+
+      Statement *st;
+      std::list<Node *>::iterator iter;
+      for(iter = (*definitionList).nodeList.begin();
+          iter != (*definitionList).nodeList.end(); ++iter){
 
         st = (Statement *) *iter;
         st->setFather(table);
-    }
-
-
-  }
-
-  void check(){
-
-    this->firstcheck();
-
-  }
-
-  void firstcheck(){
-
-    //this->checktypes(table, table, NULL);
-    std::list<Node *>::iterator iter;
-    Statement *st;
-    if (definitionList!=NULL)
-      for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
-            st = (Statement *) *iter;
-            st->firstcheck(table);
       }
 
-    if(block!=NULL) block->firstcheck();
 
+    }
 
-  }
+    void check(){
 
-  void checktypes(SymTable *tb, SymTable* root, Symbol *s){
+      this->firstcheck();
 
-  /*  std::map<std::string, Symbol *>::iterator it;
+    }
 
-    for(it=tb->table->begin();it!=tb->table->end();++it){
+    void firstcheck(){
 
-      if(s==it->second) error;
-      if(it->second->defined>1)
-        checktypes((SymTable *) it->second->pt, root,it->second);
+      //this->checktypes(table, table, NULL);
+      std::list<Node *>::iterator iter;
+      Statement *st;
+      if (definitionList!=NULL)
+        for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
+          st = (Statement *) *iter;
+          st->firstcheck(table);
+        }
+
+      if(block!=NULL) block->firstcheck();
 
 
     }
-  */
-  }
+
+    void checktypes(SymTable *tb, SymTable* root, Symbol *s){
+
+      /*  std::map<std::string, Symbol *>::iterator it;
+
+          for(it=tb->table->begin();it!=tb->table->end();++it){
+
+          if(s==it->second) error;
+          if(it->second->defined>1)
+          checktypes((SymTable *) it->second->pt, root,it->second);
+
+
+          }
+          */
+    }
+
+    std::string generateTAC(GeneratorTAC *generator) {
+      //FIXME
+      std::list<Node *>::iterator iter;
+      Statement *st;
+      printf("Estoy comenzando a generar 2\n");
+      if (definitionList!=NULL) {
+        printf("La lista de definiciones no es nula\n");
+        for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
+          st = (Statement *) *iter;
+          st->generateTAC(generator);
+        }
+      }
+
+      if(block!=NULL) {
+        printf("La lista de bloques no es nula\n");
+         block->generateTAC(generator);
+      }
+    }
 
 };
 

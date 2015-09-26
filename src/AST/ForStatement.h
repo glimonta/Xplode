@@ -17,34 +17,38 @@
 
 class ForStatement : public CompoundStatement {
   public:
-  Statement *init;
-  Expression *condition;
-  Statement *increment; 
-  ForStatement(Node *i, Expression *c, Node *inc, Node *b){
-    init = (Statement *) i;
-    increment = (Statement *) inc;
-    condition = c;
-    block = (Block *) b;
-  }
-  void print(int tab){
-   std::cout << std::string(tab, ' ') << "FOR STATEMENT \n";
-   std::cout << std::string(tab, ' ') << "intialization: \n";
-   init->print(tab+2);
-   std::cout << std::string(tab, ' ') << "increment: \n";
-   increment->print(tab+2);
-   std::cout << std::string(tab, ' ') << "condition: \n";
-   condition->print(tab+2);
-   block->print(tab+2);
-  }
+    Statement *init;
+    Expression *condition;
+    Statement *increment;
+    ForStatement(Node *i, Expression *c, Node *inc, Node *b){
+      init = (Statement *) i;
+      increment = (Statement *) inc;
+      condition = c;
+      block = (Block *) b;
+    }
+    void print(int tab){
+      std::cout << std::string(tab, ' ') << "FOR STATEMENT \n";
+      std::cout << std::string(tab, ' ') << "intialization: \n";
+      init->print(tab+2);
+      std::cout << std::string(tab, ' ') << "increment: \n";
+      increment->print(tab+2);
+      std::cout << std::string(tab, ' ') << "condition: \n";
+      condition->print(tab+2);
+      block->print(tab+2);
+    }
 
-  void firstcheck(SymTable *symtb){
-  
-    init->firstcheck(symtb); 
-    condition->firstcheck(symtb); 
-    increment->firstcheck(symtb); 
-    if (block!=NULL) block->firstcheck();  
-  
-  }
+    void firstcheck(SymTable *symtb){
+
+      init->firstcheck(symtb);
+      condition->firstcheck(symtb);
+      increment->firstcheck(symtb);
+      if (block!=NULL) block->firstcheck(); 
+
+    }
+
+    std::string generateTAC(GeneratorTAC *generator) {
+      //TODO
+    }
 
 };
 

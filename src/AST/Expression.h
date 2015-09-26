@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -15,11 +15,15 @@
 
 class Expression : public Node {
   public:
-  TypeDeclaration *ntype; //Used for type checks
+    TypeDeclaration *ntype; //Used for type checks
 
-  virtual void print(int tab) {}
+    virtual void print(int tab) {}
 
-  virtual void firstcheck(SymTable *symtb){ }
+    virtual void firstcheck(SymTable *symtb) {}
+
+    virtual std::string toString() {}
+
+    virtual std::string generateTAC(GeneratorTAC *generator) {}
 
 };
 
