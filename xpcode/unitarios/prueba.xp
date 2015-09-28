@@ -1,0 +1,7 @@
+program
+
+begin
+  let int w;
+
+  w := (43 - 38) ** 2;
+end

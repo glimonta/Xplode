@@ -7,3 +7,11 @@ lex.yy.cc
 xplode
 *.h.gch
 *~
+*.swp
+*.swo
+*.o
+lex.cl.cc
+lex.xp.cc
+xplode.output
+Clases.cpp
+*.temp
