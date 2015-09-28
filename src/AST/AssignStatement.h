@@ -41,23 +41,15 @@ class AssignStatement : public Statement {
   }
 
   std::string generateTAC(GeneratorTAC *generator) {
-        printf("Entre al generateTAC de la asignacion\n");
     std::string result = lvalue->generateTAC(generator);
-        printf("generateTAC del left value sirve %s\n", lvalue->toString().c_str());
     std::string rightop = rvalue->generateTAC(generator);
-        printf("generateTAC del right value sirve\n");
     std::string op = ":=";
-        printf("Asigno un nuevo operador :=\n");
 
     Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString());
-        printf("Creo el comentario\n");
     NoArg1Instruction *noarg1 = new NoArg1Instruction(op, result, rightop);
-        printf("Creo la instruccion\n");
     generator->gen(comment);
-        printf("genero el comentario\n");
     generator->gen(noarg1);
-        printf("genero la operacion\n");
-    return "hello";
+    return lvalue->toString();
 //FIXME
   }
 

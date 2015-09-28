@@ -139,9 +139,7 @@ class Program : public CompoundStatement {
       //FIXME
       std::list<Node *>::iterator iter;
       Statement *st;
-      printf("Estoy comenzando a generar 2\n");
       if (definitionList!=NULL) {
-        printf("La lista de definiciones no es nula\n");
         for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
           st = (Statement *) *iter;
           st->generateTAC(generator);
@@ -149,7 +147,6 @@ class Program : public CompoundStatement {
       }
 
       if(block!=NULL) {
-        printf("La lista de bloques no es nula\n");
          block->generateTAC(generator);
       }
     }

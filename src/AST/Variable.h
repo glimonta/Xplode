@@ -158,12 +158,16 @@ class Variable : public Expression {
     }
 
     std::string toString() {
+      if (varList->size() == 1 && indexList->size() == 0)
+        return varList->front()->value;
       return "variable";
       //TODO
     }
 
     std::string generateTAC(GeneratorTAC *generator) {
       //TODO
+      if (varList->size() == 1 && indexList->size() == 0)
+        return varList->front()->value;
       return "variable";
     }
 };

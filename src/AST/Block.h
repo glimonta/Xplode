@@ -121,13 +121,10 @@ class Block : public Node {
       //}
 
       if(statementList != NULL) {
-        printf("La lista de statements no es nula\n");
         for(iter = (*statementList).nodeList.begin();
             iter != (*statementList).nodeList.end(); ++iter){
-        printf("entre al for\n");
 
           st = (Statement *) *iter;
-      printf("Llego hasta despues de castear\n");
           st->generateTAC(generator);
         }
       }

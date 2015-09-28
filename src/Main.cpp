@@ -89,9 +89,7 @@ int main(int argc, char * argv[]) {
 
   GeneratorTAC *generator;
   generator = new GeneratorTAC(filename);
-  printf("Estoy comenzando a generar\n");
   program->generateTAC(generator);
-  printf("Termine de generar\n");
   generator->close();
 
 }
