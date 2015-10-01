@@ -82,7 +82,7 @@ class Function : public CompoundStatement {
 
     }
 
-    std::string generateTAC(GeneratorTAC *generator) {
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
       //TODO
     }
 

@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -20,36 +20,36 @@ extern ErrorLog *errorlog;
 
 class SymTable {
 
-    public:
+  public:
 
-        SymTable *father;
-        std::map<std::string, Symbol *> *table;
-        int totaloffset;
+    SymTable *father;
+    std::map<std::string, Symbol *> *table;
+    int totaloffset;
 
-        SymTable();
+    SymTable();
 
-        SymTable(NodeList *l);
+    SymTable(NodeList *l);
 
-        void add(NodeList *l);
+    void add(NodeList *l);
 
-        void insert(Symbol *s,  bool save = true);
-        
-        void insertString(Symbol *s, int tam);
+    void insert(Symbol *s,  bool save = true);
 
-        Symbol *find(std::string variable);
-        
-        Symbol *findType(std::string type);
+    void insertString(Symbol *s, int tam);
 
-        void print();
+    Symbol *find(std::string variable);
 
-        void setFather(SymTable *s);
-       
-        bool isMember(std::string variable);
+    Symbol *findType(std::string type);
 
-        Symbol *findall(std::string variable);
-        
-        SymTable *getRoot();
-             
+    void print();
+
+    void setFather(SymTable *s);
+
+    bool isMember(std::string variable);
+
+    Symbol *findall(std::string variable);
+
+    SymTable *getRoot();
+
 };
 
 #endif

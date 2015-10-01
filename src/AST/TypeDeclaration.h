@@ -29,7 +29,7 @@
 #define SIZE_INT   4
 #define SIZE_BOOL  1
 #define SIZE_CHAR  1
-#define SIZE_FLOAT 8
+#define SIZE_FLOAT 4
 #define SIZE_POINTER 4
 
 #define ALIGNMENT 1
@@ -38,10 +38,10 @@ class TypeDeclaration: public Node {
 
   public:
 
-  TypeDeclaration *ntype;
-  int numtype;
-  int size;
-  std::string name;
+    TypeDeclaration *ntype;
+    int numtype;
+    int size;
+    std::string name;
 
     TypeDeclaration(){}
     TypeDeclaration(int num,int s=0, TypeDeclaration *n=NULL) {
@@ -51,21 +51,21 @@ class TypeDeclaration: public Node {
       size = s;
     }
 
-   
+
 
     void print(int tab){
-        std::cout <<(long int) numtype << std:: endl;
+      std::cout <<(long int) numtype << std:: endl;
 
     }
 
     bool isarray(){ return (this->numtype==TYPE_ARRAY); }
 
     bool isfunction(){ return (this->numtype==TYPE_FUNCTION); }
-    
+
     bool isnumeric(){ return ((this->numtype==TYPE_INT) || ((this->numtype==TYPE_FLOAT))); }
-    
-    bool isprimitive(){ return ((this->numtype==TYPE_INT) || (this->numtype==TYPE_FLOAT) 
-                             || (this->numtype==TYPE_CHAR) || (this->numtype==TYPE_BOOL)); }
+
+    bool isprimitive(){ return ((this->numtype==TYPE_INT) || (this->numtype==TYPE_FLOAT)
+        || (this->numtype==TYPE_CHAR) || (this->numtype==TYPE_BOOL)); }
 
     bool haveattributes() {return ((this->numtype==TYPE_UNION) || ((this->numtype==TYPE_TYPE)));}
 

@@ -36,19 +36,19 @@ class FunctionExpression : public Expression {
       }
     }
 
-    std::string toString() {
+    std::string toString(SymTable *table) {
       std::string str = fname;
 
       if ( argList != 0 ){
         for(std::list<Expression *>::iterator iter = argList->begin(); iter != argList->end(); ++iter){
-          str = str + (*iter)->toString();
+          str = str + (*iter)->toString(table);
         }
       }
 
       return str;
     }
 
-    std::string generateTAC(GeneratorTAC *generator) {
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
       //TODO
     }
 

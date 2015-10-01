@@ -30,11 +30,11 @@ class CastedExpression : public Expression {
       exp->firstcheck(symtb);
     }
 
-  std::string toString() {
-    return cname + " " + exp->toString();
+  std::string toString(SymTable *table) {
+    return cname + " " + exp->toString(table);
   }
 
-  std::string generateTAC(GeneratorTAC *generator) {
+  std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
     //TODO
   }
 };

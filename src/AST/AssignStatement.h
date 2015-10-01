@@ -36,20 +36,21 @@ class AssignStatement : public Statement {
 
     }
 
-  std::string toString() {
-    return lvalue->toString() + " := " + rvalue->toString();
+  std::string toString(SymTable *table) {
+    return lvalue->toString(table) + " := " + rvalue->toString(table);
   }
 
-  std::string generateTAC(GeneratorTAC *generator) {
-    std::string result = lvalue->generateTAC(generator);
-    std::string rightop = rvalue->generateTAC(generator);
+  std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString(table));
+    generator->gen(comment);
+
+    std::string result = lvalue->generateTAC(generator, table);
+    std::string rightop = rvalue->generateTAC(generator, table);
     std::string op = ":=";
 
-    Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString());
     NoArg1Instruction *noarg1 = new NoArg1Instruction(op, result, rightop);
-    generator->gen(comment);
     generator->gen(noarg1);
-    return lvalue->toString();
+    return result;
 //FIXME
   }
 

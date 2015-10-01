@@ -15,6 +15,7 @@
 #ifndef X_NODE
 #define X_NODE
 
+class SymTable;
 
 class Node {
   public:
@@ -36,7 +37,7 @@ class Node {
 
     virtual void print(int tab) = 0;
 
-    virtual std::string generateTAC(GeneratorTAC *generator) {}
+    virtual std::string generateTAC(GeneratorTAC *generator, SymTable *table) {}
 
 };
 

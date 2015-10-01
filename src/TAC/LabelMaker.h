@@ -10,6 +10,7 @@
 #ifndef X_LABELMAKER
 #define X_LABELMAKER
 
+#define EMPTY_LABEL            ""
 #define COMMENT_LABEL          "#"
 #define INIT_LABEL             "INIT "
 #define ADD_LABEL              "ADD "

@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <stdio.h>
 #include "Expression.h"
+#include "ArrayType.h"
+#include "TupleType.h"
 #include "../SymTable.h"
 #include "../ErrorLog.h"
 #include "../Token.h"
@@ -157,18 +159,139 @@ class Variable : public Expression {
     */
     }
 
-    std::string toString() {
-      if (varList->size() == 1 && indexList->size() == 0)
+    std::string toString(SymTable *table) {
+      if (varList->size() == 1 && indexList->size() == 0) {
         return varList->front()->value;
-      return "variable";
-      //TODO
+      } else {
+        std::list<Xplode::Token *>::iterator vnames;
+        std::list<std::pair<int, Expression *> >::iterator indexes;
+        vnames = varList->begin();
+        indexes = indexList->begin();
+        Symbol *var = table->find(varList->front()->value);
+        TypeDeclaration *type = var->ntype;
+        std::stringstream finalStr;
+        finalStr << var->name;
+
+        while (vnames != varList->end()) {
+          if (type->isarray()) {
+            ArrayType* array = (ArrayType *) type;
+            finalStr << "[" << indexes->second->toString(table) << "]";
+            ++indexes;
+            type = array->ntype;
+            std::vector<int>* dimensions = array->findDimensions();
+
+            for (int i=1; i<dimensions->size(); ++i) {
+              finalStr << "[" << indexes->second->toString(table) << "]";
+              type = type->ntype;
+            }
+          } else if (type->haveattributes()) {
+            ++vnames;
+            TupleType * tuple = (TupleType *) type;
+            std::pair<TypeDeclaration*, int> *attribute = tuple->findAttribute((*vnames)->value);
+
+            finalStr << "." << (*vnames)->value;
+            type = attribute->first;
+          } else {
+            ++vnames;
+          }
+        }
+        return finalStr.str();
+        //FIXME
+        // Ahorita solo se considera el caso donde está una variable sola.
+      // No se han considerado ninguno de los casos especiales.
+      }
     }
 
-    std::string generateTAC(GeneratorTAC *generator) {
-      //TODO
-      if (varList->size() == 1 && indexList->size() == 0)
-        return varList->front()->value;
-      return "variable";
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+      if (varList->size() == 1 && indexList->size() == 0) {
+        std::string var(varList->front()->value);
+        std::transform(var.begin(), var.end(), var.begin(), ::tolower);
+        return var;
+      }
+
+      std::list<Xplode::Token *>::iterator vnames;
+      std::list<std::pair<int, Expression *> >::iterator indexes;
+      vnames = varList->begin();
+      indexes = indexList->begin();
+      std::string res;
+
+      Symbol *base = table->find((*vnames)->value);
+      res = EMPTY_LABEL;
+      TypeDeclaration *type = base->ntype;
+
+      while (vnames != varList->end()) {
+        if (type->isarray()) {
+          ArrayType* array = (ArrayType *) type;
+          std::vector<int>* dimensions = array->findDimensions();
+
+          res = indexes->second->generateTAC(generator, table);
+          ++indexes;
+          type = array->ntype;
+
+          for (int i=1; i<dimensions->size(); ++i) {
+            std::stringstream toString;
+            toString << (*dimensions)[i];
+            std::string arg2 = toString.str();
+            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            BinaryInstruction *mult = new BinaryInstruction("*", result, res, arg2);
+            generator->gen(mult);
+            res = mult->result;
+
+            arg2 = indexes->second->generateTAC(generator, table);
+            result = generator->labelmaker->getLabel(TEMPORAL);
+            BinaryInstruction *add = new BinaryInstruction("+", result, res, arg2);
+            generator->gen(add);
+            res = add->result;
+
+            type = type->ntype;
+          }
+
+          std::stringstream toString;
+          toString << type->size;
+          std::string size = toString.str();
+          std::string result = generator->labelmaker->getLabel(TEMPORAL);
+          BinaryInstruction * mult = new BinaryInstruction("*", result, res, size);
+          generator->gen(mult);
+          res = mult->result;
+
+          result = generator->labelmaker->getLabel(TEMPORAL);
+          BinaryInstruction * add = new BinaryInstruction("+", result, res, base->name);
+          generator->gen(add);
+          res = add->result;
+        } else if (type->haveattributes()) {
+          ++vnames;
+          TupleType * tuple = (TupleType *) type;
+          std::pair<TypeDeclaration*, int> *attribute = tuple->findAttribute((*vnames)->value);
+
+          if (EMPTY_LABEL == res) {
+            std::stringstream toString;
+            toString << attribute->second;
+            std::string size = toString.str();
+            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            BinaryInstruction * add = new BinaryInstruction("+", result, base->name, size);
+            generator->gen(add);
+            type = attribute->first;
+            res = add->result;
+          } else {
+            std::stringstream toString;
+            toString << attribute->second;
+            std::string size = toString.str();
+            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            BinaryInstruction * add = new BinaryInstruction("+", result, res, size);
+            generator->gen(add);
+            type = attribute->first;
+            res = add->result;
+          }
+        } else {
+          ++vnames;
+        }
+      }
+
+      return res;
+
+      //FIXME
+      // Ahorita solo se considera el caso donde está una variable sola.
+      // No se han considerado ninguno de los casos especiales.
     }
 };
 

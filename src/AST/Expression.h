@@ -21,9 +21,9 @@ class Expression : public Node {
 
     virtual void firstcheck(SymTable *symtb) {}
 
-    virtual std::string toString() {}
+    virtual std::string toString(SymTable *table) {}
 
-    virtual std::string generateTAC(GeneratorTAC *generator) {}
+    virtual std::string generateTAC(GeneratorTAC *generator, SymTable * table) {}
 
 };
 

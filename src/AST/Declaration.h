@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -20,51 +20,52 @@ extern ErrorLog *errorlog;
 
 class Declaration : public Statement {
   public:
-  TypeDeclaration *ntype;
-  std::string var;
-  
-  Declaration(Node *n, Xplode::Token *v) { 
-      ntype = (TypeDeclaration *) n; 
-      var = v->value; 
-      line = v->line; 
-      column = v->column; 
-  }
+    TypeDeclaration *ntype;
+    std::string var;
 
-  void print(int tab){/*
-   std::string tab = std::string(4, ' ');
-   
-   std::cout << "DECLARATION\n";
-   std::cout << "type: " << ntype->name << "\n";
-   std::cout << "var: " << var << "\n";
-  
-  */
-  }
+    Declaration(Node *n, Xplode::Token *v) {
+      ntype = (TypeDeclaration *) n;
+      var = v->value;
+      line = v->line;
+      column = v->column;
+    }
 
-  Symbol *toSymbol(){ 
-  /*
-    return new Symbol(var,ntype->name, line, column, false,
-            ntype->max_index->size()); 
-  
-  */
-  }
+    void print(int tab){/*
+                           std::string tab = std::string(4, ' ');
 
-  void firstcheck(SymTable *symtb){
-    
-    Symbol *nvar, *ntp;
- /*   
-    nvar = symtb->find(var);
-    ntp = symtb->find(ntype->name);
-    //falta
-    if((nvar)&&(nvar->defined)) errorlog->addError(6,line, column,&var);    
-    if(!ntp) errorlog->addError(7,line,column,&ntype->name); 
-    if((ntp)&&(!ntp->defined)) errorlog->addError(7,line,column,&ntype->name); 
-  */
-  }  
+                           std::cout << "DECLARATION\n";
+                           std::cout << "type: " << ntype->name << "\n";
+                           std::cout << "var: " << var << "\n";
 
-  std::string generateTAC(GeneratorTAC *generator) {
-    //TODO
+*/
+    }
+
+    Symbol *toSymbol(){
+      /*
+         return new Symbol(var,ntype->name, line, column, false,
+         ntype->max_index->size());
+
+*/
+    }
+
+    void firstcheck(SymTable *symtb){
+
+      Symbol *nvar, *ntp;
+      /*
+           nvar = symtb->find(var);
+           ntp = symtb->find(ntype->name);
+      //falta
+      if((nvar)&&(nvar->defined)) errorlog->addError(6,line, column,&var);
+      if(!ntp) errorlog->addError(7,line,column,&ntype->name);
+      if((ntp)&&(!ntp->defined)) errorlog->addError(7,line,column,&ntype->name);
+      */
+    }
+
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
       printf("Estoy en el genTAC para las declaraciones\n");
-  }
+      //TODO
+      printf("Estoy en el genTAC para las declaraciones\n");
+    }
 
 };
 

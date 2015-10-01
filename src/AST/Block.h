@@ -102,30 +102,29 @@ class Block : public Node {
       }
     }
 
-    std::string generateTAC(GeneratorTAC *generator) {
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
       Declaration *decl;
       Statement *st;
       std::string aux;
       std::list<Node *>::iterator iter;
 
-      //if(declarationList != NULL) {
-      //printf("La lista de declaraciones no es nula\n");
-      //  for(iter = (*declarationList).nodeList.begin();
-      //      iter != (*declarationList).nodeList.end(); ++iter){
+      // if(declarationList != NULL) {
+      // printf("Entre al generateTAC de program->block->declarations\n");
+      //   for(iter = (*declarationList).nodeList.begin();
+      //       iter != (*declarationList).nodeList.end(); ++iter){
 
-      //    decl = (Declaration *) *iter;
-      //printf("Llego hasta despues de castear\n");
-      //    decl->generateTAC(generator);
-      //printf("Paso el genTAC\n");
-      //  }
-      //}
+      //     decl = (Declaration *) *iter;
+      //     decl->generateTAC(generator, table);
+      //   }
+      // }
+      // printf("Sali del generateTAC de program->block->declarations\n");
 
       if(statementList != NULL) {
         for(iter = (*statementList).nodeList.begin();
             iter != (*statementList).nodeList.end(); ++iter){
 
           st = (Statement *) *iter;
-          st->generateTAC(generator);
+          st->generateTAC(generator, table);
         }
       }
 

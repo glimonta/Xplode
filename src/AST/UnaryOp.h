@@ -38,12 +38,12 @@ class UnaryOp : public Expression {
     void firstcheck(SymTable *symtb){
     }
 
-    std::string toString() {
-      return opname + " " + exp->toString();
+    std::string toString(SymTable *table) {
+      return opname + " " + exp->toString(table);
     }
 
-    std::string generateTAC(GeneratorTAC *generator) {
-      std::string a1 = exp->generateTAC(generator);
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+      std::string a1 = exp->generateTAC(generator, table);
       std::string result = generator->labelmaker->getLabel(TEMPORAL);
       std::string op;
 
@@ -53,7 +53,7 @@ class UnaryOp : public Expression {
         op = NOT_LABEL;
       } else {}
 
-      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString());
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString(table));
       NoArg2Instruction *unop = new NoArg2Instruction(op, result, a1);
       generator->gen(comment);
       generator->gen(unop);

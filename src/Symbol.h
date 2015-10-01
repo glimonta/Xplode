@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -14,10 +14,10 @@
 #include "AST/TypeDeclaration.h"
 
 /*
-nombre 
-tipo (apuntador)
-linea
-columna
+   nombre
+   tipo (apuntador)
+   linea
+   columna
 
 */
 
@@ -26,42 +26,42 @@ columna
 
 class Symbol {
 
-    public:
+  public:
 
-        std::string name;
-        TypeDeclaration *ntype;
-        int line;
-        bool hidden;
-        bool istype;
-        int offset;
-        int column;
+    std::string name;
+    TypeDeclaration *ntype;
+    int line;
+    bool hidden;
+    bool istype;
+    int offset;
+    int column;
 
-        
-        /* define defined
-        0 variable
-        1 primitives
-        2 type
-        3 union 
-        4 function
-        5 proc       
-        */
 
-        Symbol(bool h, std::string n, TypeDeclaration *t, int l, int c,bool i){
+    /* define defined
+       0 variable
+       1 primitives
+       2 type
+       3 union
+       4 function
+       5 proc
+       */
 
-            name=n;
-            ntype = t;
-            line = l;
-            column = c;
-            offset = 0; 
-            hidden = h;
-            istype = i;
-            //defined = e;
-            //dimensions = d;
-            //pt = p;
+    Symbol(bool h, std::string n, TypeDeclaration *t, int l, int c,bool i){
 
-        }
+      name=n;
+      ntype = t;
+      line = l;
+      column = c;
+      offset = 0;
+      hidden = h;
+      istype = i;
+      //defined = e;
+      //dimensions = d;
+      //pt = p;
 
-        std::string getname() {return name;}
+    }
+
+    std::string getname() {return name;}
 
 };
 

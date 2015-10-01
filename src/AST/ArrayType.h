@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -16,7 +16,7 @@ class ArrayType : public TypeDeclaration {
 
   public:
 
-  int limit;
+    int limit;
 
     ArrayType(Node *n, int lim){
 
@@ -27,8 +27,22 @@ class ArrayType : public TypeDeclaration {
 
     }
 
-
     void print(int tab){}
+
+    std::vector<int>* findDimensions() {
+      std::vector<int>* dims;
+
+      if (ntype->isarray()) {
+        ArrayType * array = (ArrayType *) ntype;
+        dims = array->findDimensions();
+        dims->push_back(limit);
+      } else {
+        dims = new std::vector<int>;
+        dims->push_back(limit);
+      }
+
+      return dims;
+    }
 
 
 };

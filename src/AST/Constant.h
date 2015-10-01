@@ -27,12 +27,12 @@ class Constant : public Expression {
 
     void firstcheck(SymTable *symtb){}
 
-    std::string toString() {
+    std::string toString(SymTable *table) {
       return value;
     }
 
-    std::string generateTAC(GeneratorTAC *generator) {
-      return toString();
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+      return toString(table);
     }
 
 };

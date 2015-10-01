@@ -89,7 +89,7 @@ int main(int argc, char * argv[]) {
 
   GeneratorTAC *generator;
   generator = new GeneratorTAC(filename);
-  program->generateTAC(generator);
+  program->generateTAC(generator, program->table);
   generator->close();
 
 }

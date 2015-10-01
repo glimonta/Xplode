@@ -38,19 +38,17 @@ class BinaryExpression : public Expression {
 
   }
 
-  std::string toString() {
-    return lexp->toString() + " " + opname + " " + rexp->toString();
+  std::string toString(SymTable *table) {
+    return lexp->toString(table) + " " + opname + " " + rexp->toString(table);
   }
 
-  std::string generateTAC(GeneratorTAC *generator) {
-    std::string leftop = lexp->generateTAC(generator);
-    std::string rightop = rexp->generateTAC(generator);
+  std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    std::string leftop = lexp->generateTAC(generator, table);
+    std::string rightop = rexp->generateTAC(generator, table);
     std::string result = generator->labelmaker->getLabel(TEMPORAL);
     std::string op = opname;
 
-    Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString());
     BinaryInstruction *binop = new BinaryInstruction(op, result, leftop, rightop);
-    generator->gen(comment);
     generator->gen(binop);
     return result;
   }
