@@ -71,6 +71,22 @@ class BinaryInstruction : public Quad {
 
 };
 
+class FunctionCallReturn : public Quad {
+  public:
+
+    FunctionCallReturn(std::string o, std::string r, std::string a1, std::string a2) {
+      op = o;
+      result = r;
+      arg1 = a1;
+      arg2 = a2;
+    }
+
+    std::string toString() {
+      return getResult() + " := " + getOp() + " " + getArg1() + " " + getArg2();
+    }
+
+};
+
 class NoArg1Instruction : public Quad {
   public:
 
@@ -96,7 +112,22 @@ class NoArg2Instruction : public Quad {
     }
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " ";
+      return getResult() + " " + getOp() + " " + getArg1();
+    }
+
+};
+
+class NoResultInstruction : public Quad {
+  public:
+
+    NoResultInstruction(std::string o, std::string a1, std::string a2) {
+      op = o;
+      arg1 = a1;
+      arg2 = a2;
+    }
+
+    std::string toString() {
+      return getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -110,7 +141,7 @@ class OneArgInstruction : public Quad {
     }
 
     std::string toString() {
-      return getOp() + getArg1() + "\n";
+      return getOp() + " " + getArg1();
     }
 
 };
@@ -124,7 +155,7 @@ class ResultInstruction : public Quad {
     }
 
     std::string toString() {
-      return getOp() + getResult() + "\n";
+      return getOp() + getResult();
     }
 
 };

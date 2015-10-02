@@ -39,7 +39,7 @@ public:
 
   virtual void firstcheck(SymTable *symtb) {}
 
-  virtual std::string generateTAC(GeneratorTAC *generator) {}
+  virtual std::string generateTAC(GeneratorTAC *generator, SymTable *table) {}
 
 };
 

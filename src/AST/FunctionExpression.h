@@ -16,6 +16,7 @@ class FunctionExpression : public Expression {
   public:
     std::string fname;
     std::list<Expression *> *argList;
+
     FunctionExpression(std::string n, std::list<Expression *> *a = 0){fname = n; argList = a; }
     void print(int tab){
       std::cout << std::string(tab, ' ') << "FUNCTION \n";
@@ -37,19 +38,41 @@ class FunctionExpression : public Expression {
     }
 
     std::string toString(SymTable *table) {
-      std::string str = fname;
-
-      if ( argList != 0 ){
-        for(std::list<Expression *>::iterator iter = argList->begin(); iter != argList->end(); ++iter){
-          str = str + (*iter)->toString(table);
+      std::stringstream str;
+      str << fname;
+      if (0 != argList->size()) {
+        str << "(";
+        std::list<Expression *>::iterator params;
+        for (params = argList->begin(); params != argList->end(); ++params) {
+          str << (*params)->toString(table);
+          if (params != --argList->end()) {
+            str << ", ";
+          }
         }
+        str << ")";
       }
-
-      return str;
+      return str.str();
     }
 
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-      //TODO
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString(table));
+      generator->gen(comment);
+
+      std::list<Expression *>::iterator params;
+      for (params = argList->begin(); params != argList->end(); ++params) {
+        std::string res = (*params)->generateTAC(generator, table);
+        OneArgInstruction *param = new OneArgInstruction("param", res);
+        generator->gen(param);
+      }
+
+      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      std::stringstream str;
+      str << argList->size();
+      FunctionCallReturn *call = new FunctionCallReturn("call", result, fname, str.str());
+      generator->gen(call);
+
+      return result;
+      //FIXME
     }
 
 };
