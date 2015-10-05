@@ -147,7 +147,7 @@ class Program : public CompoundStatement {
       }
 
       if(block!=NULL) {
-         block->generateTAC(generator, block->table);
+         block->generateTAC(generator, table);
       }
     }
 

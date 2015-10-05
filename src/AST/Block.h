@@ -124,7 +124,7 @@ class Block : public Node {
             iter != (*statementList).nodeList.end(); ++iter){
 
           st = (Statement *) *iter;
-          st->generateTAC(generator, table);
+          st->generateTAC(generator, this->table);
         }
       }
 

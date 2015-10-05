@@ -83,12 +83,12 @@ class IfStatement : public CompoundStatement {
         generator->gen(goto_instr);
 
         generator->gen(true_lab);
-        res = block->generateTAC(generator, block->table);
+        res = block->generateTAC(generator, table);
         goto_instr = new ResultInstruction("goto", next_lab->getOp());
         generator->gen(goto_instr);
 
         generator->gen(false_lab);
-        res = elseBlock->generateTAC(generator, elseBlock->table);
+        res = elseBlock->generateTAC(generator, table);
         generator->gen(next_lab);
       }
 
