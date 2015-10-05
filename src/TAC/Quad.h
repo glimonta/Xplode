@@ -39,18 +39,33 @@ class Quad {
     void setArg1(std::string a1)  { arg1 = a1; }
     void setArg2(std::string a2)  { arg2 = a2; }
 
-    virtual std::string toString(){}
+    virtual std::string toString() {
+      return getOp() + " " + getResult() + " " + getArg1() + " " + getArg2();
+    }
 };
 
 class Comment : public Quad {
   public:
 
     Comment(std::string comment) {
-      setOp(comment);
+      op = comment;
     }
 
     std::string toString() {
       return "#" + getOp();
+    }
+
+};
+
+class Label : public Quad {
+  public:
+
+    Label(std::string comment) {
+      op = comment;
+    }
+
+    std::string toString() {
+      return getOp() + ":";
     }
 
 };
@@ -155,7 +170,7 @@ class ResultInstruction : public Quad {
     }
 
     std::string toString() {
-      return getOp() + getResult();
+      return getOp() + " " + getResult();
     }
 
 };

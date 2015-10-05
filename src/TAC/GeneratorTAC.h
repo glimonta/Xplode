@@ -18,17 +18,13 @@ class GeneratorTAC {
     std::ofstream tempFile;
     LabelMaker *labelmaker;
     std::vector<Quad*> *tac;
-    int quadNum;
 
     GeneratorTAC(const std::string &file) {
       filename = file + ".temp";
       tempFile.open(filename.c_str(), std::ofstream::out);
       labelmaker = new LabelMaker();
       tac = new std::vector<Quad*>;
-      quadNum = 0;
     }
-
-    int getQuadNum() { return quadNum++; }
 
     void addQuad(Quad *quad) {
       tac->push_back(quad);
@@ -40,7 +36,7 @@ class GeneratorTAC {
 
     void gen(Quad *quad) {
       addQuad(quad);
-      tempFile << getQuadNum() << ": " << quad->toString() << std::endl;
+      tempFile << quad->toString() << std::endl;
     }
 
 };

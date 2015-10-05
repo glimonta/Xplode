@@ -59,6 +59,40 @@ class IfStatement : public CompoundStatement {
     }
 
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+      //FIXME Hay que arreglar este comentario para tener el toString()
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción if");
+      generator->gen(comment);
+
+      Label *true_lab  = new Label(generator->labelmaker->getLabel("true"));
+      Label *false_lab = new Label(generator->labelmaker->getLabel("false"));
+      Label *next_lab  = new Label(generator->labelmaker->getLabel("next"));
+
+      std::string res = condition->generateTAC(generator, table);
+      Quad *if_instr = new Quad("if", res, "goto", true_lab->getOp());
+      generator->gen(if_instr);
+
+      if (NULL == elseBlock) {
+        ResultInstruction *goto_instr = new ResultInstruction("goto", next_lab->getOp());
+        generator->gen(goto_instr);
+
+        generator->gen(true_lab);
+        res = block->generateTAC(generator, table);
+        generator->gen(next_lab);
+      } else {
+        ResultInstruction *goto_instr = new ResultInstruction("goto", false_lab->getOp());
+        generator->gen(goto_instr);
+
+        generator->gen(true_lab);
+        res = block->generateTAC(generator, block->table);
+        goto_instr = new ResultInstruction("goto", next_lab->getOp());
+        generator->gen(goto_instr);
+
+        generator->gen(false_lab);
+        res = elseBlock->generateTAC(generator, elseBlock->table);
+        generator->gen(next_lab);
+      }
+
+      return res;
       //TODO
     }
 

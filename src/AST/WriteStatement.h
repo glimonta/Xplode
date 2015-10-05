@@ -36,6 +36,8 @@ class WriteStatement : public Statement {
   
   }
 
+  std::string generateTAC(GeneratorTAC * generator, SymTable *table) {}
+
 };
 
 #endif
