@@ -35,6 +35,16 @@ class Constant : public Expression {
       return toString(table);
     }
 
+    virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
+      if ("true" == value) {
+        ResultInstruction *goto_instr = new ResultInstruction("goto", trueLabel);
+        generator->gen(goto_instr);
+      } else if ("false" == value) {
+        ResultInstruction *goto_instr = new ResultInstruction("goto", falseLabel);
+        generator->gen(goto_instr);
+      }
+    }
+
 };
 
 #endif

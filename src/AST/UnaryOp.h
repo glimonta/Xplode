@@ -60,6 +60,11 @@ class UnaryOp : public Expression {
       return result;
     }
 
+    virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
+      if ("NOT" == opname) {
+        exp->generateJumpingCode(generator, table, falseLabel, trueLabel);
+      }
+    }
 
 };
 

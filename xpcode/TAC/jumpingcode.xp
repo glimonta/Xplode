@@ -1,0 +1,23 @@
+program
+
+begin
+
+let int i, j;
+let bool k;
+
+  i := 1;
+  j := 2;
+
+  k := (j < j) && (j > 6);
+  k := (j < j) && true;
+
+  if (false || true || false) {
+    if (false && true) {
+    j := 4;
+    }
+    i := 2;
+  } else {
+    i := 4;
+  }
+
+end

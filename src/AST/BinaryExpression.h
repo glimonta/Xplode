@@ -53,6 +53,34 @@ class BinaryExpression : public Expression {
     return result;
   }
 
+  virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
+    if ("<" == opname) {
+      std::string leftop = lexp->generateTAC(generator, table);
+      std::string rightop = rexp->generateTAC(generator, table);
+      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      std::string op = opname;
+
+      BinaryInstruction *binop = new BinaryInstruction(op, result, leftop, rightop);
+      generator->gen(binop);
+
+      Quad *if_instr = new Quad("if", result, "goto", trueLabel);
+      generator->gen(if_instr);
+
+      ResultInstruction *goto_instr = new ResultInstruction("goto", falseLabel);
+      generator->gen(goto_instr);
+    } else if ("||" == opname) {
+      Label *label  = new Label(generator->labelmaker->getLabel(LAB_LABEL));
+      lexp->generateJumpingCode(generator, table, trueLabel, label->getOp());
+      generator->gen(label);
+      rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+    } else if ("&&" == opname) {
+      Label *label  = new Label(generator->labelmaker->getLabel(LAB_LABEL));
+      lexp->generateJumpingCode(generator, table, label->getOp(), falseLabel);
+      generator->gen(label);
+      rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+    }
+  }
+
 };
 
 

@@ -37,6 +37,28 @@ class WhileStatement : public CompoundStatement {
     }
 
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+      //FIXME Hay que arreglar este comentario para tener el toString()
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción while");
+      generator->gen(comment);
+
+      Label *begin_lab  = new Label(generator->labelmaker->getLabel("begin"));
+      Label *true_lab = new Label(generator->labelmaker->getLabel("true"));
+      Label *next_lab  = new Label(generator->labelmaker->getLabel("next"));
+
+      std::string res;
+
+      generator->gen(begin_lab);
+      condition->generateJumpingCode(generator, table, true_lab->getOp(), next_lab->getOp());
+
+      generator->gen(true_lab);
+
+      res = block->generateTAC(generator, table);
+      ResultInstruction *goto_instr = new ResultInstruction("goto", begin_lab->getOp());
+      generator->gen(goto_instr);
+
+      generator->gen(next_lab);
+
+      return res;
       //TODO
     }
 

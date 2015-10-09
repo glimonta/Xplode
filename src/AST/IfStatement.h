@@ -67,24 +67,18 @@ class IfStatement : public CompoundStatement {
       Label *false_lab = new Label(generator->labelmaker->getLabel("false"));
       Label *next_lab  = new Label(generator->labelmaker->getLabel("next"));
 
-      std::string res = condition->generateTAC(generator, table);
-      Quad *if_instr = new Quad("if", res, "goto", true_lab->getOp());
-      generator->gen(if_instr);
+      std::string res;
+
+      condition->generateJumpingCode(generator, table, true_lab->getOp(), next_lab->getOp());
 
       if (NULL == elseBlock) {
-        ResultInstruction *goto_instr = new ResultInstruction("goto", next_lab->getOp());
-        generator->gen(goto_instr);
-
         generator->gen(true_lab);
         res = block->generateTAC(generator, table);
         generator->gen(next_lab);
       } else {
-        ResultInstruction *goto_instr = new ResultInstruction("goto", false_lab->getOp());
-        generator->gen(goto_instr);
-
         generator->gen(true_lab);
         res = block->generateTAC(generator, table);
-        goto_instr = new ResultInstruction("goto", next_lab->getOp());
+        ResultInstruction *goto_instr = new ResultInstruction("goto", next_lab->getOp());
         generator->gen(goto_instr);
 
         generator->gen(false_lab);

@@ -31,6 +31,7 @@
 #define TEMPORAL               "t"
 #define UMINUS_LABEL           "NEG "
 #define NOT_LABEL              "NOT "
+#define LAB_LABEL              "label"
 
 class LabelMaker {
   public:
