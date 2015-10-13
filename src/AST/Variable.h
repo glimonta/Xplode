@@ -293,6 +293,25 @@ class Variable : public Expression {
       // Ahorita solo se considera el caso donde está una variable sola.
       // No se han considerado ninguno de los casos especiales.
     }
+
+    void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
+      std::string res = this->generateTAC(generator, table);
+
+      if ( "fall" != trueLabel && "fall" != falseLabel) {
+        Quad *if_instr = new Quad("if", res, "goto", trueLabel);
+        generator->gen(if_instr);
+
+        ResultInstruction *goto_instr = new ResultInstruction("goto", falseLabel);
+        generator->gen(goto_instr);
+      } else if ("fall" != trueLabel) {
+        Quad *if_instr = new Quad("if", res, "goto", trueLabel);
+        generator->gen(if_instr);
+      } else if ("fall" != falseLabel) {
+        Quad *if_instr = new Quad("ifnot", res, "goto", falseLabel);
+        generator->gen(if_instr);
+      } else {
+      }
+    }
 };
 
 

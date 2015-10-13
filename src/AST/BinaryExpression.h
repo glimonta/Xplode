@@ -54,7 +54,8 @@ class BinaryExpression : public Expression {
   }
 
   virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
-    if ("<" == opname) {
+    // FIXME creo que hay un error en el or porque creo que se genera un goto extra
+    if ("<" == opname || "<=" == opname || ">" == opname || ">=" == opname || "==" == opname || "!=" == opname) {
       std::string leftop = lexp->generateTAC(generator, table);
       std::string rightop = rexp->generateTAC(generator, table);
       std::string result = generator->labelmaker->getLabel(TEMPORAL);
@@ -63,22 +64,42 @@ class BinaryExpression : public Expression {
       BinaryInstruction *binop = new BinaryInstruction(op, result, leftop, rightop);
       generator->gen(binop);
 
-      Quad *if_instr = new Quad("if", result, "goto", trueLabel);
-      generator->gen(if_instr);
 
-      ResultInstruction *goto_instr = new ResultInstruction("goto", falseLabel);
-      generator->gen(goto_instr);
+      if ("fall" != trueLabel && "fall" != falseLabel) {
+        Quad *if_instr = new Quad("if", result, "goto", trueLabel);
+        generator->gen(if_instr);
+
+        ResultInstruction *goto_instr = new ResultInstruction("goto", falseLabel);
+        generator->gen(goto_instr);
+      } else if ("fall" != trueLabel) {
+        Quad *if_instr = new Quad("if", result, "goto", trueLabel);
+        generator->gen(if_instr);
+      } else if ("fall" != falseLabel) {
+        Quad *if_instr = new Quad("ifnot", result, "goto", falseLabel);
+        generator->gen(if_instr);
+      } else {
+      }
     } else if ("||" == opname) {
-      Label *label  = new Label(generator->labelmaker->getLabel(LAB_LABEL));
-      lexp->generateJumpingCode(generator, table, trueLabel, label->getOp());
-      generator->gen(label);
-      rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+      if ( "fall" == trueLabel ) {
+        Label *label = new Label(generator->labelmaker->getLabel("true"));
+        lexp->generateJumpingCode(generator, table, label->getOp(), "fall");
+        rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+        generator->gen(label);
+      } else {
+        lexp->generateJumpingCode(generator, table, trueLabel, "fall");
+        rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+      }
     } else if ("&&" == opname) {
-      Label *label  = new Label(generator->labelmaker->getLabel(LAB_LABEL));
-      lexp->generateJumpingCode(generator, table, label->getOp(), falseLabel);
-      generator->gen(label);
-      rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
-    }
+      if ( "fall" == falseLabel ) {
+        Label *label = new Label(generator->labelmaker->getLabel("false"));
+        lexp->generateJumpingCode(generator, table, "fall", label->getOp());
+        rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+        generator->gen(label);
+      } else {
+        lexp->generateJumpingCode(generator, table, "fall", falseLabel);
+        rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+      }
+    } else {}
   }
 
 };

@@ -81,7 +81,7 @@ class BinaryInstruction : public Quad {
     }
 
     std::string toString() {
-      return getResult() + " := " + getArg1() + " " + getOp() + " " + getArg2();
+      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
     }
 
 };

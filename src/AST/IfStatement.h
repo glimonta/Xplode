@@ -63,20 +63,19 @@ class IfStatement : public CompoundStatement {
       Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción if");
       generator->gen(comment);
 
-      Label *true_lab  = new Label(generator->labelmaker->getLabel("true"));
+      Label *fall_lab  = new Label("fall");
       Label *false_lab = new Label(generator->labelmaker->getLabel("false"));
       Label *next_lab  = new Label(generator->labelmaker->getLabel("next"));
 
       std::string res;
 
-      condition->generateJumpingCode(generator, table, true_lab->getOp(), next_lab->getOp());
 
       if (NULL == elseBlock) {
-        generator->gen(true_lab);
+        condition->generateJumpingCode(generator, table, fall_lab->getOp(), next_lab->getOp());
         res = block->generateTAC(generator, table);
         generator->gen(next_lab);
       } else {
-        generator->gen(true_lab);
+        condition->generateJumpingCode(generator, table, fall_lab->getOp(), false_lab->getOp());
         res = block->generateTAC(generator, table);
         ResultInstruction *goto_instr = new ResultInstruction("goto", next_lab->getOp());
         generator->gen(goto_instr);

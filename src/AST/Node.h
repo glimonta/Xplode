@@ -28,6 +28,7 @@ class Node {
     int getColumn()    { return column; }
 
     std::string getLineStr()   {
+      //printf("numero de linea: %d\n", line);
       std::ostringstream aux;
       aux << line;
       return aux.str();

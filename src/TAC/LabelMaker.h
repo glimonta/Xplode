@@ -32,6 +32,7 @@
 #define UMINUS_LABEL           "NEG "
 #define NOT_LABEL              "NOT "
 #define LAB_LABEL              "label"
+#define GOTO_LABEL             "goto "
 
 class LabelMaker {
   public:

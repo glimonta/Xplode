@@ -9,11 +9,11 @@ let bool k;
   j := 2;
 
   k := (j < j) && (j > 6);
-  k := (j < j) && true;
+  k := (i < j) && true;
 
-  if (false || true || false) {
+  if (false || (i<j) || false) {
     if (false && true) {
-    j := 4;
+      j := 4;
     }
     i := 2;
   } else {
