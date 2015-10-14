@@ -59,7 +59,6 @@ class WhileStatement : public CompoundStatement {
       generator->gen(next_lab);
 
       return res;
-      //TODO
     }
 
 };

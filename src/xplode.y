@@ -394,6 +394,8 @@ def_function
 
     name = $2->value;
     $$ = new Function(actual, name, $3, $4);
+    $$->line = $2->line;
+    $$->column = $2->column;
     pila.pop();
     actual = pila.top();
     inFunction = false;
@@ -469,7 +471,7 @@ function_parameters
 
     TupleType *t = (TupleType *) $1;
     t->add($3,$4->value);
-    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,false));
+    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,true));
     $$ = t;
 
   }
@@ -489,7 +491,7 @@ function_parameters
 
     TupleType *t = new TupleType();
     t->add($2,$3->value);
-    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column,false));
+    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column,true));
     $$ = t;
 
   }
@@ -508,7 +510,7 @@ function_pars
 
     TupleType *t = new TupleType();
     t->add($2,$3->value);
-    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column,false));
+    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column,true));
     $$ = t;
     } //falta var
 
@@ -526,7 +528,7 @@ function_pars
 
     TupleType *t = (TupleType *) $1;
     t->add($3,$4->value);
-    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,false));
+    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,true));
     $$ = t;
 
   } //falta var
@@ -577,6 +579,8 @@ type
 block
   : init_block x_LBRACE declaration_list statement_list x_RBRACE {
     $$ = new Block(actual,$3,$4);
+    $$->line = $2->line;
+    $$->column = $2->column;
     int aux = actual->totaloffset;
     pila.pop();
     actual = pila.top();
@@ -585,6 +589,8 @@ block
   | init_block x_LBRACE statement_list x_RBRACE {
 
     $$ = new Block(actual, $3);
+    $$->line = $2->line;
+    $$->column = $2->column;
     int aux = actual->totaloffset;
     pila.pop();
     actual = pila.top();
@@ -710,7 +716,10 @@ statement_compound
 
 statement_for
   : init_breakable x_FOR x_LPAR for_init x_SEMICOLON for_condition x_SEMICOLON for_increment x_RPAR block {
+
     $$ = new ForStatement($4,$6,$8,$10);
+    $$->line = $2->line;
+    $$->column = $2->column;
     inBlock--;
   }
   | init_breakable x_FOR error block { yyclearin; $$ = new Statement(); inBlock--; }
@@ -738,7 +747,12 @@ for_increment
   ;
 
 statement_while
-  : init_breakable x_WHILE x_LPAR while_condition x_RPAR block {$$ = new  WhileStatement($4,$6); inBlock--;}
+  : init_breakable x_WHILE x_LPAR while_condition x_RPAR block {
+      $$ = new  WhileStatement($4,$6);
+      $$->line = $2->line;
+      $$->column = $2->column;
+      inBlock--;
+    }
   | init_breakable x_WHILE error block {  yyclearin; $$ = new Statement(); inBlock--; }
   ;
 
@@ -763,8 +777,16 @@ while_condition
   ;
 
 statement_if
-  : x_IF x_LPAR if_condition x_RPAR block {$$ = new IfStatement($3,$5); }
-  | x_IF x_LPAR if_condition x_RPAR block statement_else {$$ = new IfStatement($3,$5,$6); }
+  : x_IF x_LPAR if_condition x_RPAR block {
+      $$ = new IfStatement($3,$5);
+      $$->line = $2->line;
+      $$->column = $2->column;
+    }
+  | x_IF x_LPAR if_condition x_RPAR block statement_else {
+      $$ = new IfStatement($3,$5,$6);
+      $$->line = $2->line;
+      $$->column = $2->column;
+    }
   | x_IF error block { yyclearin; $$ = new Statement(); }
   ;
 
@@ -792,6 +814,8 @@ statement_assign
       if($1->ntype!=$3->ntype) errorlog->addError(37,$2->line,$2->column,NULL);
       if(!$1->ntype->isprimitive()) errorlog->addError(40,$2->line,$2->column,NULL);
       $$ = new AssignStatement($1,$3);
+      $$->line = $2->line;
+      $$->column = $2->column;
   }
   | variable error { yyclearin; errorlog->addError(18,line,column,NULL); $$ = new Statement(); }
   ;
@@ -1510,6 +1534,7 @@ function
               while((t->isarray())||(t2->isarray())){
                 t= t->ntype;
                 t2= t2->ntype;
+                if((!t->isarray())||(!t2->isarray())) break;
               }
               if((t->ntype!=t2->ntype)||(t->numtype!=t2->numtype)) errorlog->addError(37,line,column,&$1->value);
 
@@ -1560,6 +1585,8 @@ function
 
       $$ = new FunctionExpression($1->value,$3);
       $$->ntype = tp;
+      $$->line = $1->line;
+      $$->column = $1->column;
   }
   | x_ID x_LPAR x_RPAR {$$ = new FunctionExpression($1->value); }
   ;
