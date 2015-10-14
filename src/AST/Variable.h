@@ -233,13 +233,13 @@ class Variable : public Expression {
             toString << (*dimensions)[i];
             std::string arg2 = toString.str();
             std::string result = generator->labelmaker->getLabel(TEMPORAL);
-            BinaryInstruction *mult = new BinaryInstruction("*", result, res, arg2);
+            MulQuad *mult = new MulQuad(result, res, arg2);
             generator->gen(mult);
             res = mult->result;
 
             arg2 = indexes->second->generateTAC(generator, table);
             result = generator->labelmaker->getLabel(TEMPORAL);
-            BinaryInstruction *add = new BinaryInstruction("+", result, res, arg2);
+            AddQuad *add = new AddQuad(result, res, arg2);
             generator->gen(add);
             res = add->result;
 
@@ -250,12 +250,12 @@ class Variable : public Expression {
           toString << type->size;
           std::string size = toString.str();
           std::string result = generator->labelmaker->getLabel(TEMPORAL);
-          BinaryInstruction * mult = new BinaryInstruction("*", result, res, size);
+          MulQuad * mult = new MulQuad(result, res, size);
           generator->gen(mult);
           res = mult->result;
 
           result = generator->labelmaker->getLabel(TEMPORAL);
-          BinaryInstruction * add = new BinaryInstruction("+", result, res, base->name);
+          AddQuad * add = new AddQuad(result, res, base->name);
           generator->gen(add);
           res = add->result;
         } else if (type->haveattributes()) {
@@ -268,7 +268,7 @@ class Variable : public Expression {
             toString << attribute->second;
             std::string size = toString.str();
             std::string result = generator->labelmaker->getLabel(TEMPORAL);
-            BinaryInstruction * add = new BinaryInstruction("+", result, base->name, size);
+            AddQuad * add = new AddQuad(result, base->name, size);
             generator->gen(add);
             type = attribute->first;
             res = add->result;
@@ -277,7 +277,7 @@ class Variable : public Expression {
             toString << attribute->second;
             std::string size = toString.str();
             std::string result = generator->labelmaker->getLabel(TEMPORAL);
-            BinaryInstruction * add = new BinaryInstruction("+", result, res, size);
+            AddQuad * add = new AddQuad(result, res, size);
             generator->gen(add);
             type = attribute->first;
             res = add->result;
@@ -298,16 +298,16 @@ class Variable : public Expression {
       std::string res = this->generateTAC(generator, table);
 
       if ( "fall" != trueLabel && "fall" != falseLabel) {
-        Quad *if_instr = new Quad("if", res, "goto", trueLabel);
+        IfQuad *if_instr = new IfQuad(res, trueLabel);
         generator->gen(if_instr);
 
-        ResultInstruction *goto_instr = new ResultInstruction("goto", falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
       } else if ("fall" != trueLabel) {
-        Quad *if_instr = new Quad("if", res, "goto", trueLabel);
+        IfQuad *if_instr = new IfQuad(res, trueLabel);
         generator->gen(if_instr);
       } else if ("fall" != falseLabel) {
-        Quad *if_instr = new Quad("ifnot", res, "goto", falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(res, falseLabel);
         generator->gen(if_instr);
       } else {
       }

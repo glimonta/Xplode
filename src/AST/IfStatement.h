@@ -77,7 +77,7 @@ class IfStatement : public CompoundStatement {
       } else {
         condition->generateJumpingCode(generator, table, fall_lab->getOp(), false_lab->getOp());
         res = block->generateTAC(generator, table);
-        ResultInstruction *goto_instr = new ResultInstruction("goto", next_lab->getOp());
+        GotoQuad *goto_instr = new GotoQuad(next_lab->getOp());
         generator->gen(goto_instr);
 
         generator->gen(false_lab);

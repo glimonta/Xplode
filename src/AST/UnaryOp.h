@@ -45,18 +45,17 @@ class UnaryOp : public Expression {
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
       std::string a1 = exp->generateTAC(generator, table);
       std::string result = generator->labelmaker->getLabel(TEMPORAL);
-      std::string op;
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString(table));
+      generator->gen(comment);
 
       if(opname=="UMINUS"){
-        op = UMINUS_LABEL;
+        UnaryMinusQuad *unop = new UnaryMinusQuad(result, a1);
+        generator->gen(unop);
       } else if(opname=="NOT"){
-        op = NOT_LABEL;
-      } else {}
+        NotQuad *unop = new NotQuad(result, a1);
+        generator->gen(unop);
+      }
 
-      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString(table));
-      NoArg2Instruction *unop = new NoArg2Instruction(op, result, a1);
-      generator->gen(comment);
-      generator->gen(unop);
       return result;
     }
 

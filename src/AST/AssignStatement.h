@@ -48,8 +48,8 @@ class AssignStatement : public Statement {
     std::string rightop = rvalue->generateTAC(generator, table);
     std::string op = ":=";
 
-    NoArg1Instruction *noarg1 = new NoArg1Instruction(op, result, rightop);
-    generator->gen(noarg1);
+    AssignQuad *assign = new AssignQuad(op, result, rightop);
+    generator->gen(assign);
     return result;
 //FIXME
   }

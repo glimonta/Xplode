@@ -40,14 +40,14 @@ class Constant : public Expression {
         if ( "fall" == trueLabel ) {
           return;
         } else {
-          ResultInstruction *goto_instr = new ResultInstruction("goto", trueLabel);
+          GotoQuad *goto_instr = new GotoQuad(trueLabel);
           generator->gen(goto_instr);
         }
       } else if ("false" == value) {
         if ( "fall" == falseLabel ) {
           return;
         } else {
-          ResultInstruction *goto_instr = new ResultInstruction("goto", falseLabel);
+          GotoQuad *goto_instr = new GotoQuad(falseLabel);
           generator->gen(goto_instr);
         }
       }

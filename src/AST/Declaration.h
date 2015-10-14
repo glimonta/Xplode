@@ -62,9 +62,7 @@ class Declaration : public Statement {
     }
 
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-      printf("Estoy en el genTAC para las declaraciones\n");
       //TODO
-      printf("Estoy en el genTAC para las declaraciones\n");
     }
 
 };

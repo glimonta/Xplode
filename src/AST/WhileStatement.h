@@ -53,7 +53,7 @@ class WhileStatement : public CompoundStatement {
       generator->gen(true_lab);
 
       res = block->generateTAC(generator, table);
-      ResultInstruction *goto_instr = new ResultInstruction("goto", begin_lab->getOp());
+      GotoQuad *goto_instr = new GotoQuad(begin_lab->getOp());
       generator->gen(goto_instr);
 
       generator->gen(next_lab);

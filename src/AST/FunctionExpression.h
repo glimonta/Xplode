@@ -61,14 +61,14 @@ class FunctionExpression : public Expression {
       std::list<Expression *>::iterator params;
       for (params = argList->begin(); params != argList->end(); ++params) {
         std::string res = (*params)->generateTAC(generator, table);
-        OneArgInstruction *param = new OneArgInstruction("param", res);
+        ParamQuad *param = new ParamQuad(res);
         generator->gen(param);
       }
 
       std::string result = generator->labelmaker->getLabel(TEMPORAL);
       std::stringstream str;
       str << argList->size();
-      FunctionCallReturn *call = new FunctionCallReturn("call", result, fname, str.str());
+      FunctionCallReturn *call = new FunctionCallReturn(result, fname, str.str());
       generator->gen(call);
 
       return result;
