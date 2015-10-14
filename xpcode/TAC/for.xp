@@ -1,0 +1,21 @@
+program
+
+type person{
+  char[10] name;
+  int id;
+  float height;
+  float weight;
+}
+
+begin
+  let person[10] p;
+  let int i;
+  let int j;
+  for (i := 0; i < 10; i:= i+1){
+    j := j + 1;
+  };
+  for (i := 0; i < 10; i:= i+1){
+    j := j + 2;
+  };
+
+end
