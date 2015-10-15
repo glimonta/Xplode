@@ -297,4 +297,15 @@ class NotQuad : public Quad {
 
 };
 
+class CastQuad : public Quad {
+  public:
+
+    CastQuad(std::string o, std::string r, std::string a1) : Quad(o, r, a1, "") {}
+
+    std::string toString() {
+      return getOp() + " " + getResult() + " " + getArg1();
+    }
+
+};
+
 #endif

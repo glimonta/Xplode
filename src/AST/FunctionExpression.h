@@ -72,7 +72,7 @@ class FunctionExpression : public Expression {
       generator->gen(call);
 
       return result;
-      //FIXME
+      //FIXME solo estoy considerando cuando retorna un valor, esto es mas complicado de lo que creo
     }
 
 };
