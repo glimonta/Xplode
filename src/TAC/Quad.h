@@ -308,4 +308,15 @@ class CastQuad : public Quad {
 
 };
 
+class WriteQuad : public Quad {
+  public:
+
+    WriteQuad(std::string r) : Quad("write", r, "", "") {}
+
+    std::string toString() {
+      return getOp() + " " + getResult();
+    }
+
+};
+
 #endif

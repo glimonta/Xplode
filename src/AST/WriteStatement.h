@@ -36,7 +36,13 @@ class WriteStatement : public Statement {
   
   }
 
-  std::string generateTAC(GeneratorTAC * generator, SymTable *table) {}
+  std::string generateTAC(GeneratorTAC * generator, SymTable *table) {
+    for (std::list<Expression *>::iterator i = writeList->begin(); i != writeList->end(); ++i) {
+      std::string exp = (*i)->generateTAC(generator, table);
+      WriteQuad *write = new WriteQuad(exp);
+      generator->gen(write);
+    }
+  }
 
 };
 
