@@ -44,8 +44,8 @@ class AssignStatement : public Statement {
     Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción " + toString(table));
     generator->gen(comment);
 
-    std::string result = lvalue->generateTAC(generator, table);
     std::string rightop = rvalue->generateTAC(generator, table);
+    std::string result = lvalue->generateTAC(generator, table);
     std::string op = ":=";
 
     AssignQuad *assign = new AssignQuad(op, result, rightop);

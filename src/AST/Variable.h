@@ -287,7 +287,11 @@ class Variable : public Expression {
         }
       }
 
-      return res;
+      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      AssignArrayQuad *assign = new AssignArrayQuad(result, base->name, res);
+      generator->gen(assign);
+
+      return result;
 
       //FIXME
       // Ahorita solo se considera el caso donde está una variable sola.

@@ -77,6 +77,28 @@ class AssignQuad : public Quad {
 
 };
 
+class AssignArrayQuad : public Quad {
+  public:
+
+    AssignArrayQuad(std::string r, std::string a1, std::string a2) : Quad(":=[]", r, a1, a2) {}
+
+    std::string toString() {
+      return  getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+    }
+
+};
+
+class AssignToArrayQuad : public Quad {
+  public:
+
+    AssignToArrayQuad(std::string r, std::string a1) : Quad("[]:=", r, a1, "") {}
+
+    std::string toString() {
+      return  getResult() + " " + getOp() + " " +getArg1();
+    }
+
+};
+
 class AddQuad : public Quad {
   public:
 
