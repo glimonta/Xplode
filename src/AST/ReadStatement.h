@@ -32,6 +32,19 @@ class ReadStatement : public Statement {
   
   }
 
+  std::string generateTAC(GeneratorTAC * generator, SymTable *table) {
+    Quad * read = var->lval_generateTAC(generator, table);
+
+    if ("" == read->arg1) {
+      read->arg1 = "read";
+    } else {
+      read->arg2 = "read";
+    }
+
+    generator->gen(read);
+    return read->result;
+  }
+
 };
 
 #endif
