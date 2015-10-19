@@ -341,4 +341,15 @@ class WriteQuad : public Quad {
 
 };
 
+class ReadQuad : public Quad {
+  public:
+
+    ReadQuad(std::string r, std::string a1) : Quad("read", r, a1, "") {}
+
+    std::string toString() {
+      return getOp() + " " + getResult() + " " + getArg1();
+    }
+
+};
+
 #endif

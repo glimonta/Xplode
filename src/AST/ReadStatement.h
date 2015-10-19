@@ -33,16 +33,23 @@ class ReadStatement : public Statement {
   }
 
   std::string generateTAC(GeneratorTAC * generator, SymTable *table) {
-    Quad * read = var->lval_generateTAC(generator, table);
+    std::string res = generator->labelmaker->getLabel(TEMPORAL);
+    std::stringstream toString;
+    toString << var->ntype->numtype;
+    std::string numtype = toString.str();
+    ReadQuad * read = new ReadQuad(res, numtype);
+    generator->gen(read);
 
-    if ("" == read->arg1) {
-      read->arg1 = "read";
+    Quad * instr = var->lval_generateTAC(generator, table);
+
+    if ("" == instr->arg1) {
+      instr->arg1 = res;
     } else {
-      read->arg2 = "read";
+      instr->arg2 = res;
     }
 
-    generator->gen(read);
-    return read->result;
+    generator->gen(instr);
+    return instr->result;
   }
 
 };
