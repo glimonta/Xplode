@@ -47,6 +47,7 @@ class WhileStatement : public CompoundStatement {
 
       std::string res;
 
+      generator->new_block();
       generator->gen(begin_lab);
       condition->generateJumpingCode(generator, table, true_lab->getOp(), next_lab->getOp());
 
@@ -55,6 +56,7 @@ class WhileStatement : public CompoundStatement {
       res = block->generateTAC(generator, table);
       GotoQuad *goto_instr = new GotoQuad(begin_lab->getOp());
       generator->gen(goto_instr);
+      generator->new_block();
 
       generator->gen(next_lab);
 

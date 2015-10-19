@@ -107,15 +107,19 @@ class BinaryExpression : public Expression {
       if ("fall" != trueLabel && "fall" != falseLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
 
         GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
+        generator->new_block();
       } else if ("fall" != trueLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else if ("fall" != falseLabel) {
         IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else {
       }
     } else if ( "<=" == opname ) {
@@ -131,15 +135,19 @@ class BinaryExpression : public Expression {
       if ("fall" != trueLabel && "fall" != falseLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
 
         GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
+        generator->new_block();
       } else if ("fall" != trueLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else if ("fall" != falseLabel) {
         IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else {
       }
     } else if ( ">" == opname ) {
@@ -155,15 +163,19 @@ class BinaryExpression : public Expression {
       if ("fall" != trueLabel && "fall" != falseLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
 
         GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
+        generator->new_block();
       } else if ("fall" != trueLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else if ("fall" != falseLabel) {
         IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else {
       }
     } else if ( ">=" == opname ) {
@@ -179,15 +191,19 @@ class BinaryExpression : public Expression {
       if ("fall" != trueLabel && "fall" != falseLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
 
         GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
+        generator->new_block();
       } else if ("fall" != trueLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else if ("fall" != falseLabel) {
         IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else {
       }
     } else if ( "==" == opname ) {
@@ -203,15 +219,19 @@ class BinaryExpression : public Expression {
       if ("fall" != trueLabel && "fall" != falseLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
 
         GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
+        generator->new_block();
       } else if ("fall" != trueLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else if ("fall" != falseLabel) {
         IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else {
       }
     } else if ( "!=" == opname ) {
@@ -227,15 +247,19 @@ class BinaryExpression : public Expression {
       if ("fall" != trueLabel && "fall" != falseLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
 
         GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
+        generator->new_block();
       } else if ("fall" != trueLabel) {
         IfQuad *if_instr = new IfQuad(result, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else if ("fall" != falseLabel) {
         IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else {
       }
     } else if ("||" == opname) {
@@ -243,6 +267,7 @@ class BinaryExpression : public Expression {
         Label *label = new Label(generator->labelmaker->getLabel("true"));
         lexp->generateJumpingCode(generator, table, label->getOp(), "fall");
         rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+//FIXME capaz tengo que agregar new_block aqui
         generator->gen(label);
       } else {
         lexp->generateJumpingCode(generator, table, trueLabel, "fall");
@@ -253,6 +278,7 @@ class BinaryExpression : public Expression {
         Label *label = new Label(generator->labelmaker->getLabel("false"));
         lexp->generateJumpingCode(generator, table, "fall", label->getOp());
         rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
+//FIXME capaz tengo que agregar new_block aqui
         generator->gen(label);
       } else {
         lexp->generateJumpingCode(generator, table, "fall", falseLabel);

@@ -73,15 +73,18 @@ class IfStatement : public CompoundStatement {
       if (NULL == elseBlock) {
         condition->generateJumpingCode(generator, table, fall_lab->getOp(), next_lab->getOp());
         res = block->generateTAC(generator, table);
+        generator->new_block();
         generator->gen(next_lab);
       } else {
         condition->generateJumpingCode(generator, table, fall_lab->getOp(), false_lab->getOp());
         res = block->generateTAC(generator, table);
         GotoQuad *goto_instr = new GotoQuad(next_lab->getOp());
         generator->gen(goto_instr);
+        generator->new_block();
 
         generator->gen(false_lab);
         res = elseBlock->generateTAC(generator, table);
+        generator->new_block();
         generator->gen(next_lab);
       }
 

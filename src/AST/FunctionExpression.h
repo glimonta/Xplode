@@ -81,15 +81,19 @@ class FunctionExpression : public Expression {
       if ( "fall" != trueLabel && "fall" != falseLabel) {
         IfQuad *if_instr = new IfQuad(res, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
 
         GotoQuad *goto_instr = new GotoQuad(falseLabel);
         generator->gen(goto_instr);
+        generator->new_block();
       } else if ("fall" != trueLabel) {
         IfQuad *if_instr = new IfQuad(res, trueLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else if ("fall" != falseLabel) {
         IfNotQuad *if_instr = new IfNotQuad(res, falseLabel);
         generator->gen(if_instr);
+        generator->new_block();
       } else {
       }
     }

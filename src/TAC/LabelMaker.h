@@ -33,6 +33,7 @@
 #define NOT_LABEL              "NOT "
 #define LAB_LABEL              "label"
 #define GOTO_LABEL             "goto "
+#define BLOCK_LABEL            "B"
 
 class LabelMaker {
   public:

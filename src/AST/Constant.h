@@ -42,6 +42,7 @@ class Constant : public Expression {
         } else {
           GotoQuad *goto_instr = new GotoQuad(trueLabel);
           generator->gen(goto_instr);
+          generator->new_block();
         }
       } else if ("false" == value) {
         if ( "fall" == falseLabel ) {
@@ -49,6 +50,7 @@ class Constant : public Expression {
         } else {
           GotoQuad *goto_instr = new GotoQuad(falseLabel);
           generator->gen(goto_instr);
+          generator->new_block();
         }
       }
     }
