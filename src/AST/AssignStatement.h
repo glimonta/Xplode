@@ -45,12 +45,16 @@ class AssignStatement : public Statement {
     generator->gen(comment);
 
     std::string rightop = rvalue->generateTAC(generator, table);
-    std::string result = lvalue->generateTAC(generator, table);
-    std::string op = ":=";
+    Quad * instr = lvalue->lval_generateTAC(generator, table);
 
-    AssignQuad *assign = new AssignQuad(op, result, rightop);
-    generator->gen(assign);
-    return result;
+    if ("" == instr->arg1) {
+      instr->arg1 = rightop;
+    } else {
+      instr->arg2 = rightop;
+    }
+
+    generator->gen(instr);
+    return instr->result;
 //FIXME
   }
 

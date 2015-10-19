@@ -69,10 +69,10 @@ class Label : public Quad {
 class AssignQuad : public Quad {
   public:
 
-    AssignQuad(std::string o, std::string r, std::string a2) : Quad(o, r, "", a2) {}
+    AssignQuad(std::string r, std::string a1) : Quad(":=", r, a1, "") {}
 
     std::string toString() {
-      return  getResult() + " " + getOp() + " " +getArg2();
+      return  getResult() + " " + getOp() + " " +getArg1();
     }
 
 };
@@ -91,10 +91,10 @@ class AssignArrayQuad : public Quad {
 class AssignToArrayQuad : public Quad {
   public:
 
-    AssignToArrayQuad(std::string r, std::string a1) : Quad("[]:=", r, a1, "") {}
+    AssignToArrayQuad(std::string r, std::string a1, std::string a2) : Quad("[]:=", r, a1, a2) {}
 
     std::string toString() {
-      return  getResult() + " " + getOp() + " " +getArg1();
+      return  getResult() + " " + getArg1() + " " + getOp() + " " +getArg2();
     }
 
 };
@@ -105,7 +105,7 @@ class AddQuad : public Quad {
     AddQuad(std::string r, std::string a1, std::string a2) : Quad("+", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -116,7 +116,7 @@ class SubQuad : public Quad {
     SubQuad(std::string r, std::string a1, std::string a2) : Quad("-", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -127,7 +127,7 @@ class MulQuad : public Quad {
     MulQuad(std::string r, std::string a1, std::string a2) : Quad("*", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -138,7 +138,7 @@ class DivQuad : public Quad {
     DivQuad(std::string r, std::string a1, std::string a2) : Quad("/", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -149,7 +149,7 @@ class ModQuad : public Quad {
     ModQuad(std::string r, std::string a1, std::string a2) : Quad("%", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -160,7 +160,7 @@ class LessQuad : public Quad {
     LessQuad(std::string r, std::string a1, std::string a2) : Quad("<", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -171,7 +171,7 @@ class LessEqualQuad : public Quad {
     LessEqualQuad(std::string r, std::string a1, std::string a2) : Quad("<=", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -182,7 +182,7 @@ class GreaterQuad : public Quad {
     GreaterQuad(std::string r, std::string a1, std::string a2) : Quad(">", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -193,7 +193,7 @@ class GreaterEqualQuad : public Quad {
     GreaterEqualQuad(std::string r, std::string a1, std::string a2) : Quad(">=", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -204,7 +204,7 @@ class EqualQuad : public Quad {
     EqualQuad(std::string r, std::string a1, std::string a2) : Quad("==", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -215,7 +215,7 @@ class NotEqualQuad : public Quad {
     NotEqualQuad(std::string r, std::string a1, std::string a2) : Quad("!=", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -226,7 +226,7 @@ class AndQuad : public Quad {
     AndQuad(std::string r, std::string a1, std::string a2) : Quad("&&", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -237,7 +237,7 @@ class OrQuad : public Quad {
     OrQuad(std::string r, std::string a1, std::string a2) : Quad("||", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1() + " " + getArg2() + " " + getResult();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };
@@ -303,7 +303,7 @@ class UnaryMinusQuad : public Quad {
     UnaryMinusQuad(std::string r, std::string a1) : Quad("neg", r, a1, "") {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1();
+      return getResult() + " " + getOp() + " " + getArg1();
     }
 
 };
@@ -314,7 +314,7 @@ class NotQuad : public Quad {
     NotQuad(std::string r, std::string a1) : Quad("not", r, a1, "") {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1();
+      return getResult() + " " + getOp() + " " + getArg1();
     }
 
 };

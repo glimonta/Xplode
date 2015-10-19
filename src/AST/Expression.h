@@ -27,6 +27,8 @@ class Expression : public Node {
 
     virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {}
 
+    virtual Quad * lval_generateTAC(GeneratorTAC *generator, SymTable *table) {}
+
 };
 
 #endif
