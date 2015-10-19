@@ -75,6 +75,25 @@ class FunctionExpression : public Expression {
       //FIXME solo estoy considerando cuando retorna un valor, esto es mas complicado de lo que creo
     }
 
+    void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
+      std::string res = this->generateTAC(generator, table);
+
+      if ( "fall" != trueLabel && "fall" != falseLabel) {
+        IfQuad *if_instr = new IfQuad(res, trueLabel);
+        generator->gen(if_instr);
+
+        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        generator->gen(goto_instr);
+      } else if ("fall" != trueLabel) {
+        IfQuad *if_instr = new IfQuad(res, trueLabel);
+        generator->gen(if_instr);
+      } else if ("fall" != falseLabel) {
+        IfNotQuad *if_instr = new IfNotQuad(res, falseLabel);
+        generator->gen(if_instr);
+      } else {
+      }
+    }
+
 };
 
 

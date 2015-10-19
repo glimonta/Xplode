@@ -1,9 +1,7 @@
 program
 
-function void wtf_this_parameters(var int[][][] par1, bool par2){
-
-  return;
-
+function void wtf_this_parameters(var int[][][] par1, bool par2) {
+  write("doing something!");
 }
 
 
