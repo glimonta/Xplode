@@ -392,7 +392,6 @@ proc_type_list
 def_function
   : init_block x_FUNCTION declared_function block {
 
-    name = $2->value;
     $$ = new Function(actual, name, $3, $4);
     $$->line = $2->line;
     $$->column = $2->column;
@@ -471,7 +470,7 @@ function_parameters
 
     TupleType *t = (TupleType *) $1;
     t->add($3,$4->value);
-    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,true));
+    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,false,true));
     $$ = t;
 
   }
@@ -491,7 +490,7 @@ function_parameters
 
     TupleType *t = new TupleType();
     t->add($2,$3->value);
-    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column,true));
+    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column,false,true));
     $$ = t;
 
   }
@@ -510,7 +509,7 @@ function_pars
 
     TupleType *t = new TupleType();
     t->add($2,$3->value);
-    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column,true));
+    actual->insert(new Symbol(false,$3->value,(TypeDeclaration *) $2,$3->line,$3->column, false, true));
     $$ = t;
     } //falta var
 
@@ -528,7 +527,7 @@ function_pars
 
     TupleType *t = (TupleType *) $1;
     t->add($3,$4->value);
-    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,true));
+    actual->insert(new Symbol(false,$4->value,(TypeDeclaration *) $3,$4->line,$4->column,false, true));
     $$ = t;
 
   } //falta var
@@ -779,13 +778,13 @@ while_condition
 statement_if
   : x_IF x_LPAR if_condition x_RPAR block {
       $$ = new IfStatement($3,$5);
-      $$->line = $2->line;
-      $$->column = $2->column;
+      $$->line = $1->line;
+      $$->column = $1->column;
     }
   | x_IF x_LPAR if_condition x_RPAR block statement_else {
       $$ = new IfStatement($3,$5,$6);
-      $$->line = $2->line;
-      $$->column = $2->column;
+      $$->line = $1->line;
+      $$->column = $1->column;
     }
   | x_IF error block { yyclearin; $$ = new Statement(); }
   ;
@@ -1325,7 +1324,7 @@ expression_unary
 
       UnaryOp *u = new UnaryOp($1->value,$2);
       u->ntype= $2->ntype;
-      if($2->ntype->isnumeric()){
+      if(!$2->ntype->isnumeric()){
 
         errorlog->addError(28,$1->line,$1->column,&$1->value);
         u->ntype= root->findType("_error")->ntype;
@@ -1480,10 +1479,36 @@ variable
 
           ++it2;
         }
-
+        
         if(it==tup->names->end()) errorlog->addError(34,line,column,&id); //no exist ele atrr
+      
+        if(tp->isarray()){
+      
+          ArrayType *arrt = (ArrayType *) tp; 
+          std::list<std::pair<int, Expression *> >::iterator it;
+          
+          for(it=v2->indexList->begin(); it!=v2->indexList->end();++it){
+          
+            if((*it).second->ntype->numtype!=TYPE_INT) errorlog->addError(31,line,column,NULL); //no es entero
+          
+            if(tp->isarray()){
+            
+            ArrayType *arrt = (ArrayType *) tp;
+            tp = arrt->ntype;
+            
+            }else{
+            
+            errorlog->addError(32,line,column,NULL); // no es un arreglo
+            
+            
+            }
+          
+          }
+      
+        }
+        
+      } 
 
-      }
 
       v->ntype = tp;
       $1->concat($3);
@@ -1506,6 +1531,8 @@ function
 
       Symbol *s = actual->find($1->value);
       TypeDeclaration *tp = root->findType("_error")->ntype;
+      FunctionType *f;
+
       if(!s){
 
         errorlog->addError(35,line,column,&$1->value);
@@ -1518,7 +1545,7 @@ function
 
         } else {
 
-          FunctionType *f = (FunctionType *) s->ntype;
+          f = (FunctionType *) s->ntype;
           TupleType *t = (TupleType *) f->arguments;
           std::list<Expression *>::iterator it = $3->begin();
           std::list< std::pair<TypeDeclaration*, int>* >::iterator it2;
@@ -1584,6 +1611,7 @@ function
       }
 
       $$ = new FunctionExpression($1->value,$3);
+
       $$->ntype = tp;
       $$->line = $1->line;
       $$->column = $1->column;

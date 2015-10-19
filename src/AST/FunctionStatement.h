@@ -27,6 +27,13 @@ class FunctionStatement : public Statement {
     exp->firstcheck(symtb);
   }
 
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la llamada a función");
+      generator->gen(comment);
+
+    return "";
+    }
+
 };
 
 #endif

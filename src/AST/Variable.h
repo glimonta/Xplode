@@ -210,8 +210,11 @@ class Variable : public Expression {
       }
 
       std::list<Xplode::Token *>::iterator vnames;
+      std::list<Xplode::Token *>::iterator vnamesaux;
       std::list<std::pair<int, Expression *> >::iterator indexes;
       vnames = varList->begin();
+      vnamesaux = varList->begin();
+      ++vnamesaux;
       indexes = indexList->begin();
       std::string res;
 
@@ -221,6 +224,9 @@ class Variable : public Expression {
 
       while (vnames != varList->end()) {
         if (type->isarray()) {
+
+          if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+
           ArrayType* array = (ArrayType *) type;
           std::vector<int>* dimensions = array->findDimensions();
 
@@ -231,6 +237,9 @@ class Variable : public Expression {
           type = array->ntype;
 
           for (int i=1; i<dimensions->size(); ++i) {
+
+            if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+
             std::stringstream toString;
             toString << (*dimensions)[i];
             std::string arg2 = toString.str();
@@ -264,6 +273,10 @@ class Variable : public Expression {
           }
         } else if (type->haveattributes()) {
           ++vnames;
+          ++vnamesaux;
+
+          if ((vnames ==varList->end()) && (indexes == indexList->end())) break;
+
           TupleType * tuple = (TupleType *) type;
           std::pair<TypeDeclaration*, int> *attribute = tuple->findAttribute((*vnames)->value);
 
@@ -283,6 +296,7 @@ class Variable : public Expression {
           type = attribute->first;
         } else {
           ++vnames;
+          ++vnamesaux;
         }
       }
 
@@ -324,8 +338,11 @@ class Variable : public Expression {
       }
 
       std::list<Xplode::Token *>::iterator vnames;
+      std::list<Xplode::Token *>::iterator vnamesaux;
       std::list<std::pair<int, Expression *> >::iterator indexes;
       vnames = varList->begin();
+      vnamesaux = varList->begin();
+      ++vnamesaux;
       indexes = indexList->begin();
       std::string res;
 
@@ -335,6 +352,9 @@ class Variable : public Expression {
 
       while (vnames != varList->end()) {
         if (type->isarray()) {
+
+          if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+
           ArrayType* array = (ArrayType *) type;
           std::vector<int>* dimensions = array->findDimensions();
 
@@ -345,6 +365,8 @@ class Variable : public Expression {
           type = array->ntype;
 
           for (int i=1; i<dimensions->size(); ++i) {
+            if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+
             std::stringstream toString;
             toString << (*dimensions)[i];
             std::string arg2 = toString.str();
@@ -378,6 +400,10 @@ class Variable : public Expression {
           }
         } else if (type->haveattributes()) {
           ++vnames;
+          ++vnamesaux;
+
+          if ((vnames == varList->end()) && (indexes == indexList->end())) break;
+
           TupleType * tuple = (TupleType *) type;
           std::pair<TypeDeclaration*, int> *attribute = tuple->findAttribute((*vnames)->value);
 
@@ -397,6 +423,7 @@ class Variable : public Expression {
           type = attribute->first;
         } else {
           ++vnames;
+          ++vnamesaux;
         }
       }
 

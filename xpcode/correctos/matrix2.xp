@@ -5,7 +5,7 @@ function void readMat(var int[][][] m, int s){
   for (i := 0; i < s; i:= i+1){
     for (j := 0; j < s; j:= j+1){
       for (k := 0; k < s; k:= k+1){
-        write(m);
+        write(m[0][0][0]);
         read(m[i][j][k]);
       };
     };
