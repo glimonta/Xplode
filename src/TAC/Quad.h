@@ -292,7 +292,7 @@ class FunctionCallReturn : public Quad {
     FunctionCallReturn(std::string r, std::string a1, std::string a2) : Quad("call", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " := " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
     }
 
 };

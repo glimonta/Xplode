@@ -353,8 +353,10 @@ class Variable : public Expression {
       while (vnames != varList->end()) {
         if (type->isarray()) {
 
+      printf("Entro a que es un array\n");
           if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
 
+      printf("paso el primer if dentro del while dentro del if que si es array\n");
           ArrayType* array = (ArrayType *) type;
           std::vector<int>* dimensions = array->findDimensions();
 
@@ -427,7 +429,7 @@ class Variable : public Expression {
         }
       }
 
-      
+      printf("llego hasta aqui\n");
       std::string result = generator->labelmaker->getLabel(TEMPORAL);
       AssignToArrayQuad *assign = new AssignToArrayQuad(base->name, res, "");
 

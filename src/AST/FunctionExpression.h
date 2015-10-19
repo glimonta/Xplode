@@ -55,7 +55,7 @@ class FunctionExpression : public Expression {
     }
 
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString(table));
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la llamada a función");
       generator->gen(comment);
 
       std::list<Expression *>::iterator params;
