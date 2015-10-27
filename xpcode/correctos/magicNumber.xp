@@ -20,5 +20,8 @@ begin
     write("Not magical, try again!\n");
   };
   write("SUCCESS!");
+
+  sleep(42);
+  sleep(21);
   
 end

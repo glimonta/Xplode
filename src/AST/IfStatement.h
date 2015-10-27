@@ -88,7 +88,7 @@ class IfStatement : public CompoundStatement {
         generator->gen(next_lab);
       }
 
-      return res;
+      return "";
       //TODO
     }
 

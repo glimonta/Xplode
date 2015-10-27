@@ -886,6 +886,8 @@ statement_sleep
       }
 
       $$ = new SleepStatement($3);
+      $$->line = $1->line;
+      $$->column = $1->column;
   }
   ;
 

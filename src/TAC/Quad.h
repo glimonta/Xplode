@@ -352,4 +352,15 @@ class ReadQuad : public Quad {
 
 };
 
+class SleepQuad : public Quad {
+  public:
+
+    SleepQuad(std::string r) : Quad("sleep", r, "", "") {}
+
+    std::string toString() {
+      return getOp() + " " + getResult();
+    }
+
+};
+
 #endif
