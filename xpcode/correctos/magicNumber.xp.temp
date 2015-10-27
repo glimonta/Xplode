@@ -1,0 +1,122 @@
+B1:
+INIT:
+#Este es el código generado por la linea 18 de la instrucción while
+
+#############################################################
+#B2
+#############################################################
+
+begin1:
+#Este es el código generado por la linea 18 de la llamada a función
+param n
+t1 call magicNumber 1
+if t1 goto next1
+
+#############################################################
+#B3
+#############################################################
+
+goto true1
+
+#############################################################
+#B4
+#############################################################
+
+true1:
+read t2 2
+n := t2
+write "Not magical, try again!\n"
+goto begin1
+
+#############################################################
+#B5
+#############################################################
+
+next1:
+write "SUCCESS!"
+#Este es el código generado por la linea 24 de la instrucción sleep
+sleep 42
+#Este es el código generado por la linea 25 de la instrucción sleep
+sleep 21
+
+#############################################################
+#B6
+#############################################################
+
+#Definición de Función magicNumber: linea 3
+magicNumber:
+#Este es el código generado por la linea 5 de la instrucción if
+t3 < k 2
+ifnot t3 goto next2
+
+#############################################################
+#B7
+#############################################################
+
+#Este es el código generado por la linea 6 de la instrucción return
+return false
+
+#############################################################
+#B8
+#############################################################
+
+next2:
+#Este es el código generado por la linea 8 de la instrucción for
+#Este es el código generado por la linea 8 de la instrucción k := 2
+k := 2
+goto first_for1
+
+#############################################################
+#B9
+#############################################################
+
+begin2:
+#Este es el código generado por la linea 8 de la instrucción k := k + 1
+t4 + k 1
+k := t4
+
+#############################################################
+#B10
+#############################################################
+
+first_for1:
+t5 < k n
+if t5 goto mid1
+
+#############################################################
+#B11
+#############################################################
+
+goto end1
+
+#############################################################
+#B12
+#############################################################
+
+mid1:
+#Este es el código generado por la linea 9 de la instrucción if
+t6 / n k
+t7 == t6 0
+ifnot t7 goto next3
+
+#############################################################
+#B13
+#############################################################
+
+#Este es el código generado por la linea 10 de la instrucción return
+return false
+
+#############################################################
+#B14
+#############################################################
+
+next3:
+goto begin2
+
+#############################################################
+#B15
+#############################################################
+
+end1:
+#Este es el código generado por la linea 13 de la instrucción return
+return true

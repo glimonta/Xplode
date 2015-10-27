@@ -1,0 +1,148 @@
+B1:
+INIT:
+#Este es el código generado por la linea 37 de la instrucción if
+#Este es el código generado por la linea 37 de la llamada a función
+param personcomp
+param a
+param b
+t1 call anotherComp 3
+ifnot t1 goto false1
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 38 de la instrucción if
+#Este es el código generado por la linea 38 de la llamada a función
+param personcomp
+param a
+param c
+t2 call anotherComp 3
+ifnot t2 goto false2
+
+#############################################################
+#B3
+#############################################################
+
+#Este es el código generado por la linea 39 de la llamada a función
+param a
+t3 call printPerson 1
+goto next2
+
+#############################################################
+#B4
+#############################################################
+
+false2:
+#Este es el código generado por la linea 41 de la llamada a función
+param c
+t4 call printPerson 1
+
+#############################################################
+#B5
+#############################################################
+
+next2:
+goto next1
+
+#############################################################
+#B6
+#############################################################
+
+false1:
+#Este es el código generado por la linea 44 de la instrucción if
+#Este es el código generado por la linea 44 de la llamada a función
+param personcomp
+param b
+param c
+t5 call anotherComp 3
+ifnot t5 goto false3
+
+#############################################################
+#B7
+#############################################################
+
+#Este es el código generado por la linea 45 de la llamada a función
+param b
+t6 call printPerson 1
+goto next3
+
+#############################################################
+#B8
+#############################################################
+
+false3:
+#Este es el código generado por la linea 47 de la llamada a función
+param c
+t7 call printPerson 1
+
+#############################################################
+#B9
+#############################################################
+
+next3:
+
+#############################################################
+#B10
+#############################################################
+
+next1:
+
+#############################################################
+#B11
+#############################################################
+
+#Definición de Función printPerson: linea 10
+printPerson:
+write "Person Data is : "
+t8 :=[] p 10
+write t8
+write " "
+t9 :=[] p 0
+write t9
+write " "
+t10 :=[] p 14
+write t10
+write " "
+t11 :=[] p 18
+write t11
+
+#############################################################
+#B12
+#############################################################
+
+#Definición de Función readPerson: linea 15
+readPerson:
+read t12 2
+p 10 []:= t12
+read t14 5
+p 14 []:= t14
+read t16 5
+p 18 []:= t16
+read t18 6
+p 0 []:= t18
+
+#############################################################
+#B13
+#############################################################
+
+#Definición de Función personComp: linea 22
+personComp:
+#Este es el código generado por la linea 23 de la instrucción return
+t20 :=[] a 10
+t21 :=[] b 10
+t22 < t20 t21
+return t22
+
+#############################################################
+#B14
+#############################################################
+
+#Definición de Función anotherComp: linea 28
+anotherComp:
+#Este es el código generado por la linea 29 de la instrucción return
+#Este es el código generado por la linea 29 de la llamada a función
+param a
+param b
+t23 call f 2
+return t23

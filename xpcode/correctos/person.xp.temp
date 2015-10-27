@@ -1,0 +1,32 @@
+B1:
+INIT:
+read t1 2
+p 10 []:= t1
+read t3 5
+p 14 []:= t3
+read t5 5
+p 18 []:= t5
+read t7 6
+p 0 []:= t7
+#Este es el código generado por la linea 21 de la llamada a función
+param p
+t9 call print 1
+
+#############################################################
+#B2
+#############################################################
+
+#Definición de Función print: linea 10
+print:
+write "Person Data is : "
+t10 :=[] p 10
+write t10
+write " "
+t11 :=[] p 0
+write t11
+write " "
+t12 :=[] p 14
+write t12
+write " "
+t13 :=[] p 18
+write t13

@@ -1,0 +1,6 @@
+0: #Este es el código generado por la linea 0 de la instrucción 43 - 38
+1: t1 := 43 - 38
+2: #Este es el código generado por la linea 0 de la instrucción 43 - 38 ** 2
+3: t2 := t1 ** 2
+4: #Este es el código generado por la linea 6 de la instrucción w := 43 - 38 ** 2
+5: w := t2

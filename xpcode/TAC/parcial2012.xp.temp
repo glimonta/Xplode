@@ -1,0 +1,12 @@
+B1:
+INIT:
+#Este es el código generado por la linea 8 de la instrucción foo[k] := bar[i] + baz[qux[j]]
+t1 * i 4
+t2 :=[] bar t1
+t3 * j 4
+t4 :=[] qux t3
+t5 * t4 4
+t6 :=[] baz t5
+t7 + t2 t6
+t8 * k 4
+foo t8 []:= t7

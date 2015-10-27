@@ -1,0 +1,32 @@
+B1:
+INIT:
+#Este es el código generado por la linea 13 de la instrucción x := op(suma, 2, 3)
+#Este es el código generado por la linea 13 de la llamada a función
+param suma
+param 2
+param 3
+t1 call op 3
+x := t1
+
+#############################################################
+#B2
+#############################################################
+
+#Definición de Función suma: linea 5
+suma:
+#Este es el código generado por la linea 5 de la instrucción return
+t2 + x y
+return t2
+
+#############################################################
+#B3
+#############################################################
+
+#Definición de Función op: linea 7
+op:
+#Este es el código generado por la linea 7 de la instrucción return
+#Este es el código generado por la linea 7 de la llamada a función
+param x
+param y
+t3 call f 2
+return t3

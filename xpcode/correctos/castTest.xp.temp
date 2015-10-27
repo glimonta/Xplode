@@ -1,0 +1,17 @@
+B1:
+INIT:
+#Este es el código generado por la linea 11 de la instrucción ch := itoc c
+itoc t1 c
+ch := t1
+#Este es el código generado por la linea 12 de la instrucción d := itof a / itof c
+itof t2 a
+itof t3 c
+t4 / t2 t3
+d := t4
+#Este es el código generado por la linea 13 de la instrucción x := ftoi d
+ftoi t5 d
+x := t5
+#Este es el código generado por la linea 14 de la instrucción e := d * itof x
+itof t6 x
+t7 * d t6
+e := t7

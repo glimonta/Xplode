@@ -1,0 +1,10 @@
+B1:
+INIT:
+#Este es el código generado por la linea 11 de la instrucción ci.c := 'a'
+ci 0 []:= 'a'
+#Este es el código generado por la linea 12 de la instrucción ci.i := 3
+ci 0 []:= 3
+read t3 4
+ci 0 []:= t3
+t5 :=[] ci 0
+write t5

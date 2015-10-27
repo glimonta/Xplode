@@ -1,0 +1,62 @@
+B1:
+INIT:
+#Este es el código generado por la linea 8 de la instrucción i := 1
+i := 1
+#Este es el código generado por la linea 9 de la instrucción j := 2
+j := 2
+#Este es el código generado por la linea 11 de la instrucción k := j < j && j > 6
+t1 < j j
+t2 > j 6
+t3 && t1 t2
+k := t3
+#Este es el código generado por la linea 12 de la instrucción k := i < j && true
+t4 < i j
+t5 && t4 true
+k := t5
+#Este es el código generado por la linea 14 de la instrucción if
+t6 < i j
+if t6 goto true1
+
+#############################################################
+#B2
+#############################################################
+
+goto false1
+
+#############################################################
+#B3
+#############################################################
+
+true1:
+#Este es el código generado por la linea 15 de la instrucción if
+goto next2
+
+#############################################################
+#B4
+#############################################################
+
+#Este es el código generado por la linea 16 de la instrucción j := 4
+j := 4
+
+#############################################################
+#B5
+#############################################################
+
+next2:
+#Este es el código generado por la linea 18 de la instrucción i := 2
+i := 2
+goto next1
+
+#############################################################
+#B6
+#############################################################
+
+false1:
+#Este es el código generado por la linea 20 de la instrucción i := 4
+i := 4
+
+#############################################################
+#B7
+#############################################################
+
+next1:
