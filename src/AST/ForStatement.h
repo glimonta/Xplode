@@ -46,7 +46,7 @@ class ForStatement : public CompoundStatement {
 
     }
 
-    void generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       //FIXME Hay que arreglar este comentario para tener el toString() y tampoco se que retornar
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción for");
       generator->gen(comment);
@@ -55,18 +55,18 @@ class ForStatement : public CompoundStatement {
       Label *end_lab = new Label(generator->labelmaker->getLabel("end"));
       Label *first_for_lab  = new Label(generator->labelmaker->getLabel("first_for"));
 
-      init->generateTAC(generator, table);
+      init->generateTAC(generator, table, continueLabel, breakLabel);
       GotoQuad *goto_first = new GotoQuad(first_for_lab->getOp());
       generator->gen(goto_first);
       generator->new_block();
       generator->gen(begin_lab);
-      increment->generateTAC(generator, table);
+      increment->generateTAC(generator, table, continueLabel, breakLabel);
       generator->new_block();
       generator->gen(first_for_lab);
       Label *mid_lab = new Label(generator->labelmaker->getLabel("mid"));
       condition->generateJumpingCode(generator, table, mid_lab->getOp(), end_lab->getOp());
       generator->gen(mid_lab);
-      block->generateTAC(generator, table);
+      block->generateTAC(generator, table, begin_lab->getOp(), end_lab->getOp());
       GotoQuad *goto_begin = new GotoQuad(begin_lab->getOp());
       generator->gen(goto_begin);
       generator->new_block();

@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
-#include <list> 
+#include <list>
 #include <map>
 #include <algorithm>
 #include <cstdlib>
@@ -14,14 +14,24 @@
 
 class BreakStatement : public Statement {
   public:
-  BreakStatement(){ }
-  
-  void print(int tab){
-   std::cout << std::string(tab, ' ') << "BREAK STATEMENT\n";
-  }
+    BreakStatement(){ }
 
-  void firstcheck(SymTable *symtb){  
-  }
+    void print(int tab){
+      std::cout << std::string(tab, ' ') << "BREAK STATEMENT\n";
+    }
+
+    void firstcheck(SymTable *symtb){
+    }
+
+    void generateTAC(GeneratorTAC * generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
+      Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción break");
+      generator->gen(comment);
+
+      GotoQuad *goto_instr = new GotoQuad(breakLabel);
+      generator->gen(goto_instr);
+
+      generator->new_block();
+    }
 
 };
 

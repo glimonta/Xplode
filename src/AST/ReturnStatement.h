@@ -28,7 +28,7 @@ class ReturnStatement : public Statement {
       exp->firstcheck(symtb);
     }
 
-    void generateTAC(GeneratorTAC * generator, SymTable *table) {
+    void generateTAC(GeneratorTAC * generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción return");
       generator->gen(comment);
 
@@ -40,6 +40,8 @@ class ReturnStatement : public Statement {
         ReturnExpQuad *ret_instr = new ReturnExpQuad(res);
         generator->gen(ret_instr);
       }
+
+      generator->new_block();
     }
 
 };

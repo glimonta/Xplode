@@ -25,98 +25,135 @@ goto true1
 true1:
 read t2 2
 n := t2
-write "Not magical, try again!\n"
-goto begin1
+#Este es el código generado por la linea 20 de la instrucción if
+t3 == n 42
+ifnot t3 goto next2
 
 #############################################################
 #B5
 #############################################################
 
-next1:
-write "SUCCESS!"
-#Este es el código generado por la linea 24 de la instrucción sleep
-sleep 42
-#Este es el código generado por la linea 25 de la instrucción sleep
-sleep 21
+write "n es 42"
+#Este es el código generado por la linea 0 de la instrucción continue
+goto begin1
 
 #############################################################
 #B6
 #############################################################
 
-#Definición de Función magicNumber: linea 3
-magicNumber:
-#Este es el código generado por la linea 5 de la instrucción if
-t3 < k 2
-ifnot t3 goto next2
 
 #############################################################
 #B7
+#############################################################
+
+next2:
+write "Not magical, try again!\n"
+goto begin1
+
+#############################################################
+#B8
+#############################################################
+
+next1:
+write "SUCCESS!"
+#Este es el código generado por la linea 28 de la instrucción sleep
+sleep 42
+#Este es el código generado por la linea 29 de la instrucción sleep
+sleep 21
+
+#############################################################
+#B9
+#############################################################
+
+#Definición de Función magicNumber: linea 3
+magicNumber:
+#Este es el código generado por la linea 5 de la instrucción if
+t4 < k 2
+ifnot t4 goto next3
+
+#############################################################
+#B10
 #############################################################
 
 #Este es el código generado por la linea 6 de la instrucción return
 return false
 
 #############################################################
-#B8
+#B11
 #############################################################
 
-next2:
+
+#############################################################
+#B12
+#############################################################
+
+next3:
 #Este es el código generado por la linea 8 de la instrucción for
 #Este es el código generado por la linea 8 de la instrucción k := 2
 k := 2
 goto first_for1
 
 #############################################################
-#B9
+#B13
 #############################################################
 
 begin2:
 #Este es el código generado por la linea 8 de la instrucción k := k + 1
-t4 + k 1
-k := t4
+t5 + k 1
+k := t5
 
 #############################################################
-#B10
+#B14
 #############################################################
 
 first_for1:
-t5 < k n
-if t5 goto mid1
+t6 < k n
+if t6 goto mid1
 
 #############################################################
-#B11
+#B15
 #############################################################
 
 goto end1
 
 #############################################################
-#B12
+#B16
 #############################################################
 
 mid1:
 #Este es el código generado por la linea 9 de la instrucción if
-t6 / n k
-t7 == t6 0
-ifnot t7 goto next3
+t7 / n k
+t8 == t7 0
+ifnot t8 goto next4
 
 #############################################################
-#B13
+#B17
 #############################################################
 
 #Este es el código generado por la linea 10 de la instrucción return
 return false
 
 #############################################################
-#B14
+#B18
 #############################################################
 
-next3:
+
+#############################################################
+#B19
+#############################################################
+
+next4:
 goto begin2
 
 #############################################################
-#B15
+#B20
 #############################################################
 
 end1:
 #Este es el código generado por la linea 13 de la instrucción return
 return true
+
+#############################################################
+#B21
+#############################################################
+

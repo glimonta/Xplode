@@ -1,0 +1,96 @@
+B1:
+INIT:
+#Este es el código generado por la linea 18 de la instrucción while
+
+#############################################################
+#B2
+#############################################################
+
+begin1:
+goto true1
+
+#############################################################
+#B3
+#############################################################
+
+true1:
+read t1 2
+t2 * i 4
+a t2 []:= t1
+write "Lei un numero"
+#Este es el código generado por la linea 23 de la instrucción if
+t4 * i 4
+t5 :=[] a t4
+#Este es el código generado por la linea 4 de la instrucción UMINUS 1
+t6 neg 1
+t7 == t5 t6
+ifnot t7 goto next2
+
+#############################################################
+#B4
+#############################################################
+
+#Este es el código generado por la linea 0 de la instrucción break
+goto next1
+
+#############################################################
+#B5
+#############################################################
+
+
+#############################################################
+#B6
+#############################################################
+
+next2:
+#Este es el código generado por la linea 24 de la llamada a función
+t8 * 0 4
+t9 :=[] a t8
+param t9
+t10 * 1 4
+t11 :=[] a t10
+param t11
+t12 * 2 4
+t13 :=[] a t12
+param t13
+t14 * 3 4
+t15 :=[] a t14
+param t15
+t16 * 4 4
+t17 :=[] a t16
+param t17
+t18 call prom 5
+#Este es el código generado por la linea 26 de la instrucción if
+t19 == i 4
+ifnot t19 goto next3
+
+#############################################################
+#B7
+#############################################################
+
+#Este es el código generado por la linea 26 de la instrucción i := 0
+i := 0
+
+#############################################################
+#B8
+#############################################################
+
+next3:
+#Este es el código generado por la linea 27 de la instrucción i := I + 1
+t20 + i 1
+i := t20
+goto begin1
+
+#############################################################
+#B9
+#############################################################
+
+next1:
+
+#############################################################
+#B10
+#############################################################
+
+#Definición de Función prom: linea 3
+prom:
+write "Aca saco el promedio con la magia de next, length y la desconocida"

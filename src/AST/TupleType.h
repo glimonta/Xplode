@@ -62,7 +62,6 @@ class TupleType : public TypeDeclaration {
         if((*iter)->first->isfunction()) return true;
 
       }
-      std::cout<<"buenas\n";
       return false;
 
     }

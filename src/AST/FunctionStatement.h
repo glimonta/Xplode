@@ -27,7 +27,7 @@ class FunctionStatement : public Statement {
     exp->firstcheck(symtb);
   }
 
-    void generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
 
       exp->generateTAC(generator, table);
 

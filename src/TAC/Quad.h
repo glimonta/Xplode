@@ -385,4 +385,15 @@ class ReturnExpQuad : public Quad {
 
 };
 
+class ExitQuad : public Quad {
+  public:
+
+    ExitQuad() : Quad("exit", "", "", "") {}
+
+    std::string toString() {
+      return getOp();
+    }
+
+};
+
 #endif

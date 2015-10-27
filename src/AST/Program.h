@@ -140,13 +140,13 @@ class Program : public CompoundStatement {
       std::list<Node *>::iterator iter;
       Statement *st;
       if(block!=NULL) {
-         block->generateTAC(generator, table);
+         block->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
       }
 
       if (definitionList!=NULL) {
         for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
           st = (Statement *) *iter;
-          st->generateTAC(generator, table);
+          st->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
         }
       }
 

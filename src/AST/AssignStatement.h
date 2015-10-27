@@ -40,7 +40,7 @@ class AssignStatement : public Statement {
     return lvalue->toString(table) + " := " + rvalue->toString(table);
   }
 
-  void generateTAC(GeneratorTAC *generator, SymTable *table) {
+  void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
     Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción " + toString(table));
     generator->gen(comment);
 

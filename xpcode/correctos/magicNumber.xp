@@ -17,6 +17,10 @@ begin
   let int n;
   while (! magicNumber(n)) {
     read(n);
+    if (n == 42) {
+      write("n es 42");
+      continue;
+    }
     write("Not magical, try again!\n");
   };
   write("SUCCESS!");

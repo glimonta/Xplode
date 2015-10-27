@@ -102,7 +102,7 @@ class Block : public Node {
       }
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    std::string generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       Declaration *decl;
       Statement *st;
       std::string aux;
@@ -124,7 +124,7 @@ class Block : public Node {
             iter != (*statementList).nodeList.end(); ++iter){
 
           st = (Statement *) *iter;
-          st->generateTAC(generator, this->table);
+          st->generateTAC(generator, this->table, continueLabel, breakLabel);
         }
       }
 

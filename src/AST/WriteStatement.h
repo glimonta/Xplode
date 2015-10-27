@@ -36,7 +36,7 @@ class WriteStatement : public Statement {
 
     }
 
-    void generateTAC(GeneratorTAC * generator, SymTable *table) {
+    void generateTAC(GeneratorTAC * generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción write");
       for (std::list<Expression *>::iterator i = writeList->begin(); i != writeList->end(); ++i) {
         std::string exp = (*i)->generateTAC(generator, table);

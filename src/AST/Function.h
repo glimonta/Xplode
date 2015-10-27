@@ -82,7 +82,7 @@ class Function : public CompoundStatement {
 
     }
 
-    void generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       generator->new_block();
 
       Comment *comment = new Comment("Definición de Función " + fname + ": linea " + getLineStr());
@@ -91,7 +91,7 @@ class Function : public CompoundStatement {
       Label *function_label = new Label(fname);
       generator->gen(function_label);
 
-      block->generateTAC(generator, table);
+      block->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
 
     }
 

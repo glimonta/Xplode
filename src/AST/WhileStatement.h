@@ -36,7 +36,7 @@ class WhileStatement : public CompoundStatement {
 
     }
 
-    void generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       //FIXME Hay que arreglar este comentario para tener el toString()
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción while");
       generator->gen(comment);
@@ -53,7 +53,7 @@ class WhileStatement : public CompoundStatement {
 
       generator->gen(true_lab);
 
-      res = block->generateTAC(generator, table);
+      res = block->generateTAC(generator, table, begin_lab->getOp(), next_lab->getOp());
       GotoQuad *goto_instr = new GotoQuad(begin_lab->getOp());
       generator->gen(goto_instr);
       generator->new_block();

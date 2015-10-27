@@ -58,7 +58,7 @@ class IfStatement : public CompoundStatement {
 
     }
 
-    void generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       //FIXME Hay que arreglar este comentario para tener el toString()
       Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción if");
       generator->gen(comment);
@@ -72,18 +72,18 @@ class IfStatement : public CompoundStatement {
 
       if (NULL == elseBlock) {
         condition->generateJumpingCode(generator, table, fall_lab->getOp(), next_lab->getOp());
-        res = block->generateTAC(generator, table);
+        res = block->generateTAC(generator, table, continueLabel, breakLabel);
         generator->new_block();
         generator->gen(next_lab);
       } else {
         condition->generateJumpingCode(generator, table, fall_lab->getOp(), false_lab->getOp());
-        res = block->generateTAC(generator, table);
+        res = block->generateTAC(generator, table, continueLabel, breakLabel);
         GotoQuad *goto_instr = new GotoQuad(next_lab->getOp());
         generator->gen(goto_instr);
         generator->new_block();
 
         generator->gen(false_lab);
-        res = elseBlock->generateTAC(generator, table);
+        res = elseBlock->generateTAC(generator, table, continueLabel, breakLabel);
         generator->new_block();
         generator->gen(next_lab);
       }

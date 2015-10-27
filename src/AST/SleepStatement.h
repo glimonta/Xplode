@@ -30,7 +30,7 @@ class SleepStatement : public Statement {
 
     }
 
-    void generateTAC(GeneratorTAC * generator, SymTable *table) {
+    void generateTAC(GeneratorTAC * generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción sleep");
       generator->gen(comment);
 
