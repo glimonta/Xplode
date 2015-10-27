@@ -37,7 +37,7 @@ class GeneratorTAC {
     void new_block() {
       tempFile << "\n#############################################################\n";
       this->gen(new Comment(labelmaker->getLabel(BLOCK_LABEL)));
-      tempFile << "\n#############################################################\n";
+      tempFile << "#############################################################\n\n";
       tac->push_back(new BlockTAC());
     }
 

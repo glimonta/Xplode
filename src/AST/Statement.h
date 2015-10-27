@@ -25,7 +25,7 @@ class Statement: public Node {
 
     virtual void firstcheck(SymTable *symtb){}
 
-    virtual std::string generateTAC(GeneratorTAC *generator, SymTable *table) {}
+    virtual void generateTAC(GeneratorTAC *generator, SymTable *table) {}
 
     virtual Symbol *toSymbol() {return NULL;}
 

@@ -38,8 +38,6 @@ class Node {
 
     virtual void print(int tab) = 0;
 
-    virtual std::string generateTAC(GeneratorTAC *generator, SymTable *table) {}
-
 };
 
 

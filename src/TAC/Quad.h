@@ -363,4 +363,26 @@ class SleepQuad : public Quad {
 
 };
 
+class ReturnQuad : public Quad {
+  public:
+
+    ReturnQuad() : Quad("return", "", "", "") {}
+
+    std::string toString() {
+      return getOp();
+    }
+
+};
+
+class ReturnExpQuad : public Quad {
+  public:
+
+    ReturnExpQuad(std::string r) : Quad("return", r, "", "") {}
+
+    std::string toString() {
+      return getOp() + " " + getResult();
+    }
+
+};
+
 #endif

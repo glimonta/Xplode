@@ -46,7 +46,7 @@ class ForStatement : public CompoundStatement {
 
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table) {
       //FIXME Hay que arreglar este comentario para tener el toString() y tampoco se que retornar
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción for");
       generator->gen(comment);
@@ -72,7 +72,6 @@ class ForStatement : public CompoundStatement {
       generator->new_block();
       generator->gen(end_lab);
 
-      return "";
     }
 
 };

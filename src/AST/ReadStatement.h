@@ -32,7 +32,7 @@ class ReadStatement : public Statement {
   
   }
 
-  std::string generateTAC(GeneratorTAC * generator, SymTable *table) {
+  void generateTAC(GeneratorTAC * generator, SymTable *table) {
     Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción read");
     std::string res = generator->labelmaker->getLabel(TEMPORAL);
     std::stringstream toString;
@@ -50,7 +50,6 @@ class ReadStatement : public Statement {
     }
 
     generator->gen(instr);
-    return instr->result;
   }
 
 };

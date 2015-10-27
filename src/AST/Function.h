@@ -82,8 +82,17 @@ class Function : public CompoundStatement {
 
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-      //TODO
+    void generateTAC(GeneratorTAC *generator, SymTable *table) {
+      generator->new_block();
+
+      Comment *comment = new Comment("Definición de Función " + fname + ": linea " + getLineStr());
+      generator->gen(comment);
+
+      Label *function_label = new Label(fname);
+      generator->gen(function_label);
+
+      block->generateTAC(generator, table);
+
     }
 
 };

@@ -135,20 +135,21 @@ class Program : public CompoundStatement {
           */
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table) {
       //FIXME
       std::list<Node *>::iterator iter;
       Statement *st;
-      //if (definitionList!=NULL) {
-      //  for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
-      //    st = (Statement *) *iter;
-      //    st->generateTAC(generator, table);
-      //  }
-      //}
-
       if(block!=NULL) {
          block->generateTAC(generator, table);
       }
+
+      if (definitionList!=NULL) {
+        for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
+          st = (Statement *) *iter;
+          st->generateTAC(generator, table);
+        }
+      }
+
     }
 
 };

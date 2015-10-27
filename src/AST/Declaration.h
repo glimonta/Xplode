@@ -61,10 +61,6 @@ class Declaration : public Statement {
       */
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-      //TODO
-    }
-
 };
 
 

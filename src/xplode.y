@@ -920,6 +920,8 @@ statement_return
         errorlog->addError(26,$1->line,$1->column,NULL);
 
     $$ = new ReturnStatement($2);
+    $$->line = $1->line;
+    $$->column = $1->column;
   }
   ;
 

@@ -58,7 +58,7 @@ class IfStatement : public CompoundStatement {
 
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    void generateTAC(GeneratorTAC *generator, SymTable *table) {
       //FIXME Hay que arreglar este comentario para tener el toString()
       Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción if");
       generator->gen(comment);
@@ -88,7 +88,6 @@ class IfStatement : public CompoundStatement {
         generator->gen(next_lab);
       }
 
-      return "";
       //TODO
     }
 
