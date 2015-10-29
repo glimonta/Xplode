@@ -37,6 +37,10 @@ class BlockTAC {
 
     }
 
+    int size() {
+      instructions->size();
+    }
+
 };
 
 #endif

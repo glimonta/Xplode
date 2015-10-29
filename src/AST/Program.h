@@ -143,6 +143,8 @@ class Program : public CompoundStatement {
          block->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
       }
 
+      generator->gen(new ExitQuad());
+
       if (definitionList!=NULL) {
         for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
           st = (Statement *) *iter;

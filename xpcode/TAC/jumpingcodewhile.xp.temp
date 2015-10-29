@@ -1,13 +1,16 @@
-B1:
-INIT:
+
+#############################################################
+#B1
+#############################################################
+
 #Este es el código generado por la linea 8 de la instrucción i := 0
 i := 0
-#Este es el código generado por la linea 10 de la instrucción while
 
 #############################################################
 #B2
 #############################################################
 
+#Este es el código generado por la linea 10 de la instrucción while
 begin1:
 t1 < i 13
 if t1 goto true1
@@ -50,12 +53,12 @@ goto begin1
 next1:
 #Este es el código generado por la linea 17 de la instrucción i := 13
 i := 13
-#Este es el código generado por la linea 19 de la instrucción while
 
 #############################################################
 #B8
 #############################################################
 
+#Este es el código generado por la linea 19 de la instrucción while
 begin2:
 t3 < i 13
 if t3 goto true2
@@ -96,3 +99,4 @@ goto begin2
 #############################################################
 
 next3:
+exit

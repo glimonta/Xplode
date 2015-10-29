@@ -54,7 +54,6 @@ class AssignStatement : public Statement {
     }
 
     generator->gen(instr);
-//FIXME
   }
 
 };

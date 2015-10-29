@@ -1,5 +1,3 @@
-
-
 #include <string>
 #include <iostream>
 #include <stdio.h>
@@ -268,6 +266,7 @@ class BinaryExpression : public Expression {
         lexp->generateJumpingCode(generator, table, label->getOp(), "fall");
         rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
 //FIXME capaz tengo que agregar new_block aqui
+        generator->new_block();
         generator->gen(label);
       } else {
         lexp->generateJumpingCode(generator, table, trueLabel, "fall");
@@ -279,6 +278,7 @@ class BinaryExpression : public Expression {
         lexp->generateJumpingCode(generator, table, "fall", label->getOp());
         rexp->generateJumpingCode(generator, table, trueLabel, falseLabel);
 //FIXME capaz tengo que agregar new_block aqui
+        generator->new_block();
         generator->gen(label);
       } else {
         lexp->generateJumpingCode(generator, table, "fall", falseLabel);

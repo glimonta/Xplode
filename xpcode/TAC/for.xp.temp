@@ -1,5 +1,8 @@
-B1:
-INIT:
+
+#############################################################
+#B1
+#############################################################
+
 #Este es el código generado por la linea 14 de la instrucción for
 #Este es el código generado por la linea 14 de la instrucción i := 0
 i := 0
@@ -86,3 +89,4 @@ goto begin2
 #############################################################
 
 end2:
+exit

@@ -1,5 +1,8 @@
-B1:
-INIT:
+
+#############################################################
+#B1
+#############################################################
+
 #Este es el código generado por la linea 11 de la instrucción ch := itoc c
 itoc t1 c
 ch := t1
@@ -15,3 +18,4 @@ x := t5
 itof t6 x
 t7 * d t6
 e := t7
+exit

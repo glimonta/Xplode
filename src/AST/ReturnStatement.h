@@ -41,7 +41,7 @@ class ReturnStatement : public Statement {
         generator->gen(ret_instr);
       }
 
-      generator->new_block();
+      //generator->new_block();
     }
 
 };

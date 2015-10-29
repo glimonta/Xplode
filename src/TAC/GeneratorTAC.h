@@ -25,20 +25,21 @@ class GeneratorTAC {
       labelmaker = new LabelMaker();
       tac = new std::vector<BlockTAC *>;
       BlockTAC *init_block = new BlockTAC();
-      Label *quad = new Label(labelmaker->getLabel(BLOCK_LABEL));
+      Comment *quad = new Comment(labelmaker->getLabel(BLOCK_LABEL));
       init_block->addQuad(quad);
+      tempFile << "\n#############################################################\n";
       tempFile << quad->toString() << std::endl;
-      quad = new Label("INIT");
-      init_block->addQuad(quad);
-      tempFile << quad->toString() << std::endl;
+      tempFile << "#############################################################\n\n";
       tac->push_back(init_block);
     }
 
     void new_block() {
-      tempFile << "\n#############################################################\n";
-      this->gen(new Comment(labelmaker->getLabel(BLOCK_LABEL)));
-      tempFile << "#############################################################\n\n";
-      tac->push_back(new BlockTAC());
+      if (0 != ((*tac)[(*tac).size()-1])->size()) {
+        tempFile << "\n#############################################################\n";
+        this->gen(new Comment(labelmaker->getLabel(BLOCK_LABEL)));
+        tempFile << "#############################################################\n\n";
+        tac->push_back(new BlockTAC());
+      }
     }
 
     void addQuad(Quad *quad) {

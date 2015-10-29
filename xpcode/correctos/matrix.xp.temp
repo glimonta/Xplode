@@ -1,5 +1,8 @@
-B1:
-INIT:
+
+#############################################################
+#B1
+#############################################################
+
 #Este es el código generado por la linea 36 de la llamada a función
 param mat
 param 10
@@ -8,6 +11,7 @@ t1 call readMat 2
 param mat
 param 10
 t2 call printMat 2
+exit
 
 #############################################################
 #B2
