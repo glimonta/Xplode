@@ -3,13 +3,13 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 38 de la llamada a función
+#Este es el código generado por la linea 38 de la llamada a la función: comparar_cadenas
 param lenguajes
 param bases
 param porcodigo
 t1 call comparar_cadenas 3
 write t1
-#Este es el código generado por la linea 39 de la llamada a función
+#Este es el código generado por la linea 39 de la llamada a la función: comparar_cadenas
 param lenguajes
 param diseno
 param porlab
@@ -24,7 +24,7 @@ exit
 #Definición de Función comparar_cadenas: linea 13
 comparar_cadenas:
 #Este es el código generado por la linea 15 de la instrucción return
-#Este es el código generado por la linea 15 de la llamada a función
+#Este es el código generado por la linea 15 de la llamada a la función: f
 param c1
 param c2
 t3 call f 2

@@ -47,13 +47,13 @@ class ForStatement : public CompoundStatement {
     }
 
     void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
-      //FIXME Hay que arreglar este comentario para tener el toString() y tampoco se que retornar
-      Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción for");
-      generator->gen(comment);
-
       Label *begin_lab  = new Label(generator->labelmaker->getLabel("begin"));
       Label *end_lab = new Label(generator->labelmaker->getLabel("end"));
       Label *first_for_lab  = new Label(generator->labelmaker->getLabel("first_for"));
+
+      Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() +
+        " de la instrucción for que inicia en " + begin_lab->getOp() + " y termina en " + end_lab->getOp());
+      generator->gen(comment);
 
       init->generateTAC(generator, table, continueLabel, breakLabel);
       GotoQuad *goto_first = new GotoQuad(first_for_lab->getOp());

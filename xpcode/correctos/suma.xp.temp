@@ -4,7 +4,7 @@
 #############################################################
 
 #Este es el código generado por la linea 8 de la instrucción f := suma(6, f)
-#Este es el código generado por la linea 8 de la llamada a función
+#Este es el código generado por la linea 8 de la llamada a la función: suma
 param 6
 param f
 t1 call suma 2
@@ -18,7 +18,7 @@ exit
 #Definición de Función suma: linea 3
 suma:
 #Este es el código generado por la linea 3 de la instrucción return
-#Este es el código generado por la linea 3 de la llamada a función
+#Este es el código generado por la linea 3 de la llamada a la función: suma
 param x
 param y
 t2 call suma 2

@@ -8,7 +8,7 @@
 #B2
 #############################################################
 
-#Este es el código generado por la linea 18 de la instrucción while
+#Este es el código generado por la linea 18 de la instrucción while que inicia en begin1 y termina en next1
 begin1:
 goto true1
 
@@ -21,10 +21,9 @@ read t1 2
 t2 * i 4
 a t2 []:= t1
 write "Lei un numero"
-#Este es el código generado por la linea 23 de la instrucción if
+#Este es el código generado por la linea 23 de la instrucción if que termina en next2
 t4 * i 4
 t5 :=[] a t4
-#Este es el código generado por la linea 4 de la instrucción UMINUS 1
 t6 neg 1
 t7 == t5 t6
 ifnot t7 goto next2
@@ -41,7 +40,7 @@ goto next1
 #############################################################
 
 next2:
-#Este es el código generado por la linea 24 de la llamada a función
+#Este es el código generado por la linea 24 de la llamada a la función: prom
 t8 * 0 4
 t9 :=[] a t8
 param t9
@@ -58,7 +57,7 @@ t16 * 4 4
 t17 :=[] a t16
 param t17
 t18 call prom 5
-#Este es el código generado por la linea 26 de la instrucción if
+#Este es el código generado por la linea 26 de la instrucción if que termina en next3
 t19 == i 4
 ifnot t19 goto next3
 

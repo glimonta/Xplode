@@ -10,7 +10,7 @@ i := 0
 #B2
 #############################################################
 
-#Este es el código generado por la linea 10 de la instrucción while
+#Este es el código generado por la linea 10 de la instrucción while que inicia en begin1 y termina en next1
 begin1:
 t1 < i 13
 if t1 goto true1
@@ -26,7 +26,7 @@ goto next1
 #############################################################
 
 true1:
-#Este es el código generado por la linea 11 de la instrucción if
+#Este es el código generado por la linea 11 de la instrucción if que termina en next2
 goto next2
 
 #############################################################
@@ -58,7 +58,7 @@ i := 13
 #B8
 #############################################################
 
-#Este es el código generado por la linea 19 de la instrucción while
+#Este es el código generado por la linea 19 de la instrucción while que inicia en begin2 y termina en next3
 begin2:
 t3 < i 13
 if t3 goto true2
@@ -74,7 +74,7 @@ goto next3
 #############################################################
 
 true2:
-#Este es el código generado por la linea 20 de la instrucción if
+#Este es el código generado por la linea 20 de la instrucción if que termina en next4
 goto next4
 
 #############################################################

@@ -3,7 +3,7 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 14 de la instrucción for
+#Este es el código generado por la linea 14 de la instrucción for que inicia en begin1 y termina en end1
 #Este es el código generado por la linea 14 de la instrucción i := 0
 i := 0
 goto first_for1
@@ -46,7 +46,7 @@ goto begin1
 #############################################################
 
 end1:
-#Este es el código generado por la linea 17 de la instrucción for
+#Este es el código generado por la linea 17 de la instrucción for que inicia en begin2 y termina en end2
 #Este es el código generado por la linea 17 de la instrucción i := 0
 i := 0
 goto first_for2

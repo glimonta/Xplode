@@ -46,7 +46,8 @@ class WhileStatement : public CompoundStatement {
       std::string res;
 
       generator->new_block();
-      Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción while");
+      Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción while que inicia en " +
+        begin_lab->getOp() + " y termina en " + next_lab->getOp());
       generator->gen(comment);
       generator->gen(begin_lab);
       condition->generateJumpingCode(generator, table, true_lab->getOp(), next_lab->getOp());

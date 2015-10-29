@@ -3,11 +3,11 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 31 de la llamada a función
+#Este es el código generado por la linea 31 de la llamada a la función: readMat
 param mat
 param 10
 t1 call readMat 2
-#Este es el código generado por la linea 32 de la llamada a función
+#Este es el código generado por la linea 32 de la llamada a la función: printMat
 param mat
 param 10
 t2 call printMat 2
@@ -19,7 +19,7 @@ exit
 
 #Definición de Función readMat: linea 3
 readMat:
-#Este es el código generado por la linea 5 de la instrucción for
+#Este es el código generado por la linea 5 de la instrucción for que inicia en begin1 y termina en end1
 #Este es el código generado por la linea 5 de la instrucción i := 0
 i := 0
 goto first_for1
@@ -52,7 +52,7 @@ goto end1
 #############################################################
 
 mid1:
-#Este es el código generado por la linea 6 de la instrucción for
+#Este es el código generado por la linea 6 de la instrucción for que inicia en begin2 y termina en end2
 #Este es el código generado por la linea 6 de la instrucción j := 0
 j := 0
 goto first_for2
@@ -85,7 +85,7 @@ goto end2
 #############################################################
 
 mid2:
-#Este es el código generado por la linea 7 de la instrucción for
+#Este es el código generado por la linea 7 de la instrucción for que inicia en begin3 y termina en end3
 #Este es el código generado por la linea 7 de la instrucción k := 0
 k := 0
 goto first_for3
@@ -160,7 +160,7 @@ end1:
 
 #Definición de Función printMat: linea 15
 printMat:
-#Este es el código generado por la linea 17 de la instrucción for
+#Este es el código generado por la linea 17 de la instrucción for que inicia en begin4 y termina en end4
 #Este es el código generado por la linea 17 de la instrucción i := 0
 i := 0
 goto first_for4
@@ -193,7 +193,7 @@ goto end4
 #############################################################
 
 mid4:
-#Este es el código generado por la linea 18 de la instrucción for
+#Este es el código generado por la linea 18 de la instrucción for que inicia en begin5 y termina en end5
 #Este es el código generado por la linea 18 de la instrucción j := 0
 j := 0
 goto first_for5
@@ -226,7 +226,7 @@ goto end5
 #############################################################
 
 mid5:
-#Este es el código generado por la linea 19 de la instrucción for
+#Este es el código generado por la linea 19 de la instrucción for que inicia en begin6 y termina en end6
 #Este es el código generado por la linea 19 de la instrucción k := 0
 k := 0
 goto first_for6

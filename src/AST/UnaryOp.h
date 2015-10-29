@@ -45,8 +45,6 @@ class UnaryOp : public Expression {
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
       std::string a1 = exp->generateTAC(generator, table);
       std::string result = generator->labelmaker->getLabel(TEMPORAL);
-      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción " + toString(table));
-      generator->gen(comment);
 
       if(opname=="UMINUS"){
         UnaryMinusQuad *unop = new UnaryMinusQuad(result, a1);

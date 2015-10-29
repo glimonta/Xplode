@@ -8,9 +8,9 @@
 #B2
 #############################################################
 
-#Este es el código generado por la linea 18 de la instrucción while
+#Este es el código generado por la linea 18 de la instrucción while que inicia en begin1 y termina en next1
 begin1:
-#Este es el código generado por la linea 18 de la llamada a función
+#Este es el código generado por la linea 18 de la llamada a la función: magicNumber
 param n
 t1 call magicNumber 1
 if t1 goto next1
@@ -28,7 +28,7 @@ goto true1
 true1:
 read t2 2
 n := t2
-#Este es el código generado por la linea 20 de la instrucción if
+#Este es el código generado por la linea 20 de la instrucción if que termina en next2
 t3 == n 42
 ifnot t3 goto next2
 
@@ -66,7 +66,7 @@ exit
 
 #Definición de Función magicNumber: linea 3
 magicNumber:
-#Este es el código generado por la linea 5 de la instrucción if
+#Este es el código generado por la linea 5 de la instrucción if que termina en next3
 t4 < k 2
 ifnot t4 goto next3
 
@@ -82,7 +82,7 @@ return false
 #############################################################
 
 next3:
-#Este es el código generado por la linea 8 de la instrucción for
+#Este es el código generado por la linea 8 de la instrucción for que inicia en begin2 y termina en end1
 #Este es el código generado por la linea 8 de la instrucción k := 2
 k := 2
 goto first_for1
@@ -115,7 +115,7 @@ goto end1
 #############################################################
 
 mid1:
-#Este es el código generado por la linea 9 de la instrucción if
+#Este es el código generado por la linea 9 de la instrucción if que termina en next4
 t7 / n k
 t8 == t7 0
 ifnot t8 goto next4

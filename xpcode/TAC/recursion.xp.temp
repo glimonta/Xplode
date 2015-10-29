@@ -6,7 +6,7 @@
 read t1 2
 n := t1
 #Este es el código generado por la linea 24 de la instrucción res := factorial(n)
-#Este es el código generado por la linea 24 de la llamada a función
+#Este es el código generado por la linea 24 de la llamada a la función: factorial
 param n
 t2 call factorial 1
 res := t2
@@ -20,7 +20,7 @@ exit
 
 #Definición de Función factorial: linea 3
 factorial:
-#Este es el código generado por la linea 5 de la instrucción if
+#Este es el código generado por la linea 5 de la instrucción if que termina en next1
 t3 == n 1
 ifnot t3 goto next1
 
@@ -36,7 +36,7 @@ return 1
 #############################################################
 
 next1:
-#Este es el código generado por la linea 6 de la instrucción if
+#Este es el código generado por la linea 6 de la instrucción if que termina en next2
 t4 < n 1
 ifnot t4 goto next2
 
@@ -46,7 +46,6 @@ ifnot t4 goto next2
 
 write "No intentes explotar aunque programes en Xplode!"
 #Este es el código generado por la linea 8 de la instrucción return
-#Este es el código generado por la linea 4 de la instrucción UMINUS 1
 t5 neg 1
 return t5
 
@@ -56,7 +55,7 @@ return t5
 
 next2:
 #Este es el código generado por la linea 11 de la instrucción return
-#Este es el código generado por la linea 11 de la llamada a función
+#Este es el código generado por la linea 11 de la llamada a la función: factorial
 t6 - n 1
 param t6
 t7 call factorial 1

@@ -4,7 +4,7 @@
 #############################################################
 
 #Este es el código generado por la linea 13 de la instrucción x := op(suma, 2, 3)
-#Este es el código generado por la linea 13 de la llamada a función
+#Este es el código generado por la linea 13 de la llamada a la función: op
 param suma
 param 2
 param 3
@@ -29,7 +29,7 @@ return t2
 #Definición de Función op: linea 7
 op:
 #Este es el código generado por la linea 7 de la instrucción return
-#Este es el código generado por la linea 7 de la llamada a función
+#Este es el código generado por la linea 7 de la llamada a la función: f
 param x
 param y
 t3 call f 2

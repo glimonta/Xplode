@@ -3,8 +3,8 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 37 de la instrucción if
-#Este es el código generado por la linea 37 de la llamada a función
+#Este es el código generado por la linea 37 de la instrucción if que termina en next1
+#Este es el código generado por la linea 37 de la llamada a la función: anotherComp
 param personcomp
 param a
 param b
@@ -15,8 +15,8 @@ ifnot t1 goto false1
 #B2
 #############################################################
 
-#Este es el código generado por la linea 38 de la instrucción if
-#Este es el código generado por la linea 38 de la llamada a función
+#Este es el código generado por la linea 38 de la instrucción if que termina en next2
+#Este es el código generado por la linea 38 de la llamada a la función: anotherComp
 param personcomp
 param a
 param c
@@ -27,7 +27,7 @@ ifnot t2 goto false2
 #B3
 #############################################################
 
-#Este es el código generado por la linea 39 de la llamada a función
+#Este es el código generado por la linea 39 de la llamada a la función: printPerson
 param a
 t3 call printPerson 1
 goto next2
@@ -37,7 +37,7 @@ goto next2
 #############################################################
 
 false2:
-#Este es el código generado por la linea 41 de la llamada a función
+#Este es el código generado por la linea 41 de la llamada a la función: printPerson
 param c
 t4 call printPerson 1
 
@@ -53,8 +53,8 @@ goto next1
 #############################################################
 
 false1:
-#Este es el código generado por la linea 44 de la instrucción if
-#Este es el código generado por la linea 44 de la llamada a función
+#Este es el código generado por la linea 44 de la instrucción if que termina en next3
+#Este es el código generado por la linea 44 de la llamada a la función: anotherComp
 param personcomp
 param b
 param c
@@ -65,7 +65,7 @@ ifnot t5 goto false3
 #B7
 #############################################################
 
-#Este es el código generado por la linea 45 de la llamada a función
+#Este es el código generado por la linea 45 de la llamada a la función: printPerson
 param b
 t6 call printPerson 1
 goto next3
@@ -75,7 +75,7 @@ goto next3
 #############################################################
 
 false3:
-#Este es el código generado por la linea 47 de la llamada a función
+#Este es el código generado por la linea 47 de la llamada a la función: printPerson
 param c
 t7 call printPerson 1
 
@@ -145,7 +145,7 @@ return t22
 #Definición de Función anotherComp: linea 28
 anotherComp:
 #Este es el código generado por la linea 29 de la instrucción return
-#Este es el código generado por la linea 29 de la llamada a función
+#Este es el código generado por la linea 29 de la llamada a la función: f
 param a
 param b
 t23 call f 2

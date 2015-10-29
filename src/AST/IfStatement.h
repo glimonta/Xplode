@@ -59,13 +59,14 @@ class IfStatement : public CompoundStatement {
     }
 
     void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
-      //FIXME Hay que arreglar este comentario para tener el toString()
-      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la instrucción if");
-      generator->gen(comment);
 
       Label *fall_lab  = new Label("fall");
       Label *false_lab = new Label(generator->labelmaker->getLabel("false"));
       Label *next_lab  = new Label(generator->labelmaker->getLabel("next"));
+
+      Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() +
+        " de la instrucción if que termina en " + next_lab->getOp());
+      generator->gen(comment);
 
       std::string res;
 

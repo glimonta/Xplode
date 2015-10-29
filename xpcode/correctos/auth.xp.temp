@@ -5,8 +5,8 @@
 
 read t1 2
 id := t1
-#Este es el código generado por la linea 12 de la instrucción if
-#Este es el código generado por la linea 12 de la llamada a función
+#Este es el código generado por la linea 12 de la instrucción if que termina en next1
+#Este es el código generado por la linea 12 de la llamada a la función: authenticate
 param id
 t2 call authenticate 1
 ifnot t2 goto false1
