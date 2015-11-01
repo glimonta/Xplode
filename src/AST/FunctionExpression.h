@@ -72,7 +72,6 @@ class FunctionExpression : public Expression {
       generator->gen(call);
 
       return result;
-      //FIXME solo estoy considerando cuando retorna un valor, esto es mas complicado de lo que creo
     }
 
     void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
