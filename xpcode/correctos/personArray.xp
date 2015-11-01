@@ -30,4 +30,6 @@ begin
     printPerson(p[i]);
   };
 
+  i := p[7].id;
+
 end

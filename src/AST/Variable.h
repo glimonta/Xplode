@@ -249,6 +249,7 @@ class Variable : public Expression {
             res = mult->result;
 
             arg2 = indexes->second->generateTAC(generator, table);
+            ++indexes;
             result = generator->labelmaker->getLabel(TEMPORAL);
             AddQuad *add = new AddQuad(result, res, arg2);
             generator->gen(add);

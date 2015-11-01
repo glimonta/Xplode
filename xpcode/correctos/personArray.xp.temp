@@ -93,6 +93,11 @@ goto begin2
 #############################################################
 
 end2:
+#Este es el código generado por la linea 33 de la instrucción i := p[7].id
+t11 * 7 22
+t12 + t11 10
+t13 :=[] p t12
+i := t13
 exit
 
 #############################################################
@@ -102,17 +107,17 @@ exit
 #Definición de Función printPerson: linea 10
 printPerson:
 write "Person Data is : "
-t11 :=[] p 10
-write t11
-write " "
-t12 :=[] p 0
-write t12
-write " "
-t13 :=[] p 14
-write t13
-write " "
-t14 :=[] p 18
+t14 :=[] p 10
 write t14
+write " "
+t15 :=[] p 0
+write t15
+write " "
+t16 :=[] p 14
+write t16
+write " "
+t17 :=[] p 18
+write t17
 
 #############################################################
 #B13
@@ -120,11 +125,11 @@ write t14
 
 #Definición de Función readPerson: linea 15
 readPerson:
-read t15 2
-p 10 []:= t15
-read t17 5
-p 14 []:= t17
-read t19 5
-p 18 []:= t19
-read t21 6
-p 0 []:= t21
+read t18 2
+p 10 []:= t18
+read t20 5
+p 14 []:= t20
+read t22 5
+p 18 []:= t22
+read t24 6
+p 0 []:= t24
