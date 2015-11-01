@@ -3,25 +3,25 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 37 de la instrucción if que termina en next1
+#Este es el código generado por la linea 37 de la instrucción if que termina en next_if_37_1
 #Este es el código generado por la linea 37 de la llamada a la función: anotherComp
 param personcomp
 param a
 param b
 t1 call anotherComp 3
-ifnot t1 goto false1
+ifnot t1 goto false_if_37_1
 
 #############################################################
 #B2
 #############################################################
 
-#Este es el código generado por la linea 38 de la instrucción if que termina en next2
+#Este es el código generado por la linea 38 de la instrucción if que termina en next_if_38_1
 #Este es el código generado por la linea 38 de la llamada a la función: anotherComp
 param personcomp
 param a
 param c
 t2 call anotherComp 3
-ifnot t2 goto false2
+ifnot t2 goto false_if_38_1
 
 #############################################################
 #B3
@@ -30,13 +30,13 @@ ifnot t2 goto false2
 #Este es el código generado por la linea 39 de la llamada a la función: printPerson
 param a
 t3 call printPerson 1
-goto next2
+goto next_if_38_1
 
 #############################################################
 #B4
 #############################################################
 
-false2:
+false_if_38_1:
 #Este es el código generado por la linea 41 de la llamada a la función: printPerson
 param c
 t4 call printPerson 1
@@ -45,21 +45,21 @@ t4 call printPerson 1
 #B5
 #############################################################
 
-next2:
-goto next1
+next_if_38_1:
+goto next_if_37_1
 
 #############################################################
 #B6
 #############################################################
 
-false1:
-#Este es el código generado por la linea 44 de la instrucción if que termina en next3
+false_if_37_1:
+#Este es el código generado por la linea 44 de la instrucción if que termina en next_if_44_1
 #Este es el código generado por la linea 44 de la llamada a la función: anotherComp
 param personcomp
 param b
 param c
 t5 call anotherComp 3
-ifnot t5 goto false3
+ifnot t5 goto false_if_44_1
 
 #############################################################
 #B7
@@ -68,13 +68,13 @@ ifnot t5 goto false3
 #Este es el código generado por la linea 45 de la llamada a la función: printPerson
 param b
 t6 call printPerson 1
-goto next3
+goto next_if_44_1
 
 #############################################################
 #B8
 #############################################################
 
-false3:
+false_if_44_1:
 #Este es el código generado por la linea 47 de la llamada a la función: printPerson
 param c
 t7 call printPerson 1
@@ -83,13 +83,13 @@ t7 call printPerson 1
 #B9
 #############################################################
 
-next3:
+next_if_44_1:
 
 #############################################################
 #B10
 #############################################################
 
-next1:
+next_if_37_1:
 exit
 
 #############################################################

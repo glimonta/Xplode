@@ -16,7 +16,7 @@ k := t3
 t4 < i j
 t5 && t4 true
 k := t5
-#Este es el código generado por la linea 14 de la instrucción if que termina en next1
+#Este es el código generado por la linea 14 de la instrucción if que termina en next_if_14_1
 t6 < i j
 if t6 goto true1
 
@@ -24,15 +24,15 @@ if t6 goto true1
 #B2
 #############################################################
 
-goto false1
+goto false_if_14_1
 
 #############################################################
 #B3
 #############################################################
 
 true1:
-#Este es el código generado por la linea 15 de la instrucción if que termina en next2
-goto next2
+#Este es el código generado por la linea 15 de la instrucción if que termina en next_if_15_1
+goto next_if_15_1
 
 #############################################################
 #B4
@@ -45,16 +45,16 @@ j := 4
 #B5
 #############################################################
 
-next2:
+next_if_15_1:
 #Este es el código generado por la linea 18 de la instrucción i := 2
 i := 2
-goto next1
+goto next_if_14_1
 
 #############################################################
 #B6
 #############################################################
 
-false1:
+false_if_14_1:
 #Este es el código generado por la linea 20 de la instrucción i := 4
 i := 4
 
@@ -62,5 +62,5 @@ i := 4
 #B7
 #############################################################
 
-next1:
+next_if_14_1:
 exit

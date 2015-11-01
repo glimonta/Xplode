@@ -39,9 +39,9 @@ class WhileStatement : public CompoundStatement {
     void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
       //FIXME Hay que arreglar este comentario para tener el toString()
 
-      Label *begin_lab  = new Label(generator->labelmaker->getLabel("begin"));
-      Label *true_lab = new Label(generator->labelmaker->getLabel("true"));
-      Label *next_lab  = new Label(generator->labelmaker->getLabel("next"));
+      Label *begin_lab  = new Label(generator->labelmaker->getLabel("begin_while_" + getLineStr() + "_"));
+      Label *true_lab = new Label(generator->labelmaker->getLabel("true_while_" + getLineStr() + "_"));
+      Label *next_lab  = new Label(generator->labelmaker->getLabel("next_while_" + getLineStr() + "_"));
 
       std::string res;
 

@@ -61,8 +61,8 @@ class IfStatement : public CompoundStatement {
     void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
 
       Label *fall_lab  = new Label("fall");
-      Label *false_lab = new Label(generator->labelmaker->getLabel("false"));
-      Label *next_lab  = new Label(generator->labelmaker->getLabel("next"));
+      Label *false_lab = new Label(generator->labelmaker->getLabel("false_if_" + getLineStr() + "_"));
+      Label *next_lab  = new Label(generator->labelmaker->getLabel("next_if_" + getLineStr() + "_"));
 
       Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() +
         " de la instrucción if que termina en " + next_lab->getOp());

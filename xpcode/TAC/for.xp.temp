@@ -3,16 +3,16 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 14 de la instrucción for que inicia en begin1 y termina en end1
+#Este es el código generado por la linea 14 de la instrucción for que inicia en begin_for_14_1 y termina en end_for_14_1
 #Este es el código generado por la linea 14 de la instrucción i := 0
 i := 0
-goto first_for1
+goto first_for_14_1
 
 #############################################################
 #B2
 #############################################################
 
-begin1:
+begin_for_14_1:
 #Este es el código generado por la linea 14 de la instrucción i := i + 1
 t1 + i 1
 i := t1
@@ -21,7 +21,7 @@ i := t1
 #B3
 #############################################################
 
-first_for1:
+first_for_14_1:
 t2 < i 10
 if t2 goto mid1
 
@@ -29,7 +29,7 @@ if t2 goto mid1
 #B4
 #############################################################
 
-goto end1
+goto end_for_14_1
 
 #############################################################
 #B5
@@ -39,23 +39,23 @@ mid1:
 #Este es el código generado por la linea 15 de la instrucción j := j + 1
 t3 + j 1
 j := t3
-goto begin1
+goto begin_for_14_1
 
 #############################################################
 #B6
 #############################################################
 
-end1:
-#Este es el código generado por la linea 17 de la instrucción for que inicia en begin2 y termina en end2
+end_for_14_1:
+#Este es el código generado por la linea 17 de la instrucción for que inicia en begin_for_17_1 y termina en end_for_17_1
 #Este es el código generado por la linea 17 de la instrucción i := 0
 i := 0
-goto first_for2
+goto first_for_17_1
 
 #############################################################
 #B7
 #############################################################
 
-begin2:
+begin_for_17_1:
 #Este es el código generado por la linea 17 de la instrucción i := i + 1
 t4 + i 1
 i := t4
@@ -64,7 +64,7 @@ i := t4
 #B8
 #############################################################
 
-first_for2:
+first_for_17_1:
 t5 < i 10
 if t5 goto mid2
 
@@ -72,7 +72,7 @@ if t5 goto mid2
 #B9
 #############################################################
 
-goto end2
+goto end_for_17_1
 
 #############################################################
 #B10
@@ -82,11 +82,11 @@ mid2:
 #Este es el código generado por la linea 18 de la instrucción j := j + 2
 t6 + j 2
 j := t6
-goto begin2
+goto begin_for_17_1
 
 #############################################################
 #B11
 #############################################################
 
-end2:
+end_for_17_1:
 exit

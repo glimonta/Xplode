@@ -47,9 +47,9 @@ class ForStatement : public CompoundStatement {
     }
 
     void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
-      Label *begin_lab  = new Label(generator->labelmaker->getLabel("begin"));
-      Label *end_lab = new Label(generator->labelmaker->getLabel("end"));
-      Label *first_for_lab  = new Label(generator->labelmaker->getLabel("first_for"));
+      Label *begin_lab  = new Label(generator->labelmaker->getLabel("begin_for_" + getLineStr() + "_"));
+      Label *end_lab = new Label(generator->labelmaker->getLabel("end_for_" + getLineStr() + "_"));
+      Label *first_for_lab  = new Label(generator->labelmaker->getLabel("first_for_" + getLineStr() + "_"));
 
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() +
         " de la instrucción for que inicia en " + begin_lab->getOp() + " y termina en " + end_lab->getOp());

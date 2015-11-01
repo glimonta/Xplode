@@ -20,9 +20,9 @@ exit
 
 #Definición de Función factorial: linea 3
 factorial:
-#Este es el código generado por la linea 5 de la instrucción if que termina en next1
+#Este es el código generado por la linea 5 de la instrucción if que termina en next_if_5_1
 t3 == n 1
-ifnot t3 goto next1
+ifnot t3 goto next_if_5_1
 
 #############################################################
 #B3
@@ -35,10 +35,10 @@ return 1
 #B4
 #############################################################
 
-next1:
-#Este es el código generado por la linea 6 de la instrucción if que termina en next2
+next_if_5_1:
+#Este es el código generado por la linea 6 de la instrucción if que termina en next_if_6_1
 t4 < n 1
-ifnot t4 goto next2
+ifnot t4 goto next_if_6_1
 
 #############################################################
 #B5
@@ -53,7 +53,7 @@ return t5
 #B6
 #############################################################
 
-next2:
+next_if_6_1:
 #Este es el código generado por la linea 11 de la instrucción return
 #Este es el código generado por la linea 11 de la llamada a la función: factorial
 t6 - n 1

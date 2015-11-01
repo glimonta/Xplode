@@ -26,16 +26,16 @@ exit
 
 #Definición de Función readMat: linea 3
 readMat:
-#Este es el código generado por la linea 7 de la instrucción for que inicia en begin1 y termina en end1
+#Este es el código generado por la linea 7 de la instrucción for que inicia en begin_for_7_1 y termina en end_for_7_1
 #Este es el código generado por la linea 7 de la instrucción i := 0
 i := 0
-goto first_for1
+goto first_for_7_1
 
 #############################################################
 #B3
 #############################################################
 
-begin1:
+begin_for_7_1:
 #Este es el código generado por la linea 7 de la instrucción i := i + 1
 t9 + i 1
 i := t9
@@ -44,7 +44,7 @@ i := t9
 #B4
 #############################################################
 
-first_for1:
+first_for_7_1:
 t10 < i s
 if t10 goto mid1
 
@@ -52,23 +52,23 @@ if t10 goto mid1
 #B5
 #############################################################
 
-goto end1
+goto end_for_7_1
 
 #############################################################
 #B6
 #############################################################
 
 mid1:
-#Este es el código generado por la linea 8 de la instrucción for que inicia en begin2 y termina en end2
+#Este es el código generado por la linea 8 de la instrucción for que inicia en begin_for_8_1 y termina en end_for_8_1
 #Este es el código generado por la linea 8 de la instrucción j := 0
 j := 0
-goto first_for2
+goto first_for_8_1
 
 #############################################################
 #B7
 #############################################################
 
-begin2:
+begin_for_8_1:
 #Este es el código generado por la linea 8 de la instrucción j := j + 1
 t11 + j 1
 j := t11
@@ -77,7 +77,7 @@ j := t11
 #B8
 #############################################################
 
-first_for2:
+first_for_8_1:
 t12 < j s
 if t12 goto mid2
 
@@ -85,23 +85,23 @@ if t12 goto mid2
 #B9
 #############################################################
 
-goto end2
+goto end_for_8_1
 
 #############################################################
 #B10
 #############################################################
 
 mid2:
-#Este es el código generado por la linea 9 de la instrucción for que inicia en begin3 y termina en end3
+#Este es el código generado por la linea 9 de la instrucción for que inicia en begin_for_9_1 y termina en end_for_9_1
 #Este es el código generado por la linea 9 de la instrucción k := 0
 k := 0
-goto first_for3
+goto first_for_9_1
 
 #############################################################
 #B11
 #############################################################
 
-begin3:
+begin_for_9_1:
 #Este es el código generado por la linea 9 de la instrucción k := k + 1
 t13 + k 1
 k := t13
@@ -110,7 +110,7 @@ k := t13
 #B12
 #############################################################
 
-first_for3:
+first_for_9_1:
 t14 < k s
 if t14 goto mid3
 
@@ -118,7 +118,7 @@ if t14 goto mid3
 #B13
 #############################################################
 
-goto end3
+goto end_for_9_1
 
 #############################################################
 #B14
@@ -132,27 +132,27 @@ t18 * t17 -1
 t19 + t18 j
 t20 * t19 4
 m t20 []:= t15
-goto begin3
+goto begin_for_9_1
 
 #############################################################
 #B15
 #############################################################
 
-end3:
-goto begin2
+end_for_9_1:
+goto begin_for_8_1
 
 #############################################################
 #B16
 #############################################################
 
-end2:
-goto begin1
+end_for_8_1:
+goto begin_for_7_1
 
 #############################################################
 #B17
 #############################################################
 
-end1:
+end_for_7_1:
 
 #############################################################
 #B18
@@ -160,16 +160,16 @@ end1:
 
 #Definición de Función printMat: linea 16
 printMat:
-#Este es el código generado por la linea 20 de la instrucción for que inicia en begin4 y termina en end4
+#Este es el código generado por la linea 20 de la instrucción for que inicia en begin_for_20_1 y termina en end_for_20_1
 #Este es el código generado por la linea 20 de la instrucción i := 0
 i := 0
-goto first_for4
+goto first_for_20_1
 
 #############################################################
 #B19
 #############################################################
 
-begin4:
+begin_for_20_1:
 #Este es el código generado por la linea 20 de la instrucción i := i + 1
 t22 + i 1
 i := t22
@@ -178,7 +178,7 @@ i := t22
 #B20
 #############################################################
 
-first_for4:
+first_for_20_1:
 t23 < i s
 if t23 goto mid4
 
@@ -186,23 +186,23 @@ if t23 goto mid4
 #B21
 #############################################################
 
-goto end4
+goto end_for_20_1
 
 #############################################################
 #B22
 #############################################################
 
 mid4:
-#Este es el código generado por la linea 21 de la instrucción for que inicia en begin5 y termina en end5
+#Este es el código generado por la linea 21 de la instrucción for que inicia en begin_for_21_1 y termina en end_for_21_1
 #Este es el código generado por la linea 21 de la instrucción j := 0
 j := 0
-goto first_for5
+goto first_for_21_1
 
 #############################################################
 #B23
 #############################################################
 
-begin5:
+begin_for_21_1:
 #Este es el código generado por la linea 21 de la instrucción j := j + 1
 t24 + j 1
 j := t24
@@ -211,7 +211,7 @@ j := t24
 #B24
 #############################################################
 
-first_for5:
+first_for_21_1:
 t25 < j s
 if t25 goto mid5
 
@@ -219,23 +219,23 @@ if t25 goto mid5
 #B25
 #############################################################
 
-goto end5
+goto end_for_21_1
 
 #############################################################
 #B26
 #############################################################
 
 mid5:
-#Este es el código generado por la linea 22 de la instrucción for que inicia en begin6 y termina en end6
+#Este es el código generado por la linea 22 de la instrucción for que inicia en begin_for_22_1 y termina en end_for_22_1
 #Este es el código generado por la linea 22 de la instrucción k := 0
 k := 0
-goto first_for6
+goto first_for_22_1
 
 #############################################################
 #B27
 #############################################################
 
-begin6:
+begin_for_22_1:
 #Este es el código generado por la linea 22 de la instrucción k := k + 1
 t26 + k 1
 k := t26
@@ -244,7 +244,7 @@ k := t26
 #B28
 #############################################################
 
-first_for6:
+first_for_22_1:
 t27 < k s
 if t27 goto mid6
 
@@ -252,7 +252,7 @@ if t27 goto mid6
 #B29
 #############################################################
 
-goto end6
+goto end_for_22_1
 
 #############################################################
 #B30
@@ -266,25 +266,25 @@ t31 + t30 k
 t32 * t31 4
 t33 :=[] m t32
 write t33
-goto begin6
+goto begin_for_22_1
 
 #############################################################
 #B31
 #############################################################
 
-end6:
+end_for_22_1:
 write "\n"
-goto begin5
+goto begin_for_21_1
 
 #############################################################
 #B32
 #############################################################
 
-end5:
-goto begin4
+end_for_21_1:
+goto begin_for_20_1
 
 #############################################################
 #B33
 #############################################################
 
-end4:
+end_for_20_1:

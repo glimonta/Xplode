@@ -5,31 +5,31 @@
 
 read t1 2
 id := t1
-#Este es el código generado por la linea 12 de la instrucción if que termina en next1
+#Este es el código generado por la linea 12 de la instrucción if que termina en next_if_12_1
 #Este es el código generado por la linea 12 de la llamada a la función: authenticate
 param id
 t2 call authenticate 1
-ifnot t2 goto false1
+ifnot t2 goto false_if_12_1
 
 #############################################################
 #B2
 #############################################################
 
 write "You're in.\n"
-goto next1
+goto next_if_12_1
 
 #############################################################
 #B3
 #############################################################
 
-false1:
+false_if_12_1:
 write "You thief! \n"
 
 #############################################################
 #B4
 #############################################################
 
-next1:
+next_if_12_1:
 exit
 
 #############################################################

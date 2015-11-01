@@ -10,24 +10,24 @@ i := 0
 #B2
 #############################################################
 
-#Este es el código generado por la linea 10 de la instrucción while que inicia en begin1 y termina en next1
-begin1:
+#Este es el código generado por la linea 10 de la instrucción while que inicia en begin_while_10_1 y termina en next_while_10_1
+begin_while_10_1:
 t1 < i 13
-if t1 goto true1
+if t1 goto true_while_10_1
 
 #############################################################
 #B3
 #############################################################
 
-goto next1
+goto next_while_10_1
 
 #############################################################
 #B4
 #############################################################
 
-true1:
-#Este es el código generado por la linea 11 de la instrucción if que termina en next2
-goto next2
+true_while_10_1:
+#Este es el código generado por la linea 11 de la instrucción if que termina en next_if_11_1
+goto next_if_11_1
 
 #############################################################
 #B5
@@ -40,17 +40,17 @@ i := 42
 #B6
 #############################################################
 
-next2:
+next_if_11_1:
 #Este es el código generado por la linea 14 de la instrucción i := i + 1
 t2 + i 1
 i := t2
-goto begin1
+goto begin_while_10_1
 
 #############################################################
 #B7
 #############################################################
 
-next1:
+next_while_10_1:
 #Este es el código generado por la linea 17 de la instrucción i := 13
 i := 13
 
@@ -58,24 +58,24 @@ i := 13
 #B8
 #############################################################
 
-#Este es el código generado por la linea 19 de la instrucción while que inicia en begin2 y termina en next3
-begin2:
+#Este es el código generado por la linea 19 de la instrucción while que inicia en begin_while_19_1 y termina en next_while_19_1
+begin_while_19_1:
 t3 < i 13
-if t3 goto true2
+if t3 goto true_while_19_1
 
 #############################################################
 #B9
 #############################################################
 
-goto next3
+goto next_while_19_1
 
 #############################################################
 #B10
 #############################################################
 
-true2:
-#Este es el código generado por la linea 20 de la instrucción if que termina en next4
-goto next4
+true_while_19_1:
+#Este es el código generado por la linea 20 de la instrucción if que termina en next_if_20_1
+goto next_if_20_1
 
 #############################################################
 #B11
@@ -88,15 +88,15 @@ i := 42
 #B12
 #############################################################
 
-next4:
+next_if_20_1:
 #Este es el código generado por la linea 23 de la instrucción i := i + 1
 t4 + i 1
 i := t4
-goto begin2
+goto begin_while_19_1
 
 #############################################################
 #B13
 #############################################################
 
-next3:
+next_while_19_1:
 exit

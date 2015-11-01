@@ -3,16 +3,16 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 26 de la instrucción for que inicia en begin1 y termina en end1
+#Este es el código generado por la linea 26 de la instrucción for que inicia en begin_for_26_1 y termina en end_for_26_1
 #Este es el código generado por la linea 26 de la instrucción i := 0
 i := 0
-goto first_for1
+goto first_for_26_1
 
 #############################################################
 #B2
 #############################################################
 
-begin1:
+begin_for_26_1:
 #Este es el código generado por la linea 26 de la instrucción i := 1 + 1
 t1 + 1 1
 i := t1
@@ -21,7 +21,7 @@ i := t1
 #B3
 #############################################################
 
-first_for1:
+first_for_26_1:
 t2 < i 10
 if t2 goto mid1
 
@@ -29,7 +29,7 @@ if t2 goto mid1
 #B4
 #############################################################
 
-goto end1
+goto end_for_26_1
 
 #############################################################
 #B5
@@ -41,23 +41,23 @@ t3 * i 22
 t4 :=[] p t3
 param t4
 t5 call readPerson 1
-goto begin1
+goto begin_for_26_1
 
 #############################################################
 #B6
 #############################################################
 
-end1:
-#Este es el código generado por la linea 29 de la instrucción for que inicia en begin2 y termina en end2
+end_for_26_1:
+#Este es el código generado por la linea 29 de la instrucción for que inicia en begin_for_29_1 y termina en end_for_29_1
 #Este es el código generado por la linea 29 de la instrucción i := 0
 i := 0
-goto first_for2
+goto first_for_29_1
 
 #############################################################
 #B7
 #############################################################
 
-begin2:
+begin_for_29_1:
 #Este es el código generado por la linea 29 de la instrucción i := 1 + 1
 t6 + 1 1
 i := t6
@@ -66,7 +66,7 @@ i := t6
 #B8
 #############################################################
 
-first_for2:
+first_for_29_1:
 t7 < i 10
 if t7 goto mid2
 
@@ -74,7 +74,7 @@ if t7 goto mid2
 #B9
 #############################################################
 
-goto end2
+goto end_for_29_1
 
 #############################################################
 #B10
@@ -86,13 +86,13 @@ t8 * i 22
 t9 :=[] p t8
 param t9
 t10 call printPerson 1
-goto begin2
+goto begin_for_29_1
 
 #############################################################
 #B11
 #############################################################
 
-end2:
+end_for_29_1:
 #Este es el código generado por la linea 33 de la instrucción i := p[7].id
 t11 * 7 22
 t12 + t11 10

@@ -8,20 +8,14 @@ t1 + 5 0
 t2 :=[] yo 0
 t3 * t2 2
 t4 + t3 1
-t5 * t4 2
-t6 + t5 1
-t7 * t6 2
-t8 + t7 1
-t9 * t8 2
-t10 + t9 1
-t11 * t10 4
-t12 + t11 t1
-t13 :=[] yo t12
-param t13
-t14 + 5 128
-t15 :=[] yo t14
-param t15
-t16 call wtf_this_parameters 2
+t5 * t4 32
+t6 + t5 t1
+t7 :=[] yo t6
+param t7
+t8 + 5 128
+t9 :=[] yo t8
+param t9
+t10 call wtf_this_parameters 2
 exit
 
 #############################################################
