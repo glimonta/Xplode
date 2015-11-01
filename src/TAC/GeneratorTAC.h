@@ -34,7 +34,7 @@ class GeneratorTAC {
     }
 
     void new_block() {
-      if (0 != ((*tac)[(*tac).size()-1])->size()) {
+      if (0 != ((*tac)[(*tac).size()-1])->size() && !((*tac)[(*tac).size()-1])->onlyLabels()) {
         tempFile << "\n#############################################################\n";
         this->gen(new Comment(labelmaker->getLabel(BLOCK_LABEL)));
         tempFile << "#############################################################\n\n";

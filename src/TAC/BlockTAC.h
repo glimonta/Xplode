@@ -41,6 +41,16 @@ class BlockTAC {
       instructions->size();
     }
 
+    bool onlyLabels() {
+      for (int i = 0; i < instructions->size(); ++i) {
+        if (NULL == dynamic_cast<Label *>((*instructions)[i])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
 };
 
 #endif
