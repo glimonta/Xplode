@@ -52,8 +52,16 @@
             
               (*table)[lowsymbol] = s;
               if(save){
-                s->offset = totaloffset;
-                totaloffset += s->ntype->size;
+                if ((totaloffset + s->ntype->size)/ALIGNMENT == totaloffset/ALIGNMENT) {
+                  std::cout << "Entre en el primer if con: " << s->name << " y el offset total es: " << totaloffset << " y el offset que quiero agregar es de: " << s->ntype->size << std::endl;
+                  s->offset = totaloffset;
+                  totaloffset += s->ntype->size;
+                } else {
+                  if ((totaloffset%ALIGNMENT) != 0) totaloffset += ALIGNMENT - (totaloffset%ALIGNMENT);
+                  std::cout << "Entre en el segundo if con: " << s->name << " y el offset total es: " << totaloffset << " y el offset que quiero agregar es de: " << s->ntype->size << std::endl;
+                  s->offset = totaloffset;
+                  totaloffset += s->ntype->size;
+                }
               }
               return;
             }  

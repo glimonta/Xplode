@@ -85,8 +85,14 @@ class TupleType : public TypeDeclaration {
       size = 0;
       for(std::list< std::pair<TypeDeclaration*, int>* >::iterator iter = types->begin();
           iter != types->end(); ++iter){
-        (*iter)->second = size;
-        size += (*iter)->first->size;
+          if ((size + (*iter)->first->size)/ALIGNMENT == size/ALIGNMENT) {
+            (*iter)->second = size;
+            size += (*iter)->first->size;
+          } else {
+            if ((size%ALIGNMENT) != 0) size += ALIGNMENT - (size%ALIGNMENT);
+            (*iter)->second = size;
+            size += (*iter)->first->size;
+          }
 
       }
 
