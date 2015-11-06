@@ -3,17 +3,15 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 38 de la llamada a la función: comparar_cadenas
-param lenguajes
-param bases
-param porcodigo
-t1 call comparar_cadenas 3
+#Este es el código generado por la linea 38 de la llamada a la función: porcodigo
+param_ref lenguajes  
+param_ref bases  
+t1 call porcodigo 2
 write t1
-#Este es el código generado por la linea 39 de la llamada a la función: comparar_cadenas
-param lenguajes
-param diseno
-param porlab
-t2 call comparar_cadenas 3
+#Este es el código generado por la linea 39 de la llamada a la función: porlab
+param_ref lenguajes  
+param_ref diseno  
+t2 call porlab 2
 write t2
 exit
 
@@ -21,33 +19,20 @@ exit
 #B2
 #############################################################
 
-#Definición de Función comparar_cadenas: linea 13
-comparar_cadenas:
-#Este es el código generado por la linea 15 de la instrucción return
-#Este es el código generado por la linea 15 de la llamada a la función: f
-param c1
-param c2
-t3 call f 2
-return t3
+#Definición de Función porcodigo: linea 20
+porcodigo:
+#Este es el código generado por la linea 22 de la instrucción return
+t3 :=[] c1 0
+t4 :=[] c2 0
+t5 > t3 t4
+return t5
 
 #############################################################
 #B3
 #############################################################
 
-#Definición de Función porcodigo: linea 20
-porcodigo:
-#Este es el código generado por la linea 22 de la instrucción return
-t4 :=[] c1 0
-t5 :=[] c2 0
-t6 > t4 t5
-return t6
-
-#############################################################
-#B4
-#############################################################
-
 #Definición de Función porlab: linea 26
 porlab:
 #Este es el código generado por la linea 28 de la instrucción return
-t7 :=[] c1 4
-return t7
+t6 :=[] c1 4
+return t6

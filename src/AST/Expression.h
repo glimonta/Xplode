@@ -29,6 +29,8 @@ class Expression : public Node {
 
     virtual Quad * lval_generateTAC(GeneratorTAC *generator, SymTable *table) {}
 
+    virtual bool isvariable() { return false; }
+
 };
 
 #endif

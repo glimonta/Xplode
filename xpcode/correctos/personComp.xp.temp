@@ -5,10 +5,9 @@
 
 #Este es el código generado por la linea 37 de la instrucción if que termina en next_if_37_1
 #Este es el código generado por la linea 37 de la llamada a la función: anotherComp
-param personcomp
-param a
-param b
-t1 call anotherComp 3
+param_ref a  
+param_ref b  
+t1 call anotherComp 2
 ifnot t1 goto false_if_37_1
 
 #############################################################
@@ -17,10 +16,9 @@ ifnot t1 goto false_if_37_1
 
 #Este es el código generado por la linea 38 de la instrucción if que termina en next_if_38_1
 #Este es el código generado por la linea 38 de la llamada a la función: anotherComp
-param personcomp
-param a
-param c
-t2 call anotherComp 3
+param_ref a  
+param_ref c  
+t2 call anotherComp 2
 ifnot t2 goto false_if_38_1
 
 #############################################################
@@ -28,7 +26,7 @@ ifnot t2 goto false_if_38_1
 #############################################################
 
 #Este es el código generado por la linea 39 de la llamada a la función: printPerson
-param a
+param_ref a  
 t3 call printPerson 1
 goto next_if_38_1
 
@@ -38,7 +36,7 @@ goto next_if_38_1
 
 false_if_38_1:
 #Este es el código generado por la linea 41 de la llamada a la función: printPerson
-param c
+param_ref c  
 t4 call printPerson 1
 
 #############################################################
@@ -55,10 +53,9 @@ goto next_if_37_1
 false_if_37_1:
 #Este es el código generado por la linea 44 de la instrucción if que termina en next_if_44_1
 #Este es el código generado por la linea 44 de la llamada a la función: anotherComp
-param personcomp
-param b
-param c
-t5 call anotherComp 3
+param_ref b  
+param_ref c  
+t5 call anotherComp 2
 ifnot t5 goto false_if_44_1
 
 #############################################################
@@ -66,7 +63,7 @@ ifnot t5 goto false_if_44_1
 #############################################################
 
 #Este es el código generado por la linea 45 de la llamada a la función: printPerson
-param b
+param_ref b  
 t6 call printPerson 1
 goto next_if_44_1
 
@@ -76,7 +73,7 @@ goto next_if_44_1
 
 false_if_44_1:
 #Este es el código generado por la linea 47 de la llamada a la función: printPerson
-param c
+param_ref c  
 t7 call printPerson 1
 
 #############################################################
@@ -94,16 +91,16 @@ exit
 #Definición de Función printPerson: linea 10
 printPerson:
 write "Person Data is : "
-t8 :=[] p 10
+t8 :=[] p 12
 write t8
 write " "
 t9 :=[] p 0
 write t9
 write " "
-t10 :=[] p 14
+t10 :=[] p 16
 write t10
 write " "
-t11 :=[] p 18
+t11 :=[] p 20
 write t11
 
 #############################################################
@@ -113,11 +110,11 @@ write t11
 #Definición de Función readPerson: linea 15
 readPerson:
 read t12 2
-p 10 []:= t12
+p 12 []:= t12
 read t14 5
-p 14 []:= t14
+p 16 []:= t14
 read t16 5
-p 18 []:= t16
+p 20 []:= t16
 read t18 6
 p 0 []:= t18
 
@@ -128,8 +125,8 @@ p 0 []:= t18
 #Definición de Función personComp: linea 22
 personComp:
 #Este es el código generado por la linea 23 de la instrucción return
-t20 :=[] a 10
-t21 :=[] b 10
+t20 :=[] a 12
+t21 :=[] b 12
 t22 < t20 t21
 return t22
 
@@ -140,8 +137,8 @@ return t22
 #Definición de Función anotherComp: linea 28
 anotherComp:
 #Este es el código generado por la linea 29 de la instrucción return
-#Este es el código generado por la linea 29 de la llamada a la función: f
-param a
-param b
-t23 call f 2
+#Este es el código generado por la linea 29 de la llamada a la función: personComp
+param_ref a  
+param_ref b  
+t23 call personComp 2
 return t23

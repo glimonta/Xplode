@@ -212,6 +212,7 @@ class Variable : public Expression {
       std::list<Xplode::Token *>::iterator vnames;
       std::list<Xplode::Token *>::iterator vnamesaux;
       std::list<std::pair<int, Expression *> >::iterator indexes;
+
       vnames = varList->begin();
       vnamesaux = varList->begin();
       ++vnamesaux;
@@ -345,6 +346,8 @@ class Variable : public Expression {
       std::list<Xplode::Token *>::iterator vnames;
       std::list<Xplode::Token *>::iterator vnamesaux;
       std::list<std::pair<int, Expression *> >::iterator indexes;
+
+
       vnames = varList->begin();
       vnamesaux = varList->begin();
       ++vnamesaux;
@@ -381,6 +384,7 @@ class Variable : public Expression {
             res = mult->result;
 
             arg2 = indexes->second->generateTAC(generator, table);
+            ++indexes;
             result = generator->labelmaker->getLabel(TEMPORAL);
             AddQuad *add = new AddQuad(result, res, arg2);
             generator->gen(add);
@@ -388,6 +392,7 @@ class Variable : public Expression {
 
             type = type->ntype;
           }
+
 
           std::stringstream toString;
           toString << type->size;
@@ -441,6 +446,8 @@ class Variable : public Expression {
       // Ahorita solo se considera el caso donde está una variable sola.
       // No se han considerado ninguno de los casos especiales.
     }
+
+    bool isvariable() { return true; }
 };
 
 

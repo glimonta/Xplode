@@ -286,6 +286,17 @@ class ParamQuad : public Quad {
 
 };
 
+class ParamRefQuad : public Quad {
+  public:
+
+    ParamRefQuad(std::string r, std::string a1, std::string a2) : Quad("param_ref", r, a1, a2) {}
+
+    std::string toString() {
+      return getOp() + " " + getResult() + " " + getArg1() + " " + getArg2();
+    }
+
+};
+
 class FunctionCallReturn : public Quad {
   public:
 

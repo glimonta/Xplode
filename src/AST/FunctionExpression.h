@@ -7,7 +7,9 @@
 #include <cstdlib>
 #include <stdio.h>
 #include "Expression.h"
+#include "Variable.h"
 #include "../SymTable.h"
+#include "FunctionType.h"
 
 #ifndef X_FUNCTIONEXP
 #define X_FUNCTIONEXP
@@ -16,6 +18,7 @@ class FunctionExpression : public Expression {
   public:
     std::string fname;
     std::list<Expression *> *argList;
+    std::set<int> *reference;
 
     FunctionExpression(std::string n, std::list<Expression *> *a = 0){fname = n; argList = a; }
     void print(int tab){
@@ -48,7 +51,7 @@ class FunctionExpression : public Expression {
           if (params != --argList->end()) {
             str << ", ";
           }
-        }
+          }
         str << ")";
       }
       return str.str();
@@ -58,12 +61,58 @@ class FunctionExpression : public Expression {
       Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la llamada a la función: " + fname);
       generator->gen(comment);
 
+
+      FunctionType * fun = (FunctionType *) table->find(fname);
+      int i = 1;
+
       std::list<Expression *>::iterator params;
-      for (params = argList->begin(); params != argList->end(); ++params) {
-        std::string res = (*params)->generateTAC(generator, table);
-        ParamQuad *param = new ParamQuad(res);
-        generator->gen(param);
+      for (params = argList->begin(); params != argList->end(); ++params, ++i) {
+        if (reference && reference->count(i) != 0 ) {
+          if ((*params)->ntype->isarray()) {
+            Variable * v = (Variable *) *params;
+            comment = new Comment("Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector");
+            generator->gen(comment);
+
+            TypeDeclaration * type = v->ntype;
+            ArrayType * array = (ArrayType *) v->ntype;
+            std::vector<int> * dims = array->findDimensions();
+            std::stringstream str;
+            str << dims->size();
+            // Número de dimensiones
+            ParamQuad * param = new ParamQuad(str.str());
+            generator->gen(param);
+
+            for (int j = 0; j < dims->size(); ++j) {
+              std::stringstream str;
+              str << type->ntype->size;
+              // Tamaño de un elemento del arreglo
+              ParamQuad * param = new ParamQuad(str.str());
+              generator->gen(param);
+
+              std::stringstream str2;
+              str2 << (*dims)[i];
+              // Dimensión del arreglo
+              param = new ParamQuad(str2.str());
+              generator->gen(param);
+
+              type = type->ntype;
+            }
+
+            Quad * res_instr = (*params)->lval_generateTAC(generator, table);
+            ParamRefQuad *param_ref = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
+            generator->gen(param_ref);
+          } else {
+            Quad * res_instr = (*params)->lval_generateTAC(generator, table);
+            ParamRefQuad *param = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
+            generator->gen(param);
+          }
+        } else {
+          std::string res = (*params)->generateTAC(generator, table);
+          ParamQuad *param = new ParamQuad(res);
+          generator->gen(param);
+        }
       }
+
 
       std::string result = generator->labelmaker->getLabel(TEMPORAL);
       std::stringstream str;

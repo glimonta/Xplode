@@ -12,7 +12,7 @@ p 20 []:= t5
 read t7 6
 p 0 []:= t7
 #Este es el código generado por la linea 21 de la llamada a la función: print
-param p
+param_ref p  
 t9 call print 1
 exit
 

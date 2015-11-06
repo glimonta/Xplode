@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <stdio.h>
+#include <set>
 #include "Node.h"
 #include "TypeDeclaration.h"
 #include "../Token.h"
@@ -121,6 +122,23 @@ class TupleType : public TypeDeclaration {
         if (att == (*namesit))
           return (*typesit);
       }
+    }
+
+    std::set<int> *byReference(SymTable *table) {
+      std::list<std::string>::iterator name;
+      std::set<int> *argsByRef = new std::set<int>();
+      int i = 1;
+
+
+      for(name = names->begin(); name != names->end(); ++name) {
+        Symbol *s = table->find(*name);
+        if (s->isByReference()) {
+          argsByRef->insert(i);
+        }
+        ++i;
+      }
+
+      return argsByRef;
     }
 
 };

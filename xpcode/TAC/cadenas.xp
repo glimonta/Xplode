@@ -7,15 +7,15 @@ bool tieneLab;
 
 }
 
-proc bool esMejorCadena(cadena, cadena);
+//proc bool esMejorCadena(cadena, cadena);
 
-
-function bool comparar_cadenas(var cadena c1, var cadena c2, var esMejorCadena f){
-
-  return f(c1, c2);
-
-
-}
+// Cambié esto porque yo no acepto funciones pasadas como parámetros
+//function bool comparar_cadenas(var cadena c1, var cadena c2, var esMejorCadena f){
+//
+//  return f(c1, c2);
+//
+//
+//}
 
 function bool porcodigo(var cadena c1, var cadena c2){
 
@@ -35,8 +35,8 @@ begin
 let cadena lenguajes, bases, diseno;
 
 
-  write(comparar_cadenas(lenguajes, bases, porcodigo));
-  write(comparar_cadenas(lenguajes, diseno, porlab));
+  write(porcodigo(lenguajes, bases));
+  write(porlab(lenguajes, diseno));
 
 
 end

@@ -25,8 +25,8 @@ function bool personComp(var person a, var person b){
 
 proc bool compare(person,person);
 
-function bool anotherComp(var compare f, var person a, var person b){
-  return f(a,b);
+function bool anotherComp(var person a, var person b){
+  return personComp(a,b);
 }
 
 
@@ -34,14 +34,14 @@ begin
   let person a;
   let person b;
   let person c;
-  if(anotherComp(personComp,a,b)){
-    if(anotherComp(personComp,a,c)){
+  if(anotherComp(a,b)){
+    if(anotherComp(a,c)){
       printPerson(a);
     } else {
       printPerson(c);
     };
   } else {
-    if(anotherComp(personComp,b,c)){
+    if(anotherComp(b,c)){
       printPerson(b);
     } else {
       printPerson(c);

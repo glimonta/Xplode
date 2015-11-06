@@ -67,6 +67,8 @@ class Symbol {
 
     std::string getname() {return name;}
 
+    bool isByReference() { return porref; }
+
 };
 
 #endif

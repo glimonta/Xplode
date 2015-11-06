@@ -88,6 +88,7 @@
 	std::stack<SymTable *> pila;
 	int inBlock = 0;
 	bool inFunction = false;
+        bool argument_table = false;
 	FunctionType *actualfun;
 	std::string name;
 }
@@ -408,11 +409,12 @@ declared_function
         name = $2->value;
         TupleType *t = (TupleType *) $4;
         FunctionType *f = new FunctionType($1,$4,t->extend);
+        f->byReference(actual);
         actualfun = f;
         $$ = f;
         root->insert(f->toSymbol($2), NO_SAVE_SIZE);
         inFunction = true;
-
+        argument_table = true;
 
 
     }
@@ -619,7 +621,8 @@ init_block
 
     SymTable *aux = new SymTable();
     aux->setFather(actual);
-    aux->totaloffset = (actual==root)?0:actual->totaloffset;
+    aux->totaloffset = ((actual==root)|| (argument_table))?0:actual->totaloffset;
+    argument_table = false;
     actual = aux;
     pila.push(actual);
   }
@@ -1553,10 +1556,13 @@ function
           TupleType *t = (TupleType *) f->arguments;
           std::list<Expression *>::iterator it = $3->begin();
           std::list< std::pair<TypeDeclaration*, int>* >::iterator it2;
+          int cont_param=1;
 
-          for(it2=t->types->begin();it2!=t->types->end();++it2){
+          for(it2=t->types->begin();it2!=t->types->end();++it2, ++cont_param){
 
             if(it==$3->end()) break;
+
+            if((f->reference) &&(f->reference->count(cont_param)>0)&& (!(*it)->isvariable())) errorlog->addError(0,0,0, NULL);
 
             if((*it)->ntype->isarray()){
 
@@ -1614,7 +1620,10 @@ function
 
       }
 
-      $$ = new FunctionExpression($1->value,$3);
+      FunctionExpression *fun = new FunctionExpression($1->value,$3);
+      fun->reference = f->reference;
+
+      $$ = fun;
 
       $$->ntype = tp;
       $$->line = $1->line;

@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <stdio.h>
+#include <set>
 #include "Node.h"
 #include "TypeDeclaration.h"
 
@@ -19,6 +20,7 @@ class FunctionType : public TypeDeclaration {
   public:
 
     TypeDeclaration *returnType, *arguments, *extend;
+    std::set<int> * reference;
     
     FunctionType(Node *ret, Node *args,Node *e) {
 
@@ -50,6 +52,10 @@ class FunctionType : public TypeDeclaration {
      }
     }
 
+    void *byReference(SymTable *table) {
+      TupleType *args = (TupleType *) arguments;
+      reference = args->byReference(table);
+    }
 
 };
 

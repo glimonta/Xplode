@@ -3,12 +3,11 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 13 de la instrucción x := op(suma, 2, 3)
-#Este es el código generado por la linea 13 de la llamada a la función: op
-param suma
+#Este es el código generado por la linea 12 de la instrucción x := op(2, 3)
+#Este es el código generado por la linea 12 de la llamada a la función: op
 param 2
 param 3
-t1 call op 3
+t1 call op 2
 x := t1
 exit
 
@@ -16,9 +15,9 @@ exit
 #B2
 #############################################################
 
-#Definición de Función suma: linea 5
+#Definición de Función suma: linea 4
 suma:
-#Este es el código generado por la linea 5 de la instrucción return
+#Este es el código generado por la linea 4 de la instrucción return
 t2 + x y
 return t2
 
@@ -26,11 +25,11 @@ return t2
 #B3
 #############################################################
 
-#Definición de Función op: linea 7
+#Definición de Función op: linea 6
 op:
-#Este es el código generado por la linea 7 de la instrucción return
-#Este es el código generado por la linea 7 de la llamada a la función: f
+#Este es el código generado por la linea 6 de la instrucción return
+#Este es el código generado por la linea 6 de la llamada a la función: suma
 param x
 param y
-t3 call f 2
+t3 call suma 2
 return t3

@@ -37,9 +37,8 @@ goto end_for_26_1
 
 mid1:
 #Este es el código generado por la linea 27 de la llamada a la función: readPerson
-t3 * i 22
-t4 :=[] p t3
-param t4
+t3 * i 24
+param_ref p t3 
 t5 call readPerson 1
 goto begin_for_26_1
 
@@ -82,9 +81,8 @@ goto end_for_29_1
 
 mid2:
 #Este es el código generado por la linea 30 de la llamada a la función: printPerson
-t8 * i 22
-t9 :=[] p t8
-param t9
+t8 * i 24
+param_ref p t8 
 t10 call printPerson 1
 goto begin_for_29_1
 
@@ -94,8 +92,8 @@ goto begin_for_29_1
 
 end_for_29_1:
 #Este es el código generado por la linea 33 de la instrucción i := p[7].id
-t11 * 7 22
-t12 + t11 10
+t11 * 7 24
+t12 + t11 12
 t13 :=[] p t12
 i := t13
 exit
@@ -107,16 +105,16 @@ exit
 #Definición de Función printPerson: linea 10
 printPerson:
 write "Person Data is : "
-t14 :=[] p 10
+t14 :=[] p 12
 write t14
 write " "
 t15 :=[] p 0
 write t15
 write " "
-t16 :=[] p 14
+t16 :=[] p 16
 write t16
 write " "
-t17 :=[] p 18
+t17 :=[] p 20
 write t17
 
 #############################################################
@@ -126,10 +124,10 @@ write t17
 #Definición de Función readPerson: linea 15
 readPerson:
 read t18 2
-p 10 []:= t18
+p 12 []:= t18
 read t20 5
-p 14 []:= t20
+p 16 []:= t20
 read t22 5
-p 18 []:= t22
+p 20 []:= t22
 read t24 6
 p 0 []:= t24
