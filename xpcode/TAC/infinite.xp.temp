@@ -36,19 +36,19 @@ goto next_while_18_1
 
 next_if_23_1:
 #Este es el código generado por la linea 24 de la llamada a la función: prom
-t8 * 0 4
+t8 * 4 4
 t9 :=[] a t8
 param t9
-t10 * 1 4
+t10 * 3 4
 t11 :=[] a t10
 param t11
 t12 * 2 4
 t13 :=[] a t12
 param t13
-t14 * 3 4
+t14 * 1 4
 t15 :=[] a t14
 param t15
-t16 * 4 4
+t16 * 0 4
 t17 :=[] a t16
 param t17
 t18 call prom 5

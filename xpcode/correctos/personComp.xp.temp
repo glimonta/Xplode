@@ -5,8 +5,8 @@
 
 #Este es el código generado por la linea 37 de la instrucción if que termina en next_if_37_1
 #Este es el código generado por la linea 37 de la llamada a la función: anotherComp
-param_ref a  
 param_ref b  
+param_ref a  
 t1 call anotherComp 2
 ifnot t1 goto false_if_37_1
 
@@ -16,8 +16,8 @@ ifnot t1 goto false_if_37_1
 
 #Este es el código generado por la linea 38 de la instrucción if que termina en next_if_38_1
 #Este es el código generado por la linea 38 de la llamada a la función: anotherComp
-param_ref a  
 param_ref c  
+param_ref a  
 t2 call anotherComp 2
 ifnot t2 goto false_if_38_1
 
@@ -53,8 +53,8 @@ goto next_if_37_1
 false_if_37_1:
 #Este es el código generado por la linea 44 de la instrucción if que termina en next_if_44_1
 #Este es el código generado por la linea 44 de la llamada a la función: anotherComp
-param_ref b  
 param_ref c  
+param_ref b  
 t5 call anotherComp 2
 ifnot t5 goto false_if_44_1
 
@@ -138,7 +138,7 @@ return t22
 anotherComp:
 #Este es el código generado por la linea 29 de la instrucción return
 #Este es el código generado por la linea 29 de la llamada a la función: personComp
-param_ref a  
 param_ref b  
+param_ref a  
 t23 call personComp 2
 return t23

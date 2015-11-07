@@ -5,8 +5,8 @@
 
 #Este es el código generado por la linea 12 de la instrucción x := op(2, 3)
 #Este es el código generado por la linea 12 de la llamada a la función: op
-param 2
 param 3
+param 2
 t1 call op 2
 x := t1
 exit
@@ -29,7 +29,7 @@ return t2
 op:
 #Este es el código generado por la linea 6 de la instrucción return
 #Este es el código generado por la linea 6 de la llamada a la función: suma
-param x
 param y
+param x
 t3 call suma 2
 return t3

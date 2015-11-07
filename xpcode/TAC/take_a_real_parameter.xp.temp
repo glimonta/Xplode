@@ -6,11 +6,9 @@
 #Este es el código generado por la linea 30 de la llamada a la función: wtf_this_parameters
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param 3
-param 16
-param 2
-param 8
-param 2
 param 4
+param 2
+param 2
 param 2
 t1 + 8 0
 t2 :=[] yo 0
@@ -22,7 +20,15 @@ param_ref yo t6
 t8 + 8 128
 t9 :=[] yo t8
 param t9
-t10 call wtf_this_parameters 2
+t10 + 8 0
+t11 :=[] yo 0
+t12 * t11 2
+t13 + t12 1
+t14 * t13 32
+t15 + t14 t10
+t16 :=[] yo t15
+param t16
+t17 call wtf_this_parameters 2
 exit
 
 #############################################################

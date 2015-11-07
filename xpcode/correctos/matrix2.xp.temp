@@ -6,26 +6,24 @@
 #Este es el código generado por la linea 31 de la llamada a la función: readMat
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param 3
-param 400
-param 10
-param 40
-param 10
 param 4
+param 10
+param 10
 param 10
 param_ref mat  
 param 10
+param mat
 t1 call readMat 2
 #Este es el código generado por la linea 32 de la llamada a la función: printMat
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param 3
-param 400
-param 10
-param 40
-param 10
 param 4
+param 10
+param 10
 param 10
 param_ref mat  
 param 10
+param mat
 t2 call printMat 2
 exit
 
