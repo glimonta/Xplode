@@ -12,8 +12,8 @@ t6 :=[] mat t5
 write t6
 #Este es el código generado por la linea 37 de la llamada a la función: readMat
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
-param 3
 param 4
+param 3
 param 10
 param 10
 param 10
@@ -23,8 +23,8 @@ param mat
 t7 call readMat 2
 #Este es el código generado por la linea 38 de la llamada a la función: printMat
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
-param 3
 param 4
+param 3
 param 10
 param 10
 param 10
@@ -140,12 +140,19 @@ goto end_for_9_1
 
 mid3:
 read t15 2
-t16 * i -1
-t17 + t16 j
-t18 * t17 -1
-t19 + t18 k
-t20 * t19 4
-m t20 []:= t15
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t16 + bp 20
+=* t17 t16
+t18 * i t17
+t19 + t18 j
+t20 + bp 24
+=* t21 t20
+t22 * t19 t21
+t23 + t22 k
+t24 + bp 8
+=* t25 t24
+t26 * t23 t25
+m t26 []:= t15
 goto begin_for_9_1
 
 #############################################################
@@ -180,16 +187,16 @@ goto first_for_20_1
 
 begin_for_20_1:
 #Este es el código generado por la linea 20 de la instrucción i := i + 1
-t22 + i 1
-i := t22
+t28 + i 1
+i := t28
 
 #############################################################
 #B19
 #############################################################
 
 first_for_20_1:
-t23 < i s
-if t23 goto mid4
+t29 < i s
+if t29 goto mid4
 
 #############################################################
 #B20
@@ -213,16 +220,16 @@ goto first_for_21_1
 
 begin_for_21_1:
 #Este es el código generado por la linea 21 de la instrucción j := j + 1
-t24 + j 1
-j := t24
+t30 + j 1
+j := t30
 
 #############################################################
 #B23
 #############################################################
 
 first_for_21_1:
-t25 < j s
-if t25 goto mid5
+t31 < j s
+if t31 goto mid5
 
 #############################################################
 #B24
@@ -246,16 +253,16 @@ goto first_for_22_1
 
 begin_for_22_1:
 #Este es el código generado por la linea 22 de la instrucción k := k + 1
-t26 + k 1
-k := t26
+t32 + k 1
+k := t32
 
 #############################################################
 #B27
 #############################################################
 
 first_for_22_1:
-t27 < k s
-if t27 goto mid6
+t33 < k s
+if t33 goto mid6
 
 #############################################################
 #B28
@@ -268,13 +275,20 @@ goto end_for_22_1
 #############################################################
 
 mid6:
-t28 * i -1
-t29 + t28 j
-t30 * t29 -1
-t31 + t30 k
-t32 * t31 4
-t33 :=[] m t32
-write t33
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t34 + bp 20
+=* t35 t34
+t36 * i t35
+t37 + t36 j
+t38 + bp 24
+=* t39 t38
+t40 * t37 t39
+t41 + t40 k
+t42 + bp 8
+=* t43 t42
+t44 * t41 t43
+t45 :=[] m t44
+write t45
 goto begin_for_22_1
 
 #############################################################

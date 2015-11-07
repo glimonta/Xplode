@@ -228,50 +228,121 @@ class Variable : public Expression {
 
           if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
 
-          ArrayType* array = (ArrayType *) type;
-          std::vector<int>* dimensions = array->findDimensions();
+          if (base->isByReference()) {
+            Comment * comment = new Comment ("Aquí va el acceso a un arreglo que es por referencia ==> dope vector");
+            generator->gen(comment);
 
-          std::string res_fin = res;
+            ArrayType* array = (ArrayType *) type;
+            std::vector<int>* dimensions = array->findDimensions();
 
-          res = indexes->second->generateTAC(generator, table);
-          ++indexes;
-          type = array->ntype;
+            std::string res_fin = res;
 
-          for (int i=1; i<dimensions->size(); ++i) {
+            res = indexes->second->generateTAC(generator, table);
+            ++indexes;
+            type = array->ntype;
 
-            if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+            // Esto va a estar en el dope vector
+            // bp + 4 (return address) + 4 (tamaño de un elemento) + 4 (numero dimensiones) + 4 * num_dims + 4 (offset de los datos)
+            int offset_tam = 8; // return address + tamaño elemento
+            int offset_num_dims = 12; // return address + tamaño elemento + numero dimensiones
+            int offset_datos = offset_num_dims;
+            for (int i = 1; i < dimensions->size(); ++i) offset_datos += 4; // por cada dimension sumo 4
+            offset_datos += 4; // Desplazamiento final para donde están los datos (dirección)
+
+
+            for (int i=1; i<dimensions->size(); ++i) {
+
+              if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+
+              std::stringstream toString;
+              toString << offset_num_dims + 4 + (4 * i); // El primer 4 es por la primera dimension que no se usa
+              std::string arg2 = toString.str();
+              AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", arg2);
+              generator->gen(add);
+              std::string dimension = generator->labelmaker->getLabel(TEMPORAL);
+              DerefQuad * deref = new DerefQuad(dimension, add->getResult());
+              generator->gen(deref);
+              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              MulQuad *mult = new MulQuad(result, res, deref->getResult());
+              generator->gen(mult);
+              res = mult->result;
+
+              arg2 = indexes->second->generateTAC(generator, table);
+              ++indexes;
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              add = new AddQuad(result, res, arg2);
+              generator->gen(add);
+              res = add->result;
+
+              type = type->ntype;
+            }
 
             std::stringstream toString;
-            toString << (*dimensions)[i];
-            std::string arg2 = toString.str();
+            toString << offset_tam;
+            std::string size = toString.str();
+            AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", size);
+            generator->gen(add);
+            DerefQuad * deref = new DerefQuad(generator->labelmaker->getLabel(TEMPORAL), add->getResult());
+            generator->gen(deref);
             std::string result = generator->labelmaker->getLabel(TEMPORAL);
-            MulQuad *mult = new MulQuad(result, res, arg2);
+            MulQuad * mult = new MulQuad(result, res, deref->getResult());
             generator->gen(mult);
             res = mult->result;
 
-            arg2 = indexes->second->generateTAC(generator, table);
+            if (EMPTY_LABEL != res_fin) {
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              AddQuad * add = new AddQuad(result, res, res_fin);
+              generator->gen(add);
+              res = add->result;
+            }
+
+          } else {
+
+            ArrayType* array = (ArrayType *) type;
+            std::vector<int>* dimensions = array->findDimensions();
+
+            std::string res_fin = res;
+
+            res = indexes->second->generateTAC(generator, table);
             ++indexes;
-            result = generator->labelmaker->getLabel(TEMPORAL);
-            AddQuad *add = new AddQuad(result, res, arg2);
-            generator->gen(add);
-            res = add->result;
+            type = array->ntype;
 
-            type = type->ntype;
-          }
+            for (int i=1; i<dimensions->size(); ++i) {
 
-          std::stringstream toString;
-          toString << type->size;
-          std::string size = toString.str();
-          std::string result = generator->labelmaker->getLabel(TEMPORAL);
-          MulQuad * mult = new MulQuad(result, res, size);
-          generator->gen(mult);
-          res = mult->result;
+              if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
 
-          if (EMPTY_LABEL != res_fin) {
-            result = generator->labelmaker->getLabel(TEMPORAL);
-            AddQuad * add = new AddQuad(result, res, res_fin);
-            generator->gen(add);
-            res = add->result;
+              std::stringstream toString;
+              toString << (*dimensions)[i];
+              std::string arg2 = toString.str();
+              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              MulQuad *mult = new MulQuad(result, res, arg2);
+              generator->gen(mult);
+              res = mult->result;
+
+              arg2 = indexes->second->generateTAC(generator, table);
+              ++indexes;
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              AddQuad *add = new AddQuad(result, res, arg2);
+              generator->gen(add);
+              res = add->result;
+
+              type = type->ntype;
+            }
+
+            std::stringstream toString;
+            toString << type->size;
+            std::string size = toString.str();
+            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            MulQuad * mult = new MulQuad(result, res, size);
+            generator->gen(mult);
+            res = mult->result;
+
+            if (EMPTY_LABEL != res_fin) {
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              AddQuad * add = new AddQuad(result, res, res_fin);
+              generator->gen(add);
+              res = add->result;
+            }
           }
         } else if (type->haveattributes()) {
           ++vnames;
@@ -363,50 +434,120 @@ class Variable : public Expression {
 
           if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
 
-          ArrayType* array = (ArrayType *) type;
-          std::vector<int>* dimensions = array->findDimensions();
+          if (base->isByReference()) {
+            Comment * comment = new Comment ("Aquí va el acceso a un arreglo que es por referencia ==> dope vector");
+            generator->gen(comment);
 
-          std::string res_fin = res;
+            ArrayType* array = (ArrayType *) type;
+            std::vector<int>* dimensions = array->findDimensions();
 
-          res = indexes->second->generateTAC(generator, table);
-          ++indexes;
-          type = array->ntype;
+            std::string res_fin = res;
 
-          for (int i=1; i<dimensions->size(); ++i) {
-            if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+            res = indexes->second->generateTAC(generator, table);
+            ++indexes;
+            type = array->ntype;
+
+            // Esto va a estar en el dope vector
+            // bp + 4 (return address) + 4 (tamaño de un elemento) + 4 (numero dimensiones) + 4 * num_dims + 4 (offset de los datos)
+            int offset_tam = 8; // return address + tamaño elemento
+            int offset_num_dims = 12; // return address + tamaño elemento + numero dimensiones
+            int offset_datos = offset_num_dims;
+            for (int i = 1; i < dimensions->size(); ++i) offset_datos += 4; // por cada dimension sumo 4
+            offset_datos += 4; // Desplazamiento final para donde están los datos (dirección)
+
+            for (int i=1; i<dimensions->size(); ++i) {
+              if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+
+              std::stringstream toString;
+              toString << offset_num_dims + 4 + (4 * i); // El primer 4 es por la primera dimension que no se usa
+              std::string arg2 = toString.str();
+              AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", arg2);
+              generator->gen(add);
+              std::string dimension = generator->labelmaker->getLabel(TEMPORAL);
+              DerefQuad * deref = new DerefQuad(dimension, add->getResult());
+              generator->gen(deref);
+              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              MulQuad *mult = new MulQuad(result, res, deref->getResult());
+              generator->gen(mult);
+              res = mult->result;
+
+              arg2 = indexes->second->generateTAC(generator, table);
+              ++indexes;
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              add = new AddQuad(result, res, arg2);
+              generator->gen(add);
+              res = add->result;
+
+              type = type->ntype;
+            }
+
 
             std::stringstream toString;
-            toString << (*dimensions)[i];
-            std::string arg2 = toString.str();
+            toString << offset_tam;
+            std::string size = toString.str();
+            AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", size);
+            generator->gen(add);
+            DerefQuad * deref = new DerefQuad(generator->labelmaker->getLabel(TEMPORAL), add->getResult());
+            generator->gen(deref);
             std::string result = generator->labelmaker->getLabel(TEMPORAL);
-            MulQuad *mult = new MulQuad(result, res, arg2);
+            MulQuad * mult = new MulQuad(result, res, deref->getResult());
             generator->gen(mult);
             res = mult->result;
 
-            arg2 = indexes->second->generateTAC(generator, table);
+            if (EMPTY_LABEL != res_fin) {
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              AddQuad * add = new AddQuad(result, res, res_fin);
+              generator->gen(add);
+              res = add->result;
+            }
+
+          } else {
+
+            ArrayType* array = (ArrayType *) type;
+            std::vector<int>* dimensions = array->findDimensions();
+
+            std::string res_fin = res;
+
+            res = indexes->second->generateTAC(generator, table);
             ++indexes;
-            result = generator->labelmaker->getLabel(TEMPORAL);
-            AddQuad *add = new AddQuad(result, res, arg2);
-            generator->gen(add);
-            res = add->result;
+            type = array->ntype;
 
-            type = type->ntype;
-          }
+            for (int i=1; i<dimensions->size(); ++i) {
+              if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
+
+              std::stringstream toString;
+              toString << (*dimensions)[i];
+              std::string arg2 = toString.str();
+              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              MulQuad *mult = new MulQuad(result, res, arg2);
+              generator->gen(mult);
+              res = mult->result;
+
+              arg2 = indexes->second->generateTAC(generator, table);
+              ++indexes;
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              AddQuad *add = new AddQuad(result, res, arg2);
+              generator->gen(add);
+              res = add->result;
+
+              type = type->ntype;
+            }
 
 
-          std::stringstream toString;
-          toString << type->size;
-          std::string size = toString.str();
-          std::string result = generator->labelmaker->getLabel(TEMPORAL);
-          MulQuad * mult = new MulQuad(result, res, size);
-          generator->gen(mult);
-          res = mult->result;
+            std::stringstream toString;
+            toString << type->size;
+            std::string size = toString.str();
+            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            MulQuad * mult = new MulQuad(result, res, size);
+            generator->gen(mult);
+            res = mult->result;
 
-          if (EMPTY_LABEL != res_fin) {
-            result = generator->labelmaker->getLabel(TEMPORAL);
-            AddQuad * add = new AddQuad(result, res, res_fin);
-            generator->gen(add);
-            res = add->result;
+            if (EMPTY_LABEL != res_fin) {
+              result = generator->labelmaker->getLabel(TEMPORAL);
+              AddQuad * add = new AddQuad(result, res, res_fin);
+              generator->gen(add);
+              res = add->result;
+            }
           }
         } else if (type->haveattributes()) {
           ++vnames;

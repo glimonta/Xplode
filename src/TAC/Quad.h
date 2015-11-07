@@ -407,4 +407,26 @@ class ExitQuad : public Quad {
 
 };
 
+class DerefQuad : public Quad {
+  public:
+
+    DerefQuad(std::string r, std::string a1) : Quad("=*", r, a1, "") {}
+
+    std::string toString() {
+      return getOp() + " " + getResult() + " " + getArg1();
+    }
+
+};
+
+class RefQuad : public Quad {
+  public:
+
+    RefQuad(std::string r, std::string a1) : Quad("*=", r, a1, "") {}
+
+    std::string toString() {
+      return getOp() + " " + getResult() + " " + getArg1();
+    }
+
+};
+
 #endif

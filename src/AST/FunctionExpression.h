@@ -79,18 +79,19 @@ class FunctionExpression : public Expression {
           TypeDeclaration * base_type = v->ntype;
           ArrayType * array = (ArrayType *) v->ntype;
           std::vector<int> * dims = array->findDimensions();
-          std::stringstream size_dims;
-          size_dims << dims->size();
-          // Número de dimensiones
-          ParamQuad * param = new ParamQuad(size_dims.str());
-          generator->gen(param);
 
           for (int j = 0; j < dims->size(); ++j) base_type = base_type->ntype;
 
           std::stringstream basetype;
           basetype << base_type->size;
           // Tamaño de un elemento del arreglo
-          param = new ParamQuad(basetype.str());
+          ParamQuad * param = new ParamQuad(basetype.str());
+          generator->gen(param);
+
+          std::stringstream size_dims;
+          size_dims << dims->size();
+          // Número de dimensiones
+          param = new ParamQuad(size_dims.str());
           generator->gen(param);
 
           for (int j = 0; j < dims->size(); ++j) {
