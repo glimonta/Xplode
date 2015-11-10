@@ -139,15 +139,15 @@ goto end_for_9_1
 mid3:
 read t15 2
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t16 + bp 20
+t16 + bp 24
 =* t17 t16
 t18 * i t17
 t19 + t18 j
-t20 + bp 24
+t20 + bp 28
 =* t21 t20
 t22 * t19 t21
 t23 + t22 k
-t24 + bp 8
+t24 + bp 12
 =* t25 t24
 t26 * t23 t25
 m t26 []:= t15

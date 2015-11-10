@@ -146,15 +146,15 @@ t20 :=[] m t19
 write t20
 read t21 2
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t22 + bp 20
+t22 + bp 24
 =* t23 t22
 t24 * i t23
 t25 + t24 j
-t26 + bp 24
+t26 + bp 28
 =* t27 t26
 t28 * t25 t27
 t29 + t28 k
-t30 + bp 8
+t30 + bp 12
 =* t31 t30
 t32 * t29 t31
 m t32 []:= t21
