@@ -12,25 +12,23 @@ t6 :=[] mat t5
 write t6
 #Este es el código generado por la linea 37 de la llamada a la función: readMat
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
-param 4
-param 3
-param 10
-param 10
-param 10
 param_ref mat  
 param 10
-param mat
+param 10
+param 10
+param 3
+param 4
+param 10
 t7 call readMat 2
 #Este es el código generado por la linea 38 de la llamada a la función: printMat
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
-param 4
-param 3
-param 10
-param 10
-param 10
 param_ref mat  
 param 10
-param mat
+param 10
+param 10
+param 3
+param 4
+param 10
 t8 call printMat 2
 exit
 
@@ -276,15 +274,15 @@ goto end_for_22_1
 
 mid6:
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t34 + bp 20
+t34 + bp 24
 =* t35 t34
 t36 * i t35
 t37 + t36 j
-t38 + bp 24
+t38 + bp 28
 =* t39 t38
 t40 * t37 t39
 t41 + t40 k
-t42 + bp 8
+t42 + bp 12
 =* t43 t42
 t44 * t41 t43
 t45 :=[] m t44

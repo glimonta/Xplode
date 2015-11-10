@@ -3,13 +3,8 @@
 #B1
 #############################################################
 
-#Este es el código generado por la linea 30 de la llamada a la función: wtf_this_parameters
+#Este es el código generado por la linea 32 de la llamada a la función: wtf_this_parameters
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
-param 4
-param 3
-param 2
-param 2
-param 2
 t1 + 8 0
 t2 :=[] yo 0
 t3 * t2 2
@@ -17,18 +12,28 @@ t4 + t3 1
 t5 * t4 32
 t6 + t5 t1
 param_ref yo t6 
-t8 + 8 128
-t9 :=[] yo t8
-param t9
-t10 + 8 0
-t11 :=[] yo 0
-t12 * t11 2
-t13 + t12 1
-t14 * t13 32
-t15 + t14 t10
+param 2
+param 2
+param 2
+param 3
+param 4
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+t8 + 8 0
+t9 :=[] yo 0
+t10 * t9 2
+t11 + t10 1
+t12 * t11 32
+t13 + t12 t8
+param_ref yo t13 
+param 2
+param 2
+param 2
+param 3
+param 4
+t15 + 8 128
 t16 :=[] yo t15
 param t16
-t17 call wtf_this_parameters 2
+t17 call wtf_this_parameters 3
 exit
 
 #############################################################
@@ -37,4 +42,32 @@ exit
 
 #Definición de Función wtf_this_parameters: linea 3
 wtf_this_parameters:
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t18 + bp 24
+=* t19 t18
+t20 * 1 t19
+t21 + t20 1
+t22 + bp 28
+=* t23 t22
+t24 * t21 t23
+t25 + t24 1
+t26 + bp 12
+=* t27 t26
+t28 * t25 t27
+t29 :=[] par1 t28
+write t29
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t30 + bp 48
+=* t31 t30
+t32 * 1 t31
+t33 + t32 1
+t34 + bp 52
+=* t35 t34
+t36 * t33 t35
+t37 + t36 1
+t38 + bp 36
+=* t39 t38
+t40 * t37 t39
+t41 :=[] par3 t40
+write t41
 write "doing something!"

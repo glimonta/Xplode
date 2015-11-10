@@ -12,6 +12,8 @@
 #include "Block.h"
 #include "TypeDeclaration.h"
 #include "TupleType.h"
+#include "FunctionType.h"
+#include "ArrayType.h"
 #include "../Token.h"
 
 
@@ -91,7 +93,38 @@ class Function : public CompoundStatement {
       Label *function_label = new Label(fname);
       generator->gen(function_label);
 
-      block->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
+      FunctionType *ftype = (FunctionType *) ntype;
+      TupleType *args = (TupleType *) ftype->arguments;
+      int offset = 4; //Already included return address
+      std::list<std::string>::iterator itNames;
+      std::list<std::pair<TypeDeclaration*, int>*>::iterator itTypes = args->types->begin();
+
+      for(itNames = args->names->begin(); itNames != args->names->end(); ++itNames, ++itTypes) {
+        Symbol *arg = symtb->find(*itNames);
+        if (!(*itTypes)->first->isarray()) {
+          offset += 4;
+          arg->setArg(true);
+          arg->setOffsetStack(offset);
+        }
+      }
+
+      offset += 4;
+      itTypes = args->types->begin();
+
+      for(itNames = args->names->begin(); itNames != args->names->end(); ++itNames, ++itTypes) {
+        Symbol *arg = symtb->find(*itNames);
+        if ((*itTypes)->first->isarray()) {
+          ArrayType * array = (ArrayType *) (*itTypes)->first;
+          arg->setArg(true);
+          arg->setOffsetStack(offset);
+          offset += 8; // tamaño del elemento y numero de dimensiones
+          std::vector<int>* dimensions = array->findDimensions();
+          for (int i = 1; i < dimensions->size(); ++i) offset += 4; // por cada dimension sumo 4
+          offset += 8; // Desplazamiento final para donde están los datos (dirección) y uno más para que quede libre
+        }
+      }
+
+      block->generateTAC(generator, symtb, EMPTY_LABEL, EMPTY_LABEL);
 
     }
 

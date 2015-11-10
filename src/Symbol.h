@@ -37,6 +37,7 @@ class Symbol {
     int column;
     bool porref;
     bool isarg;
+    int offset_stack;
 
 
     /* define defined
@@ -68,6 +69,14 @@ class Symbol {
     std::string getname() {return name;}
 
     bool isByReference() { return porref; }
+
+    bool isArg() { return isarg; }
+
+    void setArg(bool a) { isarg = a; }
+
+    int getOffsetStack() { return offset_stack; }
+
+    void setOffsetStack(int ofs) { offset_stack = ofs; }
 
 };
 

@@ -243,8 +243,8 @@ class Variable : public Expression {
 
             // Esto va a estar en el dope vector
             // bp + 4 (return address) + 4 (tamaño de un elemento) + 4 (numero dimensiones) + 4 * num_dims + 4 (offset de los datos)
-            int offset_tam = 8; // return address + tamaño elemento
-            int offset_num_dims = 12; // return address + tamaño elemento + numero dimensiones
+            int offset_tam = base->getOffsetStack();
+            int offset_num_dims = offset_tam + 4;
             int offset_datos = offset_num_dims;
             for (int i = 1; i < dimensions->size(); ++i) offset_datos += 4; // por cada dimension sumo 4
             offset_datos += 4; // Desplazamiento final para donde están los datos (dirección)

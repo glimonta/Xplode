@@ -75,38 +75,41 @@ class FunctionExpression : public Expression {
           comment = new Comment("Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector");
           generator->gen(comment);
 
+          //Se empila primero la dirección del arreglo
+          Quad * res_instr = (*params)->lval_generateTAC(generator, table);
+          ParamRefQuad *param_ref = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
+          generator->gen(param_ref);
+
           TypeDeclaration * type = v->ntype;
           TypeDeclaration * base_type = v->ntype;
           ArrayType * array = (ArrayType *) v->ntype;
           std::vector<int> * dims = array->findDimensions();
 
-          for (int j = 0; j < dims->size(); ++j) base_type = base_type->ntype;
-
-          std::stringstream basetype;
-          basetype << base_type->size;
-          // Tamaño de un elemento del arreglo
-          ParamQuad * param = new ParamQuad(basetype.str());
-          generator->gen(param);
-
-          std::stringstream size_dims;
-          size_dims << dims->size();
-          // Número de dimensiones
-          param = new ParamQuad(size_dims.str());
-          generator->gen(param);
-
-          for (int j = 0; j < dims->size(); ++j) {
+          //Se empilan las dimensiones del arreglo de la ultima a la primera
+          for (int j = dims->size() - 1; j >= 0; --j) {
             std::stringstream dimension;
-            dimension << (*dims)[i];
+            dimension << (*dims)[j];
             // Dimensión del arreglo
-            param = new ParamQuad(dimension.str());
+            ParamQuad *param = new ParamQuad(dimension.str());
             generator->gen(param);
 
             type = type->ntype;
           }
 
-          Quad * res_instr = (*params)->lval_generateTAC(generator, table);
-          ParamRefQuad *param_ref = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
-          generator->gen(param_ref);
+          for (int j = 0; j < dims->size(); ++j) base_type = base_type->ntype;
+
+          std::stringstream size_dims;
+          size_dims << dims->size();
+          //Se empila el número de dimensiones
+          ParamQuad * param = new ParamQuad(size_dims.str());
+          generator->gen(param);
+
+          std::stringstream basetype;
+          basetype << base_type->size;
+          //Se empila el tamaño de un elemento del arreglo
+          param = new ParamQuad(basetype.str());
+          generator->gen(param);
+
         }
       }
 
@@ -114,10 +117,12 @@ class FunctionExpression : public Expression {
       --params;
       // Se empilan el resto de los parámetros de derecha a izquierda
       for (int i = argList->size(); i > 0; --params, --i) {
-        if (reference && reference->count(i) != 0 && !(*params)->ntype->isarray()) {
-          Quad * res_instr = (*params)->lval_generateTAC(generator, table);
-          ParamRefQuad *param = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
-          generator->gen(param);
+        if (reference && reference->count(i) != 0) {
+          if (!(*params)->ntype->isarray()) {
+            Quad * res_instr = (*params)->lval_generateTAC(generator, table);
+            ParamRefQuad *param = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
+            generator->gen(param);
+          }
         } else {
           std::string res = (*params)->generateTAC(generator, table);
           ParamQuad *param = new ParamQuad(res);

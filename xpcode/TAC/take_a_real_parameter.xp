@@ -1,6 +1,8 @@
 program
 
-function void wtf_this_parameters(var int[][][] par1, bool par2) {
+function void wtf_this_parameters(var int[][][] par1, bool par2, var int[][][] par3) {
+  write(par1[1][1][1]);
+  write(par3[1][1][1]);
   write("doing something!");
 }
 
@@ -27,7 +29,7 @@ begin
 let dummy yo;
 
 
-wtf_this_parameters(yo.elcaro.ahok[yo.tni][1], yo.elcaro.entero);
+wtf_this_parameters(yo.elcaro.ahok[yo.tni][1], yo.elcaro.entero, yo.elcaro.ahok[yo.tni][1]);
 //wtf_this_parameters();
 
 
