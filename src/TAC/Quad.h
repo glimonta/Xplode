@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <stdio.h>
+#include "../MIPS/MipsInstruction.h"
+#include "../MIPS/MipsArgument.h"
 
 #ifndef X_QUAD
 #define X_QUAD
@@ -42,6 +44,7 @@ class Quad {
     virtual std::string toString() {
       return getOp() + " " + getResult() + " " + getArg1() + " " + getArg2();
     }
+
 };
 
 class Comment : public Quad {
@@ -350,6 +353,12 @@ class WriteQuad : public Quad {
       return getOp() + " " + getResult();
     }
 
+    void generateMips(std::vector<MipsInstruction *> *instructions) {
+      instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResult())));
+      instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(4)));
+      instructions->push_back(new SyscallMips());
+    }
+
 };
 
 class ReadQuad : public Quad {
@@ -403,6 +412,11 @@ class ExitQuad : public Quad {
 
     std::string toString() {
       return getOp();
+    }
+
+    void generateMips(std::vector<MipsInstruction *> *instructions) {
+      instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(10)));
+      instructions->push_back(new SyscallMips());
     }
 
 };

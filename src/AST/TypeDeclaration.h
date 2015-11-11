@@ -69,6 +69,8 @@ class TypeDeclaration: public Node {
 
     bool haveattributes() {return ((this->numtype==TYPE_UNION) || ((this->numtype==TYPE_TYPE)));}
 
+    bool isstring() { return (this->numtype == TYPE_STRING); }
+
 };
 
 #endif

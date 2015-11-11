@@ -32,6 +32,11 @@ class Constant : public Expression {
     }
 
     std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+      if (ntype->isstring()) {
+        std::string id = generator->labelmaker->getLabel("string_" + getLineStr() + "_");
+        generator->addString(id, value);
+        return id;
+      }
       return toString(table);
     }
 

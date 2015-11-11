@@ -1,57 +1,64 @@
+string_7_1 : "Escriba el primer argumento:\n"
+string_7_2 : "Escriba el segundo argumento:\n"
+string_7_3 : "ack("
+string_7_4 : " , "
+string_7_5 : " )="
+string_7_6 : "\n"
 
-#############################################################
+##############################################################
 #B1
-#############################################################
+##############################################################
 
-write "Escriba el primer argumento:\n"
+
+write string_7_1
 read t1 2
 i := t1
-write "Escriba el segundo argumento:\n"
+write string_7_2
 read t2 2
 j := t2
-write "ack("
+write string_7_3
 write i
-write " , "
+write string_7_4
 write j
-write " )="
+write string_7_5
 #Este es el código generado por la linea 33 de la llamada a la función: ack
 param j
 param i
 t3 call ack 2
 write t3
-write "\n"
+write string_7_6
 exit
-
-#############################################################
+##############################################################
 #B2
-#############################################################
+##############################################################
+
 
 #Definición de Función ack: linea 3
 ack:
 #Este es el código generado por la linea 6 de la instrucción if que termina en next_if_6_1
 t4 == m 0
 ifnot t4 goto next_if_6_1
-
-#############################################################
+##############################################################
 #B3
-#############################################################
+##############################################################
+
 
 #Este es el código generado por la linea 8 de la instrucción return
 t5 + n 1
 return t5
-
-#############################################################
+##############################################################
 #B4
-#############################################################
+##############################################################
+
 
 next_if_6_1:
 #Este es el código generado por la linea 12 de la instrucción if que termina en next_if_12_1
 t6 == n 0
 ifnot t6 goto next_if_12_1
-
-#############################################################
+##############################################################
 #B5
-#############################################################
+##############################################################
+
 
 #Este es el código generado por la linea 14 de la instrucción return
 #Este es el código generado por la linea 14 de la llamada a la función: ack
@@ -60,10 +67,10 @@ t7 - m 1
 param t7
 t8 call ack 2
 return t8
-
-#############################################################
+##############################################################
 #B6
-#############################################################
+##############################################################
+
 
 next_if_12_1:
 #Este es el código generado por la linea 18 de la instrucción r1 := ack(m, n - 1)

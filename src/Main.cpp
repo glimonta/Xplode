@@ -10,6 +10,7 @@
 #include "TAC/LabelMaker.h"
 #include "TAC/Quad.h"
 #include "TAC/GeneratorTAC.h"
+#include "MIPS/GeneratorMIPS.h"
 
 
 int line = 1;
@@ -90,7 +91,14 @@ int main(int argc, char * argv[]) {
   GeneratorTAC *generator;
   generator = new GeneratorTAC(filename);
   program->generateTAC(generator, program->table);
+  generator->printToFile();
   generator->close();
+
+  GeneratorMIPS *mips_gen;
+  mips_gen = new GeneratorMIPS(filename);
+  mips_gen->create(generator);
+  mips_gen->printToFile();
+  mips_gen->close();
 
 }
 

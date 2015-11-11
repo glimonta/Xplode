@@ -1,46 +1,54 @@
+string_7_1 : "\n"
+string_7_2 : "\n"
+string_7_3 : "\n"
+string_7_4 : "\n"
+string_7_5 : "\n"
+string_7_6 : "\n"
+string_7_7 : "\n"
 
-#############################################################
+##############################################################
 #B1
-#############################################################
+##############################################################
+
 
 #Este es el código generado por la linea 32 de la instrucción i := 3
 i := 3
 write i
-write "\n"
+write string_7_1
 #Este es el código generado por la linea 35 de la llamada a la función: prueba
 param_ref i  
 t1 call prueba 1
 write i
-write "\n"
+write string_7_2
 exit
-
-#############################################################
+##############################################################
 #B2
-#############################################################
+##############################################################
+
 
 #Definición de Función prueba2: linea 3
 prueba2:
 write a
-write "\n"
+write string_7_3
 #Este es el código generado por la linea 7 de la instrucción a := 7
 a := 7
 write a
-write "\n"
-
-#############################################################
+write string_7_4
+##############################################################
 #B3
-#############################################################
+##############################################################
+
 
 #Definición de Función prueba: linea 15
 prueba:
 write b
-write "\n"
+write string_7_5
 #Este es el código generado por la linea 19 de la instrucción b := 5
 b := 5
 write b
-write "\n"
+write string_7_6
 #Este es el código generado por la linea 23 de la llamada a la función: prueba2
 param_ref b  
 t2 call prueba2 1
 write b
-write "\n"
+write string_7_7

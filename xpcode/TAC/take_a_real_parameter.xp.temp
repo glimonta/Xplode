@@ -1,7 +1,9 @@
+string_7_1 : "doing something!"
 
-#############################################################
+##############################################################
 #B1
-#############################################################
+##############################################################
+
 
 #Este es el código generado por la linea 32 de la llamada a la función: wtf_this_parameters
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
@@ -35,10 +37,10 @@ t16 :=[] yo t15
 param t16
 t17 call wtf_this_parameters 3
 exit
-
-#############################################################
+##############################################################
 #B2
-#############################################################
+##############################################################
+
 
 #Definición de Función wtf_this_parameters: linea 3
 wtf_this_parameters:
@@ -70,4 +72,4 @@ t38 + bp 36
 t40 * t37 t39
 t41 :=[] par3 t40
 write t41
-write "doing something!"
+write string_7_1
