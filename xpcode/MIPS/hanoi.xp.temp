@@ -1,0 +1,62 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Escriba el numero de platos iniciales, que se moveran del plato 1 al 2\n"
+read t1 2
+j := t1
+#Este es el código generado por la linea 30 de la llamada a la función: hanoi
+param 3
+param 2
+param 1
+param j
+t2 call hanoi 4
+exit
+
+#############################################################
+#B2
+#############################################################
+
+#Definición de Función hanoi: linea 3
+hanoi:
+#Este es el código generado por la linea 6 de la instrucción if que termina en next_if_6_1
+t3 == num 1
+ifnot t3 goto next_if_6_1
+
+#############################################################
+#B3
+#############################################################
+
+write "Mover plato de "
+write from
+write " a "
+write dest
+write "\n"
+#Este es el código generado por la linea -369432968 de la instrucción return
+return
+
+#############################################################
+#B4
+#############################################################
+
+next_if_6_1:
+#Este es el código generado por la linea 12 de la llamada a la función: hanoi
+param dest
+param by
+param from
+t4 - num 1
+param t4
+t5 call hanoi 4
+write "Mover plato de "
+write from
+write " a "
+write dest
+write "\n"
+#Este es el código generado por la linea 18 de la llamada a la función: hanoi
+param from
+param dest
+param by
+t6 - num 1
+param t6
+t7 call hanoi 4

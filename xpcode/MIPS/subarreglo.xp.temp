@@ -1,0 +1,248 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Escriba el tamano de la cadena\n"
+read t1 2
+tamt1 := t1
+write "Escriba el tamano del posible substring\n"
+read t2 2
+tamt2 := t2
+write "Escriba la primera cadena que desea saber si esta contenida en la segunda\n"
+#Este es el código generado por la linea 17 de la instrucción tam1 := 0
+tam1 := 0
+#Este es el código generado por la linea 18 de la instrucción tam2 := 0
+tam2 := 0
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 19 de la instrucción while que inicia en begin_while_19_1 y termina en next_while_19_1
+begin_while_19_1:
+t3 < tam1 tamt1
+if t3 goto true_while_19_1
+
+#############################################################
+#B3
+#############################################################
+
+goto next_while_19_1
+
+#############################################################
+#B4
+#############################################################
+
+true_while_19_1:
+read t4 4
+t5 * tam1 1
+cad1 t5 []:= t4
+#Este es el código generado por la linea 21 de la instrucción tam1 := tam1 + 1
+t7 + tam1 1
+tam1 := t7
+goto begin_while_19_1
+
+#############################################################
+#B5
+#############################################################
+
+next_while_19_1:
+read t8 4
+aux := t8
+write "Escriba la segunda cadena\n"
+read t9 6
+cad2 := t9
+
+#############################################################
+#B6
+#############################################################
+
+#Este es el código generado por la linea 29 de la instrucción while que inicia en begin_while_29_1 y termina en next_while_29_1
+begin_while_29_1:
+t10 < tam2 tamt2
+if t10 goto true_while_29_1
+
+#############################################################
+#B7
+#############################################################
+
+goto next_while_29_1
+
+#############################################################
+#B8
+#############################################################
+
+true_while_29_1:
+read t11 4
+t12 * tam2 1
+cad2 t12 []:= t11
+#Este es el código generado por la linea 31 de la instrucción tam2 := tam2 + 1
+t14 + tam2 1
+tam2 := t14
+goto begin_while_29_1
+
+#############################################################
+#B9
+#############################################################
+
+next_while_29_1:
+read t15 4
+aux := t15
+#Este es el código generado por la linea 36 de la instrucción i := 0
+i := 0
+#Este es el código generado por la linea 37 de la instrucción j := 0
+j := 0
+#Este es el código generado por la linea 38 de la instrucción k := 0
+k := 0
+#Este es el código generado por la linea 39 de la instrucción res := 0
+res := 0
+
+#############################################################
+#B10
+#############################################################
+
+#Este es el código generado por la linea 41 de la instrucción while que inicia en begin_while_41_1 y termina en next_while_41_1
+begin_while_41_1:
+t16 < i tamt1
+ifnot t16 goto next_while_41_1
+
+#############################################################
+#B11
+#############################################################
+
+t17 == res 0
+if t17 goto true_while_41_1
+
+#############################################################
+#B12
+#############################################################
+
+goto next_while_41_1
+
+#############################################################
+#B13
+#############################################################
+
+true_while_41_1:
+#Este es el código generado por la linea 43 de la instrucción if que termina en next_if_43_1
+t18 * i 1
+t19 :=[] cad1 t18
+t20 * 0 1
+t21 :=[] cad2 t20
+t22 == t19 t21
+ifnot t22 goto next_if_43_1
+
+#############################################################
+#B14
+#############################################################
+
+#Este es el código generado por la linea 45 de la instrucción k := i
+k := i
+#Este es el código generado por la linea 46 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B15
+#############################################################
+
+#Este es el código generado por la linea 47 de la instrucción while que inicia en begin_while_47_1 y termina en next_while_47_1
+begin_while_47_1:
+t23 < j tamt2
+if t23 goto true_while_47_1
+
+#############################################################
+#B16
+#############################################################
+
+goto next_while_47_1
+
+#############################################################
+#B17
+#############################################################
+
+true_while_47_1:
+#Este es el código generado por la linea 49 de la instrucción if que termina en next_if_49_1
+t24 * k 1
+t25 :=[] cad1 t24
+t26 * j 1
+t27 :=[] cad2 t26
+t28 != t25 t27
+ifnot t28 goto next_if_49_1
+
+#############################################################
+#B18
+#############################################################
+
+#Este es el código generado por la linea -307653000 de la instrucción break
+goto next_while_47_1
+
+#############################################################
+#B19
+#############################################################
+
+next_if_49_1:
+#Este es el código generado por la linea 54 de la instrucción j := j + 1
+t29 + j 1
+j := t29
+#Este es el código generado por la linea 55 de la instrucción k := k + 1
+t30 + k 1
+k := t30
+goto begin_while_47_1
+
+#############################################################
+#B20
+#############################################################
+
+next_while_47_1:
+#Este es el código generado por la linea 57 de la instrucción if que termina en next_if_57_1
+t31 == j tamt2
+ifnot t31 goto next_if_57_1
+
+#############################################################
+#B21
+#############################################################
+
+#Este es el código generado por la linea 59 de la instrucción res := 1
+res := 1
+
+#############################################################
+#B22
+#############################################################
+
+next_if_57_1:
+next_if_43_1:
+#Este es el código generado por la linea 66 de la instrucción i := i + 1
+t32 + i 1
+i := t32
+goto begin_while_41_1
+
+#############################################################
+#B23
+#############################################################
+
+next_while_41_1:
+#Este es el código generado por la linea 69 de la instrucción if que termina en next_if_69_1
+t33 == res 1
+ifnot t33 goto false_if_69_1
+
+#############################################################
+#B24
+#############################################################
+
+write "\nSi esta contenida\n"
+goto next_if_69_1
+
+#############################################################
+#B25
+#############################################################
+
+false_if_69_1:
+write "\nNo esta contenida\n"
+
+#############################################################
+#B26
+#############################################################
+
+next_if_69_1:
+exit

@@ -1,0 +1,54 @@
+
+#############################################################
+#B1
+#############################################################
+
+read t1 2
+j := t1
+write "fibonacci["
+write j
+write "]="
+#Este es el código generado por la linea 25 de la llamada a la función: fib
+param j
+t2 call fib 1
+write t2
+write "\n"
+exit
+
+#############################################################
+#B2
+#############################################################
+
+#Definición de Función fib: linea 3
+fib:
+#Este es el código generado por la linea 7 de la instrucción if que termina en next_if_7_1
+t3 < num 2
+ifnot t3 goto next_if_7_1
+
+#############################################################
+#B3
+#############################################################
+
+#Este es el código generado por la linea 9 de la instrucción return
+return 1
+
+#############################################################
+#B4
+#############################################################
+
+next_if_7_1:
+#Este es el código generado por la linea 13 de la instrucción j := fib(num - 1)
+#Este es el código generado por la linea 13 de la llamada a la función: fib
+t4 - num 1
+param t4
+t5 call fib 1
+j := t5
+#Este es el código generado por la linea 14 de la instrucción k := fib(num - 2)
+#Este es el código generado por la linea 14 de la llamada a la función: fib
+t6 - num 2
+param t6
+t7 call fib 1
+k := t7
+#Este es el código generado por la linea 15 de la instrucción return
+t8 + k j
+return t8

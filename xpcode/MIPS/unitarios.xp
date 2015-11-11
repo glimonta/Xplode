@@ -1,0 +1,28 @@
+program
+
+function void prueba(var int[] b){
+
+
+write(b[7]);
+
+
+
+
+}
+
+
+
+
+
+
+begin
+
+let int[20] a;
+
+a[7]:=98;
+
+write(a[7]);
+prueba(a);
+write(a[7]);
+
+end

@@ -1,0 +1,89 @@
+
+#############################################################
+#B1
+#############################################################
+
+#Este es el código generado por la linea 49 de la llamada a la función: prueba
+param_ref cuadrado  
+t1 call prueba 1
+#Este es el código generado por la linea 50 de la llamada a la función: prueba
+param_ref cubo  
+t2 call prueba 1
+#Este es el código generado por la linea 51 de la llamada a la función: prueba
+param_ref fib  
+t3 call prueba 1
+exit
+
+#############################################################
+#B2
+#############################################################
+
+#Definición de Función prueba: linea 6
+prueba:
+#Este es el código generado por la linea 10 de la instrucción i := f(6)
+#Este es el código generado por la linea 10 de la llamada a la función: f
+param 6
+t4 call f 1
+i := t4
+write "La funcion devuelve: "
+write i
+write "\n"
+
+#############################################################
+#B3
+#############################################################
+
+#Definición de Función cuadrado: linea 15
+cuadrado:
+#Este es el código generado por la linea 17 de la instrucción return
+t5 * i i
+return t5
+
+#############################################################
+#B4
+#############################################################
+
+#Definición de Función cubo: linea 21
+cubo:
+#Este es el código generado por la linea 23 de la instrucción return
+t6 * j j
+t7 * t6 j
+return t7
+
+#############################################################
+#B5
+#############################################################
+
+#Definición de Función fib: linea 27
+fib:
+#Este es el código generado por la linea 31 de la instrucción if que termina en next_if_31_1
+t8 < num 2
+ifnot t8 goto next_if_31_1
+
+#############################################################
+#B6
+#############################################################
+
+#Este es el código generado por la linea 33 de la instrucción return
+return 1
+
+#############################################################
+#B7
+#############################################################
+
+next_if_31_1:
+#Este es el código generado por la linea 37 de la instrucción j := fib(num - 1)
+#Este es el código generado por la linea 37 de la llamada a la función: fib
+t9 - num 1
+param t9
+t10 call fib 1
+j := t10
+#Este es el código generado por la linea 38 de la instrucción k := fib(num - 2)
+#Este es el código generado por la linea 38 de la llamada a la función: fib
+t11 - num 2
+param t11
+t12 call fib 1
+k := t12
+#Este es el código generado por la linea 39 de la instrucción return
+t13 + k j
+return t13

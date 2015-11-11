@@ -1,0 +1,367 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Introduzca el numero de nodos:\n"
+read t1 2
+nodos := t1
+#Este es el código generado por la linea 15 de la instrucción i := 0
+i := 0
+#Este es el código generado por la linea 16 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 17 de la instrucción while que inicia en begin_while_17_1 y termina en next_while_17_1
+begin_while_17_1:
+t2 < i nodos
+if t2 goto true_while_17_1
+
+#############################################################
+#B3
+#############################################################
+
+goto next_while_17_1
+
+#############################################################
+#B4
+#############################################################
+
+true_while_17_1:
+#Este es el código generado por la linea 18 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B5
+#############################################################
+
+#Este es el código generado por la linea 19 de la instrucción while que inicia en begin_while_19_1 y termina en next_while_19_1
+begin_while_19_1:
+t3 < j nodos
+if t3 goto true_while_19_1
+
+#############################################################
+#B6
+#############################################################
+
+goto next_while_19_1
+
+#############################################################
+#B7
+#############################################################
+
+true_while_19_1:
+#Este es el código generado por la linea 20 de la instrucción ady[i][j] := 10000000
+t4 * i 50
+t5 + t4 j
+t6 * t5 4
+ady t6 []:= 10000000
+#Este es el código generado por la linea 22 de la instrucción j := j + 1
+t8 + j 1
+j := t8
+goto begin_while_19_1
+
+#############################################################
+#B8
+#############################################################
+
+next_while_19_1:
+#Este es el código generado por la linea 24 de la instrucción costo[i] := 10000000
+t9 * i 4
+costo t9 []:= 10000000
+#Este es el código generado por la linea 25 de la instrucción pick[i] := 0
+t11 * i 4
+pick t11 []:= 0
+#Este es el código generado por la linea 26 de la instrucción i := i + 1
+t13 + i 1
+i := t13
+goto begin_while_17_1
+
+#############################################################
+#B9
+#############################################################
+
+next_while_17_1:
+write "Introduzca el nodo fuente (0-indexed):\n"
+read t14 2
+src := t14
+write "Introduzca el nodo destino (0-indexed):\n"
+read t15 2
+dst := t15
+write "Introduzca el numero de arcos:\n"
+read t16 2
+arcs := t16
+#Este es el código generado por la linea 37 de la instrucción i := 0
+i := 0
+write "Ahora debe introducir los arcos\n"
+
+#############################################################
+#B10
+#############################################################
+
+#Este es el código generado por la linea 39 de la instrucción while que inicia en begin_while_39_1 y termina en next_while_39_1
+begin_while_39_1:
+t17 < i arcs
+if t17 goto true_while_39_1
+
+#############################################################
+#B11
+#############################################################
+
+goto next_while_39_1
+
+#############################################################
+#B12
+#############################################################
+
+true_while_39_1:
+write "Introduzca el fuente de un arco (0-indexed)\n"
+read t18 2
+x := t18
+write "Introduzca el destino del arco (0-indexed)\n"
+read t19 2
+y := t19
+write "Introduzca el costo del arco\n"
+read t20 2
+cost := t20
+#Este es el código generado por la linea 46 de la instrucción ady[x][y] := cost
+t21 * x 50
+t22 + t21 y
+t23 * t22 4
+ady t23 []:= cost
+#Este es el código generado por la linea 48 de la instrucción i := i + 1
+t25 + i 1
+i := t25
+goto begin_while_39_1
+
+#############################################################
+#B13
+#############################################################
+
+next_while_39_1:
+#Este es el código generado por la linea 50 de la instrucción costo[src] := 0
+t26 * src 4
+costo t26 []:= 0
+#Este es el código generado por la linea 51 de la instrucción i := 0
+i := 0
+
+#############################################################
+#B14
+#############################################################
+
+#Este es el código generado por la linea 53 de la instrucción while que inicia en begin_while_53_1 y termina en next_while_53_1
+begin_while_53_1:
+t28 < i nodos
+if t28 goto true_while_53_1
+
+#############################################################
+#B15
+#############################################################
+
+goto next_while_53_1
+
+#############################################################
+#B16
+#############################################################
+
+true_while_53_1:
+#Este es el código generado por la linea 55 de la instrucción menor := UMINUS 1
+t29 neg 1
+menor := t29
+#Este es el código generado por la linea 56 de la instrucción tmp := 0
+tmp := 0
+
+#############################################################
+#B17
+#############################################################
+
+#Este es el código generado por la linea 57 de la instrucción while que inicia en begin_while_57_1 y termina en next_while_57_1
+begin_while_57_1:
+t30 < tmp nodos
+if t30 goto true_while_57_1
+
+#############################################################
+#B18
+#############################################################
+
+goto next_while_57_1
+
+#############################################################
+#B19
+#############################################################
+
+true_while_57_1:
+#Este es el código generado por la linea 58 de la instrucción if que termina en next_if_58_1
+t31 * tmp 4
+t32 :=[] pick t31
+t33 == t32 0
+ifnot t33 goto next_if_58_1
+
+#############################################################
+#B20
+#############################################################
+
+#Este es el código generado por la linea 59 de la instrucción if que termina en next_if_59_1
+t34 neg 1
+t35 == menor t34
+ifnot t35 goto false_if_59_1
+
+#############################################################
+#B21
+#############################################################
+
+#Este es el código generado por la linea 60 de la instrucción menor := tmp
+menor := tmp
+goto next_if_59_1
+
+#############################################################
+#B22
+#############################################################
+
+false_if_59_1:
+#Este es el código generado por la linea 63 de la instrucción if que termina en next_if_63_1
+t36 * tmp 4
+t37 :=[] costo t36
+t38 * menor 4
+t39 :=[] costo t38
+t40 < t37 t39
+ifnot t40 goto next_if_63_1
+
+#############################################################
+#B23
+#############################################################
+
+#Este es el código generado por la linea 64 de la instrucción menor := tmp
+menor := tmp
+
+#############################################################
+#B24
+#############################################################
+
+next_if_63_1:
+next_if_59_1:
+next_if_58_1:
+#Este es el código generado por la linea 69 de la instrucción tmp := tmp + 1
+t41 + tmp 1
+tmp := t41
+goto begin_while_57_1
+
+#############################################################
+#B25
+#############################################################
+
+next_while_57_1:
+#Este es el código generado por la linea 72 de la instrucción if que termina en next_if_72_1
+t42 neg 1
+t43 == menor t42
+ifnot t43 goto next_if_72_1
+
+#############################################################
+#B26
+#############################################################
+
+#Este es el código generado por la linea 0 de la instrucción break
+goto next_while_53_1
+
+#############################################################
+#B27
+#############################################################
+
+next_if_72_1:
+#Este es el código generado por la linea 75 de la instrucción tmp := 0
+tmp := 0
+#Este es el código generado por la linea 76 de la instrucción pick[menor] := 1
+t44 * menor 4
+pick t44 []:= 1
+
+#############################################################
+#B28
+#############################################################
+
+#Este es el código generado por la linea 77 de la instrucción while que inicia en begin_while_77_1 y termina en next_while_77_1
+begin_while_77_1:
+t46 < tmp nodos
+if t46 goto true_while_77_1
+
+#############################################################
+#B29
+#############################################################
+
+goto next_while_77_1
+
+#############################################################
+#B30
+#############################################################
+
+true_while_77_1:
+#Este es el código generado por la linea 78 de la instrucción if que termina en next_if_78_1
+t47 * tmp 4
+t48 :=[] pick t47
+t49 == t48 0
+ifnot t49 goto next_if_78_1
+
+#############################################################
+#B31
+#############################################################
+
+t50 * menor 4
+t51 :=[] costo t50
+t52 * menor 50
+t53 + t52 tmp
+t54 * t53 4
+t55 :=[] ady t54
+t56 + t51 t55
+t57 * tmp 4
+t58 :=[] costo t57
+t59 < t56 t58
+ifnot t59 goto next_if_78_1
+
+#############################################################
+#B32
+#############################################################
+
+#Este es el código generado por la linea 79 de la instrucción costo[tmp] := costo[menor] + ady[menor][tmp]
+t60 * menor 4
+t61 :=[] costo t60
+t62 * menor 50
+t63 + t62 tmp
+t64 * t63 4
+t65 :=[] ady t64
+t66 + t61 t65
+t67 * tmp 4
+costo t67 []:= t66
+
+#############################################################
+#B33
+#############################################################
+
+next_if_78_1:
+#Este es el código generado por la linea 81 de la instrucción tmp := tmp + 1
+t69 + tmp 1
+tmp := t69
+goto begin_while_77_1
+
+#############################################################
+#B34
+#############################################################
+
+next_while_77_1:
+#Este es el código generado por la linea 84 de la instrucción i := i + 1
+t70 + i 1
+i := t70
+goto begin_while_53_1
+
+#############################################################
+#B35
+#############################################################
+
+next_while_53_1:
+write "Camino de menor costo: "
+t71 * dst 4
+t72 :=[] costo t71
+write t72
+write "\n"
+exit

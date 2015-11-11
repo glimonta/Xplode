@@ -1,0 +1,56 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Escriba el valor al que le quiere conocer su raiz\n\n"
+read t1 5
+y := t1
+#Este es el código generado por la linea 11 de la instrucción x := 1.0
+x := 1.0
+#Este es el código generado por la linea 13 de la instrucción i := 1
+i := 1
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 15 de la instrucción while que inicia en begin_while_15_1 y termina en next_while_15_1
+begin_while_15_1:
+t2 <= i 100
+if t2 goto true_while_15_1
+
+#############################################################
+#B3
+#############################################################
+
+goto next_while_15_1
+
+#############################################################
+#B4
+#############################################################
+
+true_while_15_1:
+#Este es el código generado por la linea 17 de la instrucción nuevox := 0.5 * x + y / x
+t3 / y x
+t4 + x t3
+t5 * 0.5 t4
+nuevox := t5
+#Este es el código generado por la linea 19 de la instrucción x := nuevox
+x := nuevox
+#Este es el código generado por la linea 20 de la instrucción i := i + 1
+t6 + i 1
+i := t6
+goto begin_while_15_1
+
+#############################################################
+#B5
+#############################################################
+
+next_while_15_1:
+write "La raiz de "
+write y
+write " es: "
+write x
+write "\n\n"
+exit

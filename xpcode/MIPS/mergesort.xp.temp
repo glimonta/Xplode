@@ -1,0 +1,384 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Escriba el tamanio del arreglo\n"
+read t1 2
+tam := t1
+#Este es el código generado por la linea 57 de la instrucción i := 0
+i := 0
+write "Escriba los elementos del arreglo\n"
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 60 de la instrucción while que inicia en begin_while_60_1 y termina en next_while_60_1
+begin_while_60_1:
+t2 < i tam
+if t2 goto true_while_60_1
+
+#############################################################
+#B3
+#############################################################
+
+goto next_while_60_1
+
+#############################################################
+#B4
+#############################################################
+
+true_while_60_1:
+read t3 2
+t4 * i 4
+x t4 []:= t3
+#Este es el código generado por la linea 62 de la instrucción i := i + 1
+t6 + i 1
+i := t6
+goto begin_while_60_1
+
+#############################################################
+#B5
+#############################################################
+
+next_while_60_1:
+#Este es el código generado por la linea 65 de la llamada a la función: sort
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+param_ref res  
+param 50
+param 1
+param 4
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+param_ref x  
+param 50
+param 1
+param 4
+t7 - tam 1
+param t7
+param 0
+t8 call sort 4
+write "El arreglo ordenado es:\n"
+#Este es el código generado por la linea 69 de la instrucción i := 0
+i := 0
+
+#############################################################
+#B6
+#############################################################
+
+#Este es el código generado por la linea 71 de la instrucción while que inicia en begin_while_71_1 y termina en next_while_71_1
+begin_while_71_1:
+t9 < i tam
+if t9 goto true_while_71_1
+
+#############################################################
+#B7
+#############################################################
+
+goto next_while_71_1
+
+#############################################################
+#B8
+#############################################################
+
+true_while_71_1:
+t10 * i 4
+t11 :=[] x t10
+write t11
+write " "
+#Este es el código generado por la linea 73 de la instrucción i := i + 1
+t12 + i 1
+i := t12
+goto begin_while_71_1
+
+#############################################################
+#B9
+#############################################################
+
+next_while_71_1:
+write "\n"
+exit
+
+#############################################################
+#B10
+#############################################################
+
+#Definición de Función sort: linea 3
+sort:
+#Este es el código generado por la linea 6 de la instrucción if que termina en next_if_6_1
+t13 >= x1 x2
+ifnot t13 goto next_if_6_1
+
+#############################################################
+#B11
+#############################################################
+
+#Este es el código generado por la linea 0 de la instrucción return
+return
+
+#############################################################
+#B12
+#############################################################
+
+next_if_6_1:
+#Este es el código generado por la linea 9 de la instrucción mid := x1 + x2 / 2
+t14 + x1 x2
+t15 / t14 2
+mid := t15
+#Este es el código generado por la linea 11 de la llamada a la función: sort
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+param_ref res  
+param -1
+param 1
+param 4
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+param_ref x  
+param -1
+param 1
+param 4
+param mid
+param x1
+t16 call sort 4
+#Este es el código generado por la linea 12 de la llamada a la función: sort
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+param_ref res  
+param -1
+param 1
+param 4
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+param_ref x  
+param -1
+param 1
+param 4
+param x2
+t17 + mid 1
+param t17
+t18 call sort 4
+#Este es el código generado por la linea 14 de la instrucción i := x1
+i := x1
+#Este es el código generado por la linea 15 de la instrucción j := mid + 1
+t19 + mid 1
+j := t19
+#Este es el código generado por la linea 16 de la instrucción ind := x1
+ind := x1
+
+#############################################################
+#B13
+#############################################################
+
+#Este es el código generado por la linea 18 de la instrucción while que inicia en begin_while_18_1 y termina en next_while_18_1
+begin_while_18_1:
+t20 < i mid
+ifnot t20 goto next_while_18_1
+
+#############################################################
+#B14
+#############################################################
+
+t21 < j x2
+if t21 goto true_while_18_1
+
+#############################################################
+#B15
+#############################################################
+
+goto next_while_18_1
+
+#############################################################
+#B16
+#############################################################
+
+true_while_18_1:
+#Este es el código generado por la linea 19 de la instrucción if que termina en next_if_19_1
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t22 + bp 16
+=* t23 t22
+t24 * i t23
+t25 :=[] x t24
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t26 + bp 16
+=* t27 t26
+t28 * j t27
+t29 :=[] x t28
+t30 < t25 t29
+ifnot t30 goto false_if_19_1
+
+#############################################################
+#B17
+#############################################################
+
+#Este es el código generado por la linea 20 de la instrucción res[ind] := x[i]
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t31 + bp 16
+=* t32 t31
+t33 * i t32
+t34 :=[] x t33
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t35 + bp 32
+=* t36 t35
+t37 * ind t36
+res t37 []:= t34
+#Este es el código generado por la linea 21 de la instrucción i := i + 1
+t39 + i 1
+i := t39
+goto next_if_19_1
+
+#############################################################
+#B18
+#############################################################
+
+false_if_19_1:
+#Este es el código generado por la linea 24 de la instrucción res[ind] := x[j]
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t40 + bp 16
+=* t41 t40
+t42 * j t41
+t43 :=[] x t42
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t44 + bp 32
+=* t45 t44
+t46 * ind t45
+res t46 []:= t43
+#Este es el código generado por la linea 25 de la instrucción j := j + 1
+t48 + j 1
+j := t48
+
+#############################################################
+#B19
+#############################################################
+
+next_if_19_1:
+#Este es el código generado por la linea 27 de la instrucción ind := ind + 1
+t49 + ind 1
+ind := t49
+goto begin_while_18_1
+
+#############################################################
+#B20
+#############################################################
+
+next_while_18_1:
+#Este es el código generado por la linea 30 de la instrucción while que inicia en begin_while_30_1 y termina en next_while_30_1
+begin_while_30_1:
+t50 < i mid
+if t50 goto true_while_30_1
+
+#############################################################
+#B21
+#############################################################
+
+goto next_while_30_1
+
+#############################################################
+#B22
+#############################################################
+
+true_while_30_1:
+#Este es el código generado por la linea 31 de la instrucción res[ind] := x[i]
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t51 + bp 16
+=* t52 t51
+t53 * i t52
+t54 :=[] x t53
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t55 + bp 32
+=* t56 t55
+t57 * ind t56
+res t57 []:= t54
+#Este es el código generado por la linea 32 de la instrucción i := i + 1
+t59 + i 1
+i := t59
+#Este es el código generado por la linea 33 de la instrucción ind := ind + 1
+t60 + ind 1
+ind := t60
+goto begin_while_30_1
+
+#############################################################
+#B23
+#############################################################
+
+next_while_30_1:
+#Este es el código generado por la linea 35 de la instrucción while que inicia en begin_while_35_1 y termina en next_while_35_1
+begin_while_35_1:
+t61 < j x2
+if t61 goto true_while_35_1
+
+#############################################################
+#B24
+#############################################################
+
+goto next_while_35_1
+
+#############################################################
+#B25
+#############################################################
+
+true_while_35_1:
+#Este es el código generado por la linea 36 de la instrucción res[ind] := x[j]
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t62 + bp 16
+=* t63 t62
+t64 * j t63
+t65 :=[] x t64
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t66 + bp 32
+=* t67 t66
+t68 * ind t67
+res t68 []:= t65
+#Este es el código generado por la linea 37 de la instrucción j := j + 1
+t70 + j 1
+j := t70
+#Este es el código generado por la linea 38 de la instrucción ind := ind + 1
+t71 + ind 1
+ind := t71
+goto begin_while_35_1
+
+#############################################################
+#B26
+#############################################################
+
+next_while_35_1:
+#Este es el código generado por la linea 41 de la instrucción i := x1
+i := x1
+
+#############################################################
+#B27
+#############################################################
+
+#Este es el código generado por la linea 42 de la instrucción while que inicia en begin_while_42_1 y termina en next_while_42_1
+begin_while_42_1:
+t72 <= i x2
+if t72 goto true_while_42_1
+
+#############################################################
+#B28
+#############################################################
+
+goto next_while_42_1
+
+#############################################################
+#B29
+#############################################################
+
+true_while_42_1:
+#Este es el código generado por la linea 43 de la instrucción x[i] := res[i]
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t73 + bp 32
+=* t74 t73
+t75 * i t74
+t76 :=[] res t75
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t77 + bp 16
+=* t78 t77
+t79 * i t78
+x t79 []:= t76
+#Este es el código generado por la linea 44 de la instrucción i := i + 1
+t81 + i 1
+i := t81
+goto begin_while_42_1
+
+#############################################################
+#B30
+#############################################################
+
+next_while_42_1:

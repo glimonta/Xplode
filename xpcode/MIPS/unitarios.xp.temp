@@ -1,0 +1,35 @@
+
+#############################################################
+#B1
+#############################################################
+
+#Este es el código generado por la linea 22 de la instrucción a[7] := 98
+t1 * 7 4
+a t1 []:= 98
+t3 * 7 4
+t4 :=[] a t3
+write t4
+#Este es el código generado por la linea 25 de la llamada a la función: prueba
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+param_ref a  
+param 20
+param 1
+param 4
+t5 call prueba 1
+t6 * 7 4
+t7 :=[] a t6
+write t7
+exit
+
+#############################################################
+#B2
+#############################################################
+
+#Definición de Función prueba: linea 3
+prueba:
+#Aquí va el acceso a un arreglo que es por referencia ==> dope vector
+t8 + bp 8
+=* t9 t8
+t10 * 7 t9
+t11 :=[] b t10
+write t11

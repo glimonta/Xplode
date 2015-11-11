@@ -1,0 +1,46 @@
+
+#############################################################
+#B1
+#############################################################
+
+#Este es el código generado por la linea 32 de la instrucción i := 3
+i := 3
+write i
+write "\n"
+#Este es el código generado por la linea 35 de la llamada a la función: prueba
+param_ref i  
+t1 call prueba 1
+write i
+write "\n"
+exit
+
+#############################################################
+#B2
+#############################################################
+
+#Definición de Función prueba2: linea 3
+prueba2:
+write a
+write "\n"
+#Este es el código generado por la linea 7 de la instrucción a := 7
+a := 7
+write a
+write "\n"
+
+#############################################################
+#B3
+#############################################################
+
+#Definición de Función prueba: linea 15
+prueba:
+write b
+write "\n"
+#Este es el código generado por la linea 19 de la instrucción b := 5
+b := 5
+write b
+write "\n"
+#Este es el código generado por la linea 23 de la llamada a la función: prueba2
+param_ref b  
+t2 call prueba2 1
+write b
+write "\n"

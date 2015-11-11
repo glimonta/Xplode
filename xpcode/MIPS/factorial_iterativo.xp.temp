@@ -1,0 +1,52 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Escriba el numero al cual quiere saber el factorial:\n"
+read t1 2
+j := t1
+#Este es el código generado por la linea 10 de la instrucción i := 1
+i := 1
+#Este es el código generado por la linea 11 de la instrucción fact := 1
+fact := 1
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 13 de la instrucción while que inicia en begin_while_13_1 y termina en next_while_13_1
+begin_while_13_1:
+t2 <= i j
+if t2 goto true_while_13_1
+
+#############################################################
+#B3
+#############################################################
+
+goto next_while_13_1
+
+#############################################################
+#B4
+#############################################################
+
+true_while_13_1:
+#Este es el código generado por la linea 15 de la instrucción fact := fact * i
+t3 * fact i
+fact := t3
+#Este es el código generado por la linea 16 de la instrucción i := i + 1
+t4 + i 1
+i := t4
+goto begin_while_13_1
+
+#############################################################
+#B5
+#############################################################
+
+next_while_13_1:
+write "fact["
+write j
+write "]="
+write fact
+write "\n"
+exit

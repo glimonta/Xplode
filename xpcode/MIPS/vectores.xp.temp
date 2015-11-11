@@ -1,0 +1,129 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Escriba la dimension del los vectores:\n"
+read t1 2
+dimension := t1
+#Este es el código generado por la linea 11 de la instrucción punto := 0
+punto := 0
+#Este es el código generado por la linea 13 de la instrucción i := 0
+i := 0
+write "Escriba los valores del primer vector:\n"
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 16 de la instrucción while que inicia en begin_while_16_1 y termina en next_while_16_1
+begin_while_16_1:
+t2 < i dimension
+if t2 goto true_while_16_1
+
+#############################################################
+#B3
+#############################################################
+
+goto next_while_16_1
+
+#############################################################
+#B4
+#############################################################
+
+true_while_16_1:
+read t3 2
+t4 * i 4
+x t4 []:= t3
+#Este es el código generado por la linea 18 de la instrucción i := i + 1
+t6 + i 1
+i := t6
+goto begin_while_16_1
+
+#############################################################
+#B5
+#############################################################
+
+next_while_16_1:
+#Este es el código generado por la linea 21 de la instrucción i := 0
+i := 0
+write "Escriba los valores del segundo vector:\n"
+
+#############################################################
+#B6
+#############################################################
+
+#Este es el código generado por la linea 23 de la instrucción while que inicia en begin_while_23_1 y termina en next_while_23_1
+begin_while_23_1:
+t7 < i dimension
+if t7 goto true_while_23_1
+
+#############################################################
+#B7
+#############################################################
+
+goto next_while_23_1
+
+#############################################################
+#B8
+#############################################################
+
+true_while_23_1:
+read t8 2
+t9 * i 4
+x2 t9 []:= t8
+#Este es el código generado por la linea 25 de la instrucción i := i + 1
+t11 + i 1
+i := t11
+goto begin_while_23_1
+
+#############################################################
+#B9
+#############################################################
+
+next_while_23_1:
+#Este es el código generado por la linea 28 de la instrucción i := 0
+i := 0
+
+#############################################################
+#B10
+#############################################################
+
+#Este es el código generado por la linea 30 de la instrucción while que inicia en begin_while_30_1 y termina en next_while_30_1
+begin_while_30_1:
+t12 < i dimension
+if t12 goto true_while_30_1
+
+#############################################################
+#B11
+#############################################################
+
+goto next_while_30_1
+
+#############################################################
+#B12
+#############################################################
+
+true_while_30_1:
+#Este es el código generado por la linea 31 de la instrucción punto := punto + x[i] * x2[i]
+t13 * i 4
+t14 :=[] x t13
+t15 * i 4
+t16 :=[] x2 t15
+t17 * t14 t16
+t18 + punto t17
+punto := t18
+#Este es el código generado por la linea 32 de la instrucción i := i + 1
+t19 + i 1
+i := t19
+goto begin_while_30_1
+
+#############################################################
+#B13
+#############################################################
+
+next_while_30_1:
+write "El producto punto da: "
+write punto
+write "\n"
+exit

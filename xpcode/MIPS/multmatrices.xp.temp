@@ -1,0 +1,355 @@
+
+#############################################################
+#B1
+#############################################################
+
+write "Escriba la dimension de una matriz cuadrada\n"
+read t1 2
+tam := t1
+#Este es el código generado por la linea 12 de la instrucción i := 0
+i := 0
+#Este es el código generado por la linea 13 de la instrucción j := 0
+j := 0
+write "Escriba la primera matriz\n"
+
+#############################################################
+#B2
+#############################################################
+
+#Este es el código generado por la linea 15 de la instrucción while que inicia en begin_while_15_1 y termina en next_while_15_1
+begin_while_15_1:
+t2 < i tam
+if t2 goto true_while_15_1
+
+#############################################################
+#B3
+#############################################################
+
+goto next_while_15_1
+
+#############################################################
+#B4
+#############################################################
+
+true_while_15_1:
+#Este es el código generado por la linea 16 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B5
+#############################################################
+
+#Este es el código generado por la linea 17 de la instrucción while que inicia en begin_while_17_1 y termina en next_while_17_1
+begin_while_17_1:
+t3 < j tam
+if t3 goto true_while_17_1
+
+#############################################################
+#B6
+#############################################################
+
+goto next_while_17_1
+
+#############################################################
+#B7
+#############################################################
+
+true_while_17_1:
+read t4 2
+t5 * i 50
+t6 + t5 j
+t7 * t6 4
+mat1 t7 []:= t4
+#Este es el código generado por la linea 19 de la instrucción j := j + 1
+t9 + j 1
+j := t9
+goto begin_while_17_1
+
+#############################################################
+#B8
+#############################################################
+
+next_while_17_1:
+#Este es el código generado por la linea 21 de la instrucción i := i + 1
+t10 + i 1
+i := t10
+goto begin_while_15_1
+
+#############################################################
+#B9
+#############################################################
+
+next_while_15_1:
+#Este es el código generado por la linea 23 de la instrucción i := 0
+i := 0
+#Este es el código generado por la linea 24 de la instrucción j := 0
+j := 0
+write "Escriba la segunda matriz\n"
+
+#############################################################
+#B10
+#############################################################
+
+#Este es el código generado por la linea 26 de la instrucción while que inicia en begin_while_26_1 y termina en next_while_26_1
+begin_while_26_1:
+t11 < i tam
+if t11 goto true_while_26_1
+
+#############################################################
+#B11
+#############################################################
+
+goto next_while_26_1
+
+#############################################################
+#B12
+#############################################################
+
+true_while_26_1:
+#Este es el código generado por la linea 27 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B13
+#############################################################
+
+#Este es el código generado por la linea 28 de la instrucción while que inicia en begin_while_28_1 y termina en next_while_28_1
+begin_while_28_1:
+t12 < j tam
+if t12 goto true_while_28_1
+
+#############################################################
+#B14
+#############################################################
+
+goto next_while_28_1
+
+#############################################################
+#B15
+#############################################################
+
+true_while_28_1:
+read t13 2
+t14 * i 50
+t15 + t14 j
+t16 * t15 4
+mat2 t16 []:= t13
+#Este es el código generado por la linea 30 de la instrucción j := j + 1
+t18 + j 1
+j := t18
+goto begin_while_28_1
+
+#############################################################
+#B16
+#############################################################
+
+next_while_28_1:
+#Este es el código generado por la linea 32 de la instrucción i := i + 1
+t19 + i 1
+i := t19
+goto begin_while_26_1
+
+#############################################################
+#B17
+#############################################################
+
+next_while_26_1:
+#Este es el código generado por la linea 35 de la instrucción i := 0
+i := 0
+#Este es el código generado por la linea 36 de la instrucción j := 0
+j := 0
+#Este es el código generado por la linea 37 de la instrucción k := 0
+k := 0
+
+#############################################################
+#B18
+#############################################################
+
+#Este es el código generado por la linea 38 de la instrucción while que inicia en begin_while_38_1 y termina en next_while_38_1
+begin_while_38_1:
+t20 < i tam
+if t20 goto true_while_38_1
+
+#############################################################
+#B19
+#############################################################
+
+goto next_while_38_1
+
+#############################################################
+#B20
+#############################################################
+
+true_while_38_1:
+#Este es el código generado por la linea 39 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B21
+#############################################################
+
+#Este es el código generado por la linea 40 de la instrucción while que inicia en begin_while_40_1 y termina en next_while_40_1
+begin_while_40_1:
+t21 < j tam
+if t21 goto true_while_40_1
+
+#############################################################
+#B22
+#############################################################
+
+goto next_while_40_1
+
+#############################################################
+#B23
+#############################################################
+
+true_while_40_1:
+#Este es el código generado por la linea 41 de la instrucción tmp := 0
+tmp := 0
+#Este es el código generado por la linea 42 de la instrucción k := 0
+k := 0
+
+#############################################################
+#B24
+#############################################################
+
+#Este es el código generado por la linea 43 de la instrucción while que inicia en begin_while_43_1 y termina en next_while_43_1
+begin_while_43_1:
+t22 < k tam
+if t22 goto true_while_43_1
+
+#############################################################
+#B25
+#############################################################
+
+goto next_while_43_1
+
+#############################################################
+#B26
+#############################################################
+
+true_while_43_1:
+#Este es el código generado por la linea 44 de la instrucción tmp := tmp + mat1[i][k] * mat2[k][j]
+t23 * i 50
+t24 + t23 k
+t25 * t24 4
+t26 :=[] mat1 t25
+t27 * k 50
+t28 + t27 j
+t29 * t28 4
+t30 :=[] mat2 t29
+t31 * t26 t30
+t32 + tmp t31
+tmp := t32
+#Este es el código generado por la linea 45 de la instrucción k := k + 1
+t33 + k 1
+k := t33
+goto begin_while_43_1
+
+#############################################################
+#B27
+#############################################################
+
+next_while_43_1:
+#Este es el código generado por la linea 47 de la instrucción mat3[i][j] := tmp
+t34 * i 50
+t35 + t34 j
+t36 * t35 4
+mat3 t36 []:= tmp
+#Este es el código generado por la linea 48 de la instrucción j := j + 1
+t38 + j 1
+j := t38
+goto begin_while_40_1
+
+#############################################################
+#B28
+#############################################################
+
+next_while_40_1:
+#Este es el código generado por la linea 50 de la instrucción i := i + 1
+t39 + i 1
+i := t39
+goto begin_while_38_1
+
+#############################################################
+#B29
+#############################################################
+
+next_while_38_1:
+write "Matriz resultante:\n"
+#Este es el código generado por la linea 55 de la instrucción i := 0
+i := 0
+#Este es el código generado por la linea 56 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B30
+#############################################################
+
+#Este es el código generado por la linea 57 de la instrucción while que inicia en begin_while_57_1 y termina en next_while_57_1
+begin_while_57_1:
+t40 < i tam
+if t40 goto true_while_57_1
+
+#############################################################
+#B31
+#############################################################
+
+goto next_while_57_1
+
+#############################################################
+#B32
+#############################################################
+
+true_while_57_1:
+#Este es el código generado por la linea 58 de la instrucción j := 0
+j := 0
+
+#############################################################
+#B33
+#############################################################
+
+#Este es el código generado por la linea 59 de la instrucción while que inicia en begin_while_59_1 y termina en next_while_59_1
+begin_while_59_1:
+t41 < j tam
+if t41 goto true_while_59_1
+
+#############################################################
+#B34
+#############################################################
+
+goto next_while_59_1
+
+#############################################################
+#B35
+#############################################################
+
+true_while_59_1:
+t42 * i 50
+t43 + t42 j
+t44 * t43 4
+t45 :=[] mat3 t44
+write t45
+write " "
+#Este es el código generado por la linea 61 de la instrucción j := j + 1
+t46 + j 1
+j := t46
+goto begin_while_59_1
+
+#############################################################
+#B36
+#############################################################
+
+next_while_59_1:
+write "\n"
+#Este es el código generado por la linea 64 de la instrucción i := i + 1
+t47 + i 1
+i := t47
+goto begin_while_57_1
+
+#############################################################
+#B37
+#############################################################
+
+next_while_57_1:
+exit
