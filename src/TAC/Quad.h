@@ -56,6 +56,27 @@ class Comment : public Quad {
       return "#" + getOp();
     }
 
+    void generateMips(std::vector<MipsInstruction *> *instructions) {
+      instructions->push_back(new CommentMips(getOp()));
+    }
+
+};
+
+class BlockComment : public Quad {
+  public:
+
+    BlockComment(std::string comment) : Quad(comment, "", "", "") {}
+
+    std::string toString() {
+      return "#############################################################\n#"
+          + getOp()
+          + "#############################################################\n\n";
+    }
+
+    void generateMips(std::vector<MipsInstruction *> *instructions) {
+      instructions->push_back(new CommentMips(getOp()));
+    }
+
 };
 
 class Label : public Quad {
@@ -65,6 +86,10 @@ class Label : public Quad {
 
     std::string toString() {
       return getOp() + ":";
+    }
+
+    void generateMips(std::vector<MipsInstruction *> *instructions) {
+      instructions->push_back(new LabelMips(getOp()));
     }
 
 };
@@ -369,6 +394,15 @@ class ReadQuad : public Quad {
     std::string toString() {
       return getOp() + " " + getResult() + " " + getArg1();
     }
+
+    // Primer intento en un generateMips para read, falta considerar la dirección a la que se va a leer
+    //void generateMips(std::vector<MipsInstruction *> *instructions) {
+    //  instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResult())));
+    //  int size = atoi(getArg1().c_str());
+    //  instructions->push_back(new LoadImmMips(new MipsRegister(5), new MipsImmediate(size)));
+    //  instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(8)));
+    //  instructions->push_back(new SyscallMips());
+    //}
 
 };
 

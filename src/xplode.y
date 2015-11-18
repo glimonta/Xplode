@@ -837,7 +837,11 @@ statement_read
   ;
 
 statement_write
-  : x_WRITE x_LPAR write_list x_RPAR {$$ = new WriteStatement($3); }
+  : x_WRITE x_LPAR write_list x_RPAR {
+      $$ = new WriteStatement($3);
+      $$->line = $1->line;
+      $$->column = $1->column;
+    }
   ;
 
 write_list

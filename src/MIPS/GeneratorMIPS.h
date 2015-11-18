@@ -40,6 +40,15 @@ class GeneratorMIPS {
         } else if ("exit" == quad->op) {
           ExitQuad * exit = (ExitQuad *) quad;
           exit->generateMips(instructions);
+        } else if (NULL != dynamic_cast<Comment *> (quad)){
+          Comment * comment = (Comment *) quad;
+          comment->generateMips(instructions);
+        } else if (NULL != dynamic_cast<Label *> (quad)){
+          Label * label = (Label *) quad;
+          label->generateMips(instructions);
+        //} else if ("read" == quad->op) {
+        //  ReadQuad * read = (ReadQuad *) quad;
+        //  read->generateMips(instructions);
         } else {
           //Faltan los demás casos
         }
