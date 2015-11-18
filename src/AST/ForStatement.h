@@ -56,7 +56,7 @@ class ForStatement : public CompoundStatement {
       generator->gen(comment);
 
       init->generateTAC(generator, table, continueLabel, breakLabel);
-      GotoQuad *goto_first = new GotoQuad(first_for_lab->getOp());
+      GotoQuad *goto_first = new GotoQuad(new VarQuad(first_for_lab->getOp()));
       generator->gen(goto_first);
       generator->new_block();
       generator->gen(begin_lab);
@@ -67,7 +67,7 @@ class ForStatement : public CompoundStatement {
       condition->generateJumpingCode(generator, table, mid_lab->getOp(), end_lab->getOp());
       generator->gen(mid_lab);
       block->generateTAC(generator, table, begin_lab->getOp(), end_lab->getOp());
-      GotoQuad *goto_begin = new GotoQuad(begin_lab->getOp());
+      GotoQuad *goto_begin = new GotoQuad(new VarQuad(begin_lab->getOp()));
       generator->gen(goto_begin);
       generator->new_block();
       generator->gen(end_lab);

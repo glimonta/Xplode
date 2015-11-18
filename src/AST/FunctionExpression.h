@@ -57,7 +57,7 @@ class FunctionExpression : public Expression {
       return str.str();
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    ExpQuad * generateTAC(GeneratorTAC *generator, SymTable *table) {
       Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la llamada a la función: " + fname);
       generator->gen(comment);
 
@@ -87,10 +87,9 @@ class FunctionExpression : public Expression {
 
           //Se empilan las dimensiones del arreglo de la ultima a la primera
           for (int j = dims->size() - 1; j >= 0; --j) {
-            std::stringstream dimension;
-            dimension << (*dims)[j];
+            ConstQuad * dimension = new ConstQuad((*dims)[j]);
             // Dimensión del arreglo
-            ParamQuad *param = new ParamQuad(dimension.str());
+            ParamQuad *param = new ParamQuad(dimension);
             generator->gen(param);
 
             type = type->ntype;
@@ -98,16 +97,16 @@ class FunctionExpression : public Expression {
 
           for (int j = 0; j < dims->size(); ++j) base_type = base_type->ntype;
 
-          std::stringstream size_dims;
-          size_dims << dims->size();
+          //std::stringstream size_dims;
+          //size_dims << dims->size();
           //Se empila el número de dimensiones
-          ParamQuad * param = new ParamQuad(size_dims.str());
+          ParamQuad * param = new ParamQuad(new ConstQuad(dims->size()));
           generator->gen(param);
 
-          std::stringstream basetype;
-          basetype << base_type->size;
+          //std::stringstream basetype;
+          //basetype << base_type->size;
           //Se empila el tamaño de un elemento del arreglo
-          param = new ParamQuad(basetype.str());
+          param = new ParamQuad(new ConstQuad(base_type->size));
           generator->gen(param);
 
         }
@@ -124,39 +123,41 @@ class FunctionExpression : public Expression {
             generator->gen(param);
           }
         } else {
-          std::string res = (*params)->generateTAC(generator, table);
+          ExpQuad * res = (*params)->generateTAC(generator, table);
           ParamQuad *param = new ParamQuad(res);
           generator->gen(param);
         }
       }
 
 
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
       std::stringstream str;
       str << argList->size();
-      FunctionCallReturn *call = new FunctionCallReturn(result, fname, str.str());
+      Symbol * f = table->find(fname);
+      VarQuad * function = new VarQuad(fname, f->offset, f->porref, f->isarg, f->ntype->size, f->ntype->numtype);
+      FunctionCallReturn *call = new FunctionCallReturn(result, function, new ConstQuad(argList->size()));
       generator->gen(call);
 
       return result;
     }
 
     void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
-      std::string res = this->generateTAC(generator, table);
+      ExpQuad * res = this->generateTAC(generator, table);
 
       if ( "fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(res, trueLabel);
+        IfQuad *if_instr = new IfQuad(res, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(res, trueLabel);
+        IfQuad *if_instr = new IfQuad(res, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(res, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(res, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {

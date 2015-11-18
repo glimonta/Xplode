@@ -202,11 +202,12 @@ class Variable : public Expression {
       }
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    ExpQuad * generateTAC(GeneratorTAC *generator, SymTable *table) {
       if (varList->size() == 1 && indexList->size() == 0) {
         std::string var(varList->front()->value);
         std::transform(var.begin(), var.end(), var.begin(), ::tolower);
-        return var;
+        Symbol * v = table->find(var);
+        return new VarQuad(var, v->offset, v->porref, v->isarg, v->ntype->size, v->ntype->numtype);
       }
 
       std::list<Xplode::Token *>::iterator vnames;
@@ -217,10 +218,10 @@ class Variable : public Expression {
       vnamesaux = varList->begin();
       ++vnamesaux;
       indexes = indexList->begin();
-      std::string res;
+      ExpQuad * res;
 
       Symbol *base = table->find((*vnames)->value);
-      res = EMPTY_LABEL;
+      res = NULL;
       TypeDeclaration *type = base->ntype;
 
       while (vnames != varList->end()) {
@@ -235,7 +236,7 @@ class Variable : public Expression {
             ArrayType* array = (ArrayType *) type;
             std::vector<int>* dimensions = array->findDimensions();
 
-            std::string res_fin = res;
+            ExpQuad * res_fin = res;
 
             res = indexes->second->generateTAC(generator, table);
             ++indexes;
@@ -256,21 +257,22 @@ class Variable : public Expression {
 
               std::stringstream toString;
               toString << offset_num_dims + 4 + (4 * i); // El primer 4 es por la primera dimension que no se usa
-              std::string arg2 = toString.str();
-              AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", arg2);
+              ConstQuad * arg2 = new ConstQuad(offset_num_dims + 4 + (4 * i));
+              VarQuad * bp = new VarQuad("bp");
+              AddQuad * add = new AddQuad(new VarQuad(generator->labelmaker->getLabel(TEMPORAL)), bp, arg2);
               generator->gen(add);
-              std::string dimension = generator->labelmaker->getLabel(TEMPORAL);
+              VarQuad * dimension = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               DerefQuad * deref = new DerefQuad(dimension, add->getResult());
               generator->gen(deref);
-              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               MulQuad *mult = new MulQuad(result, res, deref->getResult());
               generator->gen(mult);
               res = mult->result;
 
-              arg2 = indexes->second->generateTAC(generator, table);
+              ExpQuad * arg = indexes->second->generateTAC(generator, table);
               ++indexes;
-              result = generator->labelmaker->getLabel(TEMPORAL);
-              add = new AddQuad(result, res, arg2);
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
+              add = new AddQuad(result, res, arg);
               generator->gen(add);
               res = add->result;
 
@@ -279,18 +281,19 @@ class Variable : public Expression {
 
             std::stringstream toString;
             toString << offset_tam;
-            std::string size = toString.str();
-            AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", size);
+            ConstQuad * size = new ConstQuad(offset_tam);
+            VarQuad * bp = new VarQuad("bp");
+            AddQuad * add = new AddQuad(new VarQuad(generator->labelmaker->getLabel(TEMPORAL)), bp, size);
             generator->gen(add);
-            DerefQuad * deref = new DerefQuad(generator->labelmaker->getLabel(TEMPORAL), add->getResult());
+            DerefQuad * deref = new DerefQuad(new VarQuad(generator->labelmaker->getLabel(TEMPORAL)), add->getResult());
             generator->gen(deref);
-            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
             MulQuad * mult = new MulQuad(result, res, deref->getResult());
             generator->gen(mult);
             res = mult->result;
 
-            if (EMPTY_LABEL != res_fin) {
-              result = generator->labelmaker->getLabel(TEMPORAL);
+            if (NULL != res_fin) {
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               AddQuad * add = new AddQuad(result, res, res_fin);
               generator->gen(add);
               res = add->result;
@@ -301,7 +304,7 @@ class Variable : public Expression {
             ArrayType* array = (ArrayType *) type;
             std::vector<int>* dimensions = array->findDimensions();
 
-            std::string res_fin = res;
+            ExpQuad * res_fin = res;
 
             res = indexes->second->generateTAC(generator, table);
             ++indexes;
@@ -313,16 +316,16 @@ class Variable : public Expression {
 
               std::stringstream toString;
               toString << (*dimensions)[i];
-              std::string arg2 = toString.str();
-              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              ConstQuad * arg2 = new ConstQuad((*dimensions)[i]);
+              VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               MulQuad *mult = new MulQuad(result, res, arg2);
               generator->gen(mult);
               res = mult->result;
 
-              arg2 = indexes->second->generateTAC(generator, table);
+              ExpQuad * arg = indexes->second->generateTAC(generator, table);
               ++indexes;
-              result = generator->labelmaker->getLabel(TEMPORAL);
-              AddQuad *add = new AddQuad(result, res, arg2);
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
+              AddQuad *add = new AddQuad(result, res, arg);
               generator->gen(add);
               res = add->result;
 
@@ -331,14 +334,14 @@ class Variable : public Expression {
 
             std::stringstream toString;
             toString << type->size;
-            std::string size = toString.str();
-            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            ConstQuad * size = new ConstQuad(type->size);
+            VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
             MulQuad * mult = new MulQuad(result, res, size);
             generator->gen(mult);
             res = mult->result;
 
-            if (EMPTY_LABEL != res_fin) {
-              result = generator->labelmaker->getLabel(TEMPORAL);
+            if (NULL != res_fin) {
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               AddQuad * add = new AddQuad(result, res, res_fin);
               generator->gen(add);
               res = add->result;
@@ -353,15 +356,15 @@ class Variable : public Expression {
           TupleType * tuple = (TupleType *) type;
           std::pair<TypeDeclaration*, int> *attribute = tuple->findAttribute((*vnames)->value);
 
-          if (EMPTY_LABEL == res) {
+          if (NULL == res) {
             std::stringstream toString;
             toString << attribute->second;
-            res = toString.str();
+            res = new ConstQuad(attribute->second);
           } else {
             std::stringstream toString;
             toString << attribute->second;
-            std::string size = toString.str();
-            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            ConstQuad * size = new ConstQuad(attribute->second);
+            VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
             AddQuad * add = new AddQuad(result, res, size);
             generator->gen(add);
             res = add->result;
@@ -373,8 +376,9 @@ class Variable : public Expression {
         }
       }
 
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
-      AssignArrayQuad *assign = new AssignArrayQuad(result, base->name, res);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
+      VarQuad * basevar = new VarQuad(base->name, base->offset, base->porref, base->isarg, base->ntype->size, base->ntype->numtype);
+      AssignArrayQuad *assign = new AssignArrayQuad(result, basevar, res);
       generator->gen(assign);
 
       return result;
@@ -385,22 +389,22 @@ class Variable : public Expression {
     }
 
     void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
-      std::string res = this->generateTAC(generator, table);
+      ExpQuad * res = this->generateTAC(generator, table);
 
       if ( "fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(res, trueLabel);
+        IfQuad *if_instr = new IfQuad(res, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(res, trueLabel);
+        IfQuad *if_instr = new IfQuad(res, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(res, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(res, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {
@@ -411,7 +415,9 @@ class Variable : public Expression {
       if (varList->size() == 1 && indexList->size() == 0) {
         std::string var(varList->front()->value);
         std::transform(var.begin(), var.end(), var.begin(), ::tolower);
-        return new AssignQuad(var, "");
+        Symbol * v = table->find(var);
+        VarQuad * variable = new VarQuad(var, v->offset, v->porref, v->isarg, v->ntype->size, v->ntype->numtype);
+        return new AssignQuad(variable, NULL);
       }
 
       std::list<Xplode::Token *>::iterator vnames;
@@ -423,10 +429,10 @@ class Variable : public Expression {
       vnamesaux = varList->begin();
       ++vnamesaux;
       indexes = indexList->begin();
-      std::string res;
+      ExpQuad * res;
 
       Symbol *base = table->find((*vnames)->value);
-      res = EMPTY_LABEL;
+      res = NULL;
       TypeDeclaration *type = base->ntype;
 
       while (vnames != varList->end()) {
@@ -441,7 +447,7 @@ class Variable : public Expression {
             ArrayType* array = (ArrayType *) type;
             std::vector<int>* dimensions = array->findDimensions();
 
-            std::string res_fin = res;
+            ExpQuad * res_fin = res;
 
             res = indexes->second->generateTAC(generator, table);
             ++indexes;
@@ -456,25 +462,27 @@ class Variable : public Expression {
             offset_datos += 4; // Desplazamiento final para donde están los datos (dirección)
 
             for (int i=1; i<dimensions->size(); ++i) {
+
               if ((vnamesaux == varList->end()) && (indexes == indexList->end())) break;
 
               std::stringstream toString;
               toString << offset_num_dims + 4 + (4 * i); // El primer 4 es por la primera dimension que no se usa
-              std::string arg2 = toString.str();
-              AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", arg2);
+              ConstQuad * arg2 = new ConstQuad(offset_num_dims + 4 + (4 * i));
+              VarQuad * bp = new VarQuad("bp");
+              AddQuad * add = new AddQuad(new VarQuad(generator->labelmaker->getLabel(TEMPORAL)), bp, arg2);
               generator->gen(add);
-              std::string dimension = generator->labelmaker->getLabel(TEMPORAL);
+              VarQuad * dimension = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               DerefQuad * deref = new DerefQuad(dimension, add->getResult());
               generator->gen(deref);
-              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               MulQuad *mult = new MulQuad(result, res, deref->getResult());
               generator->gen(mult);
               res = mult->result;
 
-              arg2 = indexes->second->generateTAC(generator, table);
+              ExpQuad * arg = indexes->second->generateTAC(generator, table);
               ++indexes;
-              result = generator->labelmaker->getLabel(TEMPORAL);
-              add = new AddQuad(result, res, arg2);
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
+              add = new AddQuad(result, res, arg);
               generator->gen(add);
               res = add->result;
 
@@ -484,18 +492,19 @@ class Variable : public Expression {
 
             std::stringstream toString;
             toString << offset_tam;
-            std::string size = toString.str();
-            AddQuad * add = new AddQuad(generator->labelmaker->getLabel(TEMPORAL), "bp", size);
+            ConstQuad * size = new ConstQuad(offset_tam);
+            VarQuad * bp = new VarQuad("bp");
+            AddQuad * add = new AddQuad(new VarQuad(generator->labelmaker->getLabel(TEMPORAL)), bp, size);
             generator->gen(add);
-            DerefQuad * deref = new DerefQuad(generator->labelmaker->getLabel(TEMPORAL), add->getResult());
+            DerefQuad * deref = new DerefQuad(new VarQuad(generator->labelmaker->getLabel(TEMPORAL)), add->getResult());
             generator->gen(deref);
-            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
             MulQuad * mult = new MulQuad(result, res, deref->getResult());
             generator->gen(mult);
             res = mult->result;
 
-            if (EMPTY_LABEL != res_fin) {
-              result = generator->labelmaker->getLabel(TEMPORAL);
+            if (NULL != res_fin) {
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               AddQuad * add = new AddQuad(result, res, res_fin);
               generator->gen(add);
               res = add->result;
@@ -506,7 +515,7 @@ class Variable : public Expression {
             ArrayType* array = (ArrayType *) type;
             std::vector<int>* dimensions = array->findDimensions();
 
-            std::string res_fin = res;
+            ExpQuad * res_fin = res;
 
             res = indexes->second->generateTAC(generator, table);
             ++indexes;
@@ -517,16 +526,16 @@ class Variable : public Expression {
 
               std::stringstream toString;
               toString << (*dimensions)[i];
-              std::string arg2 = toString.str();
-              std::string result = generator->labelmaker->getLabel(TEMPORAL);
+              ConstQuad * arg2 = new ConstQuad((*dimensions)[i]);
+              VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               MulQuad *mult = new MulQuad(result, res, arg2);
               generator->gen(mult);
               res = mult->result;
 
-              arg2 = indexes->second->generateTAC(generator, table);
+              ExpQuad * arg = indexes->second->generateTAC(generator, table);
               ++indexes;
-              result = generator->labelmaker->getLabel(TEMPORAL);
-              AddQuad *add = new AddQuad(result, res, arg2);
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
+              AddQuad *add = new AddQuad(result, res, arg);
               generator->gen(add);
               res = add->result;
 
@@ -536,14 +545,14 @@ class Variable : public Expression {
 
             std::stringstream toString;
             toString << type->size;
-            std::string size = toString.str();
-            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            ConstQuad * size = new ConstQuad(type->size);
+            VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
             MulQuad * mult = new MulQuad(result, res, size);
             generator->gen(mult);
             res = mult->result;
 
-            if (EMPTY_LABEL != res_fin) {
-              result = generator->labelmaker->getLabel(TEMPORAL);
+            if (NULL != res_fin) {
+              result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
               AddQuad * add = new AddQuad(result, res, res_fin);
               generator->gen(add);
               res = add->result;
@@ -558,15 +567,15 @@ class Variable : public Expression {
           TupleType * tuple = (TupleType *) type;
           std::pair<TypeDeclaration*, int> *attribute = tuple->findAttribute((*vnames)->value);
 
-          if (EMPTY_LABEL == res) {
+          if (NULL == res) {
             std::stringstream toString;
             toString << attribute->second;
-            res = toString.str();
+            res = new ConstQuad(attribute->second);
           } else {
             std::stringstream toString;
             toString << attribute->second;
-            std::string size = toString.str();
-            std::string result = generator->labelmaker->getLabel(TEMPORAL);
+            ConstQuad * size = new ConstQuad(attribute->second);
+            VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
             AddQuad * add = new AddQuad(result, res, size);
             generator->gen(add);
             res = add->result;
@@ -578,8 +587,9 @@ class Variable : public Expression {
         }
       }
 
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
-      AssignToArrayQuad *assign = new AssignToArrayQuad(base->name, res, "");
+      VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
+      VarQuad * basevar = new VarQuad(base->name, base->offset, base->porref, base->isarg, base->ntype->size, base->ntype->numtype);
+      AssignToArrayQuad *assign = new AssignToArrayQuad(basevar, res, NULL);
 
       return assign;
 

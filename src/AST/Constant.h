@@ -31,13 +31,13 @@ class Constant : public Expression {
       return value;
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
+    ExpQuad * generateTAC(GeneratorTAC *generator, SymTable *table) {
       if (ntype->isstring()) {
         std::string id = generator->labelmaker->getLabel("string_" + getLineStr() + "_");
         generator->addString(id, value);
-        return id;
+        return new VarQuad(id);
       }
-      return toString(table);
+      return new VarQuad(toString(table));
     }
 
     virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
@@ -45,7 +45,7 @@ class Constant : public Expression {
         if ( "fall" == trueLabel ) {
           return;
         } else {
-          GotoQuad *goto_instr = new GotoQuad(trueLabel);
+          GotoQuad *goto_instr = new GotoQuad(new VarQuad(trueLabel));
           generator->gen(goto_instr);
           generator->new_block();
         }
@@ -53,7 +53,7 @@ class Constant : public Expression {
         if ( "fall" == falseLabel ) {
           return;
         } else {
-          GotoQuad *goto_instr = new GotoQuad(falseLabel);
+          GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
           generator->gen(goto_instr);
           generator->new_block();
         }

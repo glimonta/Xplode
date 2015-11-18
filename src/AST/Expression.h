@@ -23,7 +23,7 @@ class Expression : public Node {
 
     virtual std::string toString(SymTable *table) {}
 
-    virtual std::string generateTAC(GeneratorTAC *generator, SymTable * table) {}
+    virtual ExpQuad * generateTAC(GeneratorTAC *generator, SymTable * table) {}
 
     virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {}
 

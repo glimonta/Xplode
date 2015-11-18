@@ -42,9 +42,9 @@ class UnaryOp : public Expression {
       return opname + " " + exp->toString(table);
     }
 
-    std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-      std::string a1 = exp->generateTAC(generator, table);
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+    ExpQuad * generateTAC(GeneratorTAC *generator, SymTable *table) {
+      ExpQuad * a1 = exp->generateTAC(generator, table);
+      VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
 
       if(opname=="UMINUS"){
         UnaryMinusQuad *unop = new UnaryMinusQuad(result, a1);

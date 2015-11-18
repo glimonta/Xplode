@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <stdio.h>
+#include "ExpQuad.h"
 #include "../MIPS/MipsInstruction.h"
 #include "../MIPS/MipsArgument.h"
 
@@ -18,31 +19,34 @@ class Quad {
   public:
 
     std::string op;
-    std::string result;
-    std::string arg1;
-    std::string arg2;
+    ExpQuad * result;
+    ExpQuad * arg1;
+    ExpQuad * arg2;
 
     Quad(){}
 
-    Quad(std::string o, std::string r, std::string a1, std::string a2){
+    Quad(std::string o, ExpQuad * r, ExpQuad * a1, ExpQuad * a2){
       op = o;
       result = r;
       arg1 = a1;
       arg2 = a2;
     }
 
-    std::string getOp()     { return op;     }
-    std::string getResult() { return result; }
-    std::string getArg1()   { return arg1;   }
-    std::string getArg2()   { return arg2;   }
+    std::string getOp()        { return op;                                         }
+    std::string getResultStr() { return (NULL != result) ? result->toString() : ""; }
+    std::string getArg1Str()   { return (NULL != arg1)   ? arg1->toString()   : ""; }
+    std::string getArg2Str()   { return (NULL != arg2)   ? arg2->toString()   : ""; }
+    ExpQuad * getResult()      { return result;                                     }
+    ExpQuad * getArg1()        { return arg1;                                       }
+    ExpQuad * getArg2()        { return arg2;                                       }
 
-    void setOp(std::string o)     { op = o;    }
-    void setResult(std::string r) { r = r;     }
-    void setArg1(std::string a1)  { arg1 = a1; }
-    void setArg2(std::string a2)  { arg2 = a2; }
+    void setOp(std::string o)   { op = o;    }
+    void setResult(ExpQuad * r) { r = r;     }
+    void setArg1(ExpQuad * a1)  { arg1 = a1; }
+    void setArg2(ExpQuad * a2)  { arg2 = a2; }
 
     virtual std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1() + " " + getArg2();
+      return getOp() + " " + getResultStr() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -50,7 +54,7 @@ class Quad {
 class Comment : public Quad {
   public:
 
-    Comment(std::string comment) : Quad(comment, "", "", "") {}
+    Comment(std::string comment) : Quad(comment, NULL, NULL, NULL) {}
 
     std::string toString() {
       return "#" + getOp();
@@ -65,11 +69,11 @@ class Comment : public Quad {
 class BlockComment : public Quad {
   public:
 
-    BlockComment(std::string comment) : Quad(comment, "", "", "") {}
+    BlockComment(std::string comment) : Quad(comment, NULL, NULL, NULL) {}
 
     std::string toString() {
       return "#############################################################\n#"
-          + getOp()
+          + getOp() + "\n"
           + "#############################################################\n\n";
     }
 
@@ -82,7 +86,7 @@ class BlockComment : public Quad {
 class Label : public Quad {
   public:
 
-    Label(std::string comment) : Quad(comment, "", "", "") {}
+    Label(std::string comment) : Quad(comment, NULL, NULL, NULL) {}
 
     std::string toString() {
       return getOp() + ":";
@@ -97,10 +101,10 @@ class Label : public Quad {
 class AssignQuad : public Quad {
   public:
 
-    AssignQuad(std::string r, std::string a1) : Quad(":=", r, a1, "") {}
+    AssignQuad(ExpQuad * r, ExpQuad * a1) : Quad(":=", r, a1, NULL) {}
 
     std::string toString() {
-      return  getResult() + " " + getOp() + " " +getArg1();
+      return  getResultStr() + " " + getOp() + " " +getArg1Str();
     }
 
 };
@@ -108,10 +112,10 @@ class AssignQuad : public Quad {
 class AssignArrayQuad : public Quad {
   public:
 
-    AssignArrayQuad(std::string r, std::string a1, std::string a2) : Quad(":=[]", r, a1, a2) {}
+    AssignArrayQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad(":=[]", r, a1, a2) {}
 
     std::string toString() {
-      return  getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return  getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -119,10 +123,10 @@ class AssignArrayQuad : public Quad {
 class AssignToArrayQuad : public Quad {
   public:
 
-    AssignToArrayQuad(std::string r, std::string a1, std::string a2) : Quad("[]:=", r, a1, a2) {}
+    AssignToArrayQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("[]:=", r, a1, a2) {}
 
     std::string toString() {
-      return  getResult() + " " + getArg1() + " " + getOp() + " " +getArg2();
+      return  getResultStr() + " " + getArg1Str() + " " + getOp() + " " +getArg2Str();
     }
 
 };
@@ -130,10 +134,10 @@ class AssignToArrayQuad : public Quad {
 class AddQuad : public Quad {
   public:
 
-    AddQuad(std::string r, std::string a1, std::string a2) : Quad("+", r, a1, a2) {}
+    AddQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("+", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -141,10 +145,10 @@ class AddQuad : public Quad {
 class SubQuad : public Quad {
   public:
 
-    SubQuad(std::string r, std::string a1, std::string a2) : Quad("-", r, a1, a2) {}
+    SubQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("-", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -152,10 +156,10 @@ class SubQuad : public Quad {
 class MulQuad : public Quad {
   public:
 
-    MulQuad(std::string r, std::string a1, std::string a2) : Quad("*", r, a1, a2) {}
+    MulQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("*", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -163,10 +167,10 @@ class MulQuad : public Quad {
 class DivQuad : public Quad {
   public:
 
-    DivQuad(std::string r, std::string a1, std::string a2) : Quad("/", r, a1, a2) {}
+    DivQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("/", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -174,10 +178,10 @@ class DivQuad : public Quad {
 class ModQuad : public Quad {
   public:
 
-    ModQuad(std::string r, std::string a1, std::string a2) : Quad("%", r, a1, a2) {}
+    ModQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("%", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -185,10 +189,10 @@ class ModQuad : public Quad {
 class LessQuad : public Quad {
   public:
 
-    LessQuad(std::string r, std::string a1, std::string a2) : Quad("<", r, a1, a2) {}
+    LessQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("<", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -196,10 +200,10 @@ class LessQuad : public Quad {
 class LessEqualQuad : public Quad {
   public:
 
-    LessEqualQuad(std::string r, std::string a1, std::string a2) : Quad("<=", r, a1, a2) {}
+    LessEqualQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("<=", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -207,10 +211,10 @@ class LessEqualQuad : public Quad {
 class GreaterQuad : public Quad {
   public:
 
-    GreaterQuad(std::string r, std::string a1, std::string a2) : Quad(">", r, a1, a2) {}
+    GreaterQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad(">", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -218,10 +222,10 @@ class GreaterQuad : public Quad {
 class GreaterEqualQuad : public Quad {
   public:
 
-    GreaterEqualQuad(std::string r, std::string a1, std::string a2) : Quad(">=", r, a1, a2) {}
+    GreaterEqualQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad(">=", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -229,10 +233,10 @@ class GreaterEqualQuad : public Quad {
 class EqualQuad : public Quad {
   public:
 
-    EqualQuad(std::string r, std::string a1, std::string a2) : Quad("==", r, a1, a2) {}
+    EqualQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("==", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -240,10 +244,10 @@ class EqualQuad : public Quad {
 class NotEqualQuad : public Quad {
   public:
 
-    NotEqualQuad(std::string r, std::string a1, std::string a2) : Quad("!=", r, a1, a2) {}
+    NotEqualQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("!=", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -251,10 +255,10 @@ class NotEqualQuad : public Quad {
 class AndQuad : public Quad {
   public:
 
-    AndQuad(std::string r, std::string a1, std::string a2) : Quad("&&", r, a1, a2) {}
+    AndQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("&&", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -262,10 +266,10 @@ class AndQuad : public Quad {
 class OrQuad : public Quad {
   public:
 
-    OrQuad(std::string r, std::string a1, std::string a2) : Quad("||", r, a1, a2) {}
+    OrQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("||", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -273,10 +277,10 @@ class OrQuad : public Quad {
 class IfQuad : public Quad {
   public:
 
-    IfQuad(std::string r, std::string a2) : Quad("if", r, "goto", a2) {}
+    IfQuad(ExpQuad * r, ExpQuad * a2) : Quad("if", r, new GotoConstQuad(), a2) {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1() + " " + getArg2();
+      return getOp() + " " + getResultStr() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -284,10 +288,10 @@ class IfQuad : public Quad {
 class IfNotQuad : public Quad {
   public:
 
-    IfNotQuad(std::string r, std::string a2) : Quad("ifnot", r, "goto", a2) {}
+    IfNotQuad(ExpQuad * r, ExpQuad * a2) : Quad("ifnot", r, new GotoConstQuad(), a2) {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1() + " " + getArg2();
+      return getOp() + " " + getResultStr() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -295,10 +299,10 @@ class IfNotQuad : public Quad {
 class GotoQuad : public Quad {
   public:
 
-    GotoQuad(std::string r) : Quad("goto", r, "", "") {}
+    GotoQuad(ExpQuad * r) : Quad("goto", r, NULL, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult();
+      return getOp() + " " + getResultStr();
     }
 
 };
@@ -306,10 +310,10 @@ class GotoQuad : public Quad {
 class ParamQuad : public Quad {
   public:
 
-    ParamQuad(std::string a1) : Quad("param", "", a1, "") {}
+    ParamQuad(ExpQuad * a1) : Quad("param", NULL, a1, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1();
+      return getOp() + " " + getArg1Str();
     }
 
 };
@@ -317,10 +321,10 @@ class ParamQuad : public Quad {
 class ParamRefQuad : public Quad {
   public:
 
-    ParamRefQuad(std::string r, std::string a1, std::string a2) : Quad("param_ref", r, a1, a2) {}
+    ParamRefQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("param_ref", r, a1, a2) {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1() + " " + getArg2();
+      return getOp() + " " + getResultStr() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -328,10 +332,10 @@ class ParamRefQuad : public Quad {
 class FunctionCallReturn : public Quad {
   public:
 
-    FunctionCallReturn(std::string r, std::string a1, std::string a2) : Quad("call", r, a1, a2) {}
+    FunctionCallReturn(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("call", r, a1, a2) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1() + " " + getArg2();
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
     }
 
 };
@@ -339,10 +343,10 @@ class FunctionCallReturn : public Quad {
 class UnaryMinusQuad : public Quad {
   public:
 
-    UnaryMinusQuad(std::string r, std::string a1) : Quad("neg", r, a1, "") {}
+    UnaryMinusQuad(ExpQuad * r, ExpQuad * a1) : Quad("neg", r, a1, NULL) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1();
+      return getResultStr() + " " + getOp() + " " + getArg1Str();
     }
 
 };
@@ -350,10 +354,10 @@ class UnaryMinusQuad : public Quad {
 class NotQuad : public Quad {
   public:
 
-    NotQuad(std::string r, std::string a1) : Quad("not", r, a1, "") {}
+    NotQuad(ExpQuad * r, ExpQuad * a1) : Quad("not", r, a1, NULL) {}
 
     std::string toString() {
-      return getResult() + " " + getOp() + " " + getArg1();
+      return getResultStr() + " " + getOp() + " " + getArg1Str();
     }
 
 };
@@ -361,10 +365,10 @@ class NotQuad : public Quad {
 class CastQuad : public Quad {
   public:
 
-    CastQuad(std::string o, std::string r, std::string a1) : Quad(o, r, a1, "") {}
+    CastQuad(std::string o, ExpQuad * r, ExpQuad * a1) : Quad(o, r, a1, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1();
+      return getOp() + " " + getResultStr() + " " + getArg1Str();
     }
 
 };
@@ -372,14 +376,14 @@ class CastQuad : public Quad {
 class WriteQuad : public Quad {
   public:
 
-    WriteQuad(std::string r) : Quad("write", r, "", "") {}
+    WriteQuad(ExpQuad * r) : Quad("write", r, NULL, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult();
+      return getOp() + " " + getResultStr();
     }
 
     void generateMips(std::vector<MipsInstruction *> *instructions) {
-      instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResult())));
+      instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResultStr())));
       instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(4)));
       instructions->push_back(new SyscallMips());
     }
@@ -389,16 +393,16 @@ class WriteQuad : public Quad {
 class ReadQuad : public Quad {
   public:
 
-    ReadQuad(std::string r, std::string a1) : Quad("read", r, a1, "") {}
+    ReadQuad(ExpQuad * r, ExpQuad * a1) : Quad("read", r, a1, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1();
+      return getOp() + " " + getResultStr() + " " + getArg1Str();
     }
 
     // Primer intento en un generateMips para read, falta considerar la dirección a la que se va a leer
     //void generateMips(std::vector<MipsInstruction *> *instructions) {
-    //  instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResult())));
-    //  int size = atoi(getArg1().c_str());
+    //  instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResultStr())));
+    //  int size = atoi(getArg1Str().c_str());
     //  instructions->push_back(new LoadImmMips(new MipsRegister(5), new MipsImmediate(size)));
     //  instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(8)));
     //  instructions->push_back(new SyscallMips());
@@ -409,10 +413,10 @@ class ReadQuad : public Quad {
 class SleepQuad : public Quad {
   public:
 
-    SleepQuad(std::string r) : Quad("sleep", r, "", "") {}
+    SleepQuad(ExpQuad * r) : Quad("sleep", r, NULL, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult();
+      return getOp() + " " + getResultStr();
     }
 
 };
@@ -420,7 +424,7 @@ class SleepQuad : public Quad {
 class ReturnQuad : public Quad {
   public:
 
-    ReturnQuad() : Quad("return", "", "", "") {}
+    ReturnQuad() : Quad("return", NULL, NULL, NULL) {}
 
     std::string toString() {
       return getOp();
@@ -431,10 +435,10 @@ class ReturnQuad : public Quad {
 class ReturnExpQuad : public Quad {
   public:
 
-    ReturnExpQuad(std::string r) : Quad("return", r, "", "") {}
+    ReturnExpQuad(ExpQuad * r) : Quad("return", r, NULL, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult();
+      return getOp() + " " + getResultStr();
     }
 
 };
@@ -442,7 +446,7 @@ class ReturnExpQuad : public Quad {
 class ExitQuad : public Quad {
   public:
 
-    ExitQuad() : Quad("exit", "", "", "") {}
+    ExitQuad() : Quad("exit", NULL, NULL, NULL) {}
 
     std::string toString() {
       return getOp();
@@ -458,10 +462,10 @@ class ExitQuad : public Quad {
 class DerefQuad : public Quad {
   public:
 
-    DerefQuad(std::string r, std::string a1) : Quad("=*", r, a1, "") {}
+    DerefQuad(ExpQuad * r, ExpQuad * a1) : Quad("=*", r, a1, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1();
+      return getOp() + " " + getResultStr() + " " + getArg1Str();
     }
 
 };
@@ -469,10 +473,10 @@ class DerefQuad : public Quad {
 class RefQuad : public Quad {
   public:
 
-    RefQuad(std::string r, std::string a1) : Quad("*=", r, a1, "") {}
+    RefQuad(ExpQuad * r, ExpQuad * a1) : Quad("*=", r, a1, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResult() + " " + getArg1();
+      return getOp() + " " + getResultStr() + " " + getArg1Str();
     }
 
 };

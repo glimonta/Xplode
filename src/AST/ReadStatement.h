@@ -34,16 +34,16 @@ class ReadStatement : public Statement {
 
   void generateTAC(GeneratorTAC * generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
     Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción read");
-    std::string res = generator->labelmaker->getLabel(TEMPORAL);
+    VarQuad * res = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
     std::stringstream toString;
     toString << var->ntype->numtype;
-    std::string numtype = toString.str();
+    ConstQuad * numtype = new ConstQuad(var->ntype->numtype);
     ReadQuad * read = new ReadQuad(res, numtype);
     generator->gen(read);
 
     Quad * instr = var->lval_generateTAC(generator, table);
 
-    if ("" == instr->arg1) {
+    if (NULL == instr->arg1) {
       instr->arg1 = res;
     } else {
       instr->arg2 = res;

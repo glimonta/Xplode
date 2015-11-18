@@ -1,8 +1,8 @@
 string_7_1 : "doing something!"
 
-##############################################################
+#############################################################
 #B1
-##############################################################
+#############################################################
 
 
 #Este es el código generado por la linea 32 de la llamada a la función: wtf_this_parameters
@@ -37,13 +37,14 @@ t16 :=[] yo t15
 param t16
 t17 call wtf_this_parameters 3
 exit
-##############################################################
+#############################################################
 #B2
-##############################################################
+#############################################################
 
 
 #Definición de Función wtf_this_parameters: linea 3
 wtf_this_parameters:
+#Este es el código generado por la linea 4 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
 t18 + bp 24
 =* t19 t18
@@ -58,6 +59,7 @@ t26 + bp 12
 t28 * t25 t27
 t29 :=[] par1 t28
 write t29
+#Este es el código generado por la linea 5 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
 t30 + bp 48
 =* t31 t30
@@ -72,4 +74,5 @@ t38 + bp 36
 t40 * t37 t39
 t41 :=[] par3 t40
 write t41
+#Este es el código generado por la linea 6 de la instrucción write
 write string_7_1

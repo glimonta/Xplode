@@ -34,9 +34,9 @@ class CastedExpression : public Expression {
     return cname + " " + exp->toString(table);
   }
 
-  std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-    std::string left = exp->generateTAC(generator, table);
-    std::string res = generator->labelmaker->getLabel(TEMPORAL);
+  ExpQuad * generateTAC(GeneratorTAC *generator, SymTable *table) {
+    ExpQuad * left = exp->generateTAC(generator, table);
+    ExpQuad * res = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
     CastQuad *cast = new CastQuad(cname, res, left);
     generator->gen(cast);
 

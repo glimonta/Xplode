@@ -40,7 +40,7 @@ class WriteStatement : public Statement {
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción write");
       generator->gen(comment);
       for (std::list<Expression *>::iterator i = writeList->begin(); i != writeList->end(); ++i) {
-        std::string exp = (*i)->generateTAC(generator, table);
+        ExpQuad * exp = (*i)->generateTAC(generator, table);
         WriteQuad *write = new WriteQuad(exp);
         generator->gen(write);
       }

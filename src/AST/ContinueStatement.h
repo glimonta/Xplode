@@ -27,7 +27,7 @@ class ContinueStatement : public Statement {
       Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción continue");
       generator->gen(comment);
 
-      GotoQuad *goto_instr = new GotoQuad(continueLabel);
+      GotoQuad *goto_instr = new GotoQuad(new VarQuad(continueLabel));
       generator->gen(goto_instr);
 
       generator->new_block();

@@ -36,7 +36,7 @@ class ReturnStatement : public Statement {
         ReturnQuad *ret_instr = new ReturnQuad();
         generator->gen(ret_instr);
       } else {
-        std::string res = exp->generateTAC(generator, table);
+        ExpQuad * res = exp->generateTAC(generator, table);
         ReturnExpQuad *ret_instr = new ReturnExpQuad(res);
         generator->gen(ret_instr);
       }

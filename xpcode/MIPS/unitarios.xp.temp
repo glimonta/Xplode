@@ -1,12 +1,13 @@
 
-##############################################################
+#############################################################
 #B1
-##############################################################
+#############################################################
 
 
 #Este es el código generado por la linea 22 de la instrucción a[7] := 98
 t1 * 7 4
 a t1 []:= 98
+#Este es el código generado por la linea 24 de la instrucción write
 t3 * 7 4
 t4 :=[] a t3
 write t4
@@ -17,17 +18,19 @@ param 20
 param 1
 param 4
 t5 call prueba 1
+#Este es el código generado por la linea 26 de la instrucción write
 t6 * 7 4
 t7 :=[] a t6
 write t7
 exit
-##############################################################
+#############################################################
 #B2
-##############################################################
+#############################################################
 
 
 #Definición de Función prueba: linea 3
 prueba:
+#Este es el código generado por la linea 6 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
 t8 + bp 8
 =* t9 t8

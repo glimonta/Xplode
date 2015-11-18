@@ -40,10 +40,10 @@ class BinaryExpression : public Expression {
     return lexp->toString(table) + " " + opname + " " + rexp->toString(table);
   }
 
-  std::string generateTAC(GeneratorTAC *generator, SymTable *table) {
-    std::string leftop = lexp->generateTAC(generator, table);
-    std::string rightop = rexp->generateTAC(generator, table);
-    std::string result = generator->labelmaker->getLabel(TEMPORAL);
+  ExpQuad * generateTAC(GeneratorTAC *generator, SymTable *table) {
+    ExpQuad * leftop = lexp->generateTAC(generator, table);
+    ExpQuad * rightop = rexp->generateTAC(generator, table);
+    ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
     std::string op = opname;
 
     if ("+" == opname) {
@@ -93,9 +93,9 @@ class BinaryExpression : public Expression {
   virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {
     // FIXME creo que hay un error en el or porque creo que se genera un goto extra
     if ( "<" == opname ) {
-      std::string leftop = lexp->generateTAC(generator, table);
-      std::string rightop = rexp->generateTAC(generator, table);
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      ExpQuad * leftop = lexp->generateTAC(generator, table);
+      ExpQuad * rightop = rexp->generateTAC(generator, table);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
       std::string op = opname;
 
       LessQuad *binop = new LessQuad(result, leftop, rightop);
@@ -103,27 +103,27 @@ class BinaryExpression : public Expression {
 
 
       if ("fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(result, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {
       }
     } else if ( "<=" == opname ) {
-      std::string leftop = lexp->generateTAC(generator, table);
-      std::string rightop = rexp->generateTAC(generator, table);
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      ExpQuad * leftop = lexp->generateTAC(generator, table);
+      ExpQuad * rightop = rexp->generateTAC(generator, table);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
       std::string op = opname;
 
       LessEqualQuad *binop = new LessEqualQuad(result, leftop, rightop);
@@ -131,27 +131,27 @@ class BinaryExpression : public Expression {
 
 
       if ("fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(result, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {
       }
     } else if ( ">" == opname ) {
-      std::string leftop = lexp->generateTAC(generator, table);
-      std::string rightop = rexp->generateTAC(generator, table);
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      ExpQuad * leftop = lexp->generateTAC(generator, table);
+      ExpQuad * rightop = rexp->generateTAC(generator, table);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
       std::string op = opname;
 
       GreaterQuad *binop = new GreaterQuad(result, leftop, rightop);
@@ -159,27 +159,27 @@ class BinaryExpression : public Expression {
 
 
       if ("fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(result, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {
       }
     } else if ( ">=" == opname ) {
-      std::string leftop = lexp->generateTAC(generator, table);
-      std::string rightop = rexp->generateTAC(generator, table);
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      ExpQuad * leftop = lexp->generateTAC(generator, table);
+      ExpQuad * rightop = rexp->generateTAC(generator, table);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
       std::string op = opname;
 
       GreaterEqualQuad *binop = new GreaterEqualQuad(result, leftop, rightop);
@@ -187,27 +187,27 @@ class BinaryExpression : public Expression {
 
 
       if ("fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(result, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {
       }
     } else if ( "==" == opname ) {
-      std::string leftop = lexp->generateTAC(generator, table);
-      std::string rightop = rexp->generateTAC(generator, table);
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      ExpQuad * leftop = lexp->generateTAC(generator, table);
+      ExpQuad * rightop = rexp->generateTAC(generator, table);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
       std::string op = opname;
 
       EqualQuad *binop = new EqualQuad(result, leftop, rightop);
@@ -215,27 +215,27 @@ class BinaryExpression : public Expression {
 
 
       if ("fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(result, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {
       }
     } else if ( "!=" == opname ) {
-      std::string leftop = lexp->generateTAC(generator, table);
-      std::string rightop = rexp->generateTAC(generator, table);
-      std::string result = generator->labelmaker->getLabel(TEMPORAL);
+      ExpQuad * leftop = lexp->generateTAC(generator, table);
+      ExpQuad * rightop = rexp->generateTAC(generator, table);
+      ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
       std::string op = opname;
 
       NotEqualQuad *binop = new NotEqualQuad(result, leftop, rightop);
@@ -243,19 +243,19 @@ class BinaryExpression : public Expression {
 
 
       if ("fall" != trueLabel && "fall" != falseLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
 
-        GotoQuad *goto_instr = new GotoQuad(falseLabel);
+        GotoQuad *goto_instr = new GotoQuad(new VarQuad(falseLabel));
         generator->gen(goto_instr);
         generator->new_block();
       } else if ("fall" != trueLabel) {
-        IfQuad *if_instr = new IfQuad(result, trueLabel);
+        IfQuad *if_instr = new IfQuad(result, new VarQuad(trueLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else if ("fall" != falseLabel) {
-        IfNotQuad *if_instr = new IfNotQuad(result, falseLabel);
+        IfNotQuad *if_instr = new IfNotQuad(result, new VarQuad(falseLabel));
         generator->gen(if_instr);
         generator->new_block();
       } else {

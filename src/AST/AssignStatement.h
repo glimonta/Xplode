@@ -44,10 +44,10 @@ class AssignStatement : public Statement {
     Comment *comment = new Comment("Este es el código generado por la linea " + this->getLineStr() + " de la instrucción " + toString(table));
     generator->gen(comment);
 
-    std::string rightop = rvalue->generateTAC(generator, table);
+    ExpQuad * rightop = rvalue->generateTAC(generator, table);
     Quad * instr = lvalue->lval_generateTAC(generator, table);
 
-    if ("" == instr->arg1) {
+    if (NULL == instr->arg1) {
       instr->arg1 = rightop;
     } else {
       instr->arg2 = rightop;
