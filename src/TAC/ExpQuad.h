@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <stdio.h>
+#include "LabelMaker.h"
 #include "../MIPS/MipsInstruction.h"
 #include "../MIPS/MipsArgument.h"
 
@@ -20,6 +21,10 @@ class ExpQuad {
     ExpQuad() {}
 
     virtual std::string toString() { return ""; }
+
+    virtual bool isconstant() { return false; }
+
+    virtual bool istemporal() { return false; }
 
 };
 
@@ -50,6 +55,10 @@ class ConstQuad : public ExpQuad {
       return value;
     }
 
+    bool isconstant() { return true; }
+
+    bool istemporal() { return false; }
+
 };
 
 class VarQuad : public ExpQuad {
@@ -62,18 +71,26 @@ class VarQuad : public ExpQuad {
     bool is_arg;
     int size;
     int typenum;
+    bool is_string;
 
-    VarQuad(std::string v, int o = NO_OFFSET, bool r = false, bool a = false, int s = -1, int tn = -1) {
+    VarQuad(std::string v, int o = NO_OFFSET, bool r = false, bool a = false, int s = -1, int tn = -1, bool str = false) {
       vname = v;
       offset = o;
       is_ref = r;
       is_arg = a;
       size = s;
       typenum = tn;
+      is_string = str;
     }
 
     std::string toString() {
       return vname;
+    }
+
+    bool isconstant() { return false; }
+
+    bool istemporal() {
+      return ((0 == vname.find(TEMPORAL)) & (NO_OFFSET == offset)) ? true : false;
     }
 
 };

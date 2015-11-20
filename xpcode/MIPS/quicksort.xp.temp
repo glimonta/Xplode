@@ -161,7 +161,7 @@ ifnot t17 goto next_if_6_1
 #############################################################
 
 
-#Este es el código generado por la linea 0 de la instrucción return
+#Este es el código generado por la linea 7 de la instrucción return
 return
 #############################################################
 #B16
@@ -281,7 +281,7 @@ ifnot t37 goto next_if_25_1
 #############################################################
 
 
-#Este es el código generado por la linea 0 de la instrucción break
+#Este es el código generado por la linea 26 de la instrucción break
 goto next_while_14_1
 #############################################################
 #B28

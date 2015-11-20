@@ -282,7 +282,7 @@ ifnot t43 goto next_if_72_1
 #############################################################
 
 
-#Este es el código generado por la linea 0 de la instrucción break
+#Este es el código generado por la linea 73 de la instrucción break
 goto next_while_53_1
 #############################################################
 #B27

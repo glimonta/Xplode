@@ -35,7 +35,7 @@ class Constant : public Expression {
       if (ntype->isstring()) {
         std::string id = generator->labelmaker->getLabel("string_" + getLineStr() + "_");
         generator->addString(id, value);
-        return new VarQuad(id);
+        return new VarQuad(id, NO_OFFSET, false, false, -1, -1, true);
       }
       return new VarQuad(toString(table));
     }

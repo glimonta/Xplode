@@ -907,6 +907,8 @@ statement_break
 
     if(!inBlock) errorlog->addError(24,$1->line,$1->column,&$1->value);
     $$ = new BreakStatement();
+    $$->line = $1->line;
+    $$->column = $1->column;
   }
   ;
 
@@ -914,6 +916,8 @@ statement_continue
   : x_CONTINUE {
     if(!inBlock) errorlog->addError(24,$1->line,$1->column,&$1->value);
     $$ = new ContinueStatement();
+    $$->line = $1->line;
+    $$->column = $1->column;
   }
   ;
 
@@ -928,6 +932,8 @@ statement_return
         errorlog->addError(26,$1->line,$1->column,NULL);
              
     $$ = new ReturnStatement(NULL);
+    $$->line = $1->line;
+    $$->column = $1->column;
   }
   | x_RETURN expression {
 

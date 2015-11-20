@@ -124,7 +124,7 @@ ifnot t13 goto next_if_6_1
 #############################################################
 
 
-#Este es el código generado por la linea 0 de la instrucción return
+#Este es el código generado por la linea 7 de la instrucción return
 return
 #############################################################
 #B12

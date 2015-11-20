@@ -20,6 +20,7 @@ class GeneratorTAC {
     LabelMaker *labelmaker;
     std::vector<BlockTAC *> *tac;
     std::map<std::string, std::string> strings;
+    std::map<VarQuad *, std::pair<std::string, int> > globals;
 
     GeneratorTAC(const std::string &file) {
       filename = file + ".temp";
@@ -75,6 +76,26 @@ class GeneratorTAC {
     }
 
     void gen(Quad *quad) {
+      //if (NULL != dynamic_cast<DeclQuad *>(quad)) {
+      //  DeclQuad * glob_decl = (DeclQuad *) quad;
+      //  int size;
+      //  std::string type;
+      //  ConstQuad *typenum = (ConstQuad *) glob_decl->getArg1();
+      //  switch (typenum->num) {
+      //    case 2:
+      //      size = 0;
+      //      type = ".word";
+      //    case 3:
+      //      size = 1;
+      //      
+      //    case 4:
+      //      size = 1;
+      //    case 5:
+      //      size = 4;
+      //  }
+      //  if
+      //  globals[glob_decl->getResult()] = std::makepair(glob_decl->getArg1())
+      //}
       addQuad(quad);
       //tempFile << quad->toString() << std::endl;
     }

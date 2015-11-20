@@ -61,6 +61,10 @@ class Declaration : public Statement {
       */
     }
 
+    void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
+      generator->gen(new DeclQuad(new VarQuad(var), new ConstQuad(ntype->numtype)));
+    }
+
 };
 
 

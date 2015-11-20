@@ -60,10 +60,6 @@ class Comment : public Quad {
       return "#" + getOp();
     }
 
-    void generateMips(std::vector<MipsInstruction *> *instructions) {
-      instructions->push_back(new CommentMips(getOp()));
-    }
-
 };
 
 class BlockComment : public Quad {
@@ -77,10 +73,6 @@ class BlockComment : public Quad {
           + "#############################################################\n\n";
     }
 
-    void generateMips(std::vector<MipsInstruction *> *instructions) {
-      instructions->push_back(new CommentMips(getOp()));
-    }
-
 };
 
 class Label : public Quad {
@@ -90,10 +82,6 @@ class Label : public Quad {
 
     std::string toString() {
       return getOp() + ":";
-    }
-
-    void generateMips(std::vector<MipsInstruction *> *instructions) {
-      instructions->push_back(new LabelMips(getOp()));
     }
 
 };
@@ -382,12 +370,6 @@ class WriteQuad : public Quad {
       return getOp() + " " + getResultStr();
     }
 
-    void generateMips(std::vector<MipsInstruction *> *instructions) {
-      instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResultStr())));
-      instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(4)));
-      instructions->push_back(new SyscallMips());
-    }
-
 };
 
 class ReadQuad : public Quad {
@@ -398,15 +380,6 @@ class ReadQuad : public Quad {
     std::string toString() {
       return getOp() + " " + getResultStr() + " " + getArg1Str();
     }
-
-    // Primer intento en un generateMips para read, falta considerar la dirección a la que se va a leer
-    //void generateMips(std::vector<MipsInstruction *> *instructions) {
-    //  instructions->push_back(new LoadAddressMips(new MipsRegister(4), new MipsVariable(this->getResultStr())));
-    //  int size = atoi(getArg1Str().c_str());
-    //  instructions->push_back(new LoadImmMips(new MipsRegister(5), new MipsImmediate(size)));
-    //  instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(8)));
-    //  instructions->push_back(new SyscallMips());
-    //}
 
 };
 
@@ -452,11 +425,6 @@ class ExitQuad : public Quad {
       return getOp();
     }
 
-    void generateMips(std::vector<MipsInstruction *> *instructions) {
-      instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(10)));
-      instructions->push_back(new SyscallMips());
-    }
-
 };
 
 class DerefQuad : public Quad {
@@ -477,6 +445,17 @@ class RefQuad : public Quad {
 
     std::string toString() {
       return getOp() + " " + getResultStr() + " " + getArg1Str();
+    }
+
+};
+
+class DeclQuad : public Quad {
+  public:
+
+    DeclQuad(ExpQuad * r, ExpQuad * a1) : Quad("glob_decl", r, a1, NULL) {}
+
+    std::string toString() {
+      return "";
     }
 
 };

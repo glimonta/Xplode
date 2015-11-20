@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include "MipsArgument.h"
 
+#define FP_REGISTER new MipsRegister(30)
+#define SP_REGISTER new MipsRegister(29)
+
 #ifndef X_MIPSINSTRUCTION
 #define X_MIPSINSTRUCTION
 
@@ -241,7 +244,7 @@ class MoveMips : public MipsInstruction {
 
   public:
 
-    MoveMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("mfhi", r, a1, NULL) {}
+    MoveMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("move", r, a1, NULL) {}
 
     std::string toString() {
       return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();

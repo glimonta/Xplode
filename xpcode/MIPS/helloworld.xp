@@ -1,6 +1,9 @@
 program
 begin
 
+let int foo;
 write("Hello world!\n");
+read(foo);
+write(foo);
 
 end
