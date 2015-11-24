@@ -1,16 +1,22 @@
 string_7_1 : "\n"
+string_7_2 : "\n"
 
 #############################################################
 #B1
 #############################################################
 
 
-allocate 4
-#Este es el código generado por la linea 9 de la instrucción f := 6
+allocate 8
+#Este es el código generado por la linea 10 de la instrucción f := 6
 f := 6
-#Este es el código generado por la linea 10 de la instrucción write
+#Este es el código generado por la linea 11 de la instrucción g := 9
+g := 9
+#Este es el código generado por la linea 12 de la instrucción write
 write f 2
 write string_7_1 9
+#Este es el código generado por la linea 13 de la instrucción write
+write g 2
+write string_7_2 9
 exit
 #############################################################
 #B2

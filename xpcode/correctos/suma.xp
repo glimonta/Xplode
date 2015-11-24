@@ -4,9 +4,12 @@ function int suma(int x, int y, ...){ return suma(x,y); }
 
 begin
 let int f;
+let int g;
 
 //f:= suma(6,f);
 f:= 6;
+g := 9;
 write(f,"\n");
+write(g,"\n");
 
 end
