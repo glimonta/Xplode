@@ -36,8 +36,10 @@ class Constant : public Expression {
         std::string id = generator->labelmaker->getLabel("string_" + getLineStr() + "_");
         generator->addString(id, value);
         return new VarQuad(id, NO_OFFSET, false, false, -1, -1, true);
+      } else if (ntype->isnumeric()) {
+        return new ConstQuad(atoi(value.c_str()));
       }
-      return new VarQuad(toString(table));
+      return new VarQuad(value);
     }
 
     virtual void generateJumpingCode(GeneratorTAC *generator, SymTable * table, std::string trueLabel, std::string falseLabel) {

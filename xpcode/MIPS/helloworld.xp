@@ -1,9 +1,11 @@
 program
+let int foo;
+
 begin
 
-let int foo;
 write("Hello world!\n");
 read(foo);
-write(foo);
+write("Hoooooola Mundo!\n");
+write(foo, "\n");
 
 end

@@ -1,22 +1,34 @@
 .data
 string_7_1:    .asciiz "Hello world!\n"
+string_7_2:    .asciiz "Hoooooola Mundo!\n"
+string_7_3:    .asciiz "\n"
+
+foo:    .word    0
 
 .text
 main:
-#Este es el código generado por la linea 5 de la instrucción write
+addi $sp $sp -44
+#Este es el código generado por la linea 6 de la instrucción write
 la $a2 string_7_1
 move $a0 $a2
 li $v0 4
 syscall
-move $a0 $a3
-li $a1 4
-li $v0 8
+li $v0 5
 syscall
-#Este es el código generado por la linea 7 de la instrucción write
-li $t0 0
-add $t0 $t0 $sp
-lw $t0 4($8)
-move $a0 $t0
+move $a3 $v0
+la $t0 foo
+sw $a3 0($t0)
+#Este es el código generado por la linea 8 de la instrucción write
+la $t1 string_7_2
+move $a0 $t1
+li $v0 4
+syscall
+#Este es el código generado por la linea 9 de la instrucción write
+lw $a0 0($t0)
+li $v0 1
+syscall
+la $t2 string_7_3
+move $a0 $t2
 li $v0 4
 syscall
 li $v0 10

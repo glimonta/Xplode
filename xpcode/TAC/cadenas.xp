@@ -30,6 +30,8 @@ function bool porlab(var cadena c1, var cadena c2){
 
 }
 
+let cadena lenguajes;
+
 begin
 
 let cadena lenguajes, bases, diseno;

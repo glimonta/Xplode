@@ -51,6 +51,11 @@ class ConstQuad : public ExpQuad {
       value = str.str();
     }
 
+    ConstQuad(std::string v) {
+      num = NO_OFFSET;
+      value = v;
+    }
+
     std::string toString() {
       return value;
     }
@@ -69,11 +74,12 @@ class VarQuad : public ExpQuad {
     int offset;
     bool is_ref;
     bool is_arg;
+    bool is_glob;
     int size;
     int typenum;
     bool is_string;
 
-    VarQuad(std::string v, int o = NO_OFFSET, bool r = false, bool a = false, int s = -1, int tn = -1, bool str = false) {
+    VarQuad(std::string v, int o = NO_OFFSET, bool r = false, bool a = false, int s = -1, int tn = -1, bool str = false, bool glob = false) {
       vname = v;
       offset = o;
       is_ref = r;
@@ -81,6 +87,7 @@ class VarQuad : public ExpQuad {
       size = s;
       typenum = tn;
       is_string = str;
+      is_glob = glob;
     }
 
     std::string toString() {

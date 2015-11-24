@@ -41,7 +41,8 @@ class WriteStatement : public Statement {
       generator->gen(comment);
       for (std::list<Expression *>::iterator i = writeList->begin(); i != writeList->end(); ++i) {
         ExpQuad * exp = (*i)->generateTAC(generator, table);
-        WriteQuad *write = new WriteQuad(exp);
+        ConstQuad * typenum = new ConstQuad((*i)->ntype->numtype);
+        WriteQuad *write = new WriteQuad(exp, typenum);
         generator->gen(write);
       }
     }

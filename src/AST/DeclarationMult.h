@@ -101,6 +101,15 @@ class DeclarationMult : public Statement {
   */
   }  
 
+  void generateTAC(GeneratorTAC *generator, SymTable *table, std::string continueLabel, std::string breakLabel) {
+    for (std::list<decl>::iterator var = lvar.begin(); var != lvar.end(); ++var) {
+      generator->gen(new DeclQuad(new VarQuad((*var).var), new ConstQuad(ntype->numtype), new ConstQuad(ntype->size)));
+      Symbol * sym = table->find((*var).var);
+      sym->setGlob(true);
+      sym = table->find((*var).var);
+    }
+  }
+
 };
 
 

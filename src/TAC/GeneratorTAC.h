@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 #include "LabelMaker.h"
+#include "../AST/TypeDeclaration.h"
 #include "BlockTAC.h"
 
 
@@ -76,26 +77,48 @@ class GeneratorTAC {
     }
 
     void gen(Quad *quad) {
-      //if (NULL != dynamic_cast<DeclQuad *>(quad)) {
-      //  DeclQuad * glob_decl = (DeclQuad *) quad;
-      //  int size;
-      //  std::string type;
-      //  ConstQuad *typenum = (ConstQuad *) glob_decl->getArg1();
-      //  switch (typenum->num) {
-      //    case 2:
-      //      size = 0;
-      //      type = ".word";
-      //    case 3:
-      //      size = 1;
-      //      
-      //    case 4:
-      //      size = 1;
-      //    case 5:
-      //      size = 4;
-      //  }
-      //  if
-      //  globals[glob_decl->getResult()] = std::makepair(glob_decl->getArg1())
-      //}
+      if (NULL != dynamic_cast<DeclQuad *>(quad)) {
+        DeclQuad * glob_decl = (DeclQuad *) quad;
+        int size;
+        std::string type;
+        bool ok = true;
+        ConstQuad *typenum = (ConstQuad *) glob_decl->getArg1();
+        ConstQuad *typesize = (ConstQuad *) glob_decl->getArg2();
+        VarQuad *var = (VarQuad *) glob_decl->getResult();
+        switch (typenum->num) {
+          case TYPE_INT:
+            size = 0;
+            type = ".word";
+            break;
+          case TYPE_BOOL:
+            size = 0;
+            type =".word";
+            break;
+          case TYPE_CHAR:
+            size = 0;
+            type = ".byte";
+            break;
+          case TYPE_FLOAT:
+            size = 0;
+            type = ".word";
+            break;
+          case TYPE_ARRAY:
+            size = ((typesize->num%ALIGNMENT) != 0) ? typesize->num += ALIGNMENT - (typesize->num%ALIGNMENT) : typesize->num;
+            type = ".space";
+            break;
+          case TYPE_TYPE:
+            size = ((typesize->num%ALIGNMENT) != 0) ? typesize->num += ALIGNMENT - (typesize->num%ALIGNMENT) : typesize->num;
+            type = ".space";
+            break;
+          default:
+            ok = false;
+            break;
+        }
+        if (ok) {
+          globals[var] = std::make_pair(type, size);
+        }
+        return;
+      }
       addQuad(quad);
       //tempFile << quad->toString() << std::endl;
     }

@@ -10,6 +10,20 @@
 #include "RegisterAllocator.h"
 #include "../TAC/GeneratorTAC.h"
 
+//System call codes
+#define PRINT_INT_SYSCALL    new MipsImmediate(1)
+#define PRINT_FLOAT_SYSCALL  new MipsImmediate(2)
+#define PRINT_DOUBLE_SYSCALL new MipsImmediate(3)
+#define PRINT_STRING_SYSCALL new MipsImmediate(4)
+#define READ_INT_SYSCALL     new MipsImmediate(5)
+#define READ_FLOAT_SYSCALL   new MipsImmediate(6)
+#define READ_DOUBLE_SYSCALL  new MipsImmediate(7)
+#define READ_STRING_SYSCALL  new MipsImmediate(8)
+#define SBRK_SYSCALL         new MipsImmediate(9)
+#define EXIT_SYSCALL         new MipsImmediate(10)
+#define PRINT_CHAR_SYSCALL   new MipsImmediate(11)
+#define READ_CHAR_SYSCALL    new MipsImmediate(12)
+
 class GeneratorMIPS {
 
   public:
@@ -18,7 +32,7 @@ class GeneratorMIPS {
     std::ofstream tempFile;
     std::vector<MipsInstruction *> *instructions;
     std::map<std::string, std::string> strings;
-    std::map<VarQuad *, std::string, int> globals;
+    std::map<VarQuad *, std::pair<std::string, int> > globals;
     RegisterAllocator * allocator;
 
     GeneratorMIPS(std::string file) {
@@ -33,6 +47,7 @@ class GeneratorMIPS {
       for (int i = 0; i < generator->tac->size(); ++i) {
         generateMipsFromBlock(generator->tac->at(i));
       }
+      globals = generator->globals;
     }
 
     void generateMipsFromBlock(BlockTAC * block) {
@@ -53,6 +68,12 @@ class GeneratorMIPS {
         } else if ("read" == quad->op) {
           ReadQuad * read = (ReadQuad *) quad;
           readToMips(read);
+        } else if (":=" == quad->op) {
+          AssignQuad * assign = (AssignQuad *) quad;
+          assignToMips(assign);
+        } else if ("allocate" == quad->op) {
+          AllocateStackQuad * alloc = (AllocateStackQuad *) quad;
+          allocateToMips(alloc);
         } else {
           //Faltan los demás casos
         }
@@ -74,6 +95,11 @@ class GeneratorMIPS {
       }
       tempFile << std::endl;
 
+      for (std::map<VarQuad *, std::pair<std::string, int> >::iterator decl = globals.begin(); decl != globals.end(); ++decl) {
+        tempFile << decl->first->toString() << ":    " << decl->second.first << "    " << decl->second.second << std::endl;
+      }
+      tempFile << std::endl;
+
       tempFile << ".text" << std::endl;
       tempFile << "main:" << std::endl;
 
@@ -89,9 +115,18 @@ class GeneratorMIPS {
 //Falta considerar si es una variable a lo que se le hace write
       MipsRegister *rd;
       allocator->getReg(this, write, &rd, NULL, NULL);
-      instructions->push_back(new MoveMips(new MipsRegister(4), rd));
-      instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(4)));
-      instructions->push_back(new SyscallMips());
+      VarQuad * variable = (VarQuad *) write->getResult();
+      ConstQuad * typenum = (ConstQuad *) write->getArg1();
+
+      if (TYPE_INT == typenum->num) {
+        instructions->push_back(new LoadWordMips(A0_REGISTER, new MipsOffset(rd->num, 0)));
+        instructions->push_back(new LoadImmMips(V0_REGISTER, PRINT_INT_SYSCALL));
+        instructions->push_back(new SyscallMips());
+      } else if (TYPE_STRING == typenum->num){
+        instructions->push_back(new MoveMips(new MipsRegister(4), rd));
+        instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(4)));
+        instructions->push_back(new SyscallMips());
+      }
     }
 
     void commentToMips(Comment * comment) {
@@ -104,20 +139,14 @@ class GeneratorMIPS {
 
     // Primer intento en un generateMips para read, falta considerar la dirección a la que se va a leer
     void readToMips(ReadQuad * read) {
-      MipsRegister *rd;
-      allocator->getReg(this, read, &rd, NULL, NULL);
-      instructions->push_back(new MoveMips(new MipsRegister(4), rd));
-      int size;
       ConstQuad *typenum = (ConstQuad *) read->getArg1();
-      switch (typenum->num) {
-        case 2: size = 4;
-        case 3: size = 1;
-        case 4: size = 1;
-        case 5: size = 4;
+      if (TYPE_INT == typenum->num) {
+        MipsRegister *rd;
+        allocator->getReg(this, read, &rd, NULL, NULL);
+        instructions->push_back(new LoadImmMips(V0_REGISTER, READ_INT_SYSCALL));
+        instructions->push_back(new SyscallMips());
+        instructions->push_back(new MoveMips(rd, V0_REGISTER));
       }
-      instructions->push_back(new LoadImmMips(new MipsRegister(5), new MipsImmediate(size)));
-      instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(8)));
-      instructions->push_back(new SyscallMips());
     }
 
     void exitToMips(ExitQuad * exit) {
@@ -125,6 +154,17 @@ class GeneratorMIPS {
       instructions->push_back(new SyscallMips());
     }
 
+    void assignToMips(AssignQuad * assign) {
+      VarQuad * var = (VarQuad *) assign->getResult();
+      MipsRegister * rd, * rl;
+      allocator->getReg(this, assign, &rd, &rl, NULL);
+      instructions->push_back(new StoreWordMips(rl, new MipsOffset(rd->num, 0)));
+    }
+
+    void allocateToMips(AllocateStackQuad * allocate) {
+      ConstQuad * space = (ConstQuad *) allocate->getResult();
+      instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-(space->num))));
+    }
 
 
 };

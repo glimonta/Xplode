@@ -37,6 +37,7 @@ class Symbol {
     int column;
     bool porref;
     bool isarg;
+    bool isglob;
     int offset_stack;
 
 
@@ -60,6 +61,7 @@ class Symbol {
       istype = i;
       porref = pr;
       isarg = false;
+      isglob = false;
       //defined = e;
       //dimensions = d;
       //pt = p;
@@ -72,7 +74,11 @@ class Symbol {
 
     bool isArg() { return isarg; }
 
+    bool isGlob() { return isglob; }
+
     void setArg(bool a) { isarg = a; }
+
+    void setGlob(bool g) { isglob = g; }
 
     int getOffsetStack() { return offset_stack; }
 

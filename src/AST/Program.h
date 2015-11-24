@@ -137,8 +137,20 @@ class Program : public CompoundStatement {
 
     void generateTAC(GeneratorTAC *generator, SymTable *table) {
       //FIXME
+
+      int padding = (table->totaloffset%ALIGNMENT) ? (ALIGNMENT - table->totaloffset%ALIGNMENT) : 0;
+      generator->gen(new AllocateStackQuad(new ConstQuad(table->totaloffset + padding)));
+
       std::list<Node *>::iterator iter;
       Statement *st;
+      if (definitionList!=NULL) {
+        for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
+          st = (Statement *) *iter;
+          if (dynamic_cast<DeclarationMult *>(st))
+            st->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
+        }
+      }
+
       if(block!=NULL) {
          block->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
       }
@@ -148,9 +160,11 @@ class Program : public CompoundStatement {
       if (definitionList!=NULL) {
         for(iter = (*definitionList).nodeList.begin(); iter != (*definitionList).nodeList.end(); ++iter){
           st = (Statement *) *iter;
-          st->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
+          if (!dynamic_cast<DeclarationMult *>(st))
+            st->generateTAC(generator, table, EMPTY_LABEL, EMPTY_LABEL);
         }
       }
+
 
     }
 

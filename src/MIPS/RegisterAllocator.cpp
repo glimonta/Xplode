@@ -64,6 +64,11 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
 
     if (var->offset != NO_OFFSET) {
 
+      if (var->is_glob) {
+        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
+        return r;
+      }
+
       generator->gen(new LoadImmMips(r, new MipsImmediate(var->offset)));
 
       generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
@@ -76,10 +81,11 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
       }
 
     } else {
-      if (var->is_string) {
+      if (var->is_string || var->is_glob) {
         generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
       }
     }
+
 
     return r;
   //TODO caso en donde no está en algun registro
@@ -115,6 +121,27 @@ MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generat
     free_registers.pop();
     registers[r].push_back(var->vname);
     variables[var->vname] = r;
+
+    if (var->offset != NO_OFFSET) {
+
+      if (var->is_glob) {
+        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
+        return r;
+      }
+
+      generator->gen(new LoadImmMips(r, new MipsImmediate(var->offset)));
+
+      generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
+
+      if ((var->is_ref) && (var->typenum != 8)) {
+        generator->gen(new LoadWordMips(r, new MipsOffset(0, r->num)));
+      }
+
+    } else {
+      if (var->is_string || var->is_glob) {
+        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
+      }
+    }
 
     return r;
   }

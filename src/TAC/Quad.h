@@ -364,10 +364,10 @@ class CastQuad : public Quad {
 class WriteQuad : public Quad {
   public:
 
-    WriteQuad(ExpQuad * r) : Quad("write", r, NULL, NULL) {}
+    WriteQuad(ExpQuad * r, ExpQuad * a1) : Quad("write", r, a1, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getResultStr();
+      return getOp() + " " + getResultStr() + " " + getArg1Str();
     }
 
 };
@@ -452,10 +452,21 @@ class RefQuad : public Quad {
 class DeclQuad : public Quad {
   public:
 
-    DeclQuad(ExpQuad * r, ExpQuad * a1) : Quad("glob_decl", r, a1, NULL) {}
+    DeclQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("glob_decl", r, a1, a2) {}
 
     std::string toString() {
       return "";
+    }
+
+};
+
+class AllocateStackQuad : public Quad {
+  public:
+
+    AllocateStackQuad(ExpQuad * r) : Quad("allocate", r, NULL, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResultStr();
     }
 
 };

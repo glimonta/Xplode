@@ -207,7 +207,7 @@ class Variable : public Expression {
         std::string var(varList->front()->value);
         std::transform(var.begin(), var.end(), var.begin(), ::tolower);
         Symbol * v = table->find(var);
-        return new VarQuad(var, v->offset, v->porref, v->isarg, v->ntype->size, v->ntype->numtype);
+        return new VarQuad(var, v->offset, v->porref, v->isarg, v->ntype->size, v->ntype->numtype, false, v->isglob);
       }
 
       std::list<Xplode::Token *>::iterator vnames;
@@ -377,7 +377,7 @@ class Variable : public Expression {
       }
 
       ExpQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
-      VarQuad * basevar = new VarQuad(base->name, base->offset, base->porref, base->isarg, base->ntype->size, base->ntype->numtype);
+      VarQuad * basevar = new VarQuad(base->name, base->offset, base->porref, base->isarg, base->ntype->size, base->ntype->numtype, false, base->isglob);
       AssignArrayQuad *assign = new AssignArrayQuad(result, basevar, res);
       generator->gen(assign);
 
@@ -416,7 +416,7 @@ class Variable : public Expression {
         std::string var(varList->front()->value);
         std::transform(var.begin(), var.end(), var.begin(), ::tolower);
         Symbol * v = table->find(var);
-        VarQuad * variable = new VarQuad(var, v->offset, v->porref, v->isarg, v->ntype->size, v->ntype->numtype);
+        VarQuad * variable = new VarQuad(var, v->offset, v->porref, v->isarg, v->ntype->size, v->ntype->numtype, false, v->isglob);
         return new AssignQuad(variable, NULL);
       }
 
@@ -588,7 +588,7 @@ class Variable : public Expression {
       }
 
       VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
-      VarQuad * basevar = new VarQuad(base->name, base->offset, base->porref, base->isarg, base->ntype->size, base->ntype->numtype);
+      VarQuad * basevar = new VarQuad(base->name, base->offset, base->porref, base->isarg, base->ntype->size, base->ntype->numtype, false, base->isglob);
       AssignToArrayQuad *assign = new AssignToArrayQuad(basevar, res, NULL);
 
       return assign;
