@@ -18,18 +18,27 @@
 
 class GeneratorMIPS;
 
+
 class RegisterAllocator {
 
   public:
 
+    union Location {
+      MipsRegister * reg;
+      MipsOffset * stack;
+      std::string * mem;
+    };
+
     std::queue<MipsRegister *> free_registers;
     std::map<MipsRegister *, std::vector<std::string> > registers;
-    std::map<std::string, MipsRegister *> variables;
+    std::map<std::string, std::vector<Location> > variables;
 
     RegisterAllocator();
     void getReg (GeneratorMIPS * generator, Quad * quad, MipsRegister **rd, MipsRegister **rl, MipsRegister **rr);
     MipsRegister * allocate_register(GeneratorMIPS * generator, ExpQuad * exp);
     MipsRegister * allocate_dest_register(GeneratorMIPS * generator, ExpQuad * exp);
+
+    MipsRegister * find_register_location(std::vector<Location> variables);
 
 };
 

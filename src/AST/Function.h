@@ -93,6 +93,11 @@ class Function : public CompoundStatement {
       Label *function_label = new Label(fname);
       generator->gen(function_label);
 
+      Symbol * f = table->find(fname);
+      VarQuad * function = new VarQuad(fname, f->offset, f->porref, f->isarg, f->ntype->size, f->ntype->numtype);
+      PrologueQuad * prologue =  new PrologueQuad(function);
+      generator->gen(prologue);
+
       FunctionType *ftype = (FunctionType *) ntype;
       TupleType *args = (TupleType *) ftype->arguments;
       int offset = 4; //Already included return address
@@ -125,6 +130,9 @@ class Function : public CompoundStatement {
       }
 
       block->generateTAC(generator, symtb, EMPTY_LABEL, EMPTY_LABEL);
+
+      EpilogueQuad * epilogue =  new EpilogueQuad(function);
+      generator->gen(epilogue);
 
     }
 

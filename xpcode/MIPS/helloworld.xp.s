@@ -7,7 +7,7 @@ foo:    .word    0
 
 .text
 main:
-addi $sp $sp -44
+addi $sp $sp 0
 #Este es el código generado por la linea 6 de la instrucción write
 la $a2 string_7_1
 move $a0 $a2

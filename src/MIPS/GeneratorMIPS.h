@@ -74,6 +74,9 @@ class GeneratorMIPS {
         } else if ("allocate" == quad->op) {
           AllocateStackQuad * alloc = (AllocateStackQuad *) quad;
           allocateToMips(alloc);
+        } else if ("+" == quad->op) {
+          AddQuad * add = (AddQuad *) quad;
+          addToMips(add);
         } else {
           //Faltan los demás casos
         }
@@ -164,6 +167,12 @@ class GeneratorMIPS {
     void allocateToMips(AllocateStackQuad * allocate) {
       ConstQuad * space = (ConstQuad *) allocate->getResult();
       instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-(space->num))));
+    }
+
+    void addToMips(AddQuad * add) {
+      MipsRegister * rd, * rl, * rr;
+      allocator->getReg(this, add, &rd, &rl, &rr);
+      instructions->push_back(new AddMips(rd, rl, rr));
     }
 
 

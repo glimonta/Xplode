@@ -471,4 +471,26 @@ class AllocateStackQuad : public Quad {
 
 };
 
+class PrologueQuad : public Quad {
+  public:
+
+    PrologueQuad(ExpQuad * r) : Quad("prologue", r, NULL, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResultStr();
+    }
+
+};
+
+class EpilogueQuad : public Quad {
+  public:
+
+    EpilogueQuad(ExpQuad * r) : Quad("epilogue", r, NULL, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResultStr();
+    }
+
+};
+
 #endif

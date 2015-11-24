@@ -138,8 +138,8 @@ class Program : public CompoundStatement {
     void generateTAC(GeneratorTAC *generator, SymTable *table) {
       //FIXME
 
-      int padding = (table->totaloffset%ALIGNMENT) ? (ALIGNMENT - table->totaloffset%ALIGNMENT) : 0;
-      generator->gen(new AllocateStackQuad(new ConstQuad(table->totaloffset + padding)));
+      int padding = (block->table->totaloffset%ALIGNMENT) ? (ALIGNMENT - block->table->totaloffset%ALIGNMENT) : 0;
+      generator->gen(new AllocateStackQuad(new ConstQuad(block->table->totaloffset + padding)));
 
       std::list<Node *>::iterator iter;
       Statement *st;
