@@ -8,9 +8,6 @@
 #include <stdio.h>
 #include "MipsArgument.h"
 
-#define FP_REGISTER new MipsRegister(30)
-#define SP_REGISTER new MipsRegister(29)
-
 #ifndef X_MIPSINSTRUCTION
 #define X_MIPSINSTRUCTION
 

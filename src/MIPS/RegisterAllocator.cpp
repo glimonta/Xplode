@@ -24,7 +24,7 @@ void RegisterAllocator::getReg (GeneratorMIPS * generator, Quad * quad, MipsRegi
   if (quad->getArg2() && rr) *rr = allocate_register(generator, quad->getArg2());
   if (quad->getResult() && rd && (rl || rr)) {
     *rd = allocate_dest_register(generator, quad->getResult());
-  } else {
+  } else if (quad->getResult() && rd) {
     *rd = allocate_register(generator, quad->getResult());
   }
 
@@ -46,8 +46,10 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
 
   // Caso simple: Ya está en un registro
   VarQuad * var = (VarQuad *) exp;
-  if(variables.count(var->vname) != 0) {
-    MipsRegister *r = find_register_location(variables[var->vname]);
+  //MipsRegister * r = find_register_location(variables[var->vname]);
+  //if(r) {
+  if (registers.count(var->vname) != 0) {
+    MipsRegister * r = registers[var->vname];
     //if (variables[var->vname]->istemporal()) {
     //  free_registers.push(r);
     //  variables.erase(var->vname);
@@ -58,21 +60,27 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
   } else {
     MipsRegister * r = free_registers.front();
     free_registers.pop();
-    registers[r].push_back(var->vname);
-    Location l;
-    l.reg = r;
-    variables[var->vname].push_back(l);
+    //LocationEntry l;
+    //l.type = 1;
+    //l.loc.reg = r;
+    //std::vector<std::string> vars;
+    //vars.push_back(var->vname);
+    //replace_register_descriptor(r,vars);
+    //add_to_variable_descriptor(var->vname, l);
+    registers[var->vname] = r;
 
     if (var->offset != NO_OFFSET) {
 
-      if (var->is_glob) {
-        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
-        return r;
-      }
 
       generator->gen(new LoadImmMips(r, new MipsImmediate(var->offset)));
 
-      generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
+      if (var->is_glob) {
+        MipsRegister * raux = getAuxReg();
+        generator->gen(new LoadAddressMips(raux, new MipsVariable(var->vname)));
+        generator->gen(new AddMips(r, r, raux));
+      } else {
+        generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
+      }
 
       generator->gen(new LoadWordMips(r, new MipsOffset(r->num, 0)));
       //FIXME esto capaz es 4
@@ -108,78 +116,112 @@ MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generat
 
   // Caso simple: Ya está en un registro
   VarQuad * var = (VarQuad *) exp;
-  if(variables.count(var->vname) != 0) {
-    MipsRegister *r = find_register_location(variables[var->vname]);
+  //MipsRegister * r = find_register_location(variables[var->vname]);
+  //if(r) {
+  if (registers.count(var->vname) != 0) {
+    MipsRegister * r = registers[var->vname];
     //if (variables[var->vname]->istemporal()) {
     //  free_registers.push(r);
     //  variables.erase(var->vname);
     //  registers.erase(var->vname);
     //}
 
-    if (var->offset != NO_OFFSET) {
-
-      if (var->is_glob) {
-        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
-        return r;
-      }
-
-      generator->gen(new LoadImmMips(r, new MipsImmediate(var->offset)));
-
-      generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
-
-      generator->gen(new LoadAddressMips(r, new MipsOffset(r->num, 0)));
-      //FIXME esto capaz es 4
-
-      if ((var->is_ref) && (var->typenum != 8)) {
-        generator->gen(new LoadWordMips(r, new MipsOffset(0, r->num)));
-      }
-
-    } else {
-      if (var->is_string || var->is_glob) {
-        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
-      }
-    }
-
     return r;
   } else {
     MipsRegister * r = free_registers.front();
     free_registers.pop();
-    registers[r].push_back(var->vname);
-    Location l;
-    l.reg = r;
-    variables[var->vname].push_back(l);
+    //LocationEntry l;
+    //l.type = 1;
+    //l.loc.reg = r;
+    //std::vector<std::string> vars;
+    //vars.push_back(var->vname);
+    //replace_register_descriptor(r,vars);
+    //add_to_variable_descriptor(var->vname, l);
 
-    if (var->offset != NO_OFFSET) {
+    registers[var->vname] = r;
 
-      if (var->is_glob) {
-        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
-        return r;
-      }
+    //if (var->offset != NO_OFFSET) {
 
-      generator->gen(new LoadImmMips(r, new MipsImmediate(var->offset)));
 
-      generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
+    //  generator->gen(new LoadImmMips(r, new MipsImmediate(var->offset)));
 
-      if ((var->is_ref) && (var->typenum != 8)) {
-        generator->gen(new LoadWordMips(r, new MipsOffset(0, r->num)));
-      }
+    //  if (var->is_glob) {
+    //    MipsRegister * raux = getAuxReg();
+    //    free_registers.pop();
+    //    generator->gen(new LoadAddressMips(raux, new MipsVariable(var->vname)));
+    //    generator->gen(new AddMips(r, r, raux));
+    //  } else {
+    //    generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
+    //  }
 
-    } else {
-      if (var->is_string || var->is_glob) {
-        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
-      }
-    }
+    //  if ((var->is_ref) && (var->typenum != 8)) {
+    //    generator->gen(new LoadWordMips(r, new MipsOffset(0, r->num)));
+    //  }
+
+    //} else {
+    //  if (var->is_string || var->is_glob) {
+    //    generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
+    //  }
+    //}
+
 
     return r;
+  //TODO caso en donde no está en algun registro
   }
 }
 
-  MipsRegister * RegisterAllocator::find_register_location(std::vector<Location> variables) {
-    for(std::vector<Location>::iterator i = variables.begin(); i != variables.end(); ++i) {
-      if (NULL != (*i).reg) {
-        return (*i).reg;
-      }
-    }
-    return NULL;
+  //MipsRegister * RegisterAllocator::find_register_location(std::vector<LocationEntry> variables) {
+  //  for(std::vector<LocationEntry>::iterator i = variables.begin(); i != variables.end(); ++i) {
+  //    if (1 == (*i).type) {
+  //      return (*i).loc.reg;
+  //    }
+  //  }
+  //  return NULL;
+  //}
+
+  //void RegisterAllocator::add_to_register_descriptor(MipsRegister * r, std::string var) {
+  //  registers[r].push_back(var);
+  //}
+
+  //void RegisterAllocator::replace_register_descriptor(MipsRegister * r, std::vector<std::string> vars) {
+  //  registers[r] = vars;
+  //}
+
+  //void RegisterAllocator::add_to_variable_descriptor(std::string var, LocationEntry l) {
+  //  variables[var].push_back(l);
+  //}
+
+  //void RegisterAllocator::replace_variable_descriptor(std::string var, std::vector<LocationEntry> locs) {
+  //  variables[var] = locs;
+  //}
+
+  //void RegisterAllocator::delete_from_register_descriptor(MipsRegister * r, std::string var) {
+  //  for (std::vector<std::string>::iterator i = registers[r].begin(); i != registers[r].end(); ++i) {
+  //    if ((*i) == var) {
+  //      registers[r].erase(i);
+  //    }
+  //  }
+  //}
+
+  //void RegisterAllocator::delete_from_variable_descriptor(std::string v, LocationEntry l) {
+  //  for (std::vector<LocationEntry>::iterator i = variables[v].begin(); i != variables[v].end(); ++i) {
+  //    if ((*i).type == l.type) {
+  //      switch (l.type) {
+  //        case 1:
+  //          if ((*i).loc.reg->num == l.loc.reg->num)
+  //            variables[v].erase(i);
+  //        case 2:
+  //          if (((*i).loc.stack->reg == l.loc.stack->reg) && ((*i).loc.stack->offset == l.loc.stack->offset))
+  //            variables[v].erase(i);
+  //        case 3:
+  //          if (*((*i).loc.mem) == *(l.loc.mem))
+  //            variables[v].erase(i);
+  //      }
+  //    }
+  //  }
+  //}
+
+  MipsRegister * RegisterAllocator::getAuxReg() {
+    return free_registers.front();
   }
 

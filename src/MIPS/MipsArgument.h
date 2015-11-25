@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <stdio.h>
 
-#define ZERO_REG new MipsRegister(0)
+#define ZERO_REGISTER new MipsRegister(0)
 #define V0_REGISTER new MipsRegister(2)
 #define V1_REGISTER new MipsRegister(3)
 #define A0_REGISTER new MipsRegister(4)

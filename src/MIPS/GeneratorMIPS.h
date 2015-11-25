@@ -77,6 +77,12 @@ class GeneratorMIPS {
         } else if ("+" == quad->op) {
           AddQuad * add = (AddQuad *) quad;
           addToMips(add);
+        } else if ("[]:=" == quad->op) {
+          AssignToArrayQuad * assign = (AssignToArrayQuad *) quad;
+          assignToArrayToMips(assign);
+        } else if (":=[]" == quad->op) {
+          AssignArrayQuad * assign = (AssignArrayQuad *) quad;
+          assignArrayToMips(assign);
         } else {
           //Faltan los demás casos
         }
@@ -97,6 +103,8 @@ class GeneratorMIPS {
         tempFile << str->first << ":    .asciiz " << str->second << std::endl;
       }
       tempFile << std::endl;
+
+      tempFile << ".align 4" << std::endl;
 
       for (std::map<VarQuad *, std::pair<std::string, int> >::iterator decl = globals.begin(); decl != globals.end(); ++decl) {
         tempFile << decl->first->toString() << ":    " << decl->second.first << "    " << decl->second.second << std::endl;
@@ -122,7 +130,7 @@ class GeneratorMIPS {
       ConstQuad * typenum = (ConstQuad *) write->getArg1();
 
       if (TYPE_INT == typenum->num) {
-        instructions->push_back(new LoadWordMips(A0_REGISTER, new MipsOffset(rd->num, 0)));
+        instructions->push_back(new MoveMips(A0_REGISTER, rd));
         instructions->push_back(new LoadImmMips(V0_REGISTER, PRINT_INT_SYSCALL));
         instructions->push_back(new SyscallMips());
       } else if (TYPE_STRING == typenum->num){
@@ -161,7 +169,61 @@ class GeneratorMIPS {
       VarQuad * var = (VarQuad *) assign->getResult();
       MipsRegister * rd, * rl;
       allocator->getReg(this, assign, &rd, &rl, NULL);
-      instructions->push_back(new StoreWordMips(rl, new MipsOffset(rd->num, 0)));
+      instructions->push_back(new MoveMips(rd, rl));
+    }
+
+    void assignToArrayToMips(AssignToArrayQuad * assign) {
+      VarQuad * var = (VarQuad *) assign->getResult();
+      MipsRegister * rl, * rr;
+      allocator->getReg(this, assign, NULL, &rl, &rr);
+//FIXME global
+
+      if (var->is_arg) {
+        MipsRegister * raux = allocator->getAuxReg();
+        instructions->push_back(new AddiMips(raux, ZERO_REGISTER, new MipsImmediate(var->offset)));
+        instructions->push_back(new AddMips(raux, raux, FP_REGISTER));
+        instructions->push_back(new LoadWordMips(raux, new MipsOffset(raux->num, 0)));
+        instructions->push_back(new AddMips(rl, rl, raux));
+        instructions->push_back(new StoreWordMips(rr, new MipsOffset(rl->num, 0)));
+      } else if (var->is_glob) {
+        MipsRegister * raux = allocator->getAuxReg();
+        instructions->push_back(new LoadAddressMips(raux, new MipsVariable(var->vname)));
+        instructions->push_back(new AddiMips(raux, raux, new MipsImmediate(var->offset)));
+        instructions->push_back(new AddMips(rr, rr, raux));
+        instructions->push_back(new StoreWordMips(rr, new MipsOffset(rl->num, 0)));
+      } else {
+        instructions->push_back(new AddiMips(rl, rl, new MipsImmediate(var->offset)));
+        instructions->push_back(new AddMips(rl, rl, SP_REGISTER));
+        instructions->push_back(new StoreWordMips(rr, new MipsOffset(rl->num, 0)));
+      }
+
+    }
+
+    void assignArrayToMips(AssignArrayQuad * assign) {
+      VarQuad * var = (VarQuad *) assign->getArg1();
+      MipsRegister * rd, * rr;
+      allocator->getReg(this, assign, &rd, NULL, &rr);
+//FIXME global
+
+      if (var->is_arg) {
+        MipsRegister * raux = allocator->getAuxReg();
+        instructions->push_back(new AddiMips(raux, ZERO_REGISTER, new MipsImmediate(var->offset)));
+        instructions->push_back(new AddMips(raux, raux, FP_REGISTER));
+        instructions->push_back(new LoadWordMips(raux, new MipsOffset(raux->num, 0)));
+        instructions->push_back(new AddMips(rr, rr, raux));
+        instructions->push_back(new LoadWordMips(rd, new MipsOffset(rr->num, 0)));
+      } else if (var->is_glob) {
+        MipsRegister * raux = allocator->getAuxReg();
+        instructions->push_back(new LoadAddressMips(raux, new MipsVariable(var->vname)));
+        instructions->push_back(new AddiMips(raux, raux, new MipsImmediate(var->offset)));
+        instructions->push_back(new AddMips(rr, rr, raux));
+        instructions->push_back(new LoadWordMips(rd, new MipsOffset(rr->num, 0)));
+      } else {
+        instructions->push_back(new AddiMips(rr, rr, new MipsImmediate(var->offset)));
+        instructions->push_back(new AddMips(rr, rr, SP_REGISTER));
+        instructions->push_back(new LoadWordMips(rd, new MipsOffset(rr->num, 0)));
+      }
+
     }
 
     void allocateToMips(AllocateStackQuad * allocate) {
