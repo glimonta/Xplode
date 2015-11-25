@@ -4,18 +4,19 @@
 #############################################################
 
 
+allocate 24
 #Este es el código generado por la linea 40 de la instrucción write
 #Este es el código generado por la linea 40 de la llamada a la función: porcodigo
 param_ref bases  
 param_ref lenguajes  
 t1 call porcodigo 2
-write t1
+write t1 3
 #Este es el código generado por la linea 41 de la instrucción write
 #Este es el código generado por la linea 41 de la llamada a la función: porlab
 param_ref diseno  
 param_ref lenguajes  
 t2 call porlab 2
-write t2
+write t2 3
 exit
 #############################################################
 #B2
@@ -24,11 +25,13 @@ exit
 
 #Definición de Función porcodigo: linea 20
 porcodigo:
+prologue porcodigo
 #Este es el código generado por la linea 22 de la instrucción return
 t3 :=[] c1 0
 t4 :=[] c2 0
 t5 > t3 t4
-return t5
+return_exp t5
+epilogue porcodigo
 #############################################################
 #B3
 #############################################################
@@ -36,6 +39,8 @@ return t5
 
 #Definición de Función porlab: linea 26
 porlab:
+prologue porlab
 #Este es el código generado por la linea 28 de la instrucción return
 t6 :=[] c1 4
-return t6
+return_exp t6
+epilogue porlab

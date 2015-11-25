@@ -1,17 +1,39 @@
+string_7_1 : "\n"
 
 #############################################################
 #B1
 #############################################################
 
 
-#Este es el código generado por la linea 8 de la instrucción foo[k] := bar[i] + baz[qux[j]]
+allocate 92
+#Este es el código generado por la linea 8 de la instrucción i := 4
+i := 4
+#Este es el código generado por la linea 9 de la instrucción j := 1
+j := 1
+#Este es el código generado por la linea 10 de la instrucción k := 2
+k := 2
+#Este es el código generado por la linea 11 de la instrucción bar[i] := 2
 t1 * i 4
-t2 :=[] bar t1
+bar t1 []:= 2
+#Este es el código generado por la linea 12 de la instrucción qux[j] := 4
 t3 * j 4
-t4 :=[] qux t3
-t5 * t4 4
-t6 :=[] baz t5
-t7 + t2 t6
-t8 * k 4
-foo t8 []:= t7
+qux t3 []:= 4
+#Este es el código generado por la linea 13 de la instrucción baz[4] := 9
+t5 * 4 4
+baz t5 []:= 9
+#Este es el código generado por la linea 14 de la instrucción foo[k] := bar[i] + baz[qux[j]]
+t7 * i 4
+t8 :=[] bar t7
+t9 * j 4
+t10 :=[] qux t9
+t11 * t10 4
+t12 :=[] baz t11
+t13 + t8 t12
+t14 * k 4
+foo t14 []:= t13
+#Este es el código generado por la linea 16 de la instrucción write
+t16 * k 4
+t17 :=[] foo t16
+write t17 2
+write string_7_1 9
 exit

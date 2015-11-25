@@ -4,6 +4,7 @@
 #############################################################
 
 
+allocate 12
 #Este es el código generado por la linea 8 de la instrucción i := 1
 i := 1
 #Este es el código generado por la linea 9 de la instrucción j := 2

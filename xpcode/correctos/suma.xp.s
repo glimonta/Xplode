@@ -2,22 +2,19 @@
 string_7_1:    .asciiz "\n"
 string_7_2:    .asciiz "\n"
 
+.align 4
 
 .text
 main:
 addi $sp $sp -8
 #Este es el código generado por la linea 10 de la instrucción f := 6
 li $a2 6
-li $a3 0
-add $a3 $a3 $sp
-sw $a2 0($a3)
+move $a3 $a2
 #Este es el código generado por la linea 11 de la instrucción g := 9
 li $t0 9
-li $t1 4
-add $t1 $t1 $sp
-sw $t0 0($t1)
+move $t1 $t0
 #Este es el código generado por la linea 12 de la instrucción write
-lw $a0 0($a3)
+move $a0 $a3
 li $v0 1
 syscall
 la $t2 string_7_1
@@ -25,7 +22,7 @@ move $a0 $t2
 li $v0 4
 syscall
 #Este es el código generado por la linea 13 de la instrucción write
-lw $a0 0($t1)
+move $a0 $t1
 li $v0 1
 syscall
 la $t3 string_7_2

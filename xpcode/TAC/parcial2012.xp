@@ -5,7 +5,14 @@ begin
 let int[5] foo, bar, baz, qux;
 let int i, j, k;
 
+  i := 4;
+  j := 1;
+  k := 2;
+  bar[i] := 2;
+  qux[j] := 4;
+  baz[4] := 9;
   foo[k] := bar[i] + baz[qux[j]];
 
+  write(foo[k], "\n");
 
 end

@@ -2,7 +2,6 @@ string_7_1 : "\n"
 string_7_2 : "\n"
 string_7_3 : "\n"
 string_7_4 : "\n"
-string_7_5 : "\n"
 
 #############################################################
 #B1
@@ -12,34 +11,107 @@ string_7_5 : "\n"
 allocate 288
 #Este es el código generado por la linea 17 de la instrucción j := 0
 j := 0
-#Este es el código generado por la linea 19 de la instrucción i := 0
+#Este es el código generado por la linea 18 de la instrucción for que inicia en begin_for_18_1 y termina en end_for_18_1
+#Este es el código generado por la linea 18 de la instrucción i := 0
 i := 0
-#Este es el código generado por la linea 20 de la instrucción j := j + 1
-t1 + j 1
-j := t1
-#Este es el código generado por la linea 21 de la instrucción write
-write i 2
+goto first_for_18_1
+#############################################################
+#B2
+#############################################################
+
+
+begin_for_18_1:
+#Este es el código generado por la linea 18 de la instrucción i := i + 1
+t1 + i 1
+i := t1
+#############################################################
+#B3
+#############################################################
+
+
+first_for_18_1:
+t2 < i 10
+if t2 goto mid1
+#############################################################
+#B4
+#############################################################
+
+
+goto end_for_18_1
+#############################################################
+#B5
+#############################################################
+
+
+mid1:
+#Este es el código generado por la linea 19 de la instrucción j := j + 1
+t3 + j 1
+j := t3
+#Este es el código generado por la linea 20 de la instrucción write
+write j 2
 write string_7_1 9
-#Este es el código generado por la linea 22 de la instrucción write
-write j 2
-write string_7_2 9
-#Este es el código generado por la linea 25 de la instrucción i := 4
-i := 4
-#Este es el código generado por la linea 26 de la instrucción j := j + 2
-t2 + j 2
-j := t2
-#Este es el código generado por la linea 27 de la instrucción write
+goto begin_for_18_1
+#############################################################
+#B6
+#############################################################
+
+
+end_for_18_1:
+#Este es el código generado por la linea 22 de la instrucción for que inicia en begin_for_22_1 y termina en end_for_22_1
+#Este es el código generado por la linea 22 de la instrucción i := 0
+i := 0
+goto first_for_22_1
+#############################################################
+#B7
+#############################################################
+
+
+begin_for_22_1:
+#Este es el código generado por la linea 22 de la instrucción i := i + 1
+t4 + i 1
+i := t4
+#############################################################
+#B8
+#############################################################
+
+
+first_for_22_1:
+t5 < i 10
+if t5 goto mid2
+#############################################################
+#B9
+#############################################################
+
+
+goto end_for_22_1
+#############################################################
+#B10
+#############################################################
+
+
+mid2:
+#Este es el código generado por la linea 23 de la instrucción j := j + 2
+t6 + j 2
+j := t6
+#Este es el código generado por la linea 24 de la instrucción write
 write i 2
-write string_7_3 9
-#Este es el código generado por la linea 28 de la instrucción write
+write string_7_2 9
+#Este es el código generado por la linea 25 de la instrucción write
 write j 2
+write string_7_3 9
+goto begin_for_22_1
+#############################################################
+#B11
+#############################################################
+
+
+end_for_22_1:
+#Este es el código generado por la linea 28 de la instrucción b[0] := 4
+t7 * 0 4
+b t7 []:= 4
+#Este es el código generado por la linea 29 de la instrucción write
+t9 * 0 4
+t10 :=[] b t9
+write t10 2
 write string_7_4 9
-#Este es el código generado por la linea 31 de la instrucción b[0] := 4
-t3 * 0 4
-b t3 []:= 4
-#Este es el código generado por la linea 32 de la instrucción write
-t5 * 0 4
-t6 :=[] b t5
-write t6 2
-write string_7_5 9
 exit

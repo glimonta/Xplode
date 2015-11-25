@@ -408,7 +408,7 @@ class ReturnQuad : public Quad {
 class ReturnExpQuad : public Quad {
   public:
 
-    ReturnExpQuad(ExpQuad * r) : Quad("return", r, NULL, NULL) {}
+    ReturnExpQuad(ExpQuad * r) : Quad("return_exp", r, NULL, NULL) {}
 
     std::string toString() {
       return getOp() + " " + getResultStr();

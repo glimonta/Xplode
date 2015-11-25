@@ -6,6 +6,7 @@ string_7_2 : "Aca saco el promedio con la magia de next, length y la desconocida
 #############################################################
 
 
+allocate 24
 #############################################################
 #B2
 #############################################################
@@ -24,7 +25,7 @@ read t1 2
 t2 * i 4
 a t2 []:= t1
 #Este es el código generado por la linea 22 de la instrucción write
-write string_7_1
+write string_7_1 9
 #Este es el código generado por la linea 23 de la instrucción if que termina en next_if_23_1
 t4 * i 4
 t5 :=[] a t4
@@ -95,5 +96,7 @@ exit
 
 #Definición de Función prom: linea 3
 prom:
+prologue prom
 #Este es el código generado por la linea 6 de la instrucción write
-write string_7_2
+write string_7_2 9
+epilogue prom

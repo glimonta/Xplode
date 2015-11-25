@@ -9,8 +9,9 @@ string_7_5 : "\n"
 #############################################################
 
 
+allocate 252
 #Este es el código generado por la linea 9 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 2
 dimension := t1
 #Este es el código generado por la linea 11 de la instrucción punto := 0
@@ -18,7 +19,7 @@ punto := 0
 #Este es el código generado por la linea 13 de la instrucción i := 0
 i := 0
 #Este es el código generado por la linea 15 de la instrucción write
-write string_7_2
+write string_7_2 9
 #############################################################
 #B2
 #############################################################
@@ -56,7 +57,7 @@ next_while_16_1:
 #Este es el código generado por la linea 21 de la instrucción i := 0
 i := 0
 #Este es el código generado por la linea 22 de la instrucción write
-write string_7_3
+write string_7_3 9
 #############################################################
 #B6
 #############################################################
@@ -133,7 +134,7 @@ goto begin_while_30_1
 
 next_while_30_1:
 #Este es el código generado por la linea 36 de la instrucción write
-write string_7_4
-write punto
-write string_7_5
+write string_7_4 9
+write punto 2
+write string_7_5 9
 exit

@@ -10,16 +10,17 @@ string_7_6 : "\nNo esta contenida\n"
 #############################################################
 
 
+allocate 636
 #Este es el código generado por la linea 11 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 2
 tamt1 := t1
 #Este es el código generado por la linea 13 de la instrucción write
-write string_7_2
+write string_7_2 9
 read t2 2
 tamt2 := t2
 #Este es el código generado por la linea 16 de la instrucción write
-write string_7_3
+write string_7_3 9
 #Este es el código generado por la linea 17 de la instrucción tam1 := 0
 tam1 := 0
 #Este es el código generado por la linea 18 de la instrucción tam2 := 0
@@ -61,7 +62,7 @@ next_while_19_1:
 read t8 4
 aux := t8
 #Este es el código generado por la linea 26 de la instrucción write
-write string_7_4
+write string_7_4 9
 read t9 6
 cad2 := t9
 #############################################################
@@ -242,7 +243,7 @@ ifnot t33 goto false_if_69_1
 
 
 #Este es el código generado por la linea 70 de la instrucción write
-write string_7_5
+write string_7_5 9
 goto next_if_69_1
 #############################################################
 #B25
@@ -251,7 +252,7 @@ goto next_if_69_1
 
 false_if_69_1:
 #Este es el código generado por la linea 73 de la instrucción write
-write string_7_6
+write string_7_6 9
 #############################################################
 #B26
 #############################################################

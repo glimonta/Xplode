@@ -77,15 +77,109 @@ class GeneratorMIPS {
         } else if ("+" == quad->op) {
           AddQuad * add = (AddQuad *) quad;
           addToMips(add);
+        } else if ("-" == quad->op) {
+          SubQuad * sub = (SubQuad *) quad;
+          subToMips(sub);
+        } else if ("*" == quad->op) {
+          MulQuad * mul = (MulQuad *) quad;
+          mulToMips(mul);
+        } else if ("/" == quad->op) {
+          DivQuad * div = (DivQuad *) quad;
+          divToMips(div);
+        } else if ("%" == quad->op) {
+          ModQuad * mod = (ModQuad *) quad;
+          modToMips(mod);
+        } else if ("<" == quad->op) {
+          LessQuad * less = (LessQuad *) quad;
+          lessToMips(less);
+        } else if ("<=" == quad->op) {
+          LessEqualQuad * lesseq = (LessEqualQuad *) quad;
+          lesseqToMips(lesseq);
+        } else if (">" == quad->op) {
+          GreaterQuad * greater = (GreaterQuad *) quad;
+          greaterToMips(greater);
+        } else if (">=" == quad->op) {
+          GreaterEqualQuad * greatereq = (GreaterEqualQuad *) quad;
+          greatereqToMips(greatereq);
+        } else if ("==" == quad->op) {
+          EqualQuad * equal = (EqualQuad *) quad;
+          equalToMips(equal);
+        } else if ("!=" == quad->op) {
+          NotEqualQuad * notequal = (NotEqualQuad *) quad;
+          notequalToMips(notequal);
+        } else if ("&&" == quad->op) {
+          AndQuad * andquad = (AndQuad *) quad;
+          andToMips(andquad);
+        } else if ("&&" == quad->op) {
+          OrQuad * orquad = (OrQuad *) quad;
+          orToMips(orquad);
+        } else if ("if" == quad->op) {
+          IfQuad * ifquad = (IfQuad *) quad;
+          ifToMips(ifquad);
+        } else if ("ifnot" == quad->op) {
+          IfNotQuad * ifnotquad = (IfNotQuad *) quad;
+          ifnotToMips(ifnotquad);
+        } else if ("goto" == quad->op) {
+          GotoQuad * gotoquad = (GotoQuad *) quad;
+          gotoToMips(gotoquad);
+        } else if ("param" == quad->op) {
+          ParamQuad * param = (ParamQuad *) quad;
+          paramToMips(param);
+        } else if ("param_ref" == quad->op) {
+          ParamRefQuad * param = (ParamRefQuad *) quad;
+          paramrefToMips(param);
+        } else if ("call" == quad->op) {
+          FunctionCallReturn * call = (FunctionCallReturn *) quad;
+          callToMips(call);
+        } else if ("neg" == quad->op) {
+          UnaryMinusQuad * minus = (UnaryMinusQuad *) quad;
+          minusToMips(minus);
+        } else if ("neg" == quad->op) {
+          NotQuad * notquad = (NotQuad *) quad;
+          notToMips(notquad);
+        } else if ("sleep" == quad->op) {
+          SleepQuad * sleep = (SleepQuad *) quad;
+          sleepToMips(sleep);
+        } else if ("return" == quad->op) {
+          ReturnQuad * ret = (ReturnQuad *) quad;
+          returnToMips(ret);
+        } else if ("return_exp" == quad->op) {
+          ReturnExpQuad * ret = (ReturnExpQuad *) quad;
+          returnexpToMips(ret);
         } else if ("[]:=" == quad->op) {
           AssignToArrayQuad * assign = (AssignToArrayQuad *) quad;
           assignToArrayToMips(assign);
         } else if (":=[]" == quad->op) {
           AssignArrayQuad * assign = (AssignArrayQuad *) quad;
           assignArrayToMips(assign);
+        } else if ("=*" == quad->op) {
+          DerefQuad * deref = (DerefQuad *) quad;
+          derefToMips(deref);
+        } else if ("*=" == quad->op) {
+          RefQuad * ref = (RefQuad *) quad;
+          refToMips(ref);
+        } else if ("prologue" == quad->op) {
+          PrologueQuad * prologue = (PrologueQuad *) quad;
+          prologueToMips(prologue);
+        } else if ("epilogue" == quad->op) {
+          EpilogueQuad * epilogue = (EpilogueQuad *) quad;
+          epilogueToMips(epilogue);
+        } else if ("ctoi" == quad->op) {
+          CastQuad * ctoi = (CastQuad *) quad;
+          charToIntToMips(ctoi);
+        } else if ("itoc" == quad->op) {
+          CastQuad * itoc = (CastQuad *) quad;
+          intToCharToMips(itoc);
+        } else if ("itof" == quad->op) {
+          CastQuad * itof = (CastQuad *) quad;
+          intToFloatToMips(itof);
+        } else if ("ftoi" == quad->op) {
+          CastQuad * ftoi = (CastQuad *) quad;
+          floatToIntToMips(ftoi);
         } else {
-          //Faltan los demás casos
+          // Caso de declaraciones y block comments, esos se ignoran
         }
+
       }
     }
 
@@ -236,6 +330,143 @@ class GeneratorMIPS {
       allocator->getReg(this, add, &rd, &rl, &rr);
       instructions->push_back(new AddMips(rd, rl, rr));
     }
+
+    void subToMips(SubQuad * sub) {
+      MipsRegister * rd, * rl, * rr;
+      allocator->getReg(this, sub, &rd, &rl, &rr);
+      instructions->push_back(new SubMips(rd, rl, rr));
+    }
+
+    void mulToMips(MulQuad * mul) {
+      MipsRegister * rd, * rl, * rr;
+      allocator->getReg(this, mul, &rd, &rl, &rr);
+      instructions->push_back(new MultMips(rd, rl, rr));
+    }
+
+    void divToMips(DivQuad * div) {
+      MipsRegister * rd, * rl, * rr;
+      allocator->getReg(this, div, &rd, &rl, &rr);
+      instructions->push_back(new DivMips(rl, rr));
+      instructions->push_back(new MoveFromLowMips(rd));
+    }
+
+    void modToMips(ModQuad * mod) {
+      MipsRegister * rd, * rl, * rr;
+      allocator->getReg(this, mod, &rd, &rl, &rr);
+      instructions->push_back(new DivMips(rl, rr));
+      instructions->push_back(new MoveFromHighMips(rd));
+    }
+
+    void lessToMips(LessQuad * less) {
+      //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
+      //solo sirve para una condición donde se genera jumping code
+      MipsRegister * rd, * rl, *rr;
+      allocator->getReg(this, less, &rd, &rl, &rr);
+      instructions->push_back(new SetLessMips(rd, rl, rr));
+    }
+
+    void lesseqToMips(LessEqualQuad * lesseq) {
+      //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
+      //solo sirve para una condición donde se genera jumping code
+      MipsRegister * rd, * rl, *rr;
+      allocator->getReg(this, lesseq, &rd, &rl, &rr);
+      instructions->push_back(new SetLessEqualMips(rd, rl, rr));
+    }
+
+    void greaterToMips(GreaterQuad * greater) {
+      //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
+      //solo sirve para una condición donde se genera jumping code
+      MipsRegister * rd, * rl, *rr;
+      allocator->getReg(this, greater, &rd, &rl, &rr);
+      instructions->push_back(new SetGreaterMips(rd, rl, rr));
+    }
+
+    void greatereqToMips(GreaterEqualQuad * greatereq) {
+      //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
+      //solo sirve para una condición donde se genera jumping code
+      MipsRegister * rd, * rl, *rr;
+      allocator->getReg(this, greatereq, &rd, &rl, &rr);
+      instructions->push_back(new SetGreaterEqualMips(rd, rl, rr));
+    }
+
+    void equalToMips(EqualQuad * equal) {
+      //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
+      //solo sirve para una condición donde se genera jumping code
+      MipsRegister * rd, * rl, *rr;
+      allocator->getReg(this, equal, &rd, &rl, NULL);
+      VarQuad * jumpLabel = (VarQuad *) equal->getArg2();
+      instructions->push_back(new SetEqualMips(rd, rl, rr));
+    }
+
+    void notequalToMips(NotEqualQuad * notequal) {
+      //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
+      //solo sirve para una condición donde se genera jumping code
+      MipsRegister * rd, * rl, *rr;
+      allocator->getReg(this, notequal, &rd, &rl, NULL);
+      VarQuad * jumpLabel = (VarQuad *) notequal->getArg2();
+      instructions->push_back(new SetNotEqualMips(rd, rl, rr));
+    }
+
+    void andToMips(AndQuad * andquad) {
+      MipsRegister * rd, * rl, * rr;
+      allocator->getReg(this, andquad, &rd, &rl, &rr);
+      instructions->push_back(new AndMips(rd, rl, rr));
+    }
+
+    void orToMips(OrQuad * orquad) {
+      MipsRegister * rd, * rl, * rr;
+      allocator->getReg(this, orquad, &rd, &rl, &rr);
+      instructions->push_back(new OrMips(rd, rl, rr));
+    }
+
+    void ifToMips(IfQuad * ifquad) {
+      MipsRegister *rd;
+      allocator->getReg(this, ifquad, &rd, NULL, NULL);
+      VarQuad * jumpLabel = (VarQuad *) ifquad->getArg2();
+      instructions->push_back(new BranchNotEqualZeroMips(rd, new MipsVariable(jumpLabel->vname)));
+    }
+
+    void ifnotToMips(IfNotQuad * ifnotquad) {
+      MipsRegister *rd;
+      allocator->getReg(this, ifnotquad, &rd, NULL, NULL);
+      VarQuad * jumpLabel = (VarQuad *) ifnotquad->getArg2();
+      instructions->push_back(new BranchEqualZeroMips(rd, new MipsVariable(jumpLabel->vname)));
+    }
+
+    void gotoToMips(GotoQuad * gotoquad) {
+      VarQuad * jumpLabel = (VarQuad *) gotoquad->getResult();
+      instructions->push_back(new JumpMips(new MipsVariable(jumpLabel->vname)));
+    }
+
+    void paramToMips(ParamQuad * param) {}
+    void paramrefToMips(ParamRefQuad * param) {}
+    void callToMips(FunctionCallReturn * call) {}
+
+    void minusToMips(UnaryMinusQuad * minus) {
+      MipsRegister *rd, *rl;
+      allocator->getReg(this, minus, &rd, &rl, NULL);
+      instructions->push_back(new UnaryMinusMips(rd, rl));
+    }
+
+    void notToMips(NotQuad * notquad) {
+      MipsRegister *rd, *rl;
+      allocator->getReg(this, notquad, &rd, &rl, NULL);
+      instructions->push_back(new NotMips(rd, rl));
+    }
+
+    void sleepToMips(SleepQuad * sleep) {}
+    void returnToMips(ReturnQuad * ret) {}
+    void returnexpToMips(ReturnExpQuad * ret) {}
+    void derefToMips(DerefQuad * deref) {}
+    void refToMips(RefQuad * ref) {}
+    void prologueToMips(PrologueQuad * prologue) {}
+    void epilogueToMips(EpilogueQuad * epilogue) {}
+    void charToIntToMips(CastQuad * ctoi) {}
+    void intToCharToMips(CastQuad * itoc) {}
+    void intToFloatToMips(CastQuad * itof) {}
+    void floatToIntToMips(CastQuad * ftoi) {}
+
+
 
 
 };

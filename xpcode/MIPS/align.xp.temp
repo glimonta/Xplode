@@ -8,6 +8,7 @@ string_7_4 : " "
 #############################################################
 
 
+allocate 52
 #Este es el código generado por la linea 31 de la instrucción if que termina en next_if_31_1
 t1 == 2 2
 ifnot t1 goto false_if_31_1
@@ -18,7 +19,7 @@ ifnot t1 goto false_if_31_1
 
 #Este es el código generado por la linea 35 de la instrucción if que termina en next_if_35_1
 #Este es el código generado por la linea 40 de la instrucción write
-write string_7_1
+write string_7_1 9
 #############################################################
 #B3
 #############################################################
@@ -26,7 +27,7 @@ write string_7_1
 
 next_if_35_1:
 #Este es el código generado por la linea 44 de la instrucción write
-write string_7_2
+write string_7_2 9
 goto next_if_31_1
 #############################################################
 #B4
@@ -35,7 +36,7 @@ goto next_if_31_1
 
 false_if_31_1:
 #Este es el código generado por la linea 50 de la instrucción write
-write string_7_3
+write string_7_3 9
 #############################################################
 #B5
 #############################################################
@@ -51,7 +52,7 @@ ifnot t2 goto next_if_54_1
 
 
 #Este es el código generado por la linea 59 de la instrucción write
-write string_7_4
+write string_7_4 9
 #############################################################
 #B7
 #############################################################
@@ -66,6 +67,7 @@ exit
 
 #Definición de Función fib: linea 3
 fib:
+prologue fib
 #Este es el código generado por la linea 8 de la instrucción if que termina en next_if_8_1
 t3 < num 2
 ifnot t3 goto next_if_8_1
@@ -75,7 +77,7 @@ ifnot t3 goto next_if_8_1
 
 
 #Este es el código generado por la linea 10 de la instrucción return
-return 1
+return_exp 1
 #############################################################
 #B10
 #############################################################
@@ -98,4 +100,5 @@ t5 call fib 3
 k := t5
 #Este es el código generado por la linea 16 de la instrucción return
 t6 + k j
-return t6
+return_exp t6
+epilogue fib

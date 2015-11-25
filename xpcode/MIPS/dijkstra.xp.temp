@@ -14,8 +14,9 @@ string_7_9 : "Camino de menor costo: "
 #############################################################
 
 
+allocate 10452
 #Este es el código generado por la linea 12 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 2
 nodos := t1
 #Este es el código generado por la linea 15 de la instrucción i := 0
@@ -98,21 +99,21 @@ goto begin_while_17_1
 
 next_while_17_1:
 #Este es el código generado por la linea 29 de la instrucción write
-write string_7_2
+write string_7_2 9
 read t14 2
 src := t14
 #Este es el código generado por la linea 32 de la instrucción write
-write string_7_3
+write string_7_3 9
 read t15 2
 dst := t15
 #Este es el código generado por la linea 35 de la instrucción write
-write string_7_4
+write string_7_4 9
 read t16 2
 arcs := t16
 #Este es el código generado por la linea 37 de la instrucción i := 0
 i := 0
 #Este es el código generado por la linea 38 de la instrucción write
-write string_7_5
+write string_7_5 9
 #############################################################
 #B10
 #############################################################
@@ -135,15 +136,15 @@ goto next_while_39_1
 
 true_while_39_1:
 #Este es el código generado por la linea 40 de la instrucción write
-write string_7_6
+write string_7_6 9
 read t18 2
 x := t18
 #Este es el código generado por la linea 42 de la instrucción write
-write string_7_7
+write string_7_7 9
 read t19 2
 y := t19
 #Este es el código generado por la linea 44 de la instrucción write
-write string_7_8
+write string_7_8 9
 read t20 2
 cost := t20
 #Este es el código generado por la linea 46 de la instrucción ady[x][y] := cost
@@ -379,9 +380,9 @@ goto begin_while_53_1
 
 next_while_53_1:
 #Este es el código generado por la linea 87 de la instrucción write
-write string_7_9
+write string_7_9 9
 t71 * dst 4
 t72 :=[] costo t71
-write t72
-write string_7_10
+write t72 2
+write string_7_10 9
 exit

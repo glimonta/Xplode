@@ -8,8 +8,9 @@ string_7_4 : "\n"
 #############################################################
 
 
+allocate 12
 #Este es el código generado por la linea 8 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 2
 j := t1
 #Este es el código generado por la linea 10 de la instrucción i := 1
@@ -51,9 +52,9 @@ goto begin_while_13_1
 
 next_while_13_1:
 #Este es el código generado por la linea 19 de la instrucción write
-write string_7_2
-write j
-write string_7_3
-write fact
-write string_7_4
+write string_7_2 9
+write j 2
+write string_7_3 9
+write fact 2
+write string_7_4 9
 exit

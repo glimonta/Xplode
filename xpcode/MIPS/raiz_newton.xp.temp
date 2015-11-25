@@ -8,12 +8,13 @@ string_7_4 : "\n\n"
 #############################################################
 
 
+allocate 16
 #Este es el código generado por la linea 8 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 5
 y := t1
 #Este es el código generado por la linea 11 de la instrucción x := 1.0
-x := 1.0
+x := 1
 #Este es el código generado por la linea 13 de la instrucción i := 1
 i := 1
 #############################################################
@@ -40,7 +41,7 @@ true_while_15_1:
 #Este es el código generado por la linea 17 de la instrucción nuevox := 0.5 * x + y / x
 t3 / y x
 t4 + x t3
-t5 * 0.5 t4
+t5 * 0 t4
 nuevox := t5
 #Este es el código generado por la linea 19 de la instrucción x := nuevox
 x := nuevox
@@ -55,9 +56,9 @@ goto begin_while_15_1
 
 next_while_15_1:
 #Este es el código generado por la linea 23 de la instrucción write
-write string_7_2
-write y
-write string_7_3
-write x
-write string_7_4
+write string_7_2 9
+write y 5
+write string_7_3 9
+write x 5
+write string_7_4 9
 exit

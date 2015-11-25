@@ -10,8 +10,9 @@ string_7_6 : "\n"
 #############################################################
 
 
+allocate 30020
 #Este es el código generado por la linea 10 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 2
 tam := t1
 #Este es el código generado por la linea 12 de la instrucción i := 0
@@ -19,7 +20,7 @@ i := 0
 #Este es el código generado por la linea 13 de la instrucción j := 0
 j := 0
 #Este es el código generado por la linea 14 de la instrucción write
-write string_7_2
+write string_7_2 9
 #############################################################
 #B2
 #############################################################
@@ -94,7 +95,7 @@ i := 0
 #Este es el código generado por la linea 24 de la instrucción j := 0
 j := 0
 #Este es el código generado por la linea 25 de la instrucción write
-write string_7_3
+write string_7_3 9
 #############################################################
 #B10
 #############################################################
@@ -287,7 +288,7 @@ goto begin_while_38_1
 
 next_while_38_1:
 #Este es el código generado por la linea 53 de la instrucción write
-write string_7_4
+write string_7_4 9
 #Este es el código generado por la linea 55 de la instrucción i := 0
 i := 0
 #Este es el código generado por la linea 56 de la instrucción j := 0
@@ -341,8 +342,8 @@ t42 * i 50
 t43 + t42 j
 t44 * t43 4
 t45 :=[] mat3 t44
-write t45
-write string_7_5
+write t45 2
+write string_7_5 9
 #Este es el código generado por la linea 61 de la instrucción j := j + 1
 t46 + j 1
 j := t46
@@ -354,7 +355,7 @@ goto begin_while_59_1
 
 next_while_59_1:
 #Este es el código generado por la linea 63 de la instrucción write
-write string_7_6
+write string_7_6 9
 #Este es el código generado por la linea 64 de la instrucción i := i + 1
 t47 + i 1
 i := t47

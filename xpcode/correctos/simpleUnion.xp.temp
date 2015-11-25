@@ -4,13 +4,19 @@
 #############################################################
 
 
+allocate 4
 #Este es el código generado por la linea 11 de la instrucción ci.c := 'a'
 ci 0 []:= 'a'
 #Este es el código generado por la linea 12 de la instrucción ci.i := 3
 ci 0 []:= 3
-read t3 4
+read t3 2
 ci 0 []:= t3
 #Este es el código generado por la linea 15 de la instrucción write
 t5 :=[] ci 0
-write t5
+write t5 2
+read t6 4
+ci 0 []:= t6
+#Este es el código generado por la linea 18 de la instrucción write
+t8 :=[] ci 0
+write t8 4
 exit
