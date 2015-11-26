@@ -298,10 +298,10 @@ class GotoQuad : public Quad {
 class ParamQuad : public Quad {
   public:
 
-    ParamQuad(ExpQuad * a1) : Quad("param", NULL, a1, NULL) {}
+    ParamQuad(ExpQuad * r) : Quad("param", r, NULL, NULL) {}
 
     std::string toString() {
-      return getOp() + " " + getArg1Str();
+      return getOp() + " " + getResultStr();
     }
 
 };

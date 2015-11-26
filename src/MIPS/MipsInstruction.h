@@ -321,11 +321,23 @@ class JumpMips : public MipsInstruction {
 
 };
 
+class JumpFunctionMips : public MipsInstruction {
+
+  public:
+
+    JumpFunctionMips(MipsArgument * r) : MipsInstruction("jal", r, NULL, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString();
+    }
+
+};
+
 class JumpRegisterMips : public MipsInstruction {
 
   public:
 
-    JumpRegisterMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("jr", r, NULL, NULL) {}
+    JumpRegisterMips(MipsArgument * r) : MipsInstruction("jr", r, NULL, NULL) {}
 
     std::string toString() {
       return  getOp() + " " + getResult()->toString();

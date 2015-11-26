@@ -276,7 +276,7 @@ class GeneratorMIPS {
         MipsRegister * raux = allocator->getAuxReg();
         instructions->push_back(new AddiMips(raux, ZERO_REGISTER, new MipsImmediate(var->offset)));
         instructions->push_back(new AddMips(raux, raux, FP_REGISTER));
-        instructions->push_back(new LoadWordMips(raux, new MipsOffset(raux->num, 0)));
+        instructions->push_back(new LoadWordMips(raux, new MipsOffset(raux->num, 4)));
         instructions->push_back(new AddMips(rl, rl, raux));
         instructions->push_back(new StoreWordMips(rr, new MipsOffset(rl->num, 0)));
       } else if (var->is_glob) {
@@ -288,7 +288,7 @@ class GeneratorMIPS {
       } else {
         instructions->push_back(new AddiMips(rl, rl, new MipsImmediate(var->offset)));
         instructions->push_back(new AddMips(rl, rl, SP_REGISTER));
-        instructions->push_back(new StoreWordMips(rr, new MipsOffset(rl->num, 0)));
+        instructions->push_back(new StoreWordMips(rr, new MipsOffset(rl->num, 4)));
       }
 
     }
@@ -303,7 +303,7 @@ class GeneratorMIPS {
         MipsRegister * raux = allocator->getAuxReg();
         instructions->push_back(new AddiMips(raux, ZERO_REGISTER, new MipsImmediate(var->offset)));
         instructions->push_back(new AddMips(raux, raux, FP_REGISTER));
-        instructions->push_back(new LoadWordMips(raux, new MipsOffset(raux->num, 0)));
+        instructions->push_back(new LoadWordMips(raux, new MipsOffset(raux->num, 4)));
         instructions->push_back(new AddMips(rr, rr, raux));
         instructions->push_back(new LoadWordMips(rd, new MipsOffset(rr->num, 0)));
       } else if (var->is_glob) {
@@ -315,7 +315,7 @@ class GeneratorMIPS {
       } else {
         instructions->push_back(new AddiMips(rr, rr, new MipsImmediate(var->offset)));
         instructions->push_back(new AddMips(rr, rr, SP_REGISTER));
-        instructions->push_back(new LoadWordMips(rd, new MipsOffset(rr->num, 0)));
+        instructions->push_back(new LoadWordMips(rd, new MipsOffset(rr->num, 4)));
       }
 
     }
@@ -438,9 +438,50 @@ class GeneratorMIPS {
       instructions->push_back(new JumpMips(new MipsVariable(jumpLabel->vname)));
     }
 
-    void paramToMips(ParamQuad * param) {}
-    void paramrefToMips(ParamRefQuad * param) {}
-    void callToMips(FunctionCallReturn * call) {}
+    void paramToMips(ParamQuad * param) {
+      MipsRegister *rd;
+      allocator->getReg(this, param, &rd, NULL, NULL);
+      instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-4)));
+      instructions->push_back(new StoreWordMips(rd, new MipsOffset((SP_REGISTER)->num, 4)));
+    }
+
+    void paramrefToMips(ParamRefQuad * param) {
+      MipsRegister *rb, *rd;
+      rd = allocator->getAuxReg();
+      VarQuad * variable = (VarQuad *) param->getResult();
+
+      if (variable->is_ref) {
+        instructions->push_back(new AddiMips(rd, ZERO_REGISTER, new MipsImmediate(variable->offset)));
+        rb = (variable->is_arg) ? FP_REGISTER : SP_REGISTER;
+        instructions->push_back(new AddMips(rd, rd, rb));
+        instructions->push_back(new LoadWordMips(rd, new MipsOffset(rd->num, 4)));
+        instructions->push_back(new StoreWordMips(rd, new MipsOffset((SP_REGISTER)->num, 0)));
+        instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-4)));
+      } else {
+        instructions->push_back(new AddiMips(rd, ZERO_REGISTER, new MipsImmediate(variable->offset + 4)));
+        rb = (variable->is_arg) ? FP_REGISTER : SP_REGISTER;
+        instructions->push_back(new AddMips(rd, rd, rb));
+        instructions->push_back(new StoreWordMips(rd, new MipsOffset((SP_REGISTER)->num, 0)));
+        instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-4)));
+      }
+    }
+
+    void callToMips(FunctionCallReturn * call) {
+      MipsRegister *rl;
+      VarQuad * function = (VarQuad *) call->getArg1();
+
+      if (function->is_ref) {
+        allocator->getReg(this, call, NULL, &rl, NULL);
+        instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-4)));
+      } else {
+        rl = allocator->getAuxReg();
+        instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-4)));
+        instructions->push_back(new LoadAddressMips(rl, new MipsVariable(function->vname)));
+      }
+
+      instructions->push_back(new JumpFunctionMips(rl));
+      allocator->clear();
+    }
 
     void minusToMips(UnaryMinusQuad * minus) {
       MipsRegister *rd, *rl;
@@ -455,11 +496,41 @@ class GeneratorMIPS {
     }
 
     void sleepToMips(SleepQuad * sleep) {}
-    void returnToMips(ReturnQuad * ret) {}
-    void returnexpToMips(ReturnExpQuad * ret) {}
+
+    void returnToMips(ReturnQuad * ret) {
+      allocator->flush(this);
+      allocator->clear();
+      instructions->push_back(new LoadWordMips(RA_REGISTER, new MipsOffset((FP_REGISTER)->num, -4)));
+      instructions->push_back(new MoveMips(SP_REGISTER, FP_REGISTER));
+      instructions->push_back(new LoadWordMips(FP_REGISTER, new MipsOffset((FP_REGISTER)->num, -8)));
+      instructions->push_back(new JumpRegisterMips(RA_REGISTER));
+    }
+
+    void returnexpToMips(ReturnExpQuad * ret) {
+      MipsRegister *rd;
+      allocator->getReg(this, ret, &rd, NULL, NULL);
+      instructions->push_back(new StoreWordMips(rd, new MipsOffset((FP_REGISTER)->num, 0)));
+      allocator->flush(this);
+      allocator->clear();
+      instructions->push_back(new LoadWordMips(RA_REGISTER, new MipsOffset((FP_REGISTER)->num, -4)));
+      instructions->push_back(new MoveMips(SP_REGISTER, FP_REGISTER));
+      instructions->push_back(new LoadWordMips(FP_REGISTER, new MipsOffset((FP_REGISTER)->num, -8)));
+      instructions->push_back(new JumpRegisterMips(RA_REGISTER));
+    }
+
     void derefToMips(DerefQuad * deref) {}
     void refToMips(RefQuad * ref) {}
-    void prologueToMips(PrologueQuad * prologue) {}
+
+    void prologueToMips(PrologueQuad * prologue) {
+      ConstQuad *space = (ConstQuad *) prologue->getResult();
+      instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-4)));
+      instructions->push_back(new StoreWordMips(RA_REGISTER, new MipsOffset((SP_REGISTER)->num, 4)));
+      instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-4)));
+      instructions->push_back(new StoreWordMips(FP_REGISTER, new MipsOffset((SP_REGISTER)->num, 4)));
+      instructions->push_back(new AddiMips(FP_REGISTER, SP_REGISTER, new MipsImmediate(12)));
+      instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-(space->num))));
+    }
+
     void epilogueToMips(EpilogueQuad * epilogue) {}
     void charToIntToMips(CastQuad * ctoi) {}
     void intToCharToMips(CastQuad * itoc) {}

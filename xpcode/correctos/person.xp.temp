@@ -2,63 +2,67 @@ string_7_1 : "Person Data is : "
 string_7_2 : " "
 string_7_3 : " "
 string_7_4 : " "
-string_7_5 : "Person Data is : "
-string_7_6 : " "
-string_7_7 : " "
-string_7_8 : " "
+string_7_5 : "Person Id is : "
+string_7_6 : "\n"
 
 #############################################################
 #B1
 #############################################################
 
 
-allocate 24
+allocate 16
 read t1 2
-p 12 []:= t1
-read t3 5
-p 16 []:= t3
-read t5 5
-p 20 []:= t5
-read t7 6
+p 4 []:= t1
+read t3 2
+p 8 []:= t3
+read t5 2
+p 12 []:= t5
+read t7 2
 p 0 []:= t7
-#Este es el código generado por la linea 21 de la instrucción write
-write string_7_1 9
-#Este es el código generado por la linea 22 de la instrucción write
-t9 :=[] p 12
-write t9 2
-write string_7_2 9
-t10 :=[] p 0
-write t10 6
-write string_7_3 9
-t11 :=[] p 16
-write t11 5
-write string_7_4 9
-t12 :=[] p 20
-write t12 5
-#Este es el código generado por la linea 23 de la llamada a la función: print
+#Este es el código generado por la linea 33 de la llamada a la función: print
 param_ref p  
-t13 call print 1
+t9 call print 1
+epilogue 4
+#Este es el código generado por la linea 34 de la llamada a la función: print2
+t10 :=[] p 4
+param t10
+t11 call print2 1
+epilogue 4
 exit
 #############################################################
 #B2
 #############################################################
 
 
-#Definición de Función print: linea 10
+#Definición de Función print: linea 17
 print:
-prologue print
-#Este es el código generado por la linea 11 de la instrucción write
-write string_7_5 9
-#Este es el código generado por la linea 12 de la instrucción write
-t14 :=[] p 12
+prologue 0
+#Este es el código generado por la linea 18 de la instrucción write
+write string_7_1 9
+#Este es el código generado por la linea 19 de la instrucción write
+t12 :=[] p 4
+write t12 2
+write string_7_2 9
+t13 :=[] p 0
+write t13 2
+write string_7_3 9
+t14 :=[] p 8
 write t14 2
+write string_7_4 9
+t15 :=[] p 12
+write t15 2
+return
+#############################################################
+#B3
+#############################################################
+
+
+#Definición de Función print2: linea 22
+print2:
+prologue 0
+#Este es el código generado por la linea 23 de la instrucción write
+write string_7_5 9
+#Este es el código generado por la linea 24 de la instrucción write
+write id 2
 write string_7_6 9
-t15 :=[] p 0
-write t15 6
-write string_7_7 9
-t16 :=[] p 16
-write t16 5
-write string_7_8 9
-t17 :=[] p 20
-write t17 5
-epilogue print
+return

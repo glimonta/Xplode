@@ -53,6 +53,8 @@ class RegisterAllocator {
   //void delete_from_register_descriptor(MipsRegister * r, std::string var);
   //void delete_from_variable_descriptor(std::string v, LocationEntry l);
   MipsRegister * getAuxReg();
+  void clear();
+  void flush(GeneratorMIPS * generator);
 
 };
 

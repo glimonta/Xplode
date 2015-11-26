@@ -36,6 +36,13 @@ begin
 
 let cadena lenguajes, bases, diseno;
 
+  lenguajes.codigo := 3641;
+  lenguajes.tienelab := true;
+  bases.codigo := 3311;
+  bases.tienelab := true;
+  diseño.codigo := 5651;
+  diseño.tienelab := false;
+
 
   write(porcodigo(lenguajes, bases));
   write(porlab(lenguajes, diseno));

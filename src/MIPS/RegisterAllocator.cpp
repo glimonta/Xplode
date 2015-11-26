@@ -79,14 +79,14 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
         generator->gen(new LoadAddressMips(raux, new MipsVariable(var->vname)));
         generator->gen(new AddMips(r, r, raux));
       } else {
-        generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
+        generator->gen(new AddMips(r, r, ((var->is_arg) ? FP_REGISTER : SP_REGISTER)));
       }
 
-      generator->gen(new LoadWordMips(r, new MipsOffset(r->num, 0)));
+      generator->gen(new LoadWordMips(r, new MipsOffset(r->num, 4)));
       //FIXME esto capaz es 4
 
       if ((var->is_ref) && (var->typenum != 8)) {
-        generator->gen(new LoadWordMips(r, new MipsOffset(0, r->num)));
+        generator->gen(new LoadWordMips(r, new MipsOffset(r->num, 0)));
       }
 
     } else {
@@ -224,4 +224,9 @@ MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generat
   MipsRegister * RegisterAllocator::getAuxReg() {
     return free_registers.front();
   }
+
+  void RegisterAllocator::clear() {}
+
+  void RegisterAllocator::flush(GeneratorMIPS * generator) {}
+
 

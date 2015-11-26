@@ -1,15 +1,27 @@
 program
 
+//type person{
+//  char[10] name;
+//  int id;
+//  float height;
+//  float weight;
+//}
+
 type person{
-  char[10] name;
+  int name;
   int id;
-  float height;
-  float weight;
+  int height;
+  int weight;
 }
 
 function void print(var person p){
   write("Person Data is : ");
   write(p.id," ", p.name, " ",p.height, " ", p.weight);
+}
+
+function void print2(int id){
+  write("Person Id is : ");
+  write(id, "\n");
 }
 
 begin
@@ -19,5 +31,6 @@ begin
   read(p.weight);
   read(p.name);
   print(p);
+  print2(p.id);
 
 end

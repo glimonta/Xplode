@@ -67,6 +67,7 @@ class FunctionExpression : public Expression {
       std::list<Expression *>::iterator params;
       params = argList->end();
       --params;
+      int offset = 0;
 
       // Se empilan primero los parámetros de longitud variable (arreglos).
       for (int i = argList->size(); i > 0; --params, --i) {
@@ -79,6 +80,7 @@ class FunctionExpression : public Expression {
           Quad * res_instr = (*params)->lval_generateTAC(generator, table);
           ParamRefQuad *param_ref = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
           generator->gen(param_ref);
+          offset += 4;
 
           TypeDeclaration * type = v->ntype;
           TypeDeclaration * base_type = v->ntype;
@@ -91,6 +93,7 @@ class FunctionExpression : public Expression {
             // Dimensión del arreglo
             ParamQuad *param = new ParamQuad(dimension);
             generator->gen(param);
+            offset += 4;
 
             type = type->ntype;
           }
@@ -102,12 +105,14 @@ class FunctionExpression : public Expression {
           //Se empila el número de dimensiones
           ParamQuad * param = new ParamQuad(new ConstQuad(dims->size()));
           generator->gen(param);
+          offset += 4;
 
           //std::stringstream basetype;
           //basetype << base_type->size;
           //Se empila el tamaño de un elemento del arreglo
           param = new ParamQuad(new ConstQuad(base_type->size));
           generator->gen(param);
+          offset += 4;
 
         }
       }
@@ -121,11 +126,13 @@ class FunctionExpression : public Expression {
             Quad * res_instr = (*params)->lval_generateTAC(generator, table);
             ParamRefQuad *param = new ParamRefQuad(res_instr->getResult(), res_instr->getArg1(), res_instr->getArg2());
             generator->gen(param);
+            offset += 4;
           }
         } else {
           ExpQuad * res = (*params)->generateTAC(generator, table);
           ParamQuad *param = new ParamQuad(res);
           generator->gen(param);
+          offset += 4;
         }
       }
 
@@ -137,6 +144,10 @@ class FunctionExpression : public Expression {
       VarQuad * function = new VarQuad(fname, f->offset, f->porref, f->isarg, f->ntype->size, f->ntype->numtype);
       FunctionCallReturn *call = new FunctionCallReturn(result, function, new ConstQuad(argList->size()));
       generator->gen(call);
+
+
+      EpilogueQuad * epilogue =  new EpilogueQuad(new ConstQuad(offset));
+      generator->gen(epilogue);
 
       return result;
     }

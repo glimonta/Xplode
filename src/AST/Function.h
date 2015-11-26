@@ -95,7 +95,9 @@ class Function : public CompoundStatement {
 
       Symbol * f = table->find(fname);
       VarQuad * function = new VarQuad(fname, f->offset, f->porref, f->isarg, f->ntype->size, f->ntype->numtype);
-      PrologueQuad * prologue =  new PrologueQuad(function);
+
+      int padding = (this->symtb->totaloffset%ALIGNMENT) ? (ALIGNMENT - this->symtb->totaloffset%ALIGNMENT) : 0;
+      PrologueQuad * prologue =  new PrologueQuad(new ConstQuad(this->symtb->totaloffset + padding));
       generator->gen(prologue);
 
       FunctionType *ftype = (FunctionType *) ntype;
@@ -131,8 +133,11 @@ class Function : public CompoundStatement {
 
       block->generateTAC(generator, symtb, EMPTY_LABEL, EMPTY_LABEL);
 
-      EpilogueQuad * epilogue =  new EpilogueQuad(function);
-      generator->gen(epilogue);
+      if (ftype->returnType->numtype != TYPE_VOID) {
+        generator->gen(new ReturnExpQuad(new ConstQuad(0)));
+      } else {
+        generator->gen(new ReturnQuad());
+      }
 
     }
 
