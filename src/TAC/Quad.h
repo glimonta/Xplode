@@ -427,6 +427,17 @@ class ExitQuad : public Quad {
 
 };
 
+class BeginFunctionQuad : public Quad {
+  public:
+
+    BeginFunctionQuad() : Quad("begin_function", NULL, NULL, NULL) {}
+
+    std::string toString() {
+      return getOp();
+    }
+
+};
+
 class DerefQuad : public Quad {
   public:
 
@@ -485,10 +496,10 @@ class PrologueQuad : public Quad {
 class EpilogueQuad : public Quad {
   public:
 
-    EpilogueQuad(ExpQuad * r) : Quad("epilogue", r, NULL, NULL) {}
+    EpilogueQuad(ExpQuad * r, ExpQuad * a1) : Quad("epilogue", r, a1, NULL) {}
 
     std::string toString() {
-      return  getOp() + " " + getResultStr();
+      return  getOp() + " " + getResultStr() + " " + getArg1Str();
     }
 
 };

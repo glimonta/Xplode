@@ -30,18 +30,16 @@ function bool porlab(var cadena c1, var cadena c2){
 
 }
 
-let cadena lenguajes;
-
 begin
 
 let cadena lenguajes, bases, diseno;
 
   lenguajes.codigo := 3641;
-  lenguajes.tienelab := true;
+  lenguajes.tieneLab := true;
   bases.codigo := 3311;
-  bases.tienelab := true;
-  diseño.codigo := 5651;
-  diseño.tienelab := false;
+  bases.tieneLab := true;
+  diseno.codigo := 5651;
+  diseno.tieneLab := false;
 
 
   write(porcodigo(lenguajes, bases));

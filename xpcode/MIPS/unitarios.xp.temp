@@ -13,12 +13,14 @@ t3 * 7 4
 t4 :=[] a t3
 write t4 2
 #Este es el código generado por la linea 25 de la llamada a la función: prueba
+begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param_ref a  
 param 20
 param 1
 param 4
 t5 call prueba 1
+epilogue t5 16
 #Este es el código generado por la linea 26 de la instrucción write
 t6 * 7 4
 t7 :=[] a t6
@@ -31,7 +33,7 @@ exit
 
 #Definición de Función prueba: linea 3
 prueba:
-prologue prueba
+prologue 0
 #Este es el código generado por la linea 6 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
 t8 + bp 8
@@ -39,4 +41,4 @@ t8 + bp 8
 t10 * 7 t9
 t11 :=[] b t10
 write t11 2
-epilogue prueba
+return

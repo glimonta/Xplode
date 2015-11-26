@@ -50,11 +50,11 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
   //if(r) {
   if (registers.count(var->vname) != 0) {
     MipsRegister * r = registers[var->vname];
-    //if (variables[var->vname]->istemporal()) {
-    //  free_registers.push(r);
-    //  variables.erase(var->vname);
-    //  registers.erase(var->vname);
-    //}
+    if (variables[var->vname]->istemporal()) {
+      free_registers.push(r);
+      variables.erase(var->vname);
+      registers.erase(var->vname);
+    }
 
     return r;
   } else {
@@ -68,6 +68,7 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
     //replace_register_descriptor(r,vars);
     //add_to_variable_descriptor(var->vname, l);
     registers[var->vname] = r;
+    variables[var->vname] = var;
 
     if (var->offset != NO_OFFSET) {
 
@@ -139,6 +140,7 @@ MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generat
     //add_to_variable_descriptor(var->vname, l);
 
     registers[var->vname] = r;
+    variables[var->vname] = var;
 
     //if (var->offset != NO_OFFSET) {
 
@@ -225,8 +227,38 @@ MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generat
     return free_registers.front();
   }
 
-  void RegisterAllocator::clear() {}
+  void RegisterAllocator::clear() {
+    std::map<std::string, MipsRegister *>::iterator regs;
+    for(regs=registers.begin();regs!=registers.end(); ++regs){
+      free_registers.push(regs->second);
+    }
 
-  void RegisterAllocator::flush(GeneratorMIPS * generator) {}
+    registers.clear();
+    variables.clear();
+  }
+
+  void RegisterAllocator::flush(GeneratorMIPS * generator) {
+    std::map<std::string, MipsRegister *>::iterator regs;
+    MipsRegister *r = free_registers.front();
+
+    for(regs=registers.begin();regs!=registers.end(); ++regs){
+      if (variables[regs->first]->offset != NO_OFFSET) {
+        VarQuad * var = variables[regs->first];
+        if (var->is_ref) {
+          generator->gen(new AddiMips(r, ZERO_REGISTER, new MipsImmediate(var->offset)));
+          generator->gen(new AddMips(r, r, (var->is_arg) ? FP_REGISTER : SP_REGISTER));
+          generator->gen(new LoadWordMips(r, new MipsOffset(r->num, 4)));
+          generator->gen(new StoreWordMips(regs->second, new MipsOffset(r->num, 0)));
+        } else {
+          generator->gen(new AddiMips(r, ZERO_REGISTER, new MipsImmediate(var->offset)));
+          generator->gen(new AddMips(r, r, (var->is_arg) ? FP_REGISTER : SP_REGISTER));
+          generator->gen(new StoreWordMips(regs->second, new MipsOffset(r->num, 4)));
+        }
+      }
+    }
+
+
+
+  }
 
 

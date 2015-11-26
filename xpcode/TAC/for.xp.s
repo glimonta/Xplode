@@ -85,22 +85,22 @@ end_for_22_1:
 li $a2 0
 li $t0 4
 mul $t2 $a2 $t0
-li $t4 4
+li $t3 4
 addi $t2 $t2 240
 add $t2 $t2 $sp
-sw $t4 0($t2)
+sw $t3 4($t2)
 #Este es el código generado por la linea 29 de la instrucción write
-li $t6 0
-li $s1 4
-mul $s2 $t6 $s1
-addi $s2 $s2 240
-add $s2 $s2 $sp
-lw $s4 0($s2)
-move $a0 $s4
+li $t4 0
+li $t5 4
+mul $t6 $t4 $t5
+addi $t6 $t6 240
+add $t6 $t6 $sp
+lw $t7 4($t6)
+move $a0 $t7
 li $v0 1
 syscall
-la $s6 string_7_4
-move $a0 $s6
+la $s1 string_7_4
+move $a0 $s1
 li $v0 4
 syscall
 li $v0 10

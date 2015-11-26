@@ -61,6 +61,7 @@ class FunctionExpression : public Expression {
       Comment *comment = new Comment("Este es el código generado por la linea " + getLineStr() + " de la llamada a la función: " + fname);
       generator->gen(comment);
 
+      generator->gen(new BeginFunctionQuad());
 
       FunctionType * fun = (FunctionType *) table->find(fname);
 
@@ -75,6 +76,7 @@ class FunctionExpression : public Expression {
           Variable * v = (Variable *) *params;
           comment = new Comment("Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector");
           generator->gen(comment);
+
 
           //Se empila primero la dirección del arreglo
           Quad * res_instr = (*params)->lval_generateTAC(generator, table);
@@ -146,7 +148,7 @@ class FunctionExpression : public Expression {
       generator->gen(call);
 
 
-      EpilogueQuad * epilogue =  new EpilogueQuad(new ConstQuad(offset));
+      EpilogueQuad * epilogue =  new EpilogueQuad(result, new ConstQuad(offset));
       generator->gen(epilogue);
 
       return result;

@@ -33,5 +33,37 @@ li $v0 10
 syscall
 #Definición de Función suma: linea 3
 suma:
+addi $sp $sp -4
+sw $ra 4($sp)
+addi $sp $sp -4
+sw $fp 4($sp)
+addi $fp $sp 12
+addi $sp $sp 0
 #Este es el código generado por la linea 3 de la instrucción return
 #Este es el código generado por la linea 3 de la llamada a la función: suma
+li $t4 4
+add $t4 $t4 $fp
+lw $t4 4($t4)
+addi $sp $sp -4
+sw $t4 4($sp)
+li $t5 0
+add $t5 $t5 $fp
+lw $t5 4($t5)
+addi $sp $sp -4
+sw $t5 4($sp)
+addi $sp $sp -4
+la $t6 suma
+jal $t6
+lw $t6 0($sp)
+addi $sp $sp 16
+sw $t6 0($fp)
+lw $ra -4($fp)
+move $sp $fp
+lw $fp -8($fp)
+jr $ra
+li $t7 0
+sw $t7 0($fp)
+lw $ra -4($fp)
+move $sp $fp
+lw $fp -8($fp)
+jr $ra

@@ -4,14 +4,15 @@
 #############################################################
 
 
+allocate 0
 #Este es el código generado por la linea 5 de la instrucción write
-write 0e10
+write 0 5
 #Este es el código generado por la linea 6 de la instrucción write
-write 43e10
+write 43 5
 #Este es el código generado por la linea 7 de la instrucción write
-write 34.4e10
+write 34 5
 #Este es el código generado por la linea 9 de la instrucción write
-write 43e-10
+write 43 5
 #Este es el código generado por la linea 10 de la instrucción write
-write 34.3243e-10
+write 34 5
 exit

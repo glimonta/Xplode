@@ -11,16 +11,19 @@ string_7_7 : "\n"
 #############################################################
 
 
+allocate 8
 #Este es el código generado por la linea 27 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 2
 j := t1
 #Este es el código generado por la linea 30 de la llamada a la función: hanoi
+begin_function
 param 3
 param 2
 param 1
 param j
 t2 call hanoi 4
+epilogue t2 24
 exit
 #############################################################
 #B2
@@ -29,6 +32,7 @@ exit
 
 #Definición de Función hanoi: linea 3
 hanoi:
+prologue 0
 #Este es el código generado por la linea 6 de la instrucción if que termina en next_if_6_1
 t3 == num 1
 ifnot t3 goto next_if_6_1
@@ -38,11 +42,11 @@ ifnot t3 goto next_if_6_1
 
 
 #Este es el código generado por la linea 7 de la instrucción write
-write string_7_2
-write from
-write string_7_3
-write dest
-write string_7_4
+write string_7_2 9
+write from 2
+write string_7_3 9
+write dest 2
+write string_7_4 9
 #Este es el código generado por la linea 8 de la instrucción return
 return
 #############################################################
@@ -52,26 +56,31 @@ return
 
 next_if_6_1:
 #Este es el código generado por la linea 12 de la llamada a la función: hanoi
+begin_function
 param dest
 param by
 param from
 t4 - num 1
 param t4
 t5 call hanoi 4
+epilogue t5 24
 #Este es el código generado por la linea 13 de la instrucción write
-write string_7_5
+write string_7_5 9
 #Este es el código generado por la linea 14 de la instrucción write
-write from
+write from 2
 #Este es el código generado por la linea 15 de la instrucción write
-write string_7_6
+write string_7_6 9
 #Este es el código generado por la linea 16 de la instrucción write
-write dest
+write dest 2
 #Este es el código generado por la linea 17 de la instrucción write
-write string_7_7
+write string_7_7 9
 #Este es el código generado por la linea 18 de la llamada a la función: hanoi
+begin_function
 param from
 param dest
 param by
 t6 - num 1
 param t6
 t7 call hanoi 4
+epilogue t7 24
+return

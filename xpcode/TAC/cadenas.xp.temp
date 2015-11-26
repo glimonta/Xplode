@@ -5,18 +5,34 @@
 
 
 allocate 24
-#Este es el código generado por la linea 40 de la instrucción write
-#Este es el código generado por la linea 40 de la llamada a la función: porcodigo
+#Este es el código generado por la linea 37 de la instrucción lenguajes.codigo := 3641
+lenguajes 0 []:= 3641
+#Este es el código generado por la linea 38 de la instrucción lenguajes.tieneLab := true
+lenguajes 4 []:= true
+#Este es el código generado por la linea 39 de la instrucción bases.codigo := 3311
+bases 0 []:= 3311
+#Este es el código generado por la linea 40 de la instrucción bases.tieneLab := true
+bases 4 []:= true
+#Este es el código generado por la linea 41 de la instrucción diseno.codigo := 5651
+diseno 0 []:= 5651
+#Este es el código generado por la linea 42 de la instrucción diseno.tieneLab := false
+diseno 4 []:= false
+#Este es el código generado por la linea 45 de la instrucción write
+#Este es el código generado por la linea 45 de la llamada a la función: porcodigo
+begin_function
 param_ref bases  
 param_ref lenguajes  
-t1 call porcodigo 2
-write t1 3
-#Este es el código generado por la linea 41 de la instrucción write
-#Este es el código generado por la linea 41 de la llamada a la función: porlab
+t7 call porcodigo 2
+epilogue t7 8
+write t7 3
+#Este es el código generado por la linea 46 de la instrucción write
+#Este es el código generado por la linea 46 de la llamada a la función: porlab
+begin_function
 param_ref diseno  
 param_ref lenguajes  
-t2 call porlab 2
-write t2 3
+t8 call porlab 2
+epilogue t8 8
+write t8 3
 exit
 #############################################################
 #B2
@@ -25,13 +41,13 @@ exit
 
 #Definición de Función porcodigo: linea 20
 porcodigo:
-prologue porcodigo
+prologue 0
 #Este es el código generado por la linea 22 de la instrucción return
-t3 :=[] c1 0
-t4 :=[] c2 0
-t5 > t3 t4
-return_exp t5
-epilogue porcodigo
+t9 :=[] c1 0
+t10 :=[] c2 0
+t11 > t9 t10
+return_exp t11
+return_exp 0
 #############################################################
 #B3
 #############################################################
@@ -39,8 +55,8 @@ epilogue porcodigo
 
 #Definición de Función porlab: linea 26
 porlab:
-prologue porlab
+prologue 0
 #Este es el código generado por la linea 28 de la instrucción return
-t6 :=[] c1 4
-return_exp t6
-epilogue porlab
+t12 :=[] c1 4
+return_exp t12
+return_exp 0

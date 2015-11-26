@@ -6,16 +6,19 @@ string_7_2 : "No intentes explotar aunque programes en Xplode!"
 #############################################################
 
 
+allocate 8
 read t1 2
 n := t1
 #Este es el código generado por la linea 24 de la instrucción res := factorial(n)
 #Este es el código generado por la linea 24 de la llamada a la función: factorial
+begin_function
 param n
 t2 call factorial 1
+epilogue t2 4
 res := t2
 #Este es el código generado por la linea 25 de la instrucción write
-write string_7_1
-write res
+write string_7_1 9
+write res 2
 exit
 #############################################################
 #B2
@@ -24,6 +27,7 @@ exit
 
 #Definición de Función factorial: linea 3
 factorial:
+prologue 0
 #Este es el código generado por la linea 5 de la instrucción if que termina en next_if_5_1
 t3 == n 1
 ifnot t3 goto next_if_5_1
@@ -33,7 +37,7 @@ ifnot t3 goto next_if_5_1
 
 
 #Este es el código generado por la linea 5 de la instrucción return
-return 1
+return_exp 1
 #############################################################
 #B4
 #############################################################
@@ -49,10 +53,10 @@ ifnot t4 goto next_if_6_1
 
 
 #Este es el código generado por la linea 7 de la instrucción write
-write string_7_2
+write string_7_2 9
 #Este es el código generado por la linea 8 de la instrucción return
 t5 neg 1
-return t5
+return_exp t5
 #############################################################
 #B6
 #############################################################
@@ -61,8 +65,11 @@ return t5
 next_if_6_1:
 #Este es el código generado por la linea 11 de la instrucción return
 #Este es el código generado por la linea 11 de la llamada a la función: factorial
+begin_function
 t6 - n 1
 param t6
 t7 call factorial 1
+epilogue t7 4
 t8 * t7 n
-return t8
+return_exp t8
+return_exp 0

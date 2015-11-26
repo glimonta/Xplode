@@ -3,12 +3,13 @@ program
 
 function int suma(int x, int y) {return x+y;}
 
-function int op(int x, int y){ return suma(x,y);}
+//function int op(int x, int y){ return suma(x,y);}
 
 begin
 
 let int x;
 
-x:= op(2,3);
+x:= suma(2,3);
+write(x, "\n");
 
 end

@@ -25,11 +25,13 @@ exit
 
 #Definición de Función suma: linea 3
 suma:
-prologue suma
+prologue 0
 #Este es el código generado por la linea 3 de la instrucción return
 #Este es el código generado por la linea 3 de la llamada a la función: suma
+begin_function
 param y
 param x
 t1 call suma 2
+epilogue t1 16
 return_exp t1
-epilogue suma
+return_exp 0

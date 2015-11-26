@@ -5,7 +5,9 @@ string_7_1 : "\n"
 #############################################################
 
 
+allocate 4012
 #Este es el código generado por la linea 31 de la llamada a la función: readMat
+begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param_ref mat  
 param 10
@@ -15,7 +17,9 @@ param 3
 param 4
 param 10
 t1 call readMat 2
+epilogue t1 36
 #Este es el código generado por la linea 32 de la llamada a la función: printMat
+begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param_ref mat  
 param 10
@@ -25,6 +29,7 @@ param 3
 param 4
 param 10
 t2 call printMat 2
+epilogue t2 36
 exit
 #############################################################
 #B2
@@ -33,6 +38,7 @@ exit
 
 #Definición de Función readMat: linea 3
 readMat:
+prologue 12
 #Este es el código generado por la linea 5 de la instrucción for que inicia en begin_for_5_1 y termina en end_for_5_1
 #Este es el código generado por la linea 5 de la instrucción i := 0
 i := 0
@@ -146,7 +152,7 @@ t17 + bp 12
 =* t18 t17
 t19 * t16 t18
 t20 :=[] m t19
-write t20
+write t20 2
 read t21 2
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
 t22 + bp 24
@@ -182,14 +188,21 @@ goto begin_for_5_1
 
 
 end_for_5_1:
+return
+#############################################################
+#B18
+#############################################################
+
+
 #Definición de Función printMat: linea 15
 printMat:
+prologue 12
 #Este es el código generado por la linea 17 de la instrucción for que inicia en begin_for_17_1 y termina en end_for_17_1
 #Este es el código generado por la linea 17 de la instrucción i := 0
 i := 0
 goto first_for_17_1
 #############################################################
-#B18
+#B19
 #############################################################
 
 
@@ -198,7 +211,7 @@ begin_for_17_1:
 t34 + i 1
 i := t34
 #############################################################
-#B19
+#B20
 #############################################################
 
 
@@ -206,13 +219,13 @@ first_for_17_1:
 t35 < i s
 if t35 goto mid4
 #############################################################
-#B20
+#B21
 #############################################################
 
 
 goto end_for_17_1
 #############################################################
-#B21
+#B22
 #############################################################
 
 
@@ -222,7 +235,7 @@ mid4:
 j := 0
 goto first_for_18_1
 #############################################################
-#B22
+#B23
 #############################################################
 
 
@@ -231,7 +244,7 @@ begin_for_18_1:
 t36 + j 1
 j := t36
 #############################################################
-#B23
+#B24
 #############################################################
 
 
@@ -239,13 +252,13 @@ first_for_18_1:
 t37 < j s
 if t37 goto mid5
 #############################################################
-#B24
+#B25
 #############################################################
 
 
 goto end_for_18_1
 #############################################################
-#B25
+#B26
 #############################################################
 
 
@@ -255,7 +268,7 @@ mid5:
 k := 0
 goto first_for_19_1
 #############################################################
-#B26
+#B27
 #############################################################
 
 
@@ -264,7 +277,7 @@ begin_for_19_1:
 t38 + k 1
 k := t38
 #############################################################
-#B27
+#B28
 #############################################################
 
 
@@ -272,13 +285,13 @@ first_for_19_1:
 t39 < k s
 if t39 goto mid6
 #############################################################
-#B28
+#B29
 #############################################################
 
 
 goto end_for_19_1
 #############################################################
-#B29
+#B30
 #############################################################
 
 
@@ -297,27 +310,28 @@ t48 + bp 12
 =* t49 t48
 t50 * t47 t49
 t51 :=[] m t50
-write t51
+write t51 2
 goto begin_for_19_1
 #############################################################
-#B30
+#B31
 #############################################################
 
 
 end_for_19_1:
 #Este es el código generado por la linea 22 de la instrucción write
-write string_7_1
+write string_7_1 9
 goto begin_for_18_1
 #############################################################
-#B31
+#B32
 #############################################################
 
 
 end_for_18_1:
 goto begin_for_17_1
 #############################################################
-#B32
+#B33
 #############################################################
 
 
 end_for_17_1:
+return

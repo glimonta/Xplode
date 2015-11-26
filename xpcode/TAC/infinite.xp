@@ -1,6 +1,6 @@
 program
 
-function void prom(int a, int b, ...){
+function void prom(int a, int b){
 
 
   write("Aca saco el promedio con la magia de next, length y la desconocida");
@@ -21,10 +21,10 @@ let int i;
     read(a[i]);
     write("Lei un numero");
     if(a[i]==-1) {break;}
-    prom(a[0], a[1], a[2], a[3], a[4]);
+    prom(a[0], a[1]);
 
     if(i==4){ i:=0;}
-    i:=I+1;
+    i:=i+1;
 
 
   }

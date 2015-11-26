@@ -134,7 +134,7 @@ class GeneratorMIPS {
         } else if ("neg" == quad->op) {
           UnaryMinusQuad * minus = (UnaryMinusQuad *) quad;
           minusToMips(minus);
-        } else if ("neg" == quad->op) {
+        } else if ("not" == quad->op) {
           NotQuad * notquad = (NotQuad *) quad;
           notToMips(notquad);
         } else if ("sleep" == quad->op) {
@@ -176,6 +176,9 @@ class GeneratorMIPS {
         } else if ("ftoi" == quad->op) {
           CastQuad * ftoi = (CastQuad *) quad;
           floatToIntToMips(ftoi);
+        } else if ("begin_function" == quad->op) {
+          BeginFunctionQuad * begfun = (BeginFunctionQuad *) quad;
+          beginToMips(begfun);
         } else {
           // Caso de declaraciones y block comments, esos se ignoran
         }
@@ -257,6 +260,7 @@ class GeneratorMIPS {
     void exitToMips(ExitQuad * exit) {
       instructions->push_back(new LoadImmMips(new MipsRegister(2), new MipsImmediate(10)));
       instructions->push_back(new SyscallMips());
+      allocator->clear();
     }
 
     void assignToMips(AssignQuad * assign) {
@@ -393,7 +397,7 @@ class GeneratorMIPS {
       //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
       //solo sirve para una condición donde se genera jumping code
       MipsRegister * rd, * rl, *rr;
-      allocator->getReg(this, equal, &rd, &rl, NULL);
+      allocator->getReg(this, equal, &rd, &rl, &rr);
       VarQuad * jumpLabel = (VarQuad *) equal->getArg2();
       instructions->push_back(new SetEqualMips(rd, rl, rr));
     }
@@ -402,7 +406,7 @@ class GeneratorMIPS {
       //Creo que no funciona para el caso donde de verdad quiero usar el valor x < y
       //solo sirve para una condición donde se genera jumping code
       MipsRegister * rd, * rl, *rr;
-      allocator->getReg(this, notequal, &rd, &rl, NULL);
+      allocator->getReg(this, notequal, &rd, &rl, &rr);
       VarQuad * jumpLabel = (VarQuad *) notequal->getArg2();
       instructions->push_back(new SetNotEqualMips(rd, rl, rr));
     }
@@ -531,7 +535,18 @@ class GeneratorMIPS {
       instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(-(space->num))));
     }
 
-    void epilogueToMips(EpilogueQuad * epilogue) {}
+    void epilogueToMips(EpilogueQuad * epilogue) {
+      ConstQuad *space = (ConstQuad *) epilogue->getArg1();
+      MipsRegister *rd;
+      allocator->getReg(this, epilogue, &rd, NULL, NULL);
+      instructions->push_back(new LoadWordMips(rd, new MipsOffset((SP_REGISTER)->num, 0)));
+      instructions->push_back(new AddiMips(SP_REGISTER, SP_REGISTER, new MipsImmediate(space->num)));
+    }
+
+    void beginToMips(BeginFunctionQuad * begfun) {
+      allocator->flush(this);
+    }
+
     void charToIntToMips(CastQuad * ctoi) {}
     void intToCharToMips(CastQuad * itoc) {}
     void intToFloatToMips(CastQuad * itof) {}

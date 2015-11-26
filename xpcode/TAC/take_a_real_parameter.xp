@@ -28,6 +28,9 @@ begin
 
 let dummy yo;
 
+yo.tni := 0;
+yo.elcaro.ahok[yo.tni][1][1][1][1] := 7;
+
 
 wtf_this_parameters(yo.elcaro.ahok[yo.tni][1], yo.elcaro.entero, yo.elcaro.ahok[yo.tni][1]);
 //wtf_this_parameters();

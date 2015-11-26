@@ -8,19 +8,22 @@ string_7_4 : "\n"
 #############################################################
 
 
+allocate 8
 #Este es el código generado por la linea 28 de la instrucción write
-write string_7_1
+write string_7_1 9
 read t1 2
 j := t1
 #Este es el código generado por la linea 31 de la instrucción write
-write string_7_2
-write j
-write string_7_3
+write string_7_2 9
+write j 2
+write string_7_3 9
 #Este es el código generado por la linea 31 de la llamada a la función: fact
+begin_function
 param j
 t2 call fact 1
-write t2
-write string_7_4
+epilogue t2 12
+write t2 2
+write string_7_4 9
 exit
 #############################################################
 #B2
@@ -29,6 +32,7 @@ exit
 
 #Definición de Función fact: linea 3
 fact:
+prologue 4
 #Este es el código generado por la linea 6 de la instrucción if que termina en next_if_6_1
 t3 == num 0
 ifnot t3 goto next_if_6_1
@@ -38,7 +42,7 @@ ifnot t3 goto next_if_6_1
 
 
 #Este es el código generado por la linea 8 de la instrucción return
-return 1
+return_exp 1
 #############################################################
 #B4
 #############################################################
@@ -54,7 +58,7 @@ ifnot t4 goto next_if_12_1
 
 
 #Este es el código generado por la linea 14 de la instrucción return
-return 1
+return_exp 1
 #############################################################
 #B6
 #############################################################
@@ -63,10 +67,13 @@ return 1
 next_if_12_1:
 #Este es el código generado por la linea 18 de la instrucción j := fact(num - 1)
 #Este es el código generado por la linea 18 de la llamada a la función: fact
+begin_function
 t5 - num 1
 param t5
 t6 call fact 1
+epilogue t6 12
 j := t6
 #Este es el código generado por la linea 20 de la instrucción return
 t7 * num j
-return t7
+return_exp t7
+return_exp 0

@@ -38,6 +38,7 @@ class RegisterAllocator {
 
     std::queue<MipsRegister *> free_registers;
     std::map<std::string, MipsRegister *> registers;
+    std::map<std::string, VarQuad *> variables;
 
     RegisterAllocator();
     void getReg (GeneratorMIPS * generator, Quad * quad, MipsRegister **rd, MipsRegister **rl, MipsRegister **rr);

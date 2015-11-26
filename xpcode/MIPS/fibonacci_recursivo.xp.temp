@@ -7,17 +7,20 @@ string_7_3 : "\n"
 #############################################################
 
 
+allocate 8
 read t1 2
 j := t1
 #Este es el código generado por la linea 25 de la instrucción write
-write string_7_1
-write j
-write string_7_2
+write string_7_1 9
+write j 2
+write string_7_2 9
 #Este es el código generado por la linea 25 de la llamada a la función: fib
+begin_function
 param j
 t2 call fib 1
-write t2
-write string_7_3
+epilogue t2 12
+write t2 2
+write string_7_3 9
 exit
 #############################################################
 #B2
@@ -26,6 +29,7 @@ exit
 
 #Definición de Función fib: linea 3
 fib:
+prologue 8
 #Este es el código generado por la linea 7 de la instrucción if que termina en next_if_7_1
 t3 < num 2
 ifnot t3 goto next_if_7_1
@@ -35,7 +39,7 @@ ifnot t3 goto next_if_7_1
 
 
 #Este es el código generado por la linea 9 de la instrucción return
-return 1
+return_exp 1
 #############################################################
 #B4
 #############################################################
@@ -44,16 +48,21 @@ return 1
 next_if_7_1:
 #Este es el código generado por la linea 13 de la instrucción j := fib(num - 1)
 #Este es el código generado por la linea 13 de la llamada a la función: fib
+begin_function
 t4 - num 1
 param t4
 t5 call fib 1
+epilogue t5 12
 j := t5
 #Este es el código generado por la linea 14 de la instrucción k := fib(num - 2)
 #Este es el código generado por la linea 14 de la llamada a la función: fib
+begin_function
 t6 - num 2
 param t6
 t7 call fib 1
+epilogue t7 12
 k := t7
 #Este es el código generado por la linea 15 de la instrucción return
 t8 + k j
-return t8
+return_exp t8
+return_exp 0

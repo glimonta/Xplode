@@ -5,37 +5,56 @@ string_7_1 : "doing something!"
 #############################################################
 
 
-#Este es el código generado por la linea 32 de la llamada a la función: wtf_this_parameters
-#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
-t1 + 8 0
-t2 :=[] yo 0
-t3 * t2 2
-t4 + t3 1
-t5 * t4 32
-t6 + t5 t1
-param_ref yo t6 
-param 2
-param 2
-param 2
-param 3
-param 4
-#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
-t8 + 8 0
-t9 :=[] yo 0
+allocate 144
+#Este es el código generado por la linea 31 de la instrucción yo.tni := 0
+yo 0 []:= 0
+#Este es el código generado por la linea 32 de la instrucción yo.elcaro.ahok[yo.tni][1][1][1][1] := 7
+t2 + 8 0
+t3 :=[] yo 0
+t4 * t3 2
+t5 + t4 1
+t6 * t5 2
+t7 + t6 1
+t8 * t7 2
+t9 + t8 1
 t10 * t9 2
 t11 + t10 1
-t12 * t11 32
-t13 + t12 t8
-param_ref yo t13 
+t12 * t11 4
+t13 + t12 t2
+yo t13 []:= 7
+#Este es el código generado por la linea 35 de la llamada a la función: wtf_this_parameters
+begin_function
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+t15 + 8 0
+t16 :=[] yo 0
+t17 * t16 2
+t18 + t17 1
+t19 * t18 32
+t20 + t19 t15
+param_ref yo t20 
 param 2
 param 2
 param 2
 param 3
 param 4
-t15 + 8 128
-t16 :=[] yo t15
-param t16
-t17 call wtf_this_parameters 3
+#Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
+t22 + 8 0
+t23 :=[] yo 0
+t24 * t23 2
+t25 + t24 1
+t26 * t25 32
+t27 + t26 t22
+param_ref yo t27 
+param 2
+param 2
+param 2
+param 3
+param 4
+t29 + 8 128
+t30 :=[] yo t29
+param t30
+t31 call wtf_this_parameters 3
+epilogue t31 60
 exit
 #############################################################
 #B2
@@ -44,35 +63,37 @@ exit
 
 #Definición de Función wtf_this_parameters: linea 3
 wtf_this_parameters:
+prologue 0
 #Este es el código generado por la linea 4 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t18 + bp 24
-=* t19 t18
-t20 * 1 t19
-t21 + t20 1
-t22 + bp 28
-=* t23 t22
-t24 * t21 t23
-t25 + t24 1
-t26 + bp 12
-=* t27 t26
-t28 * t25 t27
-t29 :=[] par1 t28
-write t29
+t32 + bp 24
+=* t33 t32
+t34 * 1 t33
+t35 + t34 1
+t36 + bp 28
+=* t37 t36
+t38 * t35 t37
+t39 + t38 1
+t40 + bp 12
+=* t41 t40
+t42 * t39 t41
+t43 :=[] par1 t42
+write t43 2
 #Este es el código generado por la linea 5 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t30 + bp 48
-=* t31 t30
-t32 * 1 t31
-t33 + t32 1
-t34 + bp 52
-=* t35 t34
-t36 * t33 t35
-t37 + t36 1
-t38 + bp 36
-=* t39 t38
-t40 * t37 t39
-t41 :=[] par3 t40
-write t41
+t44 + bp 48
+=* t45 t44
+t46 * 1 t45
+t47 + t46 1
+t48 + bp 52
+=* t49 t48
+t50 * t47 t49
+t51 + t50 1
+t52 + bp 36
+=* t53 t52
+t54 * t51 t53
+t55 :=[] par3 t54
+write t55 2
 #Este es el código generado por la linea 6 de la instrucción write
-write string_7_1
+write string_7_1 9
+return

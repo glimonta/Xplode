@@ -11,17 +11,20 @@ string_7_7 : "\n"
 #############################################################
 
 
+allocate 4
 #Este es el código generado por la linea 32 de la instrucción i := 3
 i := 3
 #Este es el código generado por la linea 33 de la instrucción write
-write i
-write string_7_1
+write i 2
+write string_7_1 9
 #Este es el código generado por la linea 35 de la llamada a la función: prueba
+begin_function
 param_ref i  
 t1 call prueba 1
+epilogue t1 12
 #Este es el código generado por la linea 37 de la instrucción write
-write i
-write string_7_2
+write i 2
+write string_7_2 9
 exit
 #############################################################
 #B2
@@ -30,14 +33,16 @@ exit
 
 #Definición de Función prueba2: linea 3
 prueba2:
+prologue 0
 #Este es el código generado por la linea 5 de la instrucción write
-write a
-write string_7_3
+write a 2
+write string_7_3 9
 #Este es el código generado por la linea 7 de la instrucción a := 7
 a := 7
 #Este es el código generado por la linea 9 de la instrucción write
-write a
-write string_7_4
+write a 2
+write string_7_4 9
+return
 #############################################################
 #B3
 #############################################################
@@ -45,17 +50,21 @@ write string_7_4
 
 #Definición de Función prueba: linea 15
 prueba:
+prologue 0
 #Este es el código generado por la linea 17 de la instrucción write
-write b
-write string_7_5
+write b 2
+write string_7_5 9
 #Este es el código generado por la linea 19 de la instrucción b := 5
 b := 5
 #Este es el código generado por la linea 21 de la instrucción write
-write b
-write string_7_6
+write b 2
+write string_7_6 9
 #Este es el código generado por la linea 23 de la llamada a la función: prueba2
+begin_function
 param_ref b  
 t2 call prueba2 1
+epilogue t2 12
 #Este es el código generado por la linea 24 de la instrucción write
-write b
-write string_7_7
+write b 2
+write string_7_7 9
+return

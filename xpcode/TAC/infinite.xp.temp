@@ -1,5 +1,6 @@
 string_7_1 : "Lei un numero"
-string_7_2 : "Aca saco el promedio con la magia de next, length y la desconocida"
+string_7_2 : "Ciclo infinito"
+string_7_3 : "Aca saco el promedio con la magia de next, length y la desconocida"
 
 #############################################################
 #B1
@@ -46,25 +47,18 @@ goto next_while_18_1
 
 next_if_23_1:
 #Este es el código generado por la linea 24 de la llamada a la función: prom
-t8 * 4 4
+begin_function
+t8 * 1 4
 t9 :=[] a t8
 param t9
-t10 * 3 4
+t10 * 0 4
 t11 :=[] a t10
 param t11
-t12 * 2 4
-t13 :=[] a t12
-param t13
-t14 * 1 4
-t15 :=[] a t14
-param t15
-t16 * 0 4
-t17 :=[] a t16
-param t17
-t18 call prom 5
+t12 call prom 2
+epilogue t12 8
 #Este es el código generado por la linea 26 de la instrucción if que termina en next_if_26_1
-t19 == i 4
-ifnot t19 goto next_if_26_1
+t13 == i 4
+ifnot t13 goto next_if_26_1
 #############################################################
 #B6
 #############################################################
@@ -78,9 +72,9 @@ i := 0
 
 
 next_if_26_1:
-#Este es el código generado por la linea 27 de la instrucción i := I + 1
-t20 + i 1
-i := t20
+#Este es el código generado por la linea 27 de la instrucción i := i + 1
+t14 + i 1
+i := t14
 goto begin_while_18_1
 #############################################################
 #B8
@@ -88,15 +82,33 @@ goto begin_while_18_1
 
 
 next_while_18_1:
-exit
+#Este es el código generado por la linea 32 de la instrucción while que inicia en begin_while_32_1 y termina en next_while_32_1
+begin_while_32_1:
+goto true_while_32_1
 #############################################################
 #B9
 #############################################################
 
 
+true_while_32_1:
+#Este es el código generado por la linea 32 de la instrucción write
+write string_7_2 9
+goto begin_while_32_1
+#############################################################
+#B10
+#############################################################
+
+
+next_while_32_1:
+exit
+#############################################################
+#B11
+#############################################################
+
+
 #Definición de Función prom: linea 3
 prom:
-prologue prom
+prologue 0
 #Este es el código generado por la linea 6 de la instrucción write
-write string_7_2 9
-epilogue prom
+write string_7_3 9
+return

@@ -6,12 +6,14 @@ string_7_2 : "You thief! \n"
 #############################################################
 
 
+allocate 4
 read t1 2
 id := t1
 #Este es el código generado por la linea 12 de la instrucción if que termina en next_if_12_1
 #Este es el código generado por la linea 12 de la llamada a la función: authenticate
 param id
 t2 call authenticate 1
+epilogue 4
 ifnot t2 goto false_if_12_1
 #############################################################
 #B2
@@ -19,7 +21,7 @@ ifnot t2 goto false_if_12_1
 
 
 #Este es el código generado por la linea 13 de la instrucción write
-write string_7_1
+write string_7_1 9
 goto next_if_12_1
 #############################################################
 #B3
@@ -28,7 +30,7 @@ goto next_if_12_1
 
 false_if_12_1:
 #Este es el código generado por la linea 15 de la instrucción write
-write string_7_2
+write string_7_2 9
 #############################################################
 #B4
 #############################################################
@@ -43,9 +45,11 @@ exit
 
 #Definición de Función authenticate: linea 3
 authenticate:
+prologue 0
 #Este es el código generado por la linea 4 de la instrucción return
 t4 - t3 id
 t5 / t4 id
 t6 + t5 id
 t7 == id t6
-return t7
+return_exp t7
+return_exp 0
