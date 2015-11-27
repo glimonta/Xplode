@@ -57,6 +57,19 @@ class AddMips : public MipsInstruction {
 
 };
 
+class AddFloatMips : public MipsInstruction {
+
+  public:
+
+    AddFloatMips(MipsArgument * r, MipsArgument * a1, MipsArgument * a2) : MipsInstruction("add.s", r, a1, a2) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString() + " " + getArg2()->toString();
+    }
+
+};
+
+
 class AddiMips : public MipsInstruction {
 
   public:
@@ -309,6 +322,18 @@ class DivMips : public MipsInstruction {
 
 };
 
+class DivFloatMips : public MipsInstruction {
+
+  public:
+
+    DivFloatMips(MipsArgument * r, MipsArgument * a1, MipsArgument * a2) : MipsInstruction("div.s", r, a1, a2) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString() + " " + getArg2()->toString();
+    }
+
+};
+
 class JumpMips : public MipsInstruction {
 
   public:
@@ -381,6 +406,18 @@ class LoadImmMips : public MipsInstruction {
 
 };
 
+class LoadImmFloatMips : public MipsInstruction {
+
+  public:
+
+    LoadImmFloatMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("li.s", r, a1, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();
+    }
+
+};
+
 class LoadWordMips : public MipsInstruction {
 
   public:
@@ -393,11 +430,35 @@ class LoadWordMips : public MipsInstruction {
 
 };
 
+class LoadWordFloatMips : public MipsInstruction {
+
+  public:
+
+    LoadWordFloatMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("l.s", r, a1, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();
+    }
+
+};
+
 class MoveMips : public MipsInstruction {
 
   public:
 
     MoveMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("move", r, a1, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();
+    }
+
+};
+
+class MoveFloatMips : public MipsInstruction {
+
+  public:
+
+    MoveFloatMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("mov.s", r, a1, NULL) {}
 
     std::string toString() {
       return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();
@@ -441,6 +502,18 @@ class MultMips : public MipsInstruction {
 
 };
 
+class MultFloatMips : public MipsInstruction {
+
+  public:
+
+    MultFloatMips(MipsArgument * r, MipsArgument * a1, MipsArgument * a2) : MipsInstruction("mul.s", r, a1, a2) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString() + " " + getArg2()->toString();
+    }
+
+};
+
 class OrMips : public MipsInstruction {
 
   public:
@@ -477,11 +550,35 @@ class SubMips : public MipsInstruction {
 
 };
 
+class SubFloatMips : public MipsInstruction {
+
+  public:
+
+    SubFloatMips(MipsArgument * r, MipsArgument * a1, MipsArgument * a2) : MipsInstruction("sub.s", r, a1, a2) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString() + " " + getArg2()->toString();
+    }
+
+};
+
 class StoreWordMips : public MipsInstruction {
 
   public:
 
     StoreWordMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("sw", r, a1, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();
+    }
+
+};
+
+class StoreWordFloatMips : public MipsInstruction {
+
+  public:
+
+    StoreWordFloatMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("s.s", r, a1, NULL) {}
 
     std::string toString() {
       return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();
@@ -530,6 +627,18 @@ class UnaryMinusMips : public MipsInstruction {
   public:
 
     UnaryMinusMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("neg", r, a1, NULL) {}
+
+    std::string toString() {
+      return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();
+    }
+
+};
+
+class UnaryMinusFloatMips : public MipsInstruction {
+
+  public:
+
+    UnaryMinusFloatMips(MipsArgument * r, MipsArgument * a1) : MipsInstruction("neg.s", r, a1, NULL) {}
 
     std::string toString() {
       return  getOp() + " " + getResult()->toString() + " " + getArg1()->toString();

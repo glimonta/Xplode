@@ -55,7 +55,7 @@ addi $sp $sp -4
 la $t6 suma
 jal $t6
 lw $t6 0($sp)
-addi $sp $sp 16
+addi $sp $sp 8
 sw $t6 0($fp)
 lw $ra -4($fp)
 move $sp $fp

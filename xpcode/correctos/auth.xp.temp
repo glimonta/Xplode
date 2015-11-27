@@ -11,9 +11,10 @@ read t1 2
 id := t1
 #Este es el código generado por la linea 12 de la instrucción if que termina en next_if_12_1
 #Este es el código generado por la linea 12 de la llamada a la función: authenticate
+begin_function
 param id
 t2 call authenticate 1
-epilogue 4
+epilogue t2 4
 ifnot t2 goto false_if_12_1
 #############################################################
 #B2

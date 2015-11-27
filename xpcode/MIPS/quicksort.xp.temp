@@ -105,7 +105,7 @@ t11 - tam 1
 param t11
 param 0
 t12 call quicksort 3
-epilogue t12 32
+epilogue t12 24
 #Este es el código generado por la linea 66 de la instrucción i := 0
 i := 0
 #Este es el código generado por la linea 67 de la instrucción write
@@ -358,7 +358,7 @@ param 4
 param j
 param m
 t70 call quicksort 3
-epilogue t70 32
+epilogue t70 24
 #Este es el código generado por la linea 38 de la llamada a la función: quicksort
 begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
@@ -370,5 +370,5 @@ param n
 t71 + i 1
 param t71
 t72 call quicksort 3
-epilogue t72 32
+epilogue t72 24
 return

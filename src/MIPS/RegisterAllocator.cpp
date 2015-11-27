@@ -16,6 +16,10 @@ RegisterAllocator::RegisterAllocator() {
   for (int i = MIN_REGISTER; i <= MAX_REGISTER; ++i) {
     free_registers.push(new MipsRegister(i));
   }
+
+  for (int i = MIN_FLOAT_REGISTER; i <= MAX_FLOAT_REGISTER; ++i) {
+    if (12 != i) free_float_registers.push(new MipsFloatRegister(i));
+  }
 }
 
 void RegisterAllocator::getReg (GeneratorMIPS * generator, Quad * quad, MipsRegister **rd, MipsRegister **rl, MipsRegister **rr) {
@@ -31,6 +35,21 @@ void RegisterAllocator::getReg (GeneratorMIPS * generator, Quad * quad, MipsRegi
   if (rd && quad->getResult()->isconstant()) free_registers.push(*rd);
   if (rl && quad->getArg1()->isconstant()) free_registers.push(*rl);
   if (rr && quad->getArg2()->isconstant()) free_registers.push(*rr);
+}
+
+void RegisterAllocator::getFloatReg(GeneratorMIPS * generator, Quad * quad, MipsFloatRegister **rd, MipsFloatRegister **rl, MipsFloatRegister **rr) {
+  //Determinar registros para todas las expresiones
+  if (quad->getArg1() && rl) *rl = allocate_float_register(generator, quad->getArg1());
+  if (quad->getArg2() && rr) *rr = allocate_float_register(generator, quad->getArg2());
+  if (quad->getResult() && rd && (rl || rr)) {
+    *rd = allocate_dest_float_register(generator, quad->getResult());
+  } else if (quad->getResult() && rd) {
+    *rd = allocate_float_register(generator, quad->getResult());
+  }
+
+  if (rd && quad->getResult()->isconstant()) free_float_registers.push(*rd);
+  if (rl && quad->getArg1()->isconstant()) free_float_registers.push(*rl);
+  if (rr && quad->getArg2()->isconstant()) free_float_registers.push(*rr);
 }
 
 MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, ExpQuad * exp) {
@@ -103,6 +122,66 @@ MipsRegister * RegisterAllocator::allocate_register(GeneratorMIPS * generator, E
 }
 
 
+MipsFloatRegister * RegisterAllocator::allocate_float_register(GeneratorMIPS * generator, ExpQuad * exp) {
+  //Caso simple 1: La expresión es una constante y no puede estar en un registro ya
+  //Falta considerar caso donde no hayan registros libres
+  if (exp->isconstant()) {
+    MipsFloatRegister * r = free_float_registers.front();
+    free_float_registers.pop();
+    ConstQuad * c = (ConstQuad *) exp;
+    generator->gen(new LoadImmFloatMips(r, new MipsVariable(c->value)));
+    return r;
+  }
+
+  // Caso simple: Ya está en un registro
+  VarQuad * var = (VarQuad *) exp;
+  //MipsFloatRegister * r = find_register_location(variables[var->vname]);
+  //if(r) {
+  if (float_registers.count(var->vname) != 0) {
+    MipsFloatRegister * r = float_registers[var->vname];
+
+    return r;
+  } else {
+    MipsFloatRegister * r = free_float_registers.front();
+    free_float_registers.pop();
+    //LocationEntry l;
+    //l.type = 1;
+    //l.loc.reg = r;
+    //std::vector<std::string> vars;
+    //vars.push_back(var->vname);
+    //replace_register_descriptor(r,vars);
+    //add_to_variable_descriptor(var->vname, l);
+    float_registers[var->vname] = r;
+    variables[var->vname] = var;
+
+    if (var->offset != NO_OFFSET) {
+
+
+      std::stringstream ofs;
+      ofs << var->offset;
+      generator->gen(new LoadImmFloatMips(r, new MipsVariable(ofs.str())));
+
+      generator->gen(new AddMips(r, r, ((var->is_arg) ? FP_REGISTER : SP_REGISTER)));
+
+      generator->gen(new LoadWordMips(r, new MipsOffset(r->num, 4)));
+      //FIXME esto capaz es 4
+
+      if ((var->is_ref) && (var->typenum != 8)) {
+        generator->gen(new LoadWordMips(r, new MipsOffset(r->num, 0)));
+      }
+
+    } else {
+      if (var->is_string || var->is_glob) {
+        generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
+      }
+    }
+
+
+    return r;
+  //TODO caso en donde no está en algun registro
+  }
+}
+
 MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generator, ExpQuad * exp) {
   //Caso simple 1: La expresión es una constante y no puede estar en un registro ya
   //Falta considerar caso donde no hayan registros libres
@@ -149,6 +228,75 @@ MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generat
 
     //  if (var->is_glob) {
     //    MipsRegister * raux = getAuxReg();
+    //    free_registers.pop();
+    //    generator->gen(new LoadAddressMips(raux, new MipsVariable(var->vname)));
+    //    generator->gen(new AddMips(r, r, raux));
+    //  } else {
+    //    generator->gen(new AddMips(r, r, ((var->is_ref) ? FP_REGISTER : SP_REGISTER)));
+    //  }
+
+    //  if ((var->is_ref) && (var->typenum != 8)) {
+    //    generator->gen(new LoadWordMips(r, new MipsOffset(0, r->num)));
+    //  }
+
+    //} else {
+    //  if (var->is_string || var->is_glob) {
+    //    generator->gen(new LoadAddressMips(r, new MipsVariable(var->vname)));
+    //  }
+    //}
+
+
+    return r;
+  //TODO caso en donde no está en algun registro
+  }
+}
+
+MipsFloatRegister * RegisterAllocator::allocate_dest_float_register(GeneratorMIPS * generator, ExpQuad * exp) {
+  //Caso simple 1: La expresión es una constante y no puede estar en un registro ya
+  //Falta considerar caso donde no hayan registros libres
+  if (exp->isconstant()) {
+    MipsFloatRegister * r = free_float_registers.front();
+    free_float_registers.pop();
+    //registers[r] = "";
+    ConstQuad * c = (ConstQuad *) exp;
+    generator->gen(new LoadImmFloatMips(r, new MipsVariable(c->value)));
+    return r;
+  }
+
+  // Caso simple: Ya está en un registro
+  VarQuad * var = (VarQuad *) exp;
+  //MipsFloatRegister * r = find_register_location(variables[var->vname]);
+  //if(r) {
+  if (float_registers.count(var->vname) != 0) {
+    MipsFloatRegister * r = float_registers[var->vname];
+    //if (variables[var->vname]->istemporal()) {
+    //  free_float_registers.push(r);
+    //  variables.erase(var->vname);
+    //  registers.erase(var->vname);
+    //}
+
+    return r;
+  } else {
+    MipsFloatRegister * r = free_float_registers.front();
+    free_float_registers.pop();
+    //LocationEntry l;
+    //l.type = 1;
+    //l.loc.reg = r;
+    //std::vector<std::string> vars;
+    //vars.push_back(var->vname);
+    //replace_register_descriptor(r,vars);
+    //add_to_variable_descriptor(var->vname, l);
+
+    float_registers[var->vname] = r;
+    variables[var->vname] = var;
+
+    //if (var->offset != NO_OFFSET) {
+
+
+    //  generator->gen(new LoadImmMips(r, new MipsImmediate(var->offset)));
+
+    //  if (var->is_glob) {
+    //    MipsFloatRegister * raux = getAuxReg();
     //    free_registers.pop();
     //    generator->gen(new LoadAddressMips(raux, new MipsVariable(var->vname)));
     //    generator->gen(new AddMips(r, r, raux));
@@ -225,6 +373,10 @@ MipsRegister * RegisterAllocator::allocate_dest_register(GeneratorMIPS * generat
 
   MipsRegister * RegisterAllocator::getAuxReg() {
     return free_registers.front();
+  }
+
+  MipsFloatRegister * RegisterAllocator::getAuxFloatReg() {
+    return free_float_registers.front();
   }
 
   void RegisterAllocator::clear() {

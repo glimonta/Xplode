@@ -130,10 +130,32 @@ class AddQuad : public Quad {
 
 };
 
+class AddFloatQuad : public Quad {
+  public:
+
+    AddFloatQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("+f", r, a1, a2) {}
+
+    std::string toString() {
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
+    }
+
+};
+
 class SubQuad : public Quad {
   public:
 
     SubQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("-", r, a1, a2) {}
+
+    std::string toString() {
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
+    }
+
+};
+
+class SubFloatQuad : public Quad {
+  public:
+
+    SubFloatQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("-f", r, a1, a2) {}
 
     std::string toString() {
       return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
@@ -152,6 +174,17 @@ class MulQuad : public Quad {
 
 };
 
+class MulFloatQuad : public Quad {
+  public:
+
+    MulFloatQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("*f", r, a1, a2) {}
+
+    std::string toString() {
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
+    }
+
+};
+
 class DivQuad : public Quad {
   public:
 
@@ -163,10 +196,32 @@ class DivQuad : public Quad {
 
 };
 
+class DivFloatQuad : public Quad {
+  public:
+
+    DivFloatQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("/f", r, a1, a2) {}
+
+    std::string toString() {
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
+    }
+
+};
+
 class ModQuad : public Quad {
   public:
 
     ModQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("%", r, a1, a2) {}
+
+    std::string toString() {
+      return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
+    }
+
+};
+
+class ModFloatQuad : public Quad {
+  public:
+
+    ModFloatQuad(ExpQuad * r, ExpQuad * a1, ExpQuad * a2) : Quad("%f", r, a1, a2) {}
 
     std::string toString() {
       return getResultStr() + " " + getOp() + " " + getArg1Str() + " " + getArg2Str();
@@ -339,6 +394,17 @@ class UnaryMinusQuad : public Quad {
 
 };
 
+class UnaryMinusFloatQuad : public Quad {
+  public:
+
+    UnaryMinusFloatQuad(ExpQuad * r, ExpQuad * a1) : Quad("negf", r, a1, NULL) {}
+
+    std::string toString() {
+      return getResultStr() + " " + getOp() + " " + getArg1Str();
+    }
+
+};
+
 class NotQuad : public Quad {
   public:
 
@@ -442,17 +508,6 @@ class DerefQuad : public Quad {
   public:
 
     DerefQuad(ExpQuad * r, ExpQuad * a1) : Quad("=*", r, a1, NULL) {}
-
-    std::string toString() {
-      return getOp() + " " + getResultStr() + " " + getArg1Str();
-    }
-
-};
-
-class RefQuad : public Quad {
-  public:
-
-    RefQuad(ExpQuad * r, ExpQuad * a1) : Quad("*=", r, a1, NULL) {}
 
     std::string toString() {
       return getOp() + " " + getResultStr() + " " + getArg1Str();

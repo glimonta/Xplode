@@ -13,6 +13,9 @@
 #define MIN_REGISTER 6
 #define MAX_REGISTER 25
 
+#define MIN_FLOAT_REGISTER 1
+#define MAX_FLOAT_REGISTER 31
+
 #ifndef X_REGALLOC
 #define X_REGALLOC
 
@@ -38,12 +41,17 @@ class RegisterAllocator {
 
     std::queue<MipsRegister *> free_registers;
     std::map<std::string, MipsRegister *> registers;
+    std::queue<MipsFloatRegister *> free_float_registers;
+    std::map<std::string, MipsFloatRegister *> float_registers;
     std::map<std::string, VarQuad *> variables;
 
     RegisterAllocator();
     void getReg (GeneratorMIPS * generator, Quad * quad, MipsRegister **rd, MipsRegister **rl, MipsRegister **rr);
+    void getFloatReg(GeneratorMIPS * generator, Quad * quad, MipsFloatRegister **rd, MipsFloatRegister **rl, MipsFloatRegister **rr);
     MipsRegister * allocate_register(GeneratorMIPS * generator, ExpQuad * exp);
+    MipsFloatRegister * allocate_float_register(GeneratorMIPS * generator, ExpQuad * exp);
     MipsRegister * allocate_dest_register(GeneratorMIPS * generator, ExpQuad * exp);
+    MipsFloatRegister * allocate_dest_float_register(GeneratorMIPS * generator, ExpQuad * exp);
 
     //MipsRegister * find_register_location(std::vector<LocationEntry> variables);
 
@@ -54,6 +62,7 @@ class RegisterAllocator {
   //void delete_from_register_descriptor(MipsRegister * r, std::string var);
   //void delete_from_variable_descriptor(std::string v, LocationEntry l);
   MipsRegister * getAuxReg();
+  MipsFloatRegister * getAuxFloatReg();
   void clear();
   void flush(GeneratorMIPS * generator);
 

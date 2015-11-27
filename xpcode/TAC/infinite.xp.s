@@ -1,7 +1,6 @@
 .data
 string_7_1:    .asciiz "Lei un numero"
-string_7_2:    .asciiz "Ciclo infinito"
-string_7_3:    .asciiz "Aca saco el promedio con la magia de next, length y la desconocida"
+string_7_2:    .asciiz "Aca saco el promedio con la magia de next, length y la desconocida"
 
 .align 4
 
@@ -70,30 +69,19 @@ addi $sp $sp 8
 li $t0 20
 add $t0 $t0 $sp
 lw $t0 4($t0)
-li $t3 4
-seq $t6 $t0 $t3
-beqz $t6 next_if_26_1
+li $t1 4
+seq $a2 $t0 $t1
+beqz $a2 next_if_26_1
 #Este es el código generado por la linea 26 de la instrucción i := 0
-li $s1 0
-move $t0 $s1
+li $t3 0
+move $t0 $t3
 next_if_26_1:
 #Este es el código generado por la linea 27 de la instrucción i := i + 1
-li $s2 1
-add $s5 $t0 $s2
-move $t0 $s5
+li $t4 1
+add $t6 $t0 $t4
+move $t0 $t6
 j begin_while_18_1
 next_while_18_1:
-#Este es el código generado por la linea 32 de la instrucción while que inicia en begin_while_32_1 y termina en next_while_32_1
-begin_while_32_1:
-j true_while_32_1
-true_while_32_1:
-#Este es el código generado por la linea 32 de la instrucción write
-la $s6 string_7_2
-move $a0 $s6
-li $v0 4
-syscall
-j begin_while_32_1
-next_while_32_1:
 li $v0 10
 syscall
 #Definición de Función prom: linea 3
@@ -105,8 +93,8 @@ sw $fp 4($sp)
 addi $fp $sp 12
 addi $sp $sp 0
 #Este es el código generado por la linea 6 de la instrucción write
-la $a3 string_7_3
-move $a0 $a3
+la $t5 string_7_2
+move $a0 $t5
 li $v0 4
 syscall
 lw $ra -4($fp)

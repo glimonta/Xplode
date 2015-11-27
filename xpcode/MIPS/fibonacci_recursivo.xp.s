@@ -34,7 +34,7 @@ addi $sp $sp -4
 la $t2 fib
 jal $t2
 lw $t2 0($sp)
-addi $sp $sp 12
+addi $sp $sp 4
 move $a0 $t2
 li $v0 1
 syscall
@@ -83,7 +83,7 @@ addi $sp $sp -4
 la $s3 fib
 jal $s3
 lw $s3 0($sp)
-addi $sp $sp 12
+addi $sp $sp 4
 move $s4 $s3
 #Este es el código generado por la linea 14 de la instrucción k := fib(num - 2)
 #Este es el código generado por la linea 14 de la llamada a la función: fib
@@ -101,7 +101,7 @@ addi $sp $sp -4
 la $t8 fib
 jal $t8
 lw $t8 0($sp)
-addi $sp $sp 12
+addi $sp $sp 4
 move $t9 $t8
 #Este es el código generado por la linea 15 de la instrucción return
 li $a2 0

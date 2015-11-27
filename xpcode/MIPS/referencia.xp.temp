@@ -21,7 +21,7 @@ write string_7_1 9
 begin_function
 param_ref i  
 t1 call prueba 1
-epilogue t1 12
+epilogue t1 4
 #Este es el código generado por la linea 37 de la instrucción write
 write i 2
 write string_7_2 9
@@ -63,7 +63,7 @@ write string_7_6 9
 begin_function
 param_ref b  
 t2 call prueba2 1
-epilogue t2 12
+epilogue t2 4
 #Este es el código generado por la linea 24 de la instrucción write
 write b 2
 write string_7_7 9

@@ -8,6 +8,7 @@ string_7_4 : " "
 #############################################################
 
 
+allocate 244
 #Este es el código generado por la linea 26 de la instrucción for que inicia en begin_for_26_1 y termina en end_for_26_1
 #Este es el código generado por la linea 26 de la instrucción i := 0
 i := 0
@@ -42,9 +43,11 @@ goto end_for_26_1
 
 mid1:
 #Este es el código generado por la linea 27 de la llamada a la función: readPerson
+begin_function
 t3 * i 24
 param_ref p t3 
 t5 call readPerson 1
+epilogue t5 4
 goto begin_for_26_1
 #############################################################
 #B6
@@ -86,9 +89,11 @@ goto end_for_29_1
 
 mid2:
 #Este es el código generado por la linea 30 de la llamada a la función: printPerson
+begin_function
 t8 * i 24
 param_ref p t8 
 t10 call printPerson 1
+epilogue t10 4
 goto begin_for_29_1
 #############################################################
 #B11
@@ -109,20 +114,22 @@ exit
 
 #Definición de Función printPerson: linea 10
 printPerson:
+prologue 0
 #Este es el código generado por la linea 11 de la instrucción write
-write string_7_1
+write string_7_1 9
 #Este es el código generado por la linea 12 de la instrucción write
 t14 :=[] p 12
-write t14
-write string_7_2
+write t14 2
+write string_7_2 9
 t15 :=[] p 0
-write t15
-write string_7_3
+write t15 6
+write string_7_3 9
 t16 :=[] p 16
-write t16
-write string_7_4
+write t16 5
+write string_7_4 9
 t17 :=[] p 20
-write t17
+write t17 5
+return
 #############################################################
 #B13
 #############################################################
@@ -130,6 +137,7 @@ write t17
 
 #Definición de Función readPerson: linea 15
 readPerson:
+prologue 0
 read t18 2
 p 12 []:= t18
 read t20 5
@@ -138,3 +146,4 @@ read t22 5
 p 20 []:= t22
 read t24 6
 p 0 []:= t24
+return

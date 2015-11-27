@@ -17,7 +17,7 @@ param 3
 param 4
 param 10
 t1 call readMat 2
-epilogue t1 36
+epilogue t1 28
 #Este es el código generado por la linea 32 de la llamada a la función: printMat
 begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
@@ -29,7 +29,7 @@ param 3
 param 4
 param 10
 t2 call printMat 2
-epilogue t2 36
+epilogue t2 28
 exit
 #############################################################
 #B2

@@ -7,6 +7,7 @@ string_7_3 : "SUCCESS!"
 #############################################################
 
 
+allocate 4
 #############################################################
 #B2
 #############################################################
@@ -15,8 +16,10 @@ string_7_3 : "SUCCESS!"
 #Este es el código generado por la linea 18 de la instrucción while que inicia en begin_while_18_1 y termina en next_while_18_1
 begin_while_18_1:
 #Este es el código generado por la linea 18 de la llamada a la función: magicNumber
+begin_function
 param n
 t1 call magicNumber 1
+epilogue t1 4
 if t1 goto next_while_18_1
 #############################################################
 #B3
@@ -41,7 +44,7 @@ ifnot t3 goto next_if_20_1
 
 
 #Este es el código generado por la linea 21 de la instrucción write
-write string_7_1
+write string_7_1 9
 #Este es el código generado por la linea 22 de la instrucción continue
 goto begin_while_18_1
 #############################################################
@@ -51,7 +54,7 @@ goto begin_while_18_1
 
 next_if_20_1:
 #Este es el código generado por la linea 24 de la instrucción write
-write string_7_2
+write string_7_2 9
 goto begin_while_18_1
 #############################################################
 #B7
@@ -60,7 +63,7 @@ goto begin_while_18_1
 
 next_while_18_1:
 #Este es el código generado por la linea 26 de la instrucción write
-write string_7_3
+write string_7_3 9
 #Este es el código generado por la linea 28 de la instrucción sleep
 sleep 42
 #Este es el código generado por la linea 29 de la instrucción sleep
@@ -73,6 +76,7 @@ exit
 
 #Definición de Función magicNumber: linea 3
 magicNumber:
+prologue 4
 #Este es el código generado por la linea 5 de la instrucción if que termina en next_if_5_1
 t4 < k 2
 ifnot t4 goto next_if_5_1
@@ -82,7 +86,7 @@ ifnot t4 goto next_if_5_1
 
 
 #Este es el código generado por la linea 6 de la instrucción return
-return false
+return_exp false
 #############################################################
 #B10
 #############################################################
@@ -132,7 +136,7 @@ ifnot t8 goto next_if_9_1
 
 
 #Este es el código generado por la linea 10 de la instrucción return
-return false
+return_exp false
 #############################################################
 #B16
 #############################################################
@@ -147,4 +151,5 @@ goto begin_for_8_1
 
 end_for_8_1:
 #Este es el código generado por la linea 13 de la instrucción return
-return true
+return_exp true
+return_exp 0

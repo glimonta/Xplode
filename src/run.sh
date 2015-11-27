@@ -6,8 +6,8 @@ TEST_NAMES_CORRECTOS=(../xpcode/correctos/auth.xp ../xpcode/correctos/castTest.x
     ../xpcode/correctos/personArray.xp ../xpcode/correctos/personComp.xp ../xpcode/correctos/person.xp ../xpcode/correctos/scientific.xp ../xpcode/correctos/secondclass.xp 
     ../xpcode/correctos/simpleUnion.xp ../xpcode/correctos/suma.xp)
 TEST_NAMES_MIPS=(../xpcode/MIPS/ackerman.xp ../xpcode/MIPS/align.xp ../xpcode/MIPS/dijkstra.xp ../xpcode/MIPS/factorial_iterativo.xp ../xpcode/MIPS/factorial_recursivo.xp
-    ../xpcode/MIPS/fibonacci_recursivo.xp ../xpcode/MIPS/foldr.xp ../xpcode/MIPS/hanoi.xp ../xpcode/MIPS/helloworld.xp ../xpcode/MIPS/mergesort.xp ../xpcode/MIPS/multmatrices.xp
-    ../xpcode/MIPS/quicksort.xp ../xpcode/MIPS/raiz_newton.xp ../xpcode/MIPS/referencia.xp ../xpcode/MIPS/segundaclase.xp ../xpcode/MIPS/subarreglo.xp ../xpcode/MIPS/unitarios.xp
+    ../xpcode/MIPS/fibonacci_recursivo.xp ../xpcode/MIPS/hanoi.xp ../xpcode/MIPS/helloworld.xp ../xpcode/MIPS/mergesort.xp ../xpcode/MIPS/multmatrices.xp
+    ../xpcode/MIPS/quicksort.xp ../xpcode/MIPS/raiz_newton.xp ../xpcode/MIPS/referencia.xp ../xpcode/MIPS/subarreglo.xp ../xpcode/MIPS/unitarios.xp
     ../xpcode/MIPS/vectores.xp)
 
 CORRECTOS=../xpcode/correctos

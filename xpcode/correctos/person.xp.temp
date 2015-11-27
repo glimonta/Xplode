@@ -20,14 +20,16 @@ p 12 []:= t5
 read t7 2
 p 0 []:= t7
 #Este es el código generado por la linea 33 de la llamada a la función: print
+begin_function
 param_ref p  
 t9 call print 1
-epilogue 4
+epilogue t9 4
 #Este es el código generado por la linea 34 de la llamada a la función: print2
+begin_function
 t10 :=[] p 4
 param t10
 t11 call print2 1
-epilogue 4
+epilogue t11 4
 exit
 #############################################################
 #B2

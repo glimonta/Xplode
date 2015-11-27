@@ -32,6 +32,6 @@ begin_function
 param y
 param x
 t1 call suma 2
-epilogue t1 16
+epilogue t1 8
 return_exp t1
 return_exp 0

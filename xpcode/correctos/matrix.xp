@@ -33,7 +33,6 @@ begin
   let int i;
   let int j;
   let int k;
-  write(mat[4][6][2]);
   readMat(mat,10);
   printMat(mat,10);
   

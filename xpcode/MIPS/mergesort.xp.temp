@@ -68,7 +68,7 @@ t7 - tam 1
 param t7
 param 0
 t8 call sort 4
-epilogue t8 48
+epilogue t8 40
 #Este es el código generado por la linea 67 de la instrucción write
 write string_7_3 9
 #Este es el código generado por la linea 69 de la instrucción i := 0
@@ -155,7 +155,7 @@ param 4
 param mid
 param x1
 t16 call sort 4
-epilogue t16 48
+epilogue t16 40
 #Este es el código generado por la linea 12 de la llamada a la función: sort
 begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
@@ -172,7 +172,7 @@ param x2
 t17 + mid 1
 param t17
 t18 call sort 4
-epilogue t18 48
+epilogue t18 40
 #Este es el código generado por la linea 14 de la instrucción i := x1
 i := x1
 #Este es el código generado por la linea 15 de la instrucción j := mid + 1

@@ -67,7 +67,7 @@ exit
 
 #Definición de Función fib: linea 3
 fib:
-prologue fib
+prologue 16
 #Este es el código generado por la linea 8 de la instrucción if que termina en next_if_8_1
 t3 < num 2
 ifnot t3 goto next_if_8_1
@@ -86,19 +86,23 @@ return_exp 1
 next_if_8_1:
 #Este es el código generado por la linea 14 de la instrucción j := fib(num, 8, k)
 #Este es el código generado por la linea 14 de la llamada a la función: fib
+begin_function
 param_ref k  
 param 8
 param_ref num  
 t4 call fib 3
+epilogue t4 12
 j := t4
 #Este es el código generado por la linea 15 de la instrucción k := fib(num, 8, k)
 #Este es el código generado por la linea 15 de la llamada a la función: fib
+begin_function
 param_ref k  
 param 8
 param_ref num  
 t5 call fib 3
+epilogue t5 12
 k := t5
 #Este es el código generado por la linea 16 de la instrucción return
 t6 + k j
 return_exp t6
-epilogue fib
+return_exp 0

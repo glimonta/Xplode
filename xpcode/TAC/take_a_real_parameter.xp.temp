@@ -54,7 +54,7 @@ t29 + 8 128
 t30 :=[] yo t29
 param t30
 t31 call wtf_this_parameters 3
-epilogue t31 60
+epilogue t31 52
 exit
 #############################################################
 #B2

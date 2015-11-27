@@ -47,17 +47,37 @@ class BinaryExpression : public Expression {
     std::string op = opname;
 
     if ("+" == opname) {
-      AddQuad *binop = new AddQuad(result, leftop, rightop);
-      generator->gen(binop);
+      if (TYPE_INT == lexp->ntype->numtype) {
+        AddQuad *binop = new AddQuad(result, leftop, rightop);
+        generator->gen(binop);
+      } else {
+        AddFloatQuad *binop = new AddFloatQuad(result, leftop, rightop);
+        generator->gen(binop);
+      }
     } else if ( "-" == opname) {
-      SubQuad *binop = new SubQuad(result, leftop, rightop);
-      generator->gen(binop);
+      if (TYPE_INT == lexp->ntype->numtype) {
+        SubQuad *binop = new SubQuad(result, leftop, rightop);
+        generator->gen(binop);
+      } else {
+        SubFloatQuad *binop = new SubFloatQuad(result, leftop, rightop);
+        generator->gen(binop);
+      }
     } else if ( "*" == opname) {
-      MulQuad *binop = new MulQuad(result, leftop, rightop);
-      generator->gen(binop);
+      if (TYPE_INT == lexp->ntype->numtype) {
+        MulQuad *binop = new MulQuad(result, leftop, rightop);
+        generator->gen(binop);
+      } else {
+        MulFloatQuad *binop = new MulFloatQuad(result, leftop, rightop);
+        generator->gen(binop);
+      }
     } else if ( "/" == opname) {
-      DivQuad *binop = new DivQuad(result, leftop, rightop);
-      generator->gen(binop);
+      if (TYPE_INT == lexp->ntype->numtype) {
+        DivQuad *binop = new DivQuad(result, leftop, rightop);
+        generator->gen(binop);
+      } else {
+        DivFloatQuad *binop = new DivFloatQuad(result, leftop, rightop);
+        generator->gen(binop);
+      }
     } else if ( "%" == opname) {
       ModQuad *binop = new ModQuad(result, leftop, rightop);
       generator->gen(binop);

@@ -23,7 +23,7 @@ param 2
 param 1
 param j
 t2 call hanoi 4
-epilogue t2 24
+epilogue t2 16
 exit
 #############################################################
 #B2
@@ -63,7 +63,7 @@ param from
 t4 - num 1
 param t4
 t5 call hanoi 4
-epilogue t5 24
+epilogue t5 16
 #Este es el código generado por la linea 13 de la instrucción write
 write string_7_5 9
 #Este es el código generado por la linea 14 de la instrucción write
@@ -82,5 +82,5 @@ param by
 t6 - num 1
 param t6
 t7 call hanoi 4
-epilogue t7 24
+epilogue t7 16
 return

@@ -47,8 +47,13 @@ class UnaryOp : public Expression {
       VarQuad * result = new VarQuad(generator->labelmaker->getLabel(TEMPORAL));
 
       if(opname=="UMINUS"){
-        UnaryMinusQuad *unop = new UnaryMinusQuad(result, a1);
-        generator->gen(unop);
+        if (TYPE_INT == exp->ntype->numtype) {
+          UnaryMinusQuad *unop = new UnaryMinusQuad(result, a1);
+          generator->gen(unop);
+        } else {
+          UnaryMinusFloatQuad *unop = new UnaryMinusFloatQuad(result, a1);
+          generator->gen(unop);
+        }
       } else if(opname=="NOT"){
         NotQuad *unop = new NotQuad(result, a1);
         generator->gen(unop);

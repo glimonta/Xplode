@@ -6,15 +6,7 @@ string_7_1 : "\n"
 
 
 allocate 4012
-#Este es el código generado por la linea 36 de la instrucción write
-t1 * 4 10
-t2 + t1 6
-t3 * t2 10
-t4 + t3 2
-t5 * t4 4
-t6 :=[] mat t5
-write t6 2
-#Este es el código generado por la linea 37 de la llamada a la función: readMat
+#Este es el código generado por la linea 36 de la llamada a la función: readMat
 begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param_ref mat  
@@ -24,9 +16,9 @@ param 10
 param 3
 param 4
 param 10
-t7 call readMat 2
-epilogue t7 36
-#Este es el código generado por la linea 38 de la llamada a la función: printMat
+t1 call readMat 2
+epilogue t1 28
+#Este es el código generado por la linea 37 de la llamada a la función: printMat
 begin_function
 #Aquí debería pasar el parámetro que es un arreglo pero me falta solucionar lo del dope vector
 param_ref mat  
@@ -36,8 +28,8 @@ param 10
 param 3
 param 4
 param 10
-t8 call printMat 2
-epilogue t8 36
+t2 call printMat 2
+epilogue t2 28
 exit
 #############################################################
 #B2
@@ -58,16 +50,16 @@ goto first_for_7_1
 
 begin_for_7_1:
 #Este es el código generado por la linea 7 de la instrucción i := i + 1
-t9 + i 1
-i := t9
+t3 + i 1
+i := t3
 #############################################################
 #B4
 #############################################################
 
 
 first_for_7_1:
-t10 < i s
-if t10 goto mid1
+t4 < i s
+if t4 goto mid1
 #############################################################
 #B5
 #############################################################
@@ -91,16 +83,16 @@ goto first_for_8_1
 
 begin_for_8_1:
 #Este es el código generado por la linea 8 de la instrucción j := j + 1
-t11 + j 1
-j := t11
+t5 + j 1
+j := t5
 #############################################################
 #B8
 #############################################################
 
 
 first_for_8_1:
-t12 < j s
-if t12 goto mid2
+t6 < j s
+if t6 goto mid2
 #############################################################
 #B9
 #############################################################
@@ -124,16 +116,16 @@ goto first_for_9_1
 
 begin_for_9_1:
 #Este es el código generado por la linea 9 de la instrucción k := k + 1
-t13 + k 1
-k := t13
+t7 + k 1
+k := t7
 #############################################################
 #B12
 #############################################################
 
 
 first_for_9_1:
-t14 < k s
-if t14 goto mid3
+t8 < k s
+if t8 goto mid3
 #############################################################
 #B13
 #############################################################
@@ -146,20 +138,20 @@ goto end_for_9_1
 
 
 mid3:
-read t15 2
+read t9 2
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t16 + bp 24
-=* t17 t16
-t18 * i t17
-t19 + t18 j
-t20 + bp 28
-=* t21 t20
-t22 * t19 t21
-t23 + t22 k
-t24 + bp 12
-=* t25 t24
-t26 * t23 t25
-m t26 []:= t15
+t10 + bp 24
+=* t11 t10
+t12 * i t11
+t13 + t12 j
+t14 + bp 28
+=* t15 t14
+t16 * t13 t15
+t17 + t16 k
+t18 + bp 12
+=* t19 t18
+t20 * t17 t19
+m t20 []:= t9
 goto begin_for_9_1
 #############################################################
 #B15
@@ -201,16 +193,16 @@ goto first_for_20_1
 
 begin_for_20_1:
 #Este es el código generado por la linea 20 de la instrucción i := i + 1
-t28 + i 1
-i := t28
+t22 + i 1
+i := t22
 #############################################################
 #B20
 #############################################################
 
 
 first_for_20_1:
-t29 < i s
-if t29 goto mid4
+t23 < i s
+if t23 goto mid4
 #############################################################
 #B21
 #############################################################
@@ -234,16 +226,16 @@ goto first_for_21_1
 
 begin_for_21_1:
 #Este es el código generado por la linea 21 de la instrucción j := j + 1
-t30 + j 1
-j := t30
+t24 + j 1
+j := t24
 #############################################################
 #B24
 #############################################################
 
 
 first_for_21_1:
-t31 < j s
-if t31 goto mid5
+t25 < j s
+if t25 goto mid5
 #############################################################
 #B25
 #############################################################
@@ -267,16 +259,16 @@ goto first_for_22_1
 
 begin_for_22_1:
 #Este es el código generado por la linea 22 de la instrucción k := k + 1
-t32 + k 1
-k := t32
+t26 + k 1
+k := t26
 #############################################################
 #B28
 #############################################################
 
 
 first_for_22_1:
-t33 < k s
-if t33 goto mid6
+t27 < k s
+if t27 goto mid6
 #############################################################
 #B29
 #############################################################
@@ -291,19 +283,19 @@ goto end_for_22_1
 mid6:
 #Este es el código generado por la linea 23 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t34 + bp 24
-=* t35 t34
-t36 * i t35
-t37 + t36 j
-t38 + bp 28
-=* t39 t38
-t40 * t37 t39
-t41 + t40 k
-t42 + bp 12
-=* t43 t42
-t44 * t41 t43
-t45 :=[] m t44
-write t45 2
+t28 + bp 24
+=* t29 t28
+t30 * i t29
+t31 + t30 j
+t32 + bp 28
+=* t33 t32
+t34 * t31 t33
+t35 + t34 k
+t36 + bp 12
+=* t37 t36
+t38 * t35 t37
+t39 :=[] m t38
+write t39 2
 goto begin_for_22_1
 #############################################################
 #B31

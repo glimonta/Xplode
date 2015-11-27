@@ -18,7 +18,7 @@ write string_7_2 9
 begin_function
 param j
 t2 call fib 1
-epilogue t2 12
+epilogue t2 4
 write t2 2
 write string_7_3 9
 exit
@@ -52,7 +52,7 @@ begin_function
 t4 - num 1
 param t4
 t5 call fib 1
-epilogue t5 12
+epilogue t5 4
 j := t5
 #Este es el código generado por la linea 14 de la instrucción k := fib(num - 2)
 #Este es el código generado por la linea 14 de la llamada a la función: fib
@@ -60,7 +60,7 @@ begin_function
 t6 - num 2
 param t6
 t7 call fib 1
-epilogue t7 12
+epilogue t7 4
 k := t7
 #Este es el código generado por la linea 15 de la instrucción return
 t8 + k j

@@ -35,7 +35,7 @@ addi $sp $sp -4
 la $t1 prueba
 jal $t1
 lw $t1 0($sp)
-addi $sp $sp 12
+addi $sp $sp 4
 #Este es el código generado por la linea 37 de la instrucción write
 li $t2 0
 add $t2 $t2 $sp
@@ -133,7 +133,7 @@ addi $sp $sp -4
 la $s4 prueba2
 jal $s4
 lw $s4 0($sp)
-addi $sp $sp 12
+addi $sp $sp 4
 #Este es el código generado por la linea 24 de la instrucción write
 li $s5 0
 add $s5 $s5 $fp

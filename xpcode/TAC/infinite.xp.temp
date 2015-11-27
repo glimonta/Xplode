@@ -1,6 +1,5 @@
 string_7_1 : "Lei un numero"
-string_7_2 : "Ciclo infinito"
-string_7_3 : "Aca saco el promedio con la magia de next, length y la desconocida"
+string_7_2 : "Aca saco el promedio con la magia de next, length y la desconocida"
 
 #############################################################
 #B1
@@ -82,27 +81,9 @@ goto begin_while_18_1
 
 
 next_while_18_1:
-#Este es el código generado por la linea 32 de la instrucción while que inicia en begin_while_32_1 y termina en next_while_32_1
-begin_while_32_1:
-goto true_while_32_1
-#############################################################
-#B9
-#############################################################
-
-
-true_while_32_1:
-#Este es el código generado por la linea 32 de la instrucción write
-write string_7_2 9
-goto begin_while_32_1
-#############################################################
-#B10
-#############################################################
-
-
-next_while_32_1:
 exit
 #############################################################
-#B11
+#B9
 #############################################################
 
 
@@ -110,5 +91,5 @@ exit
 prom:
 prologue 0
 #Este es el código generado por la linea 6 de la instrucción write
-write string_7_3 9
+write string_7_2 9
 return

@@ -14,7 +14,7 @@ write string_7_1 9
 read t1 5
 y := t1
 #Este es el código generado por la linea 11 de la instrucción x := 1.0
-x := 1
+x := 1.0
 #Este es el código generado por la linea 13 de la instrucción i := 1
 i := 1
 #############################################################
@@ -39,9 +39,9 @@ goto next_while_15_1
 
 true_while_15_1:
 #Este es el código generado por la linea 17 de la instrucción nuevox := 0.5 * x + y / x
-t3 / y x
-t4 + x t3
-t5 * 0 t4
+t3 /f y x
+t4 +f x t3
+t5 *f 0.5 t4
 nuevox := t5
 #Este es el código generado por la linea 19 de la instrucción x := nuevox
 x := nuevox

@@ -37,7 +37,11 @@ class Constant : public Expression {
         generator->addString(id, value);
         return new VarQuad(id, NO_OFFSET, false, false, -1, -1, true);
       } else if (ntype->isnumeric()) {
-        return new ConstQuad(atoi(value.c_str()));
+        if (TYPE_FLOAT == ntype->numtype) {
+          return new ConstQuad(value);
+        } else if (TYPE_INT == ntype->numtype) {
+          return new ConstQuad(atoi(value.c_str()));
+        }
       }
       return new VarQuad(value);
     }

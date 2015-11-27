@@ -30,7 +30,7 @@ begin_function
 param j
 param i
 t3 call ack 2
-epilogue t3 16
+epilogue t3 8
 write t3 2
 write string_7_6 9
 exit
@@ -74,7 +74,7 @@ param 1
 t7 - m 1
 param t7
 t8 call ack 2
-epilogue t8 16
+epilogue t8 8
 return_exp t8
 #############################################################
 #B6
@@ -89,7 +89,7 @@ t9 - n 1
 param t9
 param m
 t10 call ack 2
-epilogue t10 16
+epilogue t10 8
 r1 := t10
 #Este es el código generado por la linea 20 de la instrucción return
 #Este es el código generado por la linea 20 de la llamada a la función: ack
@@ -98,6 +98,6 @@ param r1
 t11 - m 1
 param t11
 t12 call ack 2
-epilogue t12 16
+epilogue t12 8
 return_exp t12
 return_exp 0

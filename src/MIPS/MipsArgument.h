@@ -16,6 +16,8 @@
 #define SP_REGISTER new MipsRegister(29)
 #define FP_REGISTER new MipsRegister(30)
 #define RA_REGISTER new MipsRegister(31)
+#define F12_REGISTER new MipsFloatRegister(12)
+#define F0_REGISTER new MipsFloatRegister(0)
 
 #ifndef X_MIPSARGUMENT
 #define X_MIPSARGUMENT
@@ -80,6 +82,23 @@ class MipsRegister : public MipsArgument {
         case 30: return "fp";
         case 31: return "ra";
       }
+    }
+
+};
+
+class MipsFloatRegister : public MipsArgument {
+
+  public:
+    int num;
+
+    MipsFloatRegister(int n) {
+      num = n;
+    }
+
+    std::string toString() {
+      std::stringstream str;
+      str << "$f" << num;
+      return str.str();
     }
 
 };

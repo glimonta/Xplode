@@ -5,14 +5,18 @@
 
 
 allocate 4
-read t1 2
-ci 0 []:= t1
+#Este es el código generado por la linea 11 de la instrucción ci.c := 'a'
+ci 0 []:= 'a'
+#Este es el código generado por la linea 12 de la instrucción ci.i := 3
+ci 0 []:= 3
+read t3 2
+ci 0 []:= t3
 #Este es el código generado por la linea 15 de la instrucción write
-t3 :=[] ci 0
-write t3 2
-read t4 2
-ci 0 []:= t4
+t5 :=[] ci 0
+write t5 2
+read t6 4
+ci 0 []:= t6
 #Este es el código generado por la linea 18 de la instrucción write
-t6 :=[] ci 0
-write t6 2
+t8 :=[] ci 0
+write t8 4
 exit
