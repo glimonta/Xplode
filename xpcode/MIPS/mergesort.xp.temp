@@ -210,12 +210,12 @@ goto next_while_18_1
 true_while_18_1:
 #Este es el código generado por la linea 19 de la instrucción if que termina en next_if_19_1
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t22 + bp 16
+t22 + bp 20
 =* t23 t22
 t24 * i t23
 t25 :=[] x t24
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t26 + bp 16
+t26 + bp 20
 =* t27 t26
 t28 * j t27
 t29 :=[] x t28
@@ -228,12 +228,12 @@ ifnot t30 goto false_if_19_1
 
 #Este es el código generado por la linea 20 de la instrucción res[ind] := x[i]
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t31 + bp 16
+t31 + bp 20
 =* t32 t31
 t33 * i t32
 t34 :=[] x t33
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t35 + bp 32
+t35 + bp 36
 =* t36 t35
 t37 * ind t36
 res t37 []:= t34
@@ -249,12 +249,12 @@ goto next_if_19_1
 false_if_19_1:
 #Este es el código generado por la linea 24 de la instrucción res[ind] := x[j]
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t40 + bp 16
+t40 + bp 20
 =* t41 t40
 t42 * j t41
 t43 :=[] x t42
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t44 + bp 32
+t44 + bp 36
 =* t45 t44
 t46 * ind t45
 res t46 []:= t43
@@ -295,12 +295,12 @@ goto next_while_30_1
 true_while_30_1:
 #Este es el código generado por la linea 31 de la instrucción res[ind] := x[i]
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t51 + bp 16
+t51 + bp 20
 =* t52 t51
 t53 * i t52
 t54 :=[] x t53
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t55 + bp 32
+t55 + bp 36
 =* t56 t55
 t57 * ind t56
 res t57 []:= t54
@@ -335,12 +335,12 @@ goto next_while_35_1
 true_while_35_1:
 #Este es el código generado por la linea 36 de la instrucción res[ind] := x[j]
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t62 + bp 16
+t62 + bp 20
 =* t63 t62
 t64 * j t63
 t65 :=[] x t64
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t66 + bp 32
+t66 + bp 36
 =* t67 t66
 t68 * ind t67
 res t68 []:= t65
@@ -382,12 +382,12 @@ goto next_while_42_1
 true_while_42_1:
 #Este es el código generado por la linea 43 de la instrucción x[i] := res[i]
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t73 + bp 32
+t73 + bp 36
 =* t74 t73
 t75 * i t74
 t76 :=[] res t75
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t77 + bp 16
+t77 + bp 20
 =* t78 t77
 t79 * i t78
 x t79 []:= t76

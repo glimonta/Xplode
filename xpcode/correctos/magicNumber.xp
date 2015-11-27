@@ -2,7 +2,8 @@ program
 
 function bool magicNumber(int n){
   let int k;
-  if (k < 2){
+  k := 0;
+  if (n < 2){
     return false;
   };
   for (k:= 2; k < n; k:= k+1){
@@ -15,6 +16,7 @@ function bool magicNumber(int n){
 
 begin
   let int n;
+  n:=0;
   while (! magicNumber(n)) {
     read(n);
     if (n == 42) {

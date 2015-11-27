@@ -37,70 +37,66 @@ move $a3 $t7
 move $a0 $a3
 li $v0 1
 syscall
-la $s0 string_7_1
-move $a0 $s0
+la $a0 string_7_1
 li $v0 4
 syscall
 j begin_for_18_1
 end_for_18_1:
 #Este es el código generado por la linea 22 de la instrucción for que inicia en begin_for_22_1 y termina en end_for_22_1
 #Este es el código generado por la linea 22 de la instrucción i := 0
-li $s1 0
-move $t1 $s1
+li $s0 0
+move $t1 $s0
 j first_for_22_1
 begin_for_22_1:
 #Este es el código generado por la linea 22 de la instrucción i := i + 1
-li $s2 1
-add $s3 $t1 $s2
-move $t1 $s3
+li $s1 1
+add $s2 $t1 $s1
+move $t1 $s2
 first_for_22_1:
-li $s4 10
-slt $s5 $t1 $s4
-bnez $s5 mid2
+li $s3 10
+slt $s4 $t1 $s3
+bnez $s4 mid2
 j end_for_22_1
 mid2:
 #Este es el código generado por la linea 23 de la instrucción j := j + 2
-li $s6 2
-add $s7 $a3 $s6
-move $a3 $s7
+li $s5 2
+add $s6 $a3 $s5
+move $a3 $s6
 #Este es el código generado por la linea 24 de la instrucción write
 move $a0 $t1
 li $v0 1
 syscall
-la $t8 string_7_2
-move $a0 $t8
+la $a0 string_7_2
 li $v0 4
 syscall
 #Este es el código generado por la linea 25 de la instrucción write
 move $a0 $a3
 li $v0 1
 syscall
-la $t9 string_7_3
-move $a0 $t9
+la $a0 string_7_3
 li $v0 4
 syscall
 j begin_for_22_1
 end_for_22_1:
 #Este es el código generado por la linea 28 de la instrucción b[0] := 4
-li $a2 0
-li $t0 4
-mul $t2 $a2 $t0
-li $t3 4
-addi $t2 $t2 240
-add $t2 $t2 $sp
-sw $t3 4($t2)
+li $s7 0
+li $t8 4
+mul $t9 $s7 $t8
+li $a2 4
+addi $t9 $t9 240
+add $t9 $t9 $sp
+sw $a2 4($t9)
 #Este es el código generado por la linea 29 de la instrucción write
-li $t4 0
-li $t5 4
-mul $t6 $t4 $t5
-addi $t6 $t6 240
-add $t6 $t6 $sp
-lw $t7 4($t6)
-move $a0 $t7
+li $t0 0
+li $t2 4
+mul $t3 $t0 $t2
+addi $t3 $t3 240
+add $t3 $t3 $sp
+lw $t4 4($t3)
+move $a0 $t4
 li $v0 1
 syscall
-la $s1 string_7_4
-move $a0 $s1
+la $a0 string_7_4
 li $v0 4
 syscall
 li $v0 10

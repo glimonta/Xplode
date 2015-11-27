@@ -25,8 +25,7 @@ lw $t0 0($sp)
 addi $sp $sp 4
 move $t1 $t0
 #Este es el código generado por la linea 25 de la instrucción write
-la $t2 string_7_1
-move $a0 $t2
+la $a0 string_7_1
 li $v0 4
 syscall
 move $a0 $t1
@@ -43,42 +42,41 @@ sw $fp 4($sp)
 addi $fp $sp 12
 addi $sp $sp 0
 #Este es el código generado por la linea 5 de la instrucción if que termina en next_if_5_1
-li $t3 0
-add $t3 $t3 $fp
-lw $t3 4($t3)
-li $t4 1
-seq $t5 $t3 $t4
-beqz $t5 next_if_5_1
+li $t2 0
+add $t2 $t2 $fp
+lw $t2 4($t2)
+li $t3 1
+seq $t4 $t2 $t3
+beqz $t4 next_if_5_1
 #Este es el código generado por la linea 5 de la instrucción return
-li $t6 1
-sw $t6 0($fp)
-addi $t7 $zero 0
-add $t7 $t7 $fp
-sw $t3 4($t7)
+li $t5 1
+sw $t5 0($fp)
+addi $t6 $zero 0
+add $t6 $t6 $fp
+sw $t2 4($t6)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)
 jr $ra
 next_if_5_1:
 #Este es el código generado por la linea 6 de la instrucción if que termina en next_if_6_1
-li $t7 0
-add $t7 $t7 $fp
-lw $t7 4($t7)
-li $s0 1
-slt $s1 $t7 $s0
-beqz $s1 next_if_6_1
+li $t6 0
+add $t6 $t6 $fp
+lw $t6 4($t6)
+li $t7 1
+slt $s0 $t6 $t7
+beqz $s0 next_if_6_1
 #Este es el código generado por la linea 7 de la instrucción write
-la $s2 string_7_2
-move $a0 $s2
+la $a0 string_7_2
 li $v0 4
 syscall
 #Este es el código generado por la linea 8 de la instrucción return
-li $s3 1
-neg $s4 $s3
-sw $s4 0($fp)
-addi $s5 $zero 0
-add $s5 $s5 $fp
-sw $t7 4($s5)
+li $s1 1
+neg $s2 $s1
+sw $s2 0($fp)
+addi $s3 $zero 0
+add $s3 $s3 $fp
+sw $t6 4($s3)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)
@@ -86,32 +84,32 @@ jr $ra
 next_if_6_1:
 #Este es el código generado por la linea 11 de la instrucción return
 #Este es el código generado por la linea 11 de la llamada a la función: factorial
-li $s5 0
-add $s5 $s5 $fp
-lw $s5 4($s5)
-li $s6 1
-sub $s7 $s5 $s6
+li $s3 0
+add $s3 $s3 $fp
+lw $s3 4($s3)
+li $s4 1
+sub $s5 $s3 $s4
 addi $sp $sp -4
-sw $s7 4($sp)
+sw $s5 4($sp)
 addi $sp $sp -4
-la $t8 factorial
-jal $t8
-lw $t8 0($sp)
+la $s6 factorial
+jal $s6
+lw $s6 0($sp)
 addi $sp $sp 4
-li $t9 0
+li $s7 0
+add $s7 $s7 $fp
+lw $s7 4($s7)
+mul $t8 $s6 $s7
+sw $t8 0($fp)
+addi $t9 $zero 0
 add $t9 $t9 $fp
-lw $t9 4($t9)
-mul $a2 $t8 $t9
-sw $a2 0($fp)
-addi $a3 $zero 0
-add $a3 $a3 $fp
-sw $t9 4($a3)
+sw $s7 4($t9)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)
 jr $ra
-li $a3 0
-sw $a3 0($fp)
+li $t9 0
+sw $t9 0($fp)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)

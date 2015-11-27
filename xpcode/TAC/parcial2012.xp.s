@@ -68,8 +68,7 @@ lw $s3 4($s2)
 move $a0 $s3
 li $v0 1
 syscall
-la $s4 string_7_1
-move $a0 $s4
+la $a0 string_7_1
 li $v0 4
 syscall
 li $v0 10

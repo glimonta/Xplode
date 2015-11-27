@@ -1,70 +1,64 @@
 string_7_1 : "Person Data is : "
 string_7_2 : " "
 string_7_3 : " "
-string_7_4 : " "
-string_7_5 : "Person Id is : "
-string_7_6 : "\n"
+string_7_4 : "Person Id is : "
+string_7_5 : "\n"
 
 #############################################################
 #B1
 #############################################################
 
 
-allocate 16
+allocate 12
 read t1 2
-p 4 []:= t1
-read t3 2
-p 8 []:= t3
-read t5 2
-p 12 []:= t5
-read t7 2
-p 0 []:= t7
-#Este es el código generado por la linea 33 de la llamada a la función: print
+p 0 []:= t1
+read t3 5
+p 4 []:= t3
+read t5 5
+p 8 []:= t5
+#Este es el código generado por la linea 25 de la llamada a la función: print
 begin_function
 param_ref p  
-t9 call print 1
-epilogue t9 4
-#Este es el código generado por la linea 34 de la llamada a la función: print2
+t7 call print 1
+epilogue t7 4
+#Este es el código generado por la linea 26 de la llamada a la función: print2
 begin_function
-t10 :=[] p 4
-param t10
-t11 call print2 1
-epilogue t11 4
+t8 :=[] p 0
+param t8
+t9 call print2 1
+epilogue t9 4
 exit
 #############################################################
 #B2
 #############################################################
 
 
-#Definición de Función print: linea 17
+#Definición de Función print: linea 10
 print:
 prologue 0
-#Este es el código generado por la linea 18 de la instrucción write
+#Este es el código generado por la linea 11 de la instrucción write
 write string_7_1 9
-#Este es el código generado por la linea 19 de la instrucción write
-t12 :=[] p 4
-write t12 2
+#Este es el código generado por la linea 12 de la instrucción write
+t10 :=[] p 0
+write t10 2
 write string_7_2 9
-t13 :=[] p 0
-write t13 2
+t11 :=[] p 4
+write t11 5
 write string_7_3 9
-t14 :=[] p 8
-write t14 2
-write string_7_4 9
-t15 :=[] p 12
-write t15 2
+t12 :=[] p 8
+write t12 5
 return
 #############################################################
 #B3
 #############################################################
 
 
-#Definición de Función print2: linea 22
+#Definición de Función print2: linea 15
 print2:
 prologue 0
-#Este es el código generado por la linea 23 de la instrucción write
-write string_7_5 9
-#Este es el código generado por la linea 24 de la instrucción write
+#Este es el código generado por la linea 16 de la instrucción write
+write string_7_4 9
+#Este es el código generado por la linea 17 de la instrucción write
 write id 2
-write string_7_6 9
+write string_7_5 9
 return

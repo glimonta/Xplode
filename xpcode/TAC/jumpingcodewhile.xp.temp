@@ -1,3 +1,6 @@
+string_7_1 : "\n"
+string_7_2 : "\n"
+string_7_3 : "\n"
 
 #############################################################
 #B1
@@ -53,52 +56,61 @@ goto begin_while_10_1
 
 
 next_while_10_1:
-#Este es el código generado por la linea 17 de la instrucción i := 13
+#Este es el código generado por la linea 17 de la instrucción write
+write i 2
+write string_7_1 9
+#Este es el código generado por la linea 19 de la instrucción i := 13
 i := 13
+#Este es el código generado por la linea 21 de la instrucción write
+write i 2
+write string_7_2 9
 #############################################################
 #B8
 #############################################################
 
 
-#Este es el código generado por la linea 19 de la instrucción while que inicia en begin_while_19_1 y termina en next_while_19_1
-begin_while_19_1:
+#Este es el código generado por la linea 23 de la instrucción while que inicia en begin_while_23_1 y termina en next_while_23_1
+begin_while_23_1:
 t3 < i 13
-if t3 goto true_while_19_1
+if t3 goto true_while_23_1
 #############################################################
 #B9
 #############################################################
 
 
-goto next_while_19_1
+goto next_while_23_1
 #############################################################
 #B10
 #############################################################
 
 
-true_while_19_1:
-#Este es el código generado por la linea 20 de la instrucción if que termina en next_if_20_1
-goto next_if_20_1
+true_while_23_1:
+#Este es el código generado por la linea 24 de la instrucción if que termina en next_if_24_1
+goto next_if_24_1
 #############################################################
 #B11
 #############################################################
 
 
-#Este es el código generado por la linea 21 de la instrucción i := 42
+#Este es el código generado por la linea 25 de la instrucción i := 42
 i := 42
 #############################################################
 #B12
 #############################################################
 
 
-next_if_20_1:
-#Este es el código generado por la linea 23 de la instrucción i := i + 1
+next_if_24_1:
+#Este es el código generado por la linea 27 de la instrucción i := i + 1
 t4 + i 1
 i := t4
-goto begin_while_19_1
+goto begin_while_23_1
 #############################################################
 #B13
 #############################################################
 
 
-next_while_19_1:
+next_while_23_1:
+#Este es el código generado por la linea 30 de la instrucción write
+write i 2
+write string_7_3 9
 exit

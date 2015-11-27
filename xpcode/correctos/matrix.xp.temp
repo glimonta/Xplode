@@ -140,15 +140,15 @@ goto end_for_9_1
 mid3:
 read t9 2
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t10 + bp 24
+t10 + bp 28
 =* t11 t10
 t12 * i t11
 t13 + t12 j
-t14 + bp 28
+t14 + bp 32
 =* t15 t14
 t16 * t13 t15
 t17 + t16 k
-t18 + bp 12
+t18 + bp 16
 =* t19 t18
 t20 * t17 t19
 m t20 []:= t9
@@ -283,15 +283,15 @@ goto end_for_22_1
 mid6:
 #Este es el código generado por la linea 23 de la instrucción write
 #Aquí va el acceso a un arreglo que es por referencia ==> dope vector
-t28 + bp 24
+t28 + bp 28
 =* t29 t28
 t30 * i t29
 t31 + t30 j
-t32 + bp 28
+t32 + bp 32
 =* t33 t32
 t34 * t31 t33
 t35 + t34 k
-t36 + bp 12
+t36 + bp 16
 =* t37 t36
 t38 * t35 t37
 t39 :=[] m t38

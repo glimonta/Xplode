@@ -24,8 +24,7 @@ move $t1 $t0
 move $a0 $t1
 li $v0 1
 syscall
-la $t2 string_7_1
-move $a0 $t2
+la $a0 string_7_1
 li $v0 4
 syscall
 li $v0 10
@@ -39,26 +38,26 @@ sw $fp 4($sp)
 addi $fp $sp 12
 addi $sp $sp 0
 #Este es el código generado por la linea 4 de la instrucción return
-li $t3 0
+li $t2 0
+add $t2 $t2 $fp
+lw $t2 4($t2)
+li $t3 4
 add $t3 $t3 $fp
 lw $t3 4($t3)
-li $t4 4
-add $t4 $t4 $fp
-lw $t4 4($t4)
-add $t5 $t3 $t4
-sw $t5 0($fp)
-addi $t6 $zero 0
-add $t6 $t6 $fp
-sw $t3 4($t6)
-addi $t6 $zero 4
-add $t6 $t6 $fp
-sw $t4 4($t6)
+add $t4 $t2 $t3
+sw $t4 0($fp)
+addi $t5 $zero 0
+add $t5 $t5 $fp
+sw $t2 4($t5)
+addi $t5 $zero 4
+add $t5 $t5 $fp
+sw $t3 4($t5)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)
 jr $ra
-li $t6 0
-sw $t6 0($fp)
+li $t5 0
+sw $t5 0($fp)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)

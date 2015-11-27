@@ -1,3 +1,4 @@
+string_7_1 : "\n"
 
 #############################################################
 #B1
@@ -65,4 +66,7 @@ i := 4
 
 
 next_if_14_1:
+#Este es el código generado por la linea 23 de la instrucción write
+write i 2
+write string_7_1 9
 exit

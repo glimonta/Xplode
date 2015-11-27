@@ -17,16 +17,14 @@ move $t1 $t0
 move $a0 $a3
 li $v0 1
 syscall
-la $t2 string_7_1
-move $a0 $t2
+la $a0 string_7_1
 li $v0 4
 syscall
 #Este es el código generado por la linea 13 de la instrucción write
 move $a0 $t1
 li $v0 1
 syscall
-la $t3 string_7_2
-move $a0 $t3
+la $a0 string_7_2
 li $v0 4
 syscall
 li $v0 10
@@ -41,28 +39,28 @@ addi $fp $sp 12
 addi $sp $sp 0
 #Este es el código generado por la linea 3 de la instrucción return
 #Este es el código generado por la linea 3 de la llamada a la función: suma
-li $t4 4
-add $t4 $t4 $fp
-lw $t4 4($t4)
+li $t2 4
+add $t2 $t2 $fp
+lw $t2 4($t2)
 addi $sp $sp -4
-sw $t4 4($sp)
-li $t5 0
-add $t5 $t5 $fp
-lw $t5 4($t5)
+sw $t2 4($sp)
+li $t3 0
+add $t3 $t3 $fp
+lw $t3 4($t3)
 addi $sp $sp -4
-sw $t5 4($sp)
+sw $t3 4($sp)
 addi $sp $sp -4
-la $t6 suma
-jal $t6
-lw $t6 0($sp)
+la $t4 suma
+jal $t4
+lw $t4 0($sp)
 addi $sp $sp 8
-sw $t6 0($fp)
+sw $t4 0($fp)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)
 jr $ra
-li $t7 0
-sw $t7 0($fp)
+li $t5 0
+sw $t5 0($fp)
 lw $ra -4($fp)
 move $sp $fp
 lw $fp -8($fp)

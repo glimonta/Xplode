@@ -10,52 +10,48 @@ string_7_4:    .asciiz "\n"
 main:
 addi $sp $sp -12
 #Este es el código generado por la linea 8 de la instrucción write
-la $a2 string_7_1
-move $a0 $a2
+la $a0 string_7_1
 li $v0 4
 syscall
 li $v0 5
 syscall
-move $a3 $v0
-move $t0 $a3
+move $a2 $v0
+move $a3 $a2
 #Este es el código generado por la linea 10 de la instrucción i := 1
-li $t1 1
-move $t2 $t1
+li $t0 1
+move $t1 $t0
 #Este es el código generado por la linea 11 de la instrucción fact := 1
-li $t3 1
-move $t4 $t3
+li $t2 1
+move $t3 $t2
 #Este es el código generado por la linea 13 de la instrucción while que inicia en begin_while_13_1 y termina en next_while_13_1
 begin_while_13_1:
-sle $t5 $t2 $t0
-bnez $t5 true_while_13_1
+sle $t4 $t1 $a3
+bnez $t4 true_while_13_1
 j next_while_13_1
 true_while_13_1:
 #Este es el código generado por la linea 15 de la instrucción fact := fact * i
-mul $t6 $t4 $t2
-move $t4 $t6
+mul $t5 $t3 $t1
+move $t3 $t5
 #Este es el código generado por la linea 16 de la instrucción i := i + 1
-li $t7 1
-add $s0 $t2 $t7
-move $t2 $s0
+li $t6 1
+add $t7 $t1 $t6
+move $t1 $t7
 j begin_while_13_1
 next_while_13_1:
 #Este es el código generado por la linea 19 de la instrucción write
-la $s1 string_7_2
-move $a0 $s1
+la $a0 string_7_2
 li $v0 4
 syscall
-move $a0 $t0
+move $a0 $a3
 li $v0 1
 syscall
-la $s2 string_7_3
-move $a0 $s2
+la $a0 string_7_3
 li $v0 4
 syscall
-move $a0 $t4
+move $a0 $t3
 li $v0 1
 syscall
-la $s3 string_7_4
-move $a0 $s3
+la $a0 string_7_4
 li $v0 4
 syscall
 li $v0 10

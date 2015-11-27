@@ -1,10 +1,10 @@
 program
 
 type person{
-  char[10] name;
+  int name;
   int id;
-  float height;
-  float weight;
+  int height;
+  int weight;
 }
 
 function void printPerson(var person p){
@@ -17,6 +17,7 @@ function void readPerson(var person p){
   read(p.height);
   read(p.weight);
   read(p.name);
+  return;
 }
 
 function bool personComp(var person a, var person b){
@@ -34,6 +35,9 @@ begin
   let person a;
   let person b;
   let person c;
+  readPerson(a);
+  readPerson(b);
+  readPerson(c);
   if(anotherComp(a,b)){
     if(anotherComp(a,c)){
       printPerson(a);

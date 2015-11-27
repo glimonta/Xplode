@@ -8,100 +8,115 @@ string_7_4 : " "
 #############################################################
 
 
-allocate 72
-#Este es el código generado por la linea 37 de la instrucción if que termina en next_if_37_1
-#Este es el código generado por la linea 37 de la llamada a la función: anotherComp
+allocate 48
+#Este es el código generado por la linea 37 de la llamada a la función: readPerson
+begin_function
+param_ref a  
+t1 call readPerson 1
+epilogue t1 4
+#Este es el código generado por la linea 38 de la llamada a la función: readPerson
+begin_function
+param_ref b  
+t2 call readPerson 1
+epilogue t2 4
+#Este es el código generado por la linea 39 de la llamada a la función: readPerson
+begin_function
+param_ref c  
+t3 call readPerson 1
+epilogue t3 4
+#Este es el código generado por la linea 40 de la instrucción if que termina en next_if_40_1
+#Este es el código generado por la linea 40 de la llamada a la función: anotherComp
 begin_function
 param_ref b  
 param_ref a  
-t1 call anotherComp 2
-epilogue t1 8
-ifnot t1 goto false_if_37_1
+t4 call anotherComp 2
+epilogue t4 8
+ifnot t4 goto false_if_40_1
 #############################################################
 #B2
 #############################################################
 
 
-#Este es el código generado por la linea 38 de la instrucción if que termina en next_if_38_1
-#Este es el código generado por la linea 38 de la llamada a la función: anotherComp
+#Este es el código generado por la linea 41 de la instrucción if que termina en next_if_41_1
+#Este es el código generado por la linea 41 de la llamada a la función: anotherComp
 begin_function
 param_ref c  
 param_ref a  
-t2 call anotherComp 2
-epilogue t2 8
-ifnot t2 goto false_if_38_1
+t5 call anotherComp 2
+epilogue t5 8
+ifnot t5 goto false_if_41_1
 #############################################################
 #B3
 #############################################################
 
 
-#Este es el código generado por la linea 39 de la llamada a la función: printPerson
+#Este es el código generado por la linea 42 de la llamada a la función: printPerson
 begin_function
 param_ref a  
-t3 call printPerson 1
-epilogue t3 4
-goto next_if_38_1
+t6 call printPerson 1
+epilogue t6 4
+goto next_if_41_1
 #############################################################
 #B4
 #############################################################
 
 
-false_if_38_1:
-#Este es el código generado por la linea 41 de la llamada a la función: printPerson
-begin_function
-param_ref c  
-t4 call printPerson 1
-epilogue t4 4
-#############################################################
-#B5
-#############################################################
-
-
-next_if_38_1:
-goto next_if_37_1
-#############################################################
-#B6
-#############################################################
-
-
-false_if_37_1:
-#Este es el código generado por la linea 44 de la instrucción if que termina en next_if_44_1
-#Este es el código generado por la linea 44 de la llamada a la función: anotherComp
-begin_function
-param_ref c  
-param_ref b  
-t5 call anotherComp 2
-epilogue t5 8
-ifnot t5 goto false_if_44_1
-#############################################################
-#B7
-#############################################################
-
-
-#Este es el código generado por la linea 45 de la llamada a la función: printPerson
-begin_function
-param_ref b  
-t6 call printPerson 1
-epilogue t6 4
-goto next_if_44_1
-#############################################################
-#B8
-#############################################################
-
-
-false_if_44_1:
-#Este es el código generado por la linea 47 de la llamada a la función: printPerson
+false_if_41_1:
+#Este es el código generado por la linea 44 de la llamada a la función: printPerson
 begin_function
 param_ref c  
 t7 call printPerson 1
 epilogue t7 4
 #############################################################
+#B5
+#############################################################
+
+
+next_if_41_1:
+goto next_if_40_1
+#############################################################
+#B6
+#############################################################
+
+
+false_if_40_1:
+#Este es el código generado por la linea 47 de la instrucción if que termina en next_if_47_1
+#Este es el código generado por la linea 47 de la llamada a la función: anotherComp
+begin_function
+param_ref c  
+param_ref b  
+t8 call anotherComp 2
+epilogue t8 8
+ifnot t8 goto false_if_47_1
+#############################################################
+#B7
+#############################################################
+
+
+#Este es el código generado por la linea 48 de la llamada a la función: printPerson
+begin_function
+param_ref b  
+t9 call printPerson 1
+epilogue t9 4
+goto next_if_47_1
+#############################################################
+#B8
+#############################################################
+
+
+false_if_47_1:
+#Este es el código generado por la linea 50 de la llamada a la función: printPerson
+begin_function
+param_ref c  
+t10 call printPerson 1
+epilogue t10 4
+#############################################################
 #B9
 #############################################################
 
 
-next_if_44_1:
-next_if_37_1:
+next_if_47_1:
+next_if_40_1:
 exit
 #############################################################
 #B10
@@ -114,17 +129,17 @@ prologue 0
 #Este es el código generado por la linea 11 de la instrucción write
 write string_7_1 9
 #Este es el código generado por la linea 12 de la instrucción write
-t8 :=[] p 12
-write t8 2
+t11 :=[] p 4
+write t11 2
 write string_7_2 9
-t9 :=[] p 0
-write t9 6
+t12 :=[] p 0
+write t12 2
 write string_7_3 9
-t10 :=[] p 16
-write t10 5
+t13 :=[] p 8
+write t13 2
 write string_7_4 9
-t11 :=[] p 20
-write t11 5
+t14 :=[] p 12
+write t14 2
 return
 #############################################################
 #B11
@@ -134,14 +149,14 @@ return
 #Definición de Función readPerson: linea 15
 readPerson:
 prologue 0
-read t12 2
-p 12 []:= t12
-read t14 5
-p 16 []:= t14
-read t16 5
-p 20 []:= t16
-read t18 6
-p 0 []:= t18
+read t15 2
+p 4 []:= t15
+read t17 2
+p 8 []:= t17
+read t19 2
+p 12 []:= t19
+read t21 2
+p 0 []:= t21
 return
 #############################################################
 #B12
@@ -152,10 +167,10 @@ return
 personComp:
 prologue 0
 #Este es el código generado por la linea 23 de la instrucción return
-t20 :=[] a 12
-t21 :=[] b 12
-t22 < t20 t21
-return_exp t22
+t23 :=[] a 4
+t24 :=[] b 4
+t25 < t23 t24
+return_exp t25
 return_exp 0
 #############################################################
 #B13
@@ -170,7 +185,7 @@ prologue 0
 begin_function
 param_ref b  
 param_ref a  
-t23 call personComp 2
-epilogue t23 8
-return_exp t23
+t26 call personComp 2
+epilogue t26 8
+return_exp t26
 return_exp 0

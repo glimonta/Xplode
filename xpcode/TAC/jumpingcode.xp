@@ -20,4 +20,6 @@ let bool k;
     i := 4;
   }
 
+write(i, "\n");
+
 end

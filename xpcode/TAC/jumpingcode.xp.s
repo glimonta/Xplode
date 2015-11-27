@@ -1,4 +1,5 @@
 .data
+string_7_1:    .asciiz "\n"
 
 .align 4
 
@@ -41,5 +42,12 @@ false_if_14_1:
 li $s5 4
 move $a3 $s5
 next_if_14_1:
+#Este es el código generado por la linea 23 de la instrucción write
+move $a0 $a3
+li $v0 1
+syscall
+la $a0 string_7_1
+li $v0 4
+syscall
 li $v0 10
 syscall

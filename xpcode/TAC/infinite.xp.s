@@ -23,63 +23,62 @@ addi $t1 $t1 0
 add $t1 $t1 $sp
 sw $a2 4($t1)
 #Este es el código generado por la linea 22 de la instrucción write
-la $t2 string_7_1
-move $a0 $t2
+la $a0 string_7_1
 li $v0 4
 syscall
 #Este es el código generado por la linea 23 de la instrucción if que termina en next_if_23_1
-li $t3 4
-mul $t4 $a3 $t3
-addi $t4 $t4 0
-add $t4 $t4 $sp
-lw $t5 4($t4)
-li $t6 1
-neg $t7 $t6
-seq $s0 $t5 $t7
-beqz $s0 next_if_23_1
+li $t2 4
+mul $t3 $a3 $t2
+addi $t3 $t3 0
+add $t3 $t3 $sp
+lw $t4 4($t3)
+li $t5 1
+neg $t6 $t5
+seq $t7 $t4 $t6
+beqz $t7 next_if_23_1
 #Este es el código generado por la linea 23 de la instrucción break
 j next_while_18_1
 next_if_23_1:
 #Este es el código generado por la linea 24 de la llamada a la función: prom
-addi $s1 $zero 20
-add $s1 $s1 $sp
-sw $a3 4($s1)
-li $s1 1
-li $s2 4
-mul $s3 $s1 $s2
-addi $s3 $s3 0
-add $s3 $s3 $sp
-lw $s4 4($s3)
+addi $s0 $zero 20
+add $s0 $s0 $sp
+sw $a3 4($s0)
+li $s0 1
+li $s1 4
+mul $s2 $s0 $s1
+addi $s2 $s2 0
+add $s2 $s2 $sp
+lw $s3 4($s2)
 addi $sp $sp -4
-sw $s4 4($sp)
-li $s5 0
-li $s6 4
-mul $s7 $s5 $s6
-addi $s7 $s7 0
-add $s7 $s7 $sp
-lw $t8 4($s7)
+sw $s3 4($sp)
+li $s4 0
+li $s5 4
+mul $s6 $s4 $s5
+addi $s6 $s6 0
+add $s6 $s6 $sp
+lw $s7 4($s6)
 addi $sp $sp -4
-sw $t8 4($sp)
+sw $s7 4($sp)
 addi $sp $sp -4
-la $t9 prom
-jal $t9
-lw $t9 0($sp)
+la $t8 prom
+jal $t8
+lw $t8 0($sp)
 addi $sp $sp 8
 #Este es el código generado por la linea 26 de la instrucción if que termina en next_if_26_1
-li $t0 20
-add $t0 $t0 $sp
-lw $t0 4($t0)
-li $t1 4
-seq $a2 $t0 $t1
-beqz $a2 next_if_26_1
+li $t9 20
+add $t9 $t9 $sp
+lw $t9 4($t9)
+li $t0 4
+seq $t1 $t9 $t0
+beqz $t1 next_if_26_1
 #Este es el código generado por la linea 26 de la instrucción i := 0
-li $t3 0
-move $t0 $t3
+li $a2 0
+move $t9 $a2
 next_if_26_1:
 #Este es el código generado por la linea 27 de la instrucción i := i + 1
-li $t4 1
-add $t6 $t0 $t4
-move $t0 $t6
+li $t2 1
+add $t3 $t9 $t2
+move $t9 $t3
 j begin_while_18_1
 next_while_18_1:
 li $v0 10
@@ -93,8 +92,7 @@ sw $fp 4($sp)
 addi $fp $sp 12
 addi $sp $sp 0
 #Este es el código generado por la linea 6 de la instrucción write
-la $t5 string_7_2
-move $a0 $t5
+la $a0 string_7_2
 li $v0 4
 syscall
 lw $ra -4($fp)

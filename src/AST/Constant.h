@@ -42,6 +42,12 @@ class Constant : public Expression {
         } else if (TYPE_INT == ntype->numtype) {
           return new ConstQuad(atoi(value.c_str()));
         }
+      } else if (ntype->isbool()) {
+        if ("true" == value) {
+          return new ConstQuad(1);
+        } else if ("false" == value) {
+          return new ConstQuad(0);
+        }
       }
       return new VarQuad(value);
     }

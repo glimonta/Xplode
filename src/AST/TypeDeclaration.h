@@ -71,6 +71,8 @@ class TypeDeclaration: public Node {
 
     bool isstring() { return (this->numtype == TYPE_STRING); }
 
+    bool isbool() { return (this->numtype == TYPE_BOOL); }
+
 };
 
 #endif
